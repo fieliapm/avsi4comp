@@ -1,0 +1,206 @@
+Import("macro.avsi")
+
+#SetMemoryMax(64)
+
+######## DC (720*480) ########
+
+triggerheart_exelica_dc_pv_video=VOB_MPEG2_VIDEO_SOURCE("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv.d2v")
+triggerheart_exelica_dc_pv_audio=WAVSource("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv T80 2_0ch 448Kbps 48KHz.wav")
+triggerheart_exelica_dc_pv=AudioDub(triggerheart_exelica_dc_pv_video,triggerheart_exelica_dc_pv_audio)
+#triggerheart_exelica_dc_pv=KillAudio(triggerheart_exelica_dc_pv)
+
+######## Xbox360 (1280*720) ########
+
+xbla_mp4_fpsnum=30000
+xbla_mp4_fpsden=1001
+
+triggerheart_exelica_xbla_game_review_path="src\triggerheart_exelica-movie\xbla\gameplay\cgr_undertow\triggerheart_exelica-xbla-game_review-720p.mp4"
+triggerheart_exelica_xbla_game_review=FFMS2_VIDEO_SOURCE(triggerheart_exelica_xbla_game_review_path,fpsnum=xbla_mp4_fpsnum,fpsden=xbla_mp4_fpsden)
+triggerheart_exelica_xbla_game_review_cache02=FFMS2_VIDEO_SOURCE(triggerheart_exelica_xbla_game_review_path,fpsnum=xbla_mp4_fpsnum,fpsden=xbla_mp4_fpsden)
+triggerheart_exelica_xbla_game_review=SSRC(triggerheart_exelica_xbla_game_review,48000)
+triggerheart_exelica_xbla_game_review_cache02=SSRC(triggerheart_exelica_xbla_game_review_cache02,48000)
+#triggerheart_exelica_xbla_game_review=KillAudio(triggerheart_exelica_xbla_game_review)
+
+######## PS2 (512*336) ########
+
+ps2_sfd_fpsnum=24
+ps2_sfd_fpsden=1
+
+# ripped MP4 (H.264/AAC)
+#triggerheart_exelica_enhanced_ps2_op=FFMS2_VIDEO_SOURCE("src\triggerheart_exelica-movie\ps2\dvd_rip\triggerheart_exelica_enhanced-ps2-op.mp4")
+
+# original SFD (Sofdec) (MPEG-1/ADX)
+#triggerheart_exelica_enhanced_ps2_op=FFMS2_VIDEO_SOURCE("src\ps2\OPENING.SFD",fpsnum=ps2_sfd_fpsnum,fpsden=ps2_sfd_fpsden)
+
+# demux SFD (Sofdec) to m2v+wav
+triggerheart_exelica_enhanced_ps2_op_video=VOB_MPEG2_VIDEO_SOURCE("src\ps2\OPENING.d2v")
+triggerheart_exelica_enhanced_ps2_op_audio=WAVSource("src\ps2\OPENING_adx.wav")
+triggerheart_exelica_enhanced_ps2_op=AudioDub(triggerheart_exelica_enhanced_ps2_op_video,triggerheart_exelica_enhanced_ps2_op_audio)
+
+#triggerheart_exelica_enhanced_ps2_op=KillAudio(triggerheart_exelica_enhanced_ps2_op)
+
+######## PS2 (480*270) ########
+
+ps2_wmv_fpsnum=30000
+ps2_wmv_fpsden=1001
+
+triggerheart_exelica_enhanced_ps2_pv=FFMS2_VIDEO_SOURCE("src\triggerheart_exelica-movie\ps2\mms\EXELICA_08COM.wmv",fpsnum=ps2_wmv_fpsnum,fpsden=ps2_wmv_fpsden)
+#triggerheart_exelica_enhanced_ps2_pv=KillAudio(triggerheart_exelica_enhanced_ps2_pv)
+
+######## TRIM ########
+
+triggerheart_exelica_dc_pv_01=Trim(triggerheart_exelica_dc_pv,114,1538) # original: 114~1764
+
+triggerheart_exelica_xbla_game_review_01=Trim(triggerheart_exelica_xbla_game_review,192,302)
+triggerheart_exelica_xbla_game_review_02=Trim(triggerheart_exelica_xbla_game_review,400,1466)
+triggerheart_exelica_xbla_game_review_03=Trim(triggerheart_exelica_xbla_game_review,1467,2884)
+triggerheart_exelica_xbla_game_review_04=Trim(triggerheart_exelica_xbla_game_review,2885,4477)
+triggerheart_exelica_xbla_game_review_05=Trim(triggerheart_exelica_xbla_game_review_cache02,4478,5866)
+triggerheart_exelica_xbla_game_review_06=Trim(triggerheart_exelica_xbla_game_review,5867,6422)
+
+triggerheart_exelica_enhanced_ps2_op_01=Trim(triggerheart_exelica_enhanced_ps2_op,0,834)
+triggerheart_exelica_enhanced_ps2_op_02=Trim(triggerheart_exelica_enhanced_ps2_op,835,1150)
+triggerheart_exelica_enhanced_ps2_op_03=Trim(triggerheart_exelica_enhanced_ps2_op,1151,1770)
+triggerheart_exelica_enhanced_ps2_op_04=Trim(triggerheart_exelica_enhanced_ps2_op,1771,2077)
+triggerheart_exelica_enhanced_ps2_op_05=Trim(triggerheart_exelica_enhanced_ps2_op,2078,2693)
+triggerheart_exelica_enhanced_ps2_op_06=Trim(triggerheart_exelica_enhanced_ps2_op,2694,0)
+
+triggerheart_exelica_enhanced_ps2_pv_01=Trim(triggerheart_exelica_enhanced_ps2_pv,360,3153)
+
+######## Pre Combine ########
+
+triggerheart_exelica_dc_pv_01=AddBorders(triggerheart_exelica_dc_pv_01,68,0,68,0)
+
+triggerheart_exelica_enhanced_ps2_op_01=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01,triggerheart_exelica_dc_pv)
+triggerheart_exelica_enhanced_ps2_op_02=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_02,triggerheart_exelica_dc_pv)
+triggerheart_exelica_enhanced_ps2_op_03=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03,triggerheart_exelica_dc_pv)
+triggerheart_exelica_enhanced_ps2_op_04=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_04,triggerheart_exelica_dc_pv)
+triggerheart_exelica_enhanced_ps2_op_05=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05,triggerheart_exelica_dc_pv)
+triggerheart_exelica_enhanced_ps2_op_06=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_06,triggerheart_exelica_dc_pv)
+
+
+
+triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,16,0)
+triggerheart_exelica_enhanced_ps2_pv_overlay_bg=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_pv_01_offset,triggerheart_exelica_xbla_game_review)
+triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01=triggerheart_exelica_xbla_game_review_03
+triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02=triggerheart_exelica_xbla_game_review_05
+
+overlay_width=Width(triggerheart_exelica_xbla_game_review)
+overlay_height=Height(triggerheart_exelica_xbla_game_review)
+
+triggerheart_exelica_enhanced_ps2_pv_overlay=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01,dstx="0.25*overlay_width", \
+	dsty="Spline(n,0,0.125*overlay_height,190,0.125*overlay_height,240,0.25*overlay_height,340,0.5*overlay_height,390,0.625*overlay_height,Framecount()-1,0.625*overlay_height,cubic=false)", \
+	factor="Spline(n,0,0.3,190,0.3,240,0.5,340,0.5,390,0.7,Framecount()-1,0.7,cubic=false)", \
+	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,Framecount()-1,45,cubic=false)", \
+	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,Framecount()-1,0.0,cubic=false)")
+triggerheart_exelica_enhanced_ps2_pv_overlay=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02,dstx="0.75*overlay_width", \
+	dsty="Spline(n,0,0.875*overlay_height,190,0.875*overlay_height,240,0.75*overlay_height,340,0.5*overlay_height,390,0.375*overlay_height,Framecount()-1,0.375*overlay_height,cubic=false)", \
+	factor="Spline(n,0,0.3,190,0.3,240,0.5,340,0.5,390,0.7,Framecount()-1,0.7,cubic=false)", \
+	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,Framecount()-1,45,cubic=false)", \
+	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,Framecount()-1,0.0,cubic=false)")
+
+triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay),190,390)
+
+######## Combine ########
+
+#                                         ntsc_video    film
+# triggerheart_exelica_enhanced_op_t03    4205          3367
+# triggerheart_exelica_enhanced_op_t05    7547          6044
+
+fade_length=15
+
+triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01+triggerheart_exelica_enhanced_ps2_op_02,triggerheart_exelica_xbla_game_review)
+triggerheart_exelica_enhanced_op_t02=triggerheart_exelica_enhanced_ps2_pv_overlay
+triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_03+triggerheart_exelica_enhanced_ps2_op_04,triggerheart_exelica_xbla_game_review)
+triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,760),fade_length)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01,triggerheart_exelica_xbla_game_review),fade_length)
+triggerheart_exelica_enhanced_op_t05=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05+triggerheart_exelica_enhanced_ps2_op_06,triggerheart_exelica_xbla_game_review)+BlankClip(triggerheart_exelica_xbla_game_review,length=120,color=color_black)
+
+triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_op_t02,2767)+triggerheart_exelica_enhanced_op_t03+triggerheart_exelica_enhanced_op_t04+triggerheart_exelica_enhanced_op_t05
+
+######## Music ########
+
+# PS2 opening movie may be edited at 24000/1001 fps but output at 24 fps
+# we adjust music speed by assuming sample rate: 44100 Hz / (24000/1001) fps * 24 fps = 44144.1 Hz
+# SSRC() can resample from 44145 Hz to 48000 Hz
+
+bgm_48khz=SSRC(AssumeSampleRate(WAVSource("src\triggerheart_exelica_enhanced-op-01.wav"),44145),48000)
+
+#### for MP4 ####
+#bgm_48khz_delayed=DelayAudio(bgm_48khz,0.509)
+
+#### for SFD ####
+bgm_48khz_delayed=DelayAudio(bgm_48khz,0.454)
+
+AudioDub(triggerheart_exelica_enhanced_op_mute,bgm_48khz_delayed)
+
+######## Subtitle ########
+
+subtitle_x=50
+subtitle_y=400
+global subtitle_front_fade_count=30
+global subtitle_rear_fade_count=30
+global subtitle_font="MS Gothic"
+global subtitle_effects="bi"
+global subtitle_size=28
+global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_purple,$3F)
+global subtitle_halo_color=color_white
+global subtitle_random_char_func="RANDOM_JIS_CHAR"
+
+function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
+	is_title=Default(is_title,false)
+
+	halo_color=is_title?color_gold:subtitle_halo_color
+
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func)
+}
+
+SUBTITLE_FX("GRAVITY ERROR//彩音|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1000,true)
+
+SUBTITLE_FX("幾千光年の離れた星でも",subtitle_x,subtitle_y,206,406)
+SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,411,592)
+
+SUBTITLE_FX("運命線飛び越えても どんな未来がまってる?",subtitle_x,subtitle_y,1035,1228)
+SUBTITLE_FX("そこが笑顔に溢れる 世界と言えるかな?",subtitle_x,subtitle_y,1229,1422)
+
+SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1431,1620)
+SUBTITLE_FX("戦う事に 忘れかけた天使よ",subtitle_x,subtitle_y,1626,1812)
+SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1821,2010)
+SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2014,2182)
+
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,2190,2206)
+SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,2207,2396)
+SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,2403,2585)
+SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,2591,2979)
+SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,2980,3173)
+SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,3180,3356)
+
+SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3803,3995)
+SUBTITLE_FX("従うだけのハートが 誰かをキズつける",subtitle_x,subtitle_y,3999,4190)
+
+SUBTITLE_FX("呑み込まれる 安らぎと呼べる日常に",subtitle_x,subtitle_y,4200,4387)
+SUBTITLE_FX("目を逸らしても それは運命のように",subtitle_x,subtitle_y,4393,4579)
+SUBTITLE_FX("だけどそれは 愛するものに背くこと",subtitle_x,subtitle_y,4588,4777)
+SUBTITLE_FX("覚醒せよ 光溢れる『未来へと』",subtitle_x,subtitle_y,4782,4951)
+
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,4958,4975)
+SUBTITLE_FX("風をきるこの感覚 歪みかけたプライド",subtitle_x,subtitle_y,4976,5164)
+SUBTITLE_FX("守るべきその何かを キミはもう知っている",subtitle_x,subtitle_y,5171,5351)
+SUBTITLE_FX("幾千光年の離れた星でも|そこに何かの希望が輝くなら",subtitle_x,subtitle_y-subtitle_size,5358,5746)
+SUBTITLE_FX("引き寄せろエナジーウェイブ 両手に感じて",subtitle_x,subtitle_y,5747,5941)
+SUBTITLE_FX("回せ!砕け!心のトリガーを引け!",subtitle_x,subtitle_y,5948,6125)
+
+SUBTITLE_FX("交わされたその約束 途切れそうな旋律も",subtitle_x,subtitle_y,6773,6961)
+SUBTITLE_FX("いつしか栄光となり 奏で始める",subtitle_x,subtitle_y,6968,7134)
+
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,7143,7160)
+SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,7161,7350)
+SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,7357,7539)
+SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,7544,7932)
+SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,7933,8127)
+SUBTITLE_FX("掴め! 放て! 心のトリガーを引け!",subtitle_x,subtitle_y,8132,8310)
+
+######## Post Processing ########
+
+ConvertToYV12()
+#ConvertToYUY2()
+#ConvertToRGB24()
