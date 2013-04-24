@@ -37,6 +37,7 @@ triggerheart_exelica_enhanced_ps2_op_video=VOB_MPEG2_VIDEO_SOURCE("src\ps2\OPENI
 triggerheart_exelica_enhanced_ps2_op_audio=WAVSource("src\ps2\OPENING_adx.wav")
 triggerheart_exelica_enhanced_ps2_op=AudioDub(triggerheart_exelica_enhanced_ps2_op_video,triggerheart_exelica_enhanced_ps2_op_audio)
 
+#triggerheart_exelica_enhanced_ps2_op=SSRC(AssumeFPS(triggerheart_exelica_enhanced_ps2_op,24000,1001,true),48000) # assume 24000/1001 fps
 #triggerheart_exelica_enhanced_ps2_op=KillAudio(triggerheart_exelica_enhanced_ps2_op)
 
 ######## PS2 (480*270) ########
@@ -103,9 +104,12 @@ triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelic
 
 ######## Combine ########
 
-#                                         ntsc_video    film
-# triggerheart_exelica_enhanced_op_t03    4205          3367
-# triggerheart_exelica_enhanced_op_t05    7547          6044
+#                                                 change to ntsc_video
+#                                         film    assume 24 fps    assume 24000/1001 fps
+# triggerheart_exelica_enhanced_op_t03    3367    4205             4209
+# triggerheart_exelica_enhanced_op_t05    6044    7547             7555
+#
+# triggerheart_exelica_enhanced_ps2_pv_01         -16              -15
 
 fade_length=15
 
