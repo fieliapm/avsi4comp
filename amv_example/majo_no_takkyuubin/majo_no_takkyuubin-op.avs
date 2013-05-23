@@ -1,110 +1,85 @@
-Import("macro.avsi")
+Import("majo_no_takkyuubin-common.avsi")
 
-#SetMemoryMax(64)
-
-######## DVD (480P) ########
-
-majo_no_takkyuubin_01=VOB_MPEG2_VIDEO_SOURCE("src\dvd\VTS_01_1.d2v")
-majo_no_takkyuubin_01=AudioDub(majo_no_takkyuubin_01,WAVSource("src\dvd\VTS_01_1 T80 2_0ch 448Kbps 48KHz.wav"))
-
-majo_no_takkyuubin_01_op=Trim(majo_no_takkyuubin_01,13994,16895)
-
-
-majo_no_takkyuubin_01_mark=Trim(majo_no_takkyuubin_01,194,370)
-
-majo_no_takkyuubin_07=VOB_MPEG2_VIDEO_SOURCE("src\dvd\VTS_01_7.d2v")
-majo_no_takkyuubin_07_ed=Trim(majo_no_takkyuubin_07,5858,0)
-
-######## Pre Combine (480P) ########
-
-majo_no_takkyuubin_01_mark=AUDIO_DUB_TONE(majo_no_takkyuubin_01_mark,samplerate=48000,channels=2,type="Silence")
+######## Pre Combine ########
 
 ######## Combine ########
 
-majo_no_takkyuubin_ed_mute=majo_no_takkyuubin_07_ed
-
-######## Music ########
-
-#bgm_48khz=ResampleAudio(AssumeSampleRate(WAVSource("src\yuming-1974_10_05-misslim-03.wav"),44042),48000)
-#bgm_48khz_delayed=DelayAudio(bgm_48khz,2.248)
-
-bgm_48khz=ResampleAudio(AssumeSampleRate(WAVSource("src\majo_no_takkyuubin-ost-21.wav"),43738),48000)
-bgm_48khz_delayed=DelayAudio(bgm_48khz,2.211)
-
-AudioDub(majo_no_takkyuubin_ed_mute,bgm_48khz_delayed)
-
-######## Subtitle ########
-
-subtitle_x=50
-subtitle_y=400
-global subtitle_front_fade_count=30
-global subtitle_rear_fade_count=30
-global subtitle_font="MS Gothic"
-global subtitle_effects="bi"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_lightpink,$3F)
-global subtitle_halo_color=color_midnightblue
-
-function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
-	is_title=Default(is_title,false)
-
-	text_color=is_title?color_indianred:subtitle_text_color
-
-	return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
-}
-
-SUBTITLE_FX("やさしさに包まれたなら|album version//荒井由実|- by fielia@AVISynth",subtitle_x,subtitle_y-(subtitle_size*2),80,287,true)
-
-SUBTITLE_FX("小さい頃は神さまがいて",subtitle_x,subtitle_y,357,600)
-SUBTITLE_FX("不思議に夢をかなえてくれた",subtitle_x,subtitle_y-subtitle_size,632,879)
-SUBTITLE_FX("やさしい気持で目覚めた朝は",subtitle_x,subtitle_y,907,1152)
-SUBTITLE_FX("おとなになっても奇蹟はおこるよ",subtitle_x,subtitle_y-subtitle_size,1181,1455)
-
-SUBTITLE_FX("カーテンを開いて 静かな木洩れ陽の",subtitle_x,subtitle_y,1472,1718)
-SUBTITLE_FX("やさしさに包まれたなら きっと",subtitle_x,subtitle_y-subtitle_size,1742,1984)
-SUBTITLE_FX("目にうつる全てのことは メッセージ",subtitle_x,subtitle_y,1991,2281)
-
-SUBTITLE_FX("小さい頃は神さまがいて",subtitle_x,subtitle_y,2547,2787)
-SUBTITLE_FX("毎日愛を届けてくれた",subtitle_x,subtitle_y-subtitle_size,2823,3069)
-SUBTITLE_FX("心の奥にしまい忘れた",subtitle_x,subtitle_y,3098,3348)
-SUBTITLE_FX("大切な箱 ひらくときは今",subtitle_x,subtitle_y-subtitle_size,3372,3647)
-
-SUBTITLE_FX("雨上がりの庭で くちなしの香りの",subtitle_x,subtitle_y,3666,3920)
-SUBTITLE_FX("やさしさに包まれたなら きっと",subtitle_x,subtitle_y-subtitle_size,3941,4182)
-SUBTITLE_FX("目にうつる全てのことは メッセージ",subtitle_x,subtitle_y,4189,4486)
-
-SUBTITLE_FX("カーテンを開いて 静かな木洩れ陽の",subtitle_x,subtitle_y,4552,4800)
-SUBTITLE_FX("やさしさに包まれたなら きっと",subtitle_x,subtitle_y-subtitle_size,4823,5064)
-SUBTITLE_FX("目にうつる全てのことは メッセージ",subtitle_x,subtitle_y,5071,5436)
+# majo_no_takkyuubin_01_op -102
 
 fade_length=15
 
-majo_no_takkyuubin_01_mark++ConvertToYV12(FADE_IN_WITH_BRIGHTNESS_OFFSET(last,30))
-
-#majo_no_takkyuubin_07
-
 majo_no_takkyuubin_01_op_00=Trim(majo_no_takkyuubin_01_op,0,101)
 majo_no_takkyuubin_01_op_01=Trim(majo_no_takkyuubin_01_op,102,0)
-kiki_talk=FadeOut0(Trim(majo_no_takkyuubin_01_op,0,168+fade_length),fade_length)
+
+majo_no_takkyuubin_op_t01=majo_no_takkyuubin_01_op_01+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_01_kiki_talk_with_friends,51)
+majo_no_takkyuubin_op_t02=TRIM_MIDDLE_CLIP(majo_no_takkyuubin_01_kiki_run_across_river,95)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_01_kiki_turn,96)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_01_kiki_talk_with_mother,95)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_06_kiki_and_madame_and_barsa,94)
+majo_no_takkyuubin_op_t03=TRIM_MIDDLE_CLIP(majo_no_takkyuubin_01_kiki_leave_train,189)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_02_fukuo_and_osono_make_bread,189)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_06_ursula_and_kiki_watch_painting,188)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_02_park,186)
+majo_no_takkyuubin_op_t04=TRIM_LAST_CLIP(majo_no_takkyuubin_04_tombo_and_fukuo_waiting_for_kiki,191)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_04_kiki_cooking,190)
+majo_no_takkyuubin_op_t05=TRIM_MIDDLE_CLIP(majo_no_takkyuubin_05_kiki_on_stair_01,191)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_03_kiki_fly_high,190)+TRIM_MIDDLE_CLIP(majo_no_takkyuubin_05_tombo_and_kiki_talk_01,93)
+majo_no_takkyuubin_op_t06=TRIM_MIDDLE_CLIP(majo_no_takkyuubin_06_ursula_and_kiki_on_bed,191)+TRIM_LAST_CLIP(majo_no_takkyuubin_07_kiki_stare_blankly,192)+FadeOut0(TRIM_LAST_CLIP(majo_no_takkyuubin_03_kiki_do_nothing_02,190),fade_length*2)+BlankClip(majo_no_takkyuubin_01_op_01,length=90,color=color_black)
+
+majo_no_takkyuubin_op_mute=majo_no_takkyuubin_op_t01+majo_no_takkyuubin_op_t02+majo_no_takkyuubin_op_t03+majo_no_takkyuubin_op_t04+majo_no_takkyuubin_op_t05+majo_no_takkyuubin_op_t06
+
+#majo_no_takkyuubin_op_mute=BlankClip(majo_no_takkyuubin_op_mute)
+
+######## Music ########
+
+bgm_48khz=SSRC(AssumeSampleRate(WAVSource("src\yuming-1975_06_20-cobalt_hour-05.wav"),44019),48000)
+AudioDub(majo_no_takkyuubin_op_mute,bgm_48khz)
+
+######## Subtitle ########
+
+SUBTITLE_FX("ルージュの伝言//荒井由実|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,386,545,true)
+
+SUBTITLE_FX("あのひとの ママに会うために",subtitle_x,subtitle_y,591,712)
+SUBTITLE_FX("今ひとり 列車に乗ったの",subtitle_x,subtitle_y-subtitle_size,779,903)
+SUBTITLE_FX("たそがれせまる 街並や車の流れ",subtitle_x,subtitle_y,941,1135)
+SUBTITLE_FX("横目で追い越して",subtitle_x,subtitle_y-subtitle_size,1151,1292)
+
+SUBTITLE_FX("あのひとは もう気づくころよ",subtitle_x,subtitle_y,1340,1460)
+SUBTITLE_FX("バスルームに ルージュの伝言",subtitle_x,subtitle_y-subtitle_size,1527,1648)
+SUBTITLE_FX("浮気な恋を はやくあきらめないかぎり",subtitle_x,subtitle_y,1690,1882)
+SUBTITLE_FX("家には帰らない",subtitle_x,subtitle_y-subtitle_size,1900,2033)
+
+SUBTITLE_FX("不安な気持ちを 残したまま",subtitle_x,subtitle_y,2098,2231)
+SUBTITLE_FX("街はDing-Dong 遠ざかってゆくわ",subtitle_x,subtitle_y-subtitle_size,2288,2444)
+
+SUBTITLE_FX("明日の朝 ママから電話で",subtitle_x,subtitle_y,2467,2591)
+SUBTITLE_FX("しかってもらうわ My Darling!",subtitle_x,subtitle_y-subtitle_size,2632,2785)
+
+SUBTITLE_FX("あのひとは あわててるころよ",subtitle_x,subtitle_y,3230,3347)
+SUBTITLE_FX("バスルームに ルージュの伝言",subtitle_x,subtitle_y-subtitle_size,3414,3535)
+SUBTITLE_FX("てあたりしだい 友達にたずねるかしら",subtitle_x,subtitle_y,3579,3774)
+SUBTITLE_FX("私の行く先を",subtitle_x,subtitle_y-subtitle_size,3796,3922)
+
+SUBTITLE_FX("不安な気持ちを 残したまま",subtitle_x,subtitle_y,3990,4122)
+SUBTITLE_FX("街はDing-Dong 遠ざかってゆくわ",subtitle_x,subtitle_y-subtitle_size,4178,4338)
+
+SUBTITLE_FX("明日の朝 ママから電話で",subtitle_x,subtitle_y,4358,4480)
+SUBTITLE_FX("しかってもらうわ My Darling!",subtitle_x,subtitle_y-subtitle_size,4524,4675)
+SUBTITLE_FX("しかってもらうわ My Darling!",subtitle_x,subtitle_y,4713,4869)
+
+
 
 majo_no_takkyuubin_01_op_00=AUDIO_DUB_TONE(majo_no_takkyuubin_01_op_00,samplerate=48000,channels=2,type="Silence")
+majo_no_takkyuubin_op=FadeIn0(majo_no_takkyuubin_01_op_00,fade_length)+ConvertToYUY2(last)
+kiki_talk=FadeOut0(Trim(majo_no_takkyuubin_01_op,0,168+fade_length),fade_length)
+MixAudio(majo_no_takkyuubin_op,kiki_talk,1.0,1.0)
 
-bgm_48khz=ResampleAudio(AssumeSampleRate(WAVSource("src\yuming-1975_06_20-cobalt_hour-05.wav"),44025),48000)
-#majo_no_takkyuubin_01_op_01=MixAudio(majo_no_takkyuubin_01_op_01,bgm_48khz)
-majo_no_takkyuubin_01_op_01=AudioDub(majo_no_takkyuubin_01_op_01,bgm_48khz)
+SUBTITLE_N("ジジ ラジオ付けて",subtitle_x,subtitle_y,35,80)
+SUBTITLE_N("今手が離せないの 早く",subtitle_x,subtitle_y,90,170)
 
-majo_no_takkyuubin_01_op=majo_no_takkyuubin_01_op_00+majo_no_takkyuubin_01_op_01
 
-MixAudio(majo_no_takkyuubin_01_op,kiki_talk,1.0,1.0)
 
+majo_no_takkyuubin_01_mark++ConvertToYUY2(last)
 
 ######## Post Processing ########
 
 #### restore interlace ####
-#DoubleWeave()
+Bob()
 
 #### restore aspect ratio ####
-#Lanczos4Resize(856,480)
+Lanczos4Resize(856,480)
 
 ConvertToYV12()
 #ConvertToYUY2()

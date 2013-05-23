@@ -4,18 +4,18 @@ Import("macro.avsi")
 
 ######## DVD (480P) ########
 
-ys_special_collection_section_03=VOB_MPEG2_VIDEO_SOURCE("src\ys_special_collection\VTS_01_3.d2v")
+ys_special_collection_section_03=VOB_MPEG2_VIDEO_SOURCE("src\ys_special_collection\VTS_01_3.d2v",upConv=1)
 ys_special_collection_section_03=AudioDub(ys_special_collection_section_03,WAVSource("src\ys_special_collection\VTS_01_3 Ta0 48K 16bit 2ch.wav"))
 
 ys_tenkuu_no_shinden_ed_official=Trim(ys_special_collection_section_03,1439,9647)
 
 
 
-ys_tenkuu_no_shinden_section_01=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_1.d2v")
-ys_tenkuu_no_shinden_section_02=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_2.d2v")
-ys_tenkuu_no_shinden_section_03=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_3.d2v")
-ys_tenkuu_no_shinden_section_04=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_4.d2v")
-ys_tenkuu_no_shinden_section_05=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_5.d2v")
+ys_tenkuu_no_shinden_section_01=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_1.d2v",upConv=1)
+ys_tenkuu_no_shinden_section_02=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_2.d2v",upConv=1)
+ys_tenkuu_no_shinden_section_03=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_3.d2v",upConv=1)
+ys_tenkuu_no_shinden_section_04=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_4.d2v",upConv=1)
+ys_tenkuu_no_shinden_section_05=VOB_MPEG2_VIDEO_SOURCE("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_5.d2v",upConv=1)
 
 ys_tenkuu_no_shinden_section_01=AudioDub(ys_tenkuu_no_shinden_section_01,WAVSource("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_1 T80 3_1ch 32Kbps 48KHz.wav"))
 ys_tenkuu_no_shinden_section_02=AudioDub(ys_tenkuu_no_shinden_section_02,WAVSource("src\ys2e-ova-ys_tenkuu_no_shinden\VTS_01_2 T80 2_0ch 384Kbps 48KHz.wav"))
@@ -94,12 +94,12 @@ SUBTITLE_FX("èùÇæÇÁÇØÇÃ òrÇÃíÜÇ… ç° à§Çä¥Ç∂ÇÈ",subtitle_x,subtitle_y,7279,7607)
 
 
 
-ys_tenkuu_no_shinden_section_01_title++ConvertToYV12(last)
+ys_tenkuu_no_shinden_section_01_title++ConvertToYUY2(last)
 
 ######## Post Processing ########
 
 #### restore interlace ####
-DoubleWeave()
+Bob()
 
 #### restore aspect ratio ####
 Lanczos4Resize(640,480)

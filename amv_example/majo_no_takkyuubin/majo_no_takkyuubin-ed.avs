@@ -1,18 +1,6 @@
-Import("macro.avsi")
+Import("majo_no_takkyuubin-common.avsi")
 
-#SetMemoryMax(64)
-
-######## DVD (480P) ########
-
-majo_no_takkyuubin_01=VOB_MPEG2_VIDEO_SOURCE("src\dvd\VTS_01_1.d2v")
-majo_no_takkyuubin_01_mark=Trim(majo_no_takkyuubin_01,194,370)
-
-majo_no_takkyuubin_07=VOB_MPEG2_VIDEO_SOURCE("src\dvd\VTS_01_7.d2v")
-majo_no_takkyuubin_07_ed=Trim(majo_no_takkyuubin_07,5858,0)
-
-######## Pre Combine (480P) ########
-
-majo_no_takkyuubin_01_mark=AUDIO_DUB_TONE(majo_no_takkyuubin_01_mark,samplerate=48000,channels=2,type="Silence")
+######## Pre Combine ########
 
 ######## Combine ########
 
@@ -29,24 +17,6 @@ bgm_48khz_delayed=DelayAudio(bgm_48khz,2.211)
 AudioDub(majo_no_takkyuubin_ed_mute,bgm_48khz_delayed)
 
 ######## Subtitle ########
-
-subtitle_x=50
-subtitle_y=400
-global subtitle_front_fade_count=30
-global subtitle_rear_fade_count=30
-global subtitle_font="MS Gothic"
-global subtitle_effects="bi"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_lightpink,$3F)
-global subtitle_halo_color=color_midnightblue
-
-function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
-	is_title=Default(is_title,false)
-
-	text_color=is_title?color_indianred:subtitle_text_color
-
-	return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
-}
 
 SUBTITLE_FX("やさしさに包まれたなら|album version//荒井由実|- by fielia@AVISynth",subtitle_x,subtitle_y-(subtitle_size*2),80,287,true)
 
@@ -74,12 +44,12 @@ SUBTITLE_FX("目にうつる全てのことは メッセージ",subtitle_x,subtitle_y,5071,5436)
 
 
 
-majo_no_takkyuubin_01_mark++ConvertToYV12(FADE_IN_WITH_BRIGHTNESS_OFFSET(last,30))
+majo_no_takkyuubin_01_mark++ConvertToYUY2(FADE_IN_WITH_BRIGHTNESS_OFFSET(last,30))
 
 ######## Post Processing ########
 
 #### restore interlace ####
-DoubleWeave()
+Bob()
 
 #### restore aspect ratio ####
 Lanczos4Resize(856,480)

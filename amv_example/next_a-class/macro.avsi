@@ -187,6 +187,79 @@ function AUDIO_DUB_TONE(clip clip,int "frequency",int "samplerate",int "channels
 	return AudioDub(clip,tone)
 }
 
+######## Trim ########
+
+function TRIM_FIRST_CLIP(clip clip,int length){
+	return Trim(clip,0,-length)
+}
+
+function TRIM_MIDDLE_CLIP(clip clip,int length){
+	return Trim(clip,(Framecount(clip)-length)/2,-length)
+}
+
+function TRIM_LAST_CLIP(clip clip,int length){
+	return Trim(clip,Framecount(clip)-length,0)
+}
+
+function LOOP_STILL_FRAME(clip clip,int loop_count){
+	Assert(Framecount(clip)==1,"must be still frame")
+	return Loop(clip,loop_count,0,0)
+}
+
+function STILL_FRAME(clip clip,int frame_index,int loop_count){
+	return LOOP_STILL_FRAME(Trim(clip,frame_index,-1),loop_count)
+}
+
+function STILL_FIRST_FRAME(clip clip,int loop_count){
+	return LOOP_STILL_FRAME(TRIM_FIRST_CLIP(clip,1),loop_count)
+}
+
+function STILL_MIDDLE_FRAME(clip clip,int loop_count){
+	return LOOP_STILL_FRAME(TRIM_MIDDLE_CLIP(clip,1),loop_count)
+}
+
+function STILL_LAST_FRAME(clip clip,int loop_count){
+	return LOOP_STILL_FRAME(TRIM_LAST_CLIP(clip,1),loop_count)
+}
+
+######## FPS ########
+
+function CONVERT_24P_TO_60P_PATTERN_AAIBB(clip clip){
+	clip_even=SelectEven(clip)
+	clip_odd=SelectOdd(clip)
+	clip_even_last_frame=TRIM_LAST_CLIP(clip_even,1)
+	clip_interpolation=Merge(clip_even,clip_odd+clip_even_last_frame,0.5)
+	return Interleave(clip_even,clip_even,clip_interpolation,clip_odd,clip_odd)
+}
+
+function ASSUME_FPS_SYNC_AUDIO(clip clip,int numerator,int "denominator"){
+	return AssumeFPS(clip,numerator,denominator,sync_audio=true)
+}
+
+function ASSUME_SCALED_FPS_SYNC_AUDIO(clip clip,int "multiplier",int "divisor"){
+	return AssumeScaledFPS(clip,multiplier,divisor,sync_audio=true)
+}
+
+function ASSUME_30P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,30,1)
+}
+
+function ASSUME_29_97P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,30000,1001)
+}
+
+function ASSUME_25P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,25,1)
+}
+
+function ASSUME_24P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,24,1)
+}
+
+function ASSUME_23_976P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,24000,1001)
+}
+
 ######## Speed ########
 
 function CONVERT_FPS_AUTO_HQ(clip,fps){
@@ -208,29 +281,17 @@ function SLOW_MOTION_BY_DIVISOR(clip clip,int fps_divisor,bool smooth){
 	return SLOW_MOTION_TO_FPS(clip,Framerate(clip)/fps_divisor,smooth)
 }
 
-######## Trim ########
-
-function TRIM_FIRST_CLIP(clip clip,int length){
-	return Trim(clip,0,-length)
-}
-
-function TRIM_MIDDLE_CLIP(clip clip,int length){
-	return Trim(clip,(Framecount(clip)-length)/2,-length)
-}
-
-function TRIM_LAST_CLIP(clip clip,int length){
-	return Trim(clip,Framecount(clip)-length,0)
-}
-
 ######## Fade ########
 
-function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_out){
-	filter_string="_offset=Round(_var*255.0)
-		Levels(0,1.0,255,_offset,_offset+255,coring=false)"
+function BRIGHTNESS_OFFSET(clip clip,float offset){
+	offset_level=Round(offset*255.0)
+	return Levels(clip,0,1.0,255,offset_level,offset_level+255,coring=false)
+}
 
+function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_out){
 	zero_val_frame=is_fade_out?start_frame:end_frame
 	one_val_frame=is_fade_out?end_frame:start_frame
-	clip_faded_containing_var=ScriptClip(clip,filter_string)
+	clip_faded_containing_var=ScriptClip(clip,"BRIGHTNESS_OFFSET(_var)")
 	clip_faded=EVALUATE_VAR(clip_faded_containing_var,"_var",zero_val_frame,one_val_frame)
 	return OVERWRITE_RANGE(clip,clip_faded,start_frame,end_frame)
 }
@@ -353,26 +414,25 @@ function PULL_IN_OUT(clip clip,float "pull_ratio_x",float "pull_ratio_y"){
 
 ######## Source ########
 
-function FFMS2_VIDEO_SOURCE(string filename,bool "enable_audio_track",int "fpsnum",int "fpsden",bool "enable_multi_thread"){
-	enable_audio_track=Default(enable_audio_track,true)
+function FFMS2_VIDEO_SOURCE(string filename,int "vtrack",int "atrack",int "fpsnum",int "fpsden",bool "enable_multi_thread"){
+	atrack=Default(atrack,-1)
 	enable_multi_thread=Default(enable_multi_thread,false)
 
-	audio_track=enable_audio_track?-1:-2
 	threads=enable_multi_thread?-1:1
 
-	return FFmpegSource2(filename,atrack=audio_track,fpsnum=fpsnum,fpsden=fpsden,threads=threads)
+	return FFmpegSource2(filename,vtrack=vtrack,atrack=atrack,fpsnum=fpsnum,fpsden=fpsden,threads=threads)
 }
 
-function FFMS2_VIDEO_SOURCE_RGB24(string filename,bool "enable_audio_track",int "fpsnum",int "fpsden",bool "enable_multi_thread"){
-	return ConvertToRGB24(FFMS2_VIDEO_SOURCE(filename,enable_audio_track,fpsnum,fpsden,enable_multi_thread))
+function FFMS2_VIDEO_SOURCE_RGB24(string filename,int "vtrack",int "atrack",int "fpsnum",int "fpsden",bool "enable_multi_thread"){
+	return ConvertToRGB24(FFMS2_VIDEO_SOURCE(filename,vtrack,atrack,fpsnum,fpsden,enable_multi_thread))
 }
 
-function VOB_MPEG2_VIDEO_SOURCE(string filename){
-	return DGDecode_MPEG2Source(filename)
+function VOB_MPEG2_VIDEO_SOURCE(string filename,int "upConv",int "info"){
+	return DGDecode_MPEG2Source(filename,upConv=upConv,info=info)
 }
 
-function VOB_MPEG2_VIDEO_SOURCE_CROPPED(string filename){
-	return Crop(VOB_MPEG2_VIDEO_SOURCE(filename),0,60,720,360)
+function VOB_MPEG2_VIDEO_SOURCE_CROPPED(string filename,int "upConv",int "info"){
+	return Crop(VOB_MPEG2_VIDEO_SOURCE(filename,upConv=upConv,info=info),0,60,720,360)
 }
 
 ######## Subtitle ########

@@ -4,10 +4,9 @@ Import("macro.avsi")
 
 ######## DC (720*480) ########
 
-triggerheart_exelica_dc_pv_video=VOB_MPEG2_VIDEO_SOURCE("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv.d2v")
+triggerheart_exelica_dc_pv_video=VOB_MPEG2_VIDEO_SOURCE("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv.d2v",upConv=1)
 triggerheart_exelica_dc_pv_audio=WAVSource("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv T80 2_0ch 448Kbps 48KHz.wav")
 triggerheart_exelica_dc_pv=AudioDub(triggerheart_exelica_dc_pv_video,triggerheart_exelica_dc_pv_audio)
-#triggerheart_exelica_dc_pv=KillAudio(triggerheart_exelica_dc_pv)
 
 ######## Xbox360 (1280*720) ########
 
@@ -19,7 +18,6 @@ triggerheart_exelica_xbla_game_review=FFMS2_VIDEO_SOURCE(triggerheart_exelica_xb
 triggerheart_exelica_xbla_game_review_cache02=FFMS2_VIDEO_SOURCE(triggerheart_exelica_xbla_game_review_path,fpsnum=xbla_mp4_fpsnum,fpsden=xbla_mp4_fpsden)
 triggerheart_exelica_xbla_game_review=SSRC(triggerheart_exelica_xbla_game_review,48000)
 triggerheart_exelica_xbla_game_review_cache02=SSRC(triggerheart_exelica_xbla_game_review_cache02,48000)
-#triggerheart_exelica_xbla_game_review=KillAudio(triggerheart_exelica_xbla_game_review)
 
 ######## PS2 (512*336) ########
 
@@ -37,8 +35,7 @@ triggerheart_exelica_enhanced_ps2_op_video=VOB_MPEG2_VIDEO_SOURCE("src\ps2\OPENI
 triggerheart_exelica_enhanced_ps2_op_audio=WAVSource("src\ps2\OPENING_adx.wav")
 triggerheart_exelica_enhanced_ps2_op=AudioDub(triggerheart_exelica_enhanced_ps2_op_video,triggerheart_exelica_enhanced_ps2_op_audio)
 
-#triggerheart_exelica_enhanced_ps2_op=SSRC(AssumeFPS(triggerheart_exelica_enhanced_ps2_op,24000,1001,true),48000) # assume 24000/1001 fps
-#triggerheart_exelica_enhanced_ps2_op=KillAudio(triggerheart_exelica_enhanced_ps2_op)
+#triggerheart_exelica_enhanced_ps2_op=SSRC(ASSUME_23_976P(triggerheart_exelica_enhanced_ps2_op),48000) # assume 24000/1001 fps
 
 ######## PS2 (480*270) ########
 
@@ -46,7 +43,6 @@ ps2_wmv_fpsnum=30000
 ps2_wmv_fpsden=1001
 
 triggerheart_exelica_enhanced_ps2_pv=FFMS2_VIDEO_SOURCE("src\triggerheart_exelica-movie\ps2\mms\EXELICA_08COM.wmv",fpsnum=ps2_wmv_fpsnum,fpsden=ps2_wmv_fpsden)
-#triggerheart_exelica_enhanced_ps2_pv=KillAudio(triggerheart_exelica_enhanced_ps2_pv)
 
 ######## TRIM ########
 
@@ -70,14 +66,16 @@ triggerheart_exelica_enhanced_ps2_pv_01=Trim(triggerheart_exelica_enhanced_ps2_p
 
 ######## Pre Combine ########
 
-triggerheart_exelica_dc_pv_01=AddBorders(triggerheart_exelica_dc_pv_01,68,0,68,0)
+fade_length=15
 
-triggerheart_exelica_enhanced_ps2_op_01=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01,triggerheart_exelica_dc_pv)
-triggerheart_exelica_enhanced_ps2_op_02=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_02,triggerheart_exelica_dc_pv)
-triggerheart_exelica_enhanced_ps2_op_03=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03,triggerheart_exelica_dc_pv)
-triggerheart_exelica_enhanced_ps2_op_04=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_04,triggerheart_exelica_dc_pv)
-triggerheart_exelica_enhanced_ps2_op_05=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05,triggerheart_exelica_dc_pv)
-triggerheart_exelica_enhanced_ps2_op_06=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_06,triggerheart_exelica_dc_pv)
+triggerheart_exelica_dc_pv_01=AddBorders(triggerheart_exelica_dc_pv_01,68,0,68,0)
+triggerheart_exelica_dc_pv_01_fade_out_interlace=FADE_OUT_WITH_BRIGHTNESS_OFFSET(triggerheart_exelica_dc_pv_01,fade_length)
+triggerheart_exelica_dc_pv_01_fade_out_deinterlace=Bob(triggerheart_exelica_dc_pv_01_fade_out_interlace)
+triggerheart_exelica_dc_pv_01_fade_out=triggerheart_exelica_dc_pv_01_fade_out_deinterlace # select interlace/deinterlace
+
+triggerheart_exelica_enhanced_ps2_op_01_02=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01+triggerheart_exelica_enhanced_ps2_op_02,triggerheart_exelica_dc_pv_01_fade_out)
+triggerheart_exelica_enhanced_ps2_op_03_04=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03+triggerheart_exelica_enhanced_ps2_op_04,triggerheart_exelica_dc_pv_01_fade_out)
+triggerheart_exelica_enhanced_ps2_op_05_06=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05+triggerheart_exelica_enhanced_ps2_op_06,triggerheart_exelica_dc_pv_01_fade_out)
 
 
 
@@ -106,20 +104,22 @@ triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelic
 
 #                                                 change to ntsc_video
 #                                         film    assume 24 fps    assume 24000/1001 fps
-# triggerheart_exelica_enhanced_op_t03    3367    4205             4209
+# triggerheart_exelica_enhanced_op_t03    3367    4204             4209
 # triggerheart_exelica_enhanced_op_t05    6044    7547             7555
 #
 # triggerheart_exelica_enhanced_ps2_pv_01         -16              -15
 
-fade_length=15
+triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
+triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2767)
+triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_xbla_game_review)
+triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,760),fade_length)
+triggerheart_exelica_enhanced_op_t05=ConvertToYV12(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01_fade_out,triggerheart_exelica_xbla_game_review))
+triggerheart_exelica_enhanced_op_t06=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_xbla_game_review)
+triggerheart_exelica_enhanced_op_t07=BlankClip(triggerheart_exelica_xbla_game_review,length=30*3,color=color_black)
 
-triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01+triggerheart_exelica_enhanced_ps2_op_02,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t02=triggerheart_exelica_enhanced_ps2_pv_overlay
-triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_03+triggerheart_exelica_enhanced_ps2_op_04,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,760),fade_length)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01,triggerheart_exelica_xbla_game_review),fade_length)
-triggerheart_exelica_enhanced_op_t05=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05+triggerheart_exelica_enhanced_ps2_op_06,triggerheart_exelica_xbla_game_review)+BlankClip(triggerheart_exelica_xbla_game_review,length=120,color=color_black)
-
-triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_op_t02,2767)+triggerheart_exelica_enhanced_op_t03+triggerheart_exelica_enhanced_op_t04+triggerheart_exelica_enhanced_op_t05
+triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+ChangeFPS(triggerheart_exelica_enhanced_op_t02,triggerheart_exelica_dc_pv_01_fade_out) \
+	+triggerheart_exelica_enhanced_op_t03+ChangeFPS(triggerheart_exelica_enhanced_op_t04,triggerheart_exelica_dc_pv_01_fade_out) \
+	+triggerheart_exelica_enhanced_op_t05+triggerheart_exelica_enhanced_op_t06+ChangeFPS(triggerheart_exelica_enhanced_op_t07,triggerheart_exelica_dc_pv_01_fade_out)
 
 ######## Music ########
 
@@ -155,7 +155,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	halo_color=is_title?color_gold:subtitle_halo_color
 
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func)
+	#return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # interlace
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame*2,end_frame*2,subtitle_front_fade_count*2,subtitle_rear_fade_count*2,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # deinterlace
 }
 
 SUBTITLE_FX("GRAVITY ERROR//ç âπ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1000,true)
