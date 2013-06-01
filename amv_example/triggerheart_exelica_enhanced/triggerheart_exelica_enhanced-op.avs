@@ -35,7 +35,17 @@ triggerheart_exelica_enhanced_ps2_op_video=VOB_MPEG2_VIDEO_SOURCE("src\ps2\OPENI
 triggerheart_exelica_enhanced_ps2_op_audio=WAVSource("src\ps2\OPENING_adx.wav")
 triggerheart_exelica_enhanced_ps2_op=AudioDub(triggerheart_exelica_enhanced_ps2_op_video,triggerheart_exelica_enhanced_ps2_op_audio)
 
-#triggerheart_exelica_enhanced_ps2_op=SSRC(ASSUME_23_976P(triggerheart_exelica_enhanced_ps2_op),48000) # assume 24000/1001 fps
+# PS2 opening movie may be edited at 24000/1001 fps but saved as 24 fps
+# there are 2 strategy:
+#
+# 1. we adjust PS2 opening movie speed by assuming 24000/1001 fps and keep audio sync
+#    then edit at 30000/1001 fps
+#
+# 2. we adjust music speed by assuming sample rate: 44100 Hz / (24000/1001) fps * 24 fps = 44144.1 Hz
+#    SSRC() can resample from 44145 Hz to 48000 Hz
+#    then edit at 30 fps
+
+triggerheart_exelica_enhanced_ps2_op=SSRC(ASSUME_23_976P(triggerheart_exelica_enhanced_ps2_op),48000) # assume 24000/1001 fps
 
 ######## PS2 (480*270) ########
 
@@ -73,13 +83,23 @@ triggerheart_exelica_dc_pv_01_fade_out_interlace=FADE_OUT_WITH_BRIGHTNESS_OFFSET
 triggerheart_exelica_dc_pv_01_fade_out_deinterlace=Bob(triggerheart_exelica_dc_pv_01_fade_out_interlace)
 triggerheart_exelica_dc_pv_01_fade_out=triggerheart_exelica_dc_pv_01_fade_out_deinterlace # select interlace/deinterlace
 
-triggerheart_exelica_enhanced_ps2_op_01_02=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01+triggerheart_exelica_enhanced_ps2_op_02,triggerheart_exelica_dc_pv_01_fade_out)
-triggerheart_exelica_enhanced_ps2_op_03_04=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03+triggerheart_exelica_enhanced_ps2_op_04,triggerheart_exelica_dc_pv_01_fade_out)
-triggerheart_exelica_enhanced_ps2_op_05_06=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05+triggerheart_exelica_enhanced_ps2_op_06,triggerheart_exelica_dc_pv_01_fade_out)
+
+
+triggerheart_exelica_enhanced_ps2_op_01_02=triggerheart_exelica_enhanced_ps2_op_01+triggerheart_exelica_enhanced_ps2_op_02
+triggerheart_exelica_enhanced_ps2_op_03_04=triggerheart_exelica_enhanced_ps2_op_03+triggerheart_exelica_enhanced_ps2_op_04
+triggerheart_exelica_enhanced_ps2_op_05_06=triggerheart_exelica_enhanced_ps2_op_05+triggerheart_exelica_enhanced_ps2_op_06
+
+#triggerheart_exelica_enhanced_ps2_op_01_02=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_dc_pv_01_fade_out)
+#triggerheart_exelica_enhanced_ps2_op_03_04=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_dc_pv_01_fade_out)
+#triggerheart_exelica_enhanced_ps2_op_05_06=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_dc_pv_01_fade_out)
+
+triggerheart_exelica_enhanced_ps2_op_01_02=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_01_02)
+triggerheart_exelica_enhanced_ps2_op_03_04=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_03_04)
+triggerheart_exelica_enhanced_ps2_op_05_06=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_05_06)
 
 
 
-triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,16,0)
+triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,15,0)
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_pv_01_offset,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01=triggerheart_exelica_xbla_game_review_03
 triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02=triggerheart_exelica_xbla_game_review_05
@@ -102,20 +122,20 @@ triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelic
 
 ######## Combine ########
 
-#                                                 change to ntsc_video
-#                                         film    assume 24 fps    assume 24000/1001 fps
-# triggerheart_exelica_enhanced_op_t03    3367    4204             4209
-# triggerheart_exelica_enhanced_op_t05    6044    7547             7555
+#                                                 assume 24000/1001 fps
+#                                         film    then change to 30000/1001 fps
+# triggerheart_exelica_enhanced_op_t03    3367    4209
+# triggerheart_exelica_enhanced_op_t05    6044    7555
 #
-# triggerheart_exelica_enhanced_ps2_pv_01         -16              -15
+# triggerheart_exelica_enhanced_ps2_pv_01    -15
 
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2767)
+triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770)
 triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,760),fade_length)
+triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,762),fade_length)
 triggerheart_exelica_enhanced_op_t05=ConvertToYV12(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01_fade_out,triggerheart_exelica_xbla_game_review))
 triggerheart_exelica_enhanced_op_t06=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t07=BlankClip(triggerheart_exelica_xbla_game_review,length=30*3,color=color_black)
+triggerheart_exelica_enhanced_op_t07=BlankClip(triggerheart_exelica_xbla_game_review,length=30*4,color=color_black)
 
 triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+ChangeFPS(triggerheart_exelica_enhanced_op_t02,triggerheart_exelica_dc_pv_01_fade_out) \
 	+triggerheart_exelica_enhanced_op_t03+ChangeFPS(triggerheart_exelica_enhanced_op_t04,triggerheart_exelica_dc_pv_01_fade_out) \
@@ -123,11 +143,7 @@ triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+Chang
 
 ######## Music ########
 
-# PS2 opening movie may be edited at 24000/1001 fps but output at 24 fps
-# we adjust music speed by assuming sample rate: 44100 Hz / (24000/1001) fps * 24 fps = 44144.1 Hz
-# SSRC() can resample from 44145 Hz to 48000 Hz
-
-bgm_48khz=SSRC(AssumeSampleRate(WAVSource("src\triggerheart_exelica_enhanced-op-01.wav"),44145),48000)
+bgm_48khz=SSRC(WAVSource("src\triggerheart_exelica_enhanced-op-01.wav"),48000)
 
 #### for MP4 ####
 #bgm_48khz_delayed=DelayAudio(bgm_48khz,0.509)
@@ -159,50 +175,50 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame*2,end_frame*2,subtitle_front_fade_count*2,subtitle_rear_fade_count*2,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # deinterlace
 }
 
-SUBTITLE_FX("GRAVITY ERROR//彩音|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1000,true)
+SUBTITLE_FX("GRAVITY ERROR//彩音|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)
 
-SUBTITLE_FX("幾千光年の離れた星でも",subtitle_x,subtitle_y,206,406)
-SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,411,592)
+SUBTITLE_FX("幾千光年の離れた星でも",subtitle_x,subtitle_y,206,407)
+SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,412,593)
 
-SUBTITLE_FX("運命線飛び越えても どんな未来がまってる?",subtitle_x,subtitle_y,1035,1228)
-SUBTITLE_FX("そこが笑顔に溢れる 世界と言えるかな?",subtitle_x,subtitle_y,1229,1422)
+SUBTITLE_FX("運命線飛び越えても どんな未来がまってる?",subtitle_x,subtitle_y,1036,1230)
+SUBTITLE_FX("そこが笑顔に溢れる 世界と言えるかな?",subtitle_x,subtitle_y,1231,1424)
 
-SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1431,1620)
-SUBTITLE_FX("戦う事に 忘れかけた天使よ",subtitle_x,subtitle_y,1626,1812)
-SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1821,2010)
-SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2014,2182)
+SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1433,1622)
+SUBTITLE_FX("戦う事に 忘れかけた天使よ",subtitle_x,subtitle_y,1628,1812)
+SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1823,2013)
+SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2017,2185)
 
-SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,2190,2206)
-SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,2207,2396)
-SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,2403,2585)
-SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,2591,2979)
-SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,2980,3173)
-SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,3180,3356)
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,2193,2209)
+SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,2210,2399)
+SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,2405,2588)
+SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,2594,2981)
+SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,2982,3177)
+SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,3181,3360)
 
-SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3803,3995)
-SUBTITLE_FX("従うだけのハートが 誰かをキズつける",subtitle_x,subtitle_y,3999,4190)
+SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3806,4000)
+SUBTITLE_FX("従うだけのハートが 誰かをキズつける",subtitle_x,subtitle_y,4002,4195)
 
-SUBTITLE_FX("呑み込まれる 安らぎと呼べる日常に",subtitle_x,subtitle_y,4200,4387)
-SUBTITLE_FX("目を逸らしても それは運命のように",subtitle_x,subtitle_y,4393,4579)
-SUBTITLE_FX("だけどそれは 愛するものに背くこと",subtitle_x,subtitle_y,4588,4777)
-SUBTITLE_FX("覚醒せよ 光溢れる『未来へと』",subtitle_x,subtitle_y,4782,4951)
+SUBTITLE_FX("呑み込まれる 安らぎと呼べる日常に",subtitle_x,subtitle_y,4203,4392)
+SUBTITLE_FX("目を逸らしても それは運命のように",subtitle_x,subtitle_y,4398,4583)
+SUBTITLE_FX("だけどそれは 愛するものに背くこと",subtitle_x,subtitle_y,4592,4782)
+SUBTITLE_FX("覚醒せよ 光溢れる『未来へと』",subtitle_x,subtitle_y,4787,4956)
 
-SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,4958,4975)
-SUBTITLE_FX("風をきるこの感覚 歪みかけたプライド",subtitle_x,subtitle_y,4976,5164)
-SUBTITLE_FX("守るべきその何かを キミはもう知っている",subtitle_x,subtitle_y,5171,5351)
-SUBTITLE_FX("幾千光年の離れた星でも|そこに何かの希望が輝くなら",subtitle_x,subtitle_y-subtitle_size,5358,5746)
-SUBTITLE_FX("引き寄せろエナジーウェイブ 両手に感じて",subtitle_x,subtitle_y,5747,5941)
-SUBTITLE_FX("回せ!砕け!心のトリガーを引け!",subtitle_x,subtitle_y,5948,6125)
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,4963,4980)
+SUBTITLE_FX("風をきるこの感覚 歪みかけたプライド",subtitle_x,subtitle_y,4981,5169)
+SUBTITLE_FX("守るべきその何かを キミはもう知っている",subtitle_x,subtitle_y,5176,5357)
+SUBTITLE_FX("幾千光年の離れた星でも|そこに何かの希望が輝くなら",subtitle_x,subtitle_y-subtitle_size,5363,5751)
+SUBTITLE_FX("引き寄せろエナジーウェイブ 両手に感じて",subtitle_x,subtitle_y,5752,5948)
+SUBTITLE_FX("回せ!砕け!心のトリガーを引け!",subtitle_x,subtitle_y,5952,6132)
 
-SUBTITLE_FX("交わされたその約束 途切れそうな旋律も",subtitle_x,subtitle_y,6773,6961)
-SUBTITLE_FX("いつしか栄光となり 奏で始める",subtitle_x,subtitle_y,6968,7134)
+SUBTITLE_FX("交わされたその約束 途切れそうな旋律も",subtitle_x,subtitle_y,6779,6968)
+SUBTITLE_FX("いつしか栄光となり 奏で始める",subtitle_x,subtitle_y,6974,7140)
 
-SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,7143,7160)
-SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,7161,7350)
-SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,7357,7539)
-SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,7544,7932)
-SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,7933,8127)
-SUBTITLE_FX("掴め! 放て! 心のトリガーを引け!",subtitle_x,subtitle_y,8132,8310)
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,7149,7166)
+SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,7167,7356)
+SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,7362,7546)
+SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,7550,7938)
+SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,7939,8134)
+SUBTITLE_FX("掴め! 放て! 心のトリガーを引け!",subtitle_x,subtitle_y,8139,8317)
 
 ######## Post Processing ########
 

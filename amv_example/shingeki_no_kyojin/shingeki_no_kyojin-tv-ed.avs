@@ -59,12 +59,12 @@ global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=28*1.5
 global subtitle_text_color=color_white
-global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$7F)
+global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$3F)
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	text_color=is_title?OVERWRITE_COLOR_ALPHA(color_gold,$0):subtitle_text_color
+	text_color=is_title?color_gold:subtitle_text_color
 
 	return SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
 }

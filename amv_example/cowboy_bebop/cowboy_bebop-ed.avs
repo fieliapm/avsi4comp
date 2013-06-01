@@ -149,25 +149,25 @@ AudioDub(cowboy_bebop_ed_mute,bgm_48khz)
 
 ######## Subtitle ########
 
-global subtitle_clip_width=1440
-global subtitle_clip_height=1080
+global subtitle_clip_width=640
+global subtitle_clip_height=480
 
-subtitle_x=50*2.25
-subtitle_y=400*2.25
+subtitle_x=50
+subtitle_y=400
 #global subtitle_front_fade_count=24
 #global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28*2.25
+global subtitle_size=28
 global subtitle_text_color=color_white
-global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$7F)
+global subtitle_halo_color=color_black
 
 function SUBTITLE_N(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	text_color=is_title?OVERWRITE_COLOR_ALPHA(color_mediumpurple,$0):subtitle_text_color
+	text_color=is_title?color_mediumpurple:subtitle_text_color
 
-	return SUBTITLE_NORMAL(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,false)
+	return SUBTITLE_NORMAL(clip,text,x,y,start_frame,end_frame,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color,false)
 }
 
 SUBTITLE_N("THE REAL FOLK BLUES//éRç™ñÉàﬂ",subtitle_x,subtitle_y-subtitle_size,8022,8597,true)

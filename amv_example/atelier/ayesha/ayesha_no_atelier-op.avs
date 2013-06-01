@@ -105,9 +105,9 @@ global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=28*1.5
 global subtitle_session01_text_color=color_black
-global subtitle_session01_halo_color=OVERWRITE_COLOR_ALPHA(color_white,$7F)
+global subtitle_session01_halo_color=OVERWRITE_COLOR_ALPHA(color_white,$3F)
 global subtitle_session02_text_color=color_white
-global subtitle_session02_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$7F)
+global subtitle_session02_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$3F)
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool is_session_01){
 	text_color=is_session_01?subtitle_session01_text_color:subtitle_session02_text_color
