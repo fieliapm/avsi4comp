@@ -1,4 +1,4 @@
-Import("macro.avsi")
+Import("..\..\avsi4comp\macro.avsi")
 
 ######## Function ########
 

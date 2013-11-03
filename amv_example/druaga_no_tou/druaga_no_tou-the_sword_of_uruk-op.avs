@@ -1,4 +1,4 @@
-Import("macro.avsi")
+Import("..\avsi4comp\macro.avsi")
 
 #SetMemoryMax(64)
 
@@ -7,7 +7,6 @@ Import("macro.avsi")
 fpsnum=30000
 fpsden=1001
 
-#druaga_no_tou_the_sword_of_uruk_tv_01=AVIFileSource("src\druaga_no_tou-the_sword_of_uruk-tv-01.avi")
 druaga_no_tou_the_sword_of_uruk_tv_01=FFMS2_VIDEO_SOURCE("src\anime\bs4-1280_720\druaga_no_tou-the_sword_of_uruk\druaga_no_tou-the_sword_of_uruk-tv-01.mp4",fpsnum=fpsnum,fpsden=fpsden)
 druaga_no_tou_the_sword_of_uruk_tv_02=FFMS2_VIDEO_SOURCE("src\anime\bs4-1280_720\druaga_no_tou-the_sword_of_uruk\druaga_no_tou-the_sword_of_uruk-tv-02.mp4",fpsnum=fpsnum,fpsden=fpsden)
 druaga_no_tou_the_sword_of_uruk_tv_03=FFMS2_VIDEO_SOURCE("src\anime\bs4-1280_720\druaga_no_tou-the_sword_of_uruk\druaga_no_tou-the_sword_of_uruk-tv-03.mp4",fpsnum=fpsnum,fpsden=fpsden)

@@ -128,7 +128,7 @@ subtitle_halo_color=color_gold
 SUBTITLE_FX_PULL_IN_PULL_OUT("- by fielia & niwa0daisuke@AVISynth",subtitle_x,subtitle_y,231,406,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
 
 #LoadPlugin("VSFilter.dll")
-TextSub("maoyuu-op.ass")
+TextSub("maoyuu-tv-op.ass")
 
 ######## Post Processing ########
 

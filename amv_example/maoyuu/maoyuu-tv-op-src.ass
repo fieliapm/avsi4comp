@@ -21,10 +21,10 @@ Style: maoyuu,ＭＳ ゴシック,63,&H00FFFFFF,&H000000FF,&H00000000,&H00000000
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,code once,function char_color(i) if i%2 == 0 then return "&H0000FF&" else return "&HFFFFFF&" end end
-Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template,!retime("preline", -($syln-$si+1)*100,0)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\pos($sx,$sy)\fry-90\frz-45\t(\fry0\frz0)}
-Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template,!retime("start2syl",0,0)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\pos($sx,$sy)}
-Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template,!retime("syl", 0, 0)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\pos($sx,$sy)\t(\fscy150)}
-Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template,!retime("postsyl",0,500)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\fad(0,500)\move($sx,$sy,$sx,!$sy-($sheight*2)!)\frz0\t(\frz45)}
+Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template syl,!retime("preline", -($syln-$si+1)*100,0)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\pos($sx,$sy)\fry-90\frz-45\t(\fry0\frz0)}
+Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template syl,!retime("start2syl",0,0)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\pos($sx,$sy)}
+Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template syl,!retime("syl", 0, 0)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\pos($sx,$sy)\t(\fscy150)}
+Comment: 0,0:00:00.00,0:00:00.00,maoyuu,,0000,0000,0000,template syl,!retime("postsyl",0,500)!{\c!char_color($si)!\2c!char_color($si)!\3c!char_color($si+1)!\fad(0,500)\move($sx,$sy,$sx,!$sy-($sheight*2)!)\frz0\t(\frz45)}
 Dialogue: 0,0:00:09.61,0:00:16.95,maoyuu,,0000,0000,0000,,{\K550}{\K20}向{\K20}か{\K20}い{\K20}風{\K20}//{\K20}Y{\K20}O{\K20}H{\K20}K{\K20}O
 Dialogue: 0,0:00:18.66,0:00:21.37,maoyuu,,0000,0000,0000,,{\K22}{\K40}君{\K19}の{\K18}邪{\K16}魔{\K22}を{\K35}し{\K20}た{\K21}い{\K17}ん{\K39}だ
 Dialogue: 0,0:00:21.58,0:00:24.29,maoyuu,,0000,0000,0000,,{\K26}{\K20}ひ{\K20}と{\K17}り{\K19}よ{\K18}が{\K18}り{\K36}で{\K19}い{\K18}い{\K19}ん{\K40}だ

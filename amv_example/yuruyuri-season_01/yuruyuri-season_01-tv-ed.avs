@@ -1,4 +1,4 @@
-Import("macro.avsi")
+Import("..\avsi4comp\macro.avsi")
 
 #SetMemoryMax(64)
 
@@ -133,19 +133,18 @@ function FLIP_PAGE(clip clip1,clip clip2,int num_frames){
 	clip2_extend=BlankClip(clip2,length=clip2_start)+clip2
 	clip1_height=Height(clip1)
 	return TRANSFORM(clip1_extend,clip2_extend,srcx="0",srcy="0",dstx="0",dsty="n<"+String(clip2_start)+"?-"+String(clip1_height)+":(n>"+String(clip2_start)+"+"+String(num_frames)+"-1?0:-Int(Float("+String(clip1_height)+")/Pow("+String(num_frames)+"-1,2)*Pow("+String(clip2_start)+"+"+String(num_frames)+"-1-n,2)))")
-	#return TRANSFORM(clip1_extend,clip2_extend,srcx="0",srcy="0",dstx="0",dsty="0",opacity="0.3")
 }
 
 flip_page_length=8
 
-yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_08_chitose_hello,121+flip_page_length),TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part01,23),flip_page_length)
-yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(yuruyuri_season_01_tv_01_mirakurun_temp,TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part02,23),flip_page_length)
-#yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part01,23),TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part02,23),flip_page_length)
+yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part01,23),TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part02,23),flip_page_length)
 yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(yuruyuri_season_01_tv_01_mirakurun_temp,TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part03,23),flip_page_length)
 yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(yuruyuri_season_01_tv_01_mirakurun_temp,TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_mirakurun_part04,23),flip_page_length)
 yuruyuri_season_01_tv_01_mirakurun_temp=FLIP_PAGE(yuruyuri_season_01_tv_01_mirakurun_temp,TRIM_FIRST_CLIP(yuruyuri_season_01_tv_01_mirakurun_part05,23),flip_page_length)
 yuruyuri_season_01_tv_01_mirakurun=FLIP_PAGE(yuruyuri_season_01_tv_01_mirakurun_temp,TRIM_LAST_CLIP(yuruyuri_season_01_tv_01_mirakurun_part05,46),flip_page_length)
-#Assert(Framecount(yuruyuri_season_01_tv_01_mirakurun)==121,"mirakurun must have 121 framecount")
+Assert(Framecount(yuruyuri_season_01_tv_01_mirakurun)==121,"mirakurun must have 121 framecount")
+
+yuruyuri_season_01_tv_ed_t99=FLIP_PAGE(TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_08_chitose_hello,121+flip_page_length),yuruyuri_season_01_tv_01_mirakurun,flip_page_length)
 
 
 
@@ -166,7 +165,7 @@ yuruyuri_season_01_tv_04_akkariin_extend=Loop(yuruyuri_season_01_tv_04_akkariin,
 timing_offset=13
 
 yuruyuri_season_01_tv_ed_t01=Trim(yuruyuri_season_01_tv_clean_ed_01,1,0)
-yuruyuri_season_01_tv_ed_t02=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_kyouko_dont_care,124)+ConvertToYV12(yuruyuri_season_01_tv_01_mirakurun)
+yuruyuri_season_01_tv_ed_t02=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_kyouko_dont_care,124)+ConvertToYV12(yuruyuri_season_01_tv_ed_t99)
 yuruyuri_season_01_tv_ed_t03=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_himawari_big_breast_01,121)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_himawari_big_breast_02,121)
 yuruyuri_season_01_tv_ed_t04=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_kyouko_cry,122)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_03_kyouko_thanks_to_yui,61) \
 	+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_04_chinatsu_twinkle_01,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_04_chinatsu_twinkle_02,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_04_kyouko_and_ayako_draw,30)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_akkariin,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_sakurako_vs_himawari_01,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_sakurako_vs_himawari_02,30-timing_offset)
@@ -197,8 +196,6 @@ yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_t
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t13
 
 yuruyuri_season_01_tv_op_mute=yuruyuri_season_01_tv_ed_temp
-
-#yuruyuri_season_01_tv_op_mute=FLIP_PAGE(TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_08_chitose_hello,121+flip_page_length),yuruyuri_season_01_tv_01_mirakurun,flip_page_length)
 
 ######## Music ########
 

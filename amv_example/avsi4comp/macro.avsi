@@ -343,19 +343,23 @@ function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty"
 	target_height=Default(height,clip_height)
 	dstx=Default(dstx,Float(target_width)*0.5)
 	dsty=Default(dsty,Float(target_height)*0.5)
-	factorX=Defined(factor)?factor:Default(factorX,1.0)
-	factorY=Defined(factor)?factor:Default(factorY,1.0)
+	factorX=Default(factor,Default(factorX,1.0))
+	factorY=Default(factor,Default(factorY,1.0))
 	resize_func=Default(resize_func,"Lanczos4Resize")
 	extend=Default(extend,false)
-	border_size_x=extend?0:border_size+Ceil(Float(border_size)/factorX)
-	border_size_y=extend?0:border_size+Ceil(Float(border_size)/factorY)
+
+	Assert(factorX>0.0,"FAST_ZOOM(): factorX is not greater than 0.0")
+	Assert(factorY>0.0,"FAST_ZOOM(): factorY is not greater than 0.0")
+
+	border_size_x=extend?0:Ceil(Float(border_size)/factorX)
+	border_size_y=extend?0:Ceil(Float(border_size)/factorY)
 
 	clip_with_border=AddBorders(clip,border_size_x,border_size_y,border_size_x,border_size_y)
-	src_left=(srcx+border_size_x)-(dstx/factorX)
-	src_top=(srcy+border_size_y)-(dsty/factorY)
+	src_left=(srcx+border_size_x)-(dstx/factorX) # source_px=((target_px-dstx)/factorX)+(srcx+border_size_x)
+	src_top=(srcy+border_size_y)-(dsty/factorY) # source_py=((target_py-dsty)/factorY)+(srcy+border_size_y)
 	src_width=Float(target_width)/factorX
 	src_height=Float(target_height)/factorY
-	return Apply(resize_func,clip_with_border,target_width,target_height,src_left,src_top,src_width,src_height)
+	return Eval(resize_func+"(clip_with_border,target_width,target_height,src_left=src_left,src_top=src_top,src_width=src_width,src_height=src_height)")
 }
 
 global _transform_global_clip_count=0
@@ -368,7 +372,7 @@ function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",
 	global _transform_global_clip_count=_transform_global_clip_count+1
 	Eval("global "+global_clip+"=RESIZE_TO_REF_CLIP(Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,width,height,show),base_clip_rgb32)")
 	result_clip_containing_var=ScriptClip(base_clip_rgb32,"Layer("+global_clip+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
-	return FrameEvaluate(result_clip_containing_var,"n=current_frame")
+	return FrameEvaluate(result_clip_containing_var,"global n=current_frame")
 }
 
 

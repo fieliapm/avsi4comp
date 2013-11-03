@@ -1,8 +1,8 @@
-Import("shingeki_no_kyojin-tv-common.avsi")
+Import("shingeki_no_kyojin-tv-common-01.avsi")
 
 ######## Source ########
 
-shingeki_no_kyojin_tv_ed=FFMS2_VIDEO_SOURCE("shingeki_no_kyojin-tv-ed.avi")
+shingeki_no_kyojin_tv_ed=FFMS2_VIDEO_SOURCE("..\shingeki_no_kyojin-tv-ed-01.avi")
 
 ######## Pre Combine ########
 
@@ -117,7 +117,7 @@ shingeki_no_kyojin_tv_01_cm_next_03=SUBTITLE_N(shingeki_no_kyojin_tv_01_cm_next_
 shingeki_no_kyojin_tv_01_cm_next_03=ConvertToYV12(shingeki_no_kyojin_tv_01_cm_next_03)
 
 cm_next=shingeki_no_kyojin_tv_01_cm_next_01 \
-	++AudioDub(TRIM_LAST_CLIP(shingeki_no_kyojin_tv_07_cm_mikasa_iaido+shingeki_no_kyojin_tv_07_cm_kyojin_eren_punch_kyojin_01,Framecount(shingeki_no_kyojin_tv_01_cm_next_02)),shingeki_no_kyojin_tv_01_cm_next_02) \
+	++AudioDub(TRIM_LAST_CLIP(shingeki_no_kyojin_tv_07_cm_mikasa_iaido+shingeki_no_kyojin_tv_07_kyojin_eren_punch_kyojin_01,Framecount(shingeki_no_kyojin_tv_01_cm_next_02)),shingeki_no_kyojin_tv_01_cm_next_02) \
 	++shingeki_no_kyojin_tv_01_cm_next_03
 
 cm_next=SUBTITLE_N(cm_next,"çgò@ÇÃã|ñÓ7åéçÀ·¢öS",subtitle_x,subtitle_y,40,75,false)
