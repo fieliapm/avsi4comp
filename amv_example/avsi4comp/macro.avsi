@@ -363,23 +363,29 @@ function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty"
 }
 
 global _transform_global_clip_count=0
-function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",string "dstx",string "dsty",string "factorX",string "factorY",string "factor",string "angle",int "width",int "height",bool "show",string "opacity"){
+function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",string "dstx",string "dsty",string "factorX",string "factorY",string "factor",string "angle",bool "show",string "opacity"){
 	opacity=Default(opacity,"1.0")
 
 	base_clip_rgb32=ConvertToRGB32(base_clip)
+	base_clip_rgb32_width=Width(base_clip_rgb32)
+	base_clip_rgb32_height=Height(base_clip_rgb32)
 	overlay_clip_rgb32=ConvertToRGB32(overlay_clip)
 	global_clip="overlay_clip_zoomed_"+String(_transform_global_clip_count)
 	global _transform_global_clip_count=_transform_global_clip_count+1
-	Eval("global "+global_clip+"=RESIZE_TO_REF_CLIP(Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,width,height,show),base_clip_rgb32)")
+	Eval("global "+global_clip+"=Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,base_clip_rgb32_width,base_clip_rgb32_height,show)")
 	result_clip_containing_var=ScriptClip(base_clip_rgb32,"Layer("+global_clip+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
 	return FrameEvaluate(result_clip_containing_var,"global n=current_frame")
 }
 
 
 
+# deprecated
+
 function RESCALE(clip clip,float scale_x,float scale_y){
 	return Lanczos4Resize(clip,ROUND_BS(Float(Width(clip))*scale_x,4),ROUND_BS(Float(Height(clip))*scale_y,4))
 }
+
+# deprecated
 
 function LINEAR_MOVE(clip clip,string overlay_clip,string mode,int start_frame,int end_frame,float start_x,float start_y,float start_opacity,float end_x,float end_y,float end_opacity,bool "extend",bool "overwrite"){
 	extend=Default(extend,false)
@@ -606,6 +612,8 @@ function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_f
 }
 
 
+
+# deprecated implementation
 
 function _SUBTITLE_FX_CLIP_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string font,string effects,int size,int text_color,int halo_color,bool "subtitle_ex",float "appear_offset"){
 	before_start_frame=start_frame-front_fade_count

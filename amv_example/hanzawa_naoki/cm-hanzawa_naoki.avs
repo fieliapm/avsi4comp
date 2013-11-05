@@ -15,7 +15,7 @@ hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=Trim(hanzawa_naoki_tv_10,56150,58
 ######## Pre Combine ########
 
 madoka_cida=ImageSource("src\P1200930.JPG",start=0,end=360-275,fps=Framerate(hanzawa_naoki_tv_09_oowata_angry))
-hanzawa_naoki_tv_09_oowata_angry_overlay=ConvertToYV12(TRANSFORM(hanzawa_naoki_tv_09_oowata_angry,madoka_cida,dstx="3200",dsty="1000",factorX="0.5*3.0/4.0",factorY="0.5"))
+hanzawa_naoki_tv_09_oowata_angry_overlay=ConvertToYV12(TRANSFORM(hanzawa_naoki_tv_09_oowata_angry,madoka_cida,dstx="1024",dsty="240",factor="0.12"))
 
 hanzawa_naoki_tv_09_oowata_angry=OVERWRITE_RANGE(hanzawa_naoki_tv_09_oowata_angry,hanzawa_naoki_tv_09_oowata_angry_overlay,254,353)
 
