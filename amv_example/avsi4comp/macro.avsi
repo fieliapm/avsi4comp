@@ -1,3 +1,25 @@
+################################################################################
+#
+# avsi4comp - A set of AviSynth functions to help video compositing and editing
+# Copyright (C) 2010-present <fieliapm@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
+
+
 #SetMemoryMax(64)
 
 #Import("FFMS2.avsi")
@@ -362,7 +384,7 @@ function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty"
 	return Eval(resize_func+"(clip_with_border,target_width,target_height,src_left=src_left,src_top=src_top,src_width=src_width,src_height=src_height)")
 }
 
-global _transform_global_clip_count=0
+global _transform_overlay_clip_count=0
 function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",string "dstx",string "dsty",string "factorX",string "factorY",string "factor",string "angle",bool "show",string "opacity"){
 	opacity=Default(opacity,"1.0")
 
@@ -370,10 +392,10 @@ function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",
 	base_clip_rgb32_width=Width(base_clip_rgb32)
 	base_clip_rgb32_height=Height(base_clip_rgb32)
 	overlay_clip_rgb32=ConvertToRGB32(overlay_clip)
-	global_clip="overlay_clip_zoomed_"+String(_transform_global_clip_count)
-	global _transform_global_clip_count=_transform_global_clip_count+1
-	Eval("global "+global_clip+"=Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,base_clip_rgb32_width,base_clip_rgb32_height,show)")
-	result_clip_containing_var=ScriptClip(base_clip_rgb32,"Layer("+global_clip+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
+	global_clip_name="_transform_overlay_clip_zoomed_"+String(_transform_overlay_clip_count)
+	global _transform_overlay_clip_count=_transform_overlay_clip_count+1
+	Eval("global "+global_clip_name+"=Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,base_clip_rgb32_width,base_clip_rgb32_height,show)")
+	result_clip_containing_var=ScriptClip(base_clip_rgb32,"Layer("+global_clip_name+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
 	return FrameEvaluate(result_clip_containing_var,"global n=current_frame")
 }
 
