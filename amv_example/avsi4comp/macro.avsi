@@ -55,6 +55,43 @@ function ROUND_BS(val x,val n){
 	return Round(x/n)*n
 }
 
+function CEIL_BS(val x,val n){
+	return Ceil(x/n)*n
+}
+
+######## Array ########
+
+global __ARRAY_DLM=","
+
+function _ARRAY_FIRST_DELIMITER_LOCATION(string array){
+	match=FindStr(array,__ARRAY_DLM)
+	match=match>0?match:StrLen(array)+1
+	return match
+}
+
+function _ARRAY_DELIMITER_LENGTH(){
+	return StrLen(__ARRAY_DLM)
+}
+
+function ARRAY_FIRST(string array){
+	match=_ARRAY_FIRST_DELIMITER_LOCATION(array)
+	return Eval(LeftStr(array,match-1))
+}
+
+function ARRAY_REST(string array){
+	match=_ARRAY_FIRST_DELIMITER_LOCATION(array)
+	return MidStr(array,match+_ARRAY_DELIMITER_LENGTH())
+}
+
+function ARRAY_LEN(string array){
+	return StrLen(array)>0?1+ARRAY_LEN(ARRAY_REST(array)):0
+}
+
+function ARRAY_FILL(val base,int count){
+	element=String(base)
+	return element+(count>1?__ARRAY_DLM+ARRAY_FILL(base,count-1):"")
+}
+
 ######## Variant ########
 
 function _LINEAR_VAR(float x,float start,float end){
@@ -244,6 +281,23 @@ function STILL_LAST_FRAME(clip clip,int loop_count){
 	return LOOP_STILL_FRAME(TRIM_LAST_CLIP(clip,1),loop_count)
 }
 
+function EXTEND_ANIMATION_CG(clip cg,int frame_count){
+	cg_frame_count=Framecount(cg)
+	return TRIM_FIRST_CLIP(Loop(cg,CEIL_BS(Float(frame_count),cg_frame_count)),frame_count)
+}
+
+function _ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg_length_array){
+	first_animation_cg_vary=EXTEND_ANIMATION_CG(ARRAY_FIRST(animation_cg_set),ARRAY_FIRST(cg_length_array)+dissolve_length)
+	return ARRAY_LEN(animation_cg_set)>1?Dissolve(first_animation_cg_vary,_ANIMATION_CG_VARY(ARRAY_REST(animation_cg_set),dissolve_length,ARRAY_REST(cg_length_array)),dissolve_length):first_animation_cg_vary
+}
+
+function ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg_length_array,bool "strip"){
+	strip=Default(strip,true)
+
+	animation_cg_vary_result=_ANIMATION_CG_VARY(animation_cg_set,dissolve_length,cg_length_array)
+	return strip?Trim(animation_cg_vary_result,dissolve_length/2,dissolve_length-Framecount(animation_cg_vary_result)):animation_cg_vary_result
+}
+
 ######## FPS ########
 
 function CONVERT_24P_TO_60P_PATTERN_AAIBB(clip clip){
@@ -288,10 +342,10 @@ function CONVERT_FPS_AUTO_HQ(clip,fps){
 	return (Framerate(clip)/fps<=3.0/2.0)?ConvertFPS(clip,fps):ChangeFPS(clip,fps)
 }
 
-function CLIP_SPEED(clip clip,float speed){
+function CLIP_SPEED(clip clip,float speed,bool smooth){
 	frame_rate=Framerate(clip)
 	speeded_clip=AssumeFPS(clip,frame_rate*speed)
-	return CONVERT_FPS_AUTO_HQ(speeded_clip,frame_rate)
+	return Apply(smooth?"CONVERT_FPS_AUTO_HQ":"ChangeFPS",speeded_clip,frame_rate)
 }
 
 function SLOW_MOTION_TO_FPS(clip clip,float fps,bool smooth){

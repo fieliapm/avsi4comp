@@ -67,9 +67,8 @@ shingeki_no_kyojin_tv_op_01_mute=shingeki_no_kyojin_tv_op_01_t01+shingeki_no_kyo
 
 bgm_48khz=SSRC(WAVSource("src\shingeki_no_kyojin-tv-op-cd-01.wav"),48000)
 AudioDub(shingeki_no_kyojin_tv_op_01_mute,bgm_48khz)
-#MixAudio(shingeki_no_kyojin_tv_op_01_mute,bgm_48khz,7.5,1.0)
 
-a=last
+
 
 thumbnail=Trim(3288,-24*5)
 

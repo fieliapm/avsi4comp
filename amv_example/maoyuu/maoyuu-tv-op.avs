@@ -2,9 +2,9 @@ Import("maoyuu-tv-common.avsi")
 
 ######## Pre Combine ########
 
-maoyuu_tv_01_onna_mahoutsukai_faster=CLIP_SPEED(maoyuu_tv_01_onna_mahoutsukai,2.4)
-maoyuu_tv_10_young_maou_01_faster=CLIP_SPEED(maoyuu_tv_10_young_maou_01,1.3)
-maoyuu_tv_10_young_chief_maid_01_faster=CLIP_SPEED(maoyuu_tv_10_young_chief_maid_01,1.9)
+maoyuu_tv_01_onna_mahoutsukai_faster=CLIP_SPEED(maoyuu_tv_01_onna_mahoutsukai,2.4,true)
+maoyuu_tv_10_young_maou_01_faster=CLIP_SPEED(maoyuu_tv_10_young_maou_01,1.3,true)
+maoyuu_tv_10_young_chief_maid_01_faster=CLIP_SPEED(maoyuu_tv_10_young_chief_maid_01,1.9,true)
 
 
 

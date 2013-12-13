@@ -1,6 +1,4 @@
-Import("..\avsi4comp\macro.avsi")
-
-SetMemoryMax(64)
+Import("shingeki_no_kyojin-tv-common.avsi")
 
 ######## Function ########
 
@@ -59,26 +57,14 @@ function PSEUDO_COLOR_GRAY_TO_PAPER(clip clip,int start_frame,int end_frame){
 	cont_v=Spline(current_frame,-1,-256.0,"+String(start_frame)+",-256.0,"+String(end_frame)+",paper_cont_v,Framecount(),paper_cont_v,cubic=false))")
 }
 
-global slow_motion_fps=6
-
-function SLOW_MOTION_WITH_CLIP_SPEED(clip clip){
-	return CLIP_SPEED(clip,1.0/Float(slow_motion_fps))
-}
-
-function SLOW_MOTION_WITH_CONVERT_FPS(clip clip){
-	return SLOW_MOTION_BY_DIVISOR(clip,slow_motion_fps,true)
-}
-
 ######## TV (1920*1080) ########
 
-shingeki_no_kyojin_tv_01=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第01話 「二千年後の君へ」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_02=FFMS2_VIDEO_SOURCE("src\anime\進撃の巨人 第02話 「その日」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_02=Loop(shingeki_no_kyojin_tv_02,0,3237,3476)
 #shingeki_no_kyojin_tv_02=AUDIO_DUB_TONE(shingeki_no_kyojin_tv_02,samplerate=48000,channels=2,type="Silence")
 shingeki_no_kyojin_tv_03=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第03話 「絶望の中で鈍く光る --人類の再起①-- 」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_04=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第04話 「解散式の夜」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_05=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第05話 「初陣 --トロスト区攻防戦①--」 (MBS 1280x720 x264 AAC).mp4")
-shingeki_no_kyojin_tv_06=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第06話 「少女が見た世界」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_07=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第07話 「小さな刃」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_08=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第08話 「心臓の鼓動が聞こえる」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_09=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第09話 「左腕の行方」 (MBS 1280x720 x264 AAC).mp4")
@@ -88,7 +74,6 @@ shingeki_no_kyojin_tv_11=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第11
 shingeki_no_kyojin_tv_12=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第12話 「傷」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_13=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第13話 「原初的欲求」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_13_5=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第13.5話 「あの日から」 (MBS 1280x720 x264 AAC).mp4")
-shingeki_no_kyojin_tv_17=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第17話 「女型の巨人」 (MBS 1280x720 x264 AAC).mp4")
 
 shingeki_no_kyojin_tv_clean_op_01=Trim(shingeki_no_kyojin_tv_03,0,2205)
 shingeki_no_kyojin_tv_clean_ed_01=Trim(shingeki_no_kyojin_tv_03,32244,34399)
@@ -238,6 +223,7 @@ shingeki_no_kyojin_tv_06_mikasa_family_01=Trim(shingeki_no_kyojin_tv_06,26617,26
 shingeki_no_kyojin_tv_06_mikasa_family_02=Trim(shingeki_no_kyojin_tv_06,26677,26730) #54
 shingeki_no_kyojin_tv_06_mikasa_family=shingeki_no_kyojin_tv_06_mikasa_family_01+shingeki_no_kyojin_tv_06_mikasa_family_02 #114 ed1
 
+shingeki_no_kyojin_tv_07_mikasa_look_at_rain=Trim(shingeki_no_kyojin_tv_07,6613,6672) #60
 shingeki_no_kyojin_tv_07_mikasa_attack=Trim(shingeki_no_kyojin_tv_07,17690,17899) #210 op1
 shingeki_no_kyojin_tv_07_mikasa_iaido=Trim(shingeki_no_kyojin_tv_07,22483,22661) #179
 shingeki_no_kyojin_tv_07_cm_mikasa_iaido=Trim(shingeki_no_kyojin_tv_07,22027,22601) #575 cm1

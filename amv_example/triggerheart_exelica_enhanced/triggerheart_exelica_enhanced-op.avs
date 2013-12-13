@@ -76,7 +76,7 @@ ps2_wmv_fpsden=1001
 
 triggerheart_exelica_enhanced_ps2_pv=FFMS2_VIDEO_SOURCE("src\triggerheart_exelica-movie\ps2\mms\EXELICA_08COM.wmv",fpsnum=ps2_wmv_fpsnum,fpsden=ps2_wmv_fpsden)
 
-######## TRIM ########
+######## Trim ########
 
 triggerheart_exelica_dc_pv_01=Trim(triggerheart_exelica_dc_pv,114,1538) # original: 114~1764
 
