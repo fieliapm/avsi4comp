@@ -257,7 +257,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 		SUBTITLE_FX_FLY_IN_FLY_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
 }
 
-SUBTITLE_FX("Ž©—R‚Ì—ƒ//Linked Horizon|- by fielia@AVISynth",-subtitle_x,subtitle_y,7731,7840,false,is_title=true)
+SUBTITLE_FX("Ž©—R‚Ì—ƒ//Linked Horizon|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,7731,7840,false,is_title=true)
 
 
 
