@@ -20,7 +20,7 @@ maoyuu_tv_10=FFMS2_VIDEO_SOURCE("src\anime\[Zero-Raws] Maoyuu Maou Yuusha - 10 (
 
 maoyuu_tv_clean_op=Trim(maoyuu_tv_01,1868,4025)
 
-######## TRIM ########
+######## Trim ########
 
 maoyuu_tv_clean_op_01=Trim(maoyuu_tv_clean_op,0,288)
 maoyuu_tv_clean_op_02=Trim(maoyuu_tv_clean_op,289,1049)

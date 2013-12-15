@@ -16,7 +16,7 @@ bannou_bunka_nekomusume_ova_origin_ed_01=Trim(bannou_bunka_nekomusume_ova_01,322
 bannou_bunka_nekomusume_ova_origin_op_02=Trim(bannou_bunka_nekomusume_ova_04,1043,3511)
 bannou_bunka_nekomusume_ova_origin_ed_02=Trim(bannou_bunka_nekomusume_ova_04,32244,34399)
 
-######## TRIM ########
+######## Trim ########
 
 bannou_bunka_nekomusume_ova_origin_op_02_01=Trim(bannou_bunka_nekomusume_ova_origin_op_02,0,1335)
 bannou_bunka_nekomusume_ova_origin_op_02_02=Trim(bannou_bunka_nekomusume_ova_origin_op_02,1336,1695)

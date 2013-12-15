@@ -17,7 +17,7 @@ ninokuni_ds_tgs_2010=AssumeFPS(FFMS2_VIDEO_SOURCE("src\famitsutube\ni_no_kuni-sh
 _ninokuni_tgs_2009=AssumeFPS(FFMS2_VIDEO_SOURCE("src\famitsutube\ni_no_kuni-tgs_2009.flv"),video_fps)
 global ninokuni_tgs_2009=AddBorders(_ninokuni_tgs_2009,0,0,2,2)
 
-######## TRIM ########
+######## Trim ########
 
 #ninokuni_ds_cm_pv_01_anime_01=Trim(ninokuni_ds_cm_pv,0,118)
 ninokuni_ds_cm_pv_01_anime_02=Trim(ninokuni_ds_cm_pv,119,179)

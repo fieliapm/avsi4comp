@@ -7,7 +7,7 @@ SetMemoryMax(64)
 hanzawa_naoki_tv_09=FFMS2_VIDEO_SOURCE("src\hanzawa_naoki\【国内ドラマ】半沢直樹 第09話｢最終決戦! 出向をかけた金融庁検査｣(x264 720p aac).mp4")
 hanzawa_naoki_tv_10=FFMS2_VIDEO_SOURCE("src\hanzawa_naoki\【国内ドラマ】半沢直樹 第10話終｢100倍返しなるか 最後に土下座するのは誰だ！｣(x264 720p aac).mp4")
 
-######## TRIM ########
+######## Trim ########
 
 hanzawa_naoki_tv_09_oowata_angry=Trim(hanzawa_naoki_tv_09,84750,85878)
 hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=Trim(hanzawa_naoki_tv_10,56150,58309)

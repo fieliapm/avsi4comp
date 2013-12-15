@@ -21,7 +21,7 @@ shingeki_no_kyojin_tv_25=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) êiåÇÇÃãêêl ëÊ25ò
 shingeki_no_kyojin_tv_clean_op_02=Trim(shingeki_no_kyojin_tv_14,1200,3356)
 shingeki_no_kyojin_tv_clean_ed_02=Trim(shingeki_no_kyojin_tv_14,32172,34326)
 
-######## TRIM ########
+######## Trim ########
 
 shingeki_no_kyojin_tv_clean_op_02_01=Trim(shingeki_no_kyojin_tv_clean_op_02,0,1087)
 shingeki_no_kyojin_tv_clean_op_02_02=Trim(shingeki_no_kyojin_tv_clean_op_02,1088,1998)

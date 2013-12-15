@@ -18,7 +18,7 @@ ico_hd_gameplay_beach=SSRC(AssumeFPS(FFMS2_VIDEO_SOURCE("src\ico_nico-movie\game
 #ico_hd_gameplay_02=FFMS2_VIDEO_SOURCE("src\ico_nico-movie\gameplay\huperion\ico-gameplay-02-720p.mp4")
 #ico_hd_gameplay_03=FFMS2_VIDEO_SOURCE("src\ico_nico-movie\gameplay\huperion\ico-gameplay-03-720p.mp4")
 
-######## TRIM ########
+######## Trim ########
 
 ico_hd_pv_01=Trim(ico_hd_pv,453,2056)
 ico_hd_pv_02=Trim(ico_hd_pv,2057,2696)

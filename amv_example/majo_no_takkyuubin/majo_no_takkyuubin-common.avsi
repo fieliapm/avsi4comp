@@ -49,7 +49,7 @@ majo_no_takkyuubin_06=AudioDub(majo_no_takkyuubin_06,WAVSource("src\dvd\VTS_01_6
 majo_no_takkyuubin_07=VOB_MPEG2_VIDEO_SOURCE("src\dvd\VTS_01_7.d2v",upConv=1)
 majo_no_takkyuubin_07=AudioDub(majo_no_takkyuubin_07,WAVSource("src\dvd\VTS_01_7 T80 2_0ch 448Kbps 48KHz.wav"))
 
-######## TRIM ########
+######## Trim ########
 
 majo_no_takkyuubin_01_mark=Trim(majo_no_takkyuubin_01,194,370)
 majo_no_takkyuubin_01_mark=AUDIO_DUB_TONE(majo_no_takkyuubin_01_mark,samplerate=48000,channels=2,type="Silence")
