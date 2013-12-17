@@ -121,3 +121,5 @@ TextSub("shingeki_no_kyojin-tv-op-01.ass")
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer(22051)
