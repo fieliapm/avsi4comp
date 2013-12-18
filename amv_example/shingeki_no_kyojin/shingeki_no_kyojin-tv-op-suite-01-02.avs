@@ -15,7 +15,7 @@ shingeki_no_kyojin_tv_op_02=TCPSource("localhost",22052,"None")
 # shingeki_no_kyojin_tv_op_01 0
 # shingeki_no_kyojin_tv_op_02 7599 (without beginning 5 frame) 7594 (with beginning 5 frame) 
 
-shingeki_no_kyojin_tv_op_suite_mute=shingeki_no_kyojin_tv_op_01++BlankClip(shingeki_no_kyojin_tv_op_01,length=186-5,color=color_white)++shingeki_no_kyojin_tv_op_02
+shingeki_no_kyojin_tv_op_suite_mute=shingeki_no_kyojin_tv_op_01++BlankClip(shingeki_no_kyojin_tv_op_01,length=186-5,color=color_black)++shingeki_no_kyojin_tv_op_02
 
 shingeki_no_kyojin_tv_op_suite_title=BlankClip(shingeki_no_kyojin_tv_op_01,length=24*9,color=color_black)
 

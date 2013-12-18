@@ -155,8 +155,8 @@ review_02_01=ANIMATION_CG_VARY("review_02_01,review_02_02,review_02_03,
 	review_02_13,review_02_14,review_02_15,review_02_16", \
 	fast_fade_length, \
 	"5+Ceil(fast_fade_length/2.0),4,9,5,4,9,
-	5,4,5,9,5,10,
-	9,9,9,9")
+	5,4,5,9,5,9,
+	9,9,9,10")
 
 review_02_02=TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_25_kyojin_eren_catch_megata_no_kyojin,22)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_21_thunder_02,5)+TRIM_LAST_CLIP(shingeki_no_kyojin_tv_21_kyojin_eren_in_megata_no_kyojin_s_eye,11)
 
