@@ -19,7 +19,17 @@ function SLOW_MOTION_WITH_CONVERT_FPS(clip clip){
 shingeki_no_kyojin_tv_01=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第01話 「二千年後の君へ」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_01_cache02=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第01話 「二千年後の君へ」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_06=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第06話 「少女が見た世界」 (MBS 1280x720 x264 AAC).mp4")
+shingeki_no_kyojin_tv_16=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第16話 「今、何をすべきか」 (MBS 1280x720 x264 AAC).mp4")
+shingeki_no_kyojin_tv_16_cache02=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第16話 「今、何をすべきか」 (MBS 1280x720 x264 AAC).mp4")
 shingeki_no_kyojin_tv_17=FFMS2_VIDEO_SOURCE("src\anime\(2013Q2) 進撃の巨人  第17話 「女型の巨人」 (MBS 1280x720 x264 AAC).mp4")
+
+######## Trim ########
 
 shingeki_no_kyojin_tv_01_kyojin_catch_carla_01=Trim(shingeki_no_kyojin_tv_01,32841,32950) #110 op2
 shingeki_no_kyojin_tv_01_kyojin_catch_carla_02=Trim(shingeki_no_kyojin_tv_01_cache02,32951,33052) #102 op2
+
+shingeki_no_kyojin_tv_06_mikasa_in_rain=Trim(shingeki_no_kyojin_tv_06,31367,31510) #144 op2
+
+shingeki_no_kyojin_tv_16_wall_gate_open=Trim(shingeki_no_kyojin_tv_16,31508,31704) #197 op_suite
+
+shingeki_no_kyojin_tv_17_megata_no_kyojin_jump=Trim(shingeki_no_kyojin_tv_17,16307,16329) #23 op1

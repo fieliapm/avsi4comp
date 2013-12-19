@@ -1,6 +1,4 @@
-Import("..\avsi4comp\macro.avsi")
-
-SetMemoryMax(64)
+Import("shingeki_no_kyojin-tv-common.avsi")
 
 ######## Source ########
 
@@ -13,9 +11,14 @@ shingeki_no_kyojin_tv_op_02=TCPSource("localhost",22052,"None")
 ######## Combine ########
 
 # shingeki_no_kyojin_tv_op_01 0
-# shingeki_no_kyojin_tv_op_02 7599 (without beginning 5 frame) 7594 (with beginning 5 frame) 
+# shingeki_no_kyojin_tv_op_02 7599 (without beginning 5 frame) 7594 (with beginning 5 frame)
 
-shingeki_no_kyojin_tv_op_suite_mute=shingeki_no_kyojin_tv_op_01++BlankClip(shingeki_no_kyojin_tv_op_01,length=186-5,color=color_black)++shingeki_no_kyojin_tv_op_02
+fade_length=24
+inter_movement_length=210-5
+
+shingeki_no_kyojin_tv_op_suite_mute=shingeki_no_kyojin_tv_op_01 \
+	++BlankClip(shingeki_no_kyojin_tv_16_wall_gate_open,length=inter_movement_length-Framecount(shingeki_no_kyojin_tv_16_wall_gate_open),color=color_black)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(FadeIn0(shingeki_no_kyojin_tv_16_wall_gate_open,fade_length),fade_length) \
+	++shingeki_no_kyojin_tv_op_02
 
 shingeki_no_kyojin_tv_op_suite_title=BlankClip(shingeki_no_kyojin_tv_op_01,length=24*9,color=color_black)
 

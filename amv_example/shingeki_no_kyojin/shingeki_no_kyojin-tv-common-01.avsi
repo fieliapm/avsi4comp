@@ -93,6 +93,9 @@ shingeki_no_kyojin_tv_clean_ed_01_04=Trim(shingeki_no_kyojin_tv_clean_ed_01,1953
 
 
 
+shingeki_no_kyojin_tv_01_survey_corps_attack_kyojin_01=Trim(shingeki_no_kyojin_tv_01,2446,2574) #129
+shingeki_no_kyojin_tv_01_survey_corps_attack_kyojin_02=Trim(shingeki_no_kyojin_tv_01,2575,2677) #102
+
 shingeki_no_kyojin_tv_01_field_01=Trim(shingeki_no_kyojin_tv_01,5651,5763) #113
 shingeki_no_kyojin_tv_01_mikasa_watch_eren=Trim(shingeki_no_kyojin_tv_01,5824,5895) #72
 shingeki_no_kyojin_tv_01_field_02=Trim(shingeki_no_kyojin_tv_01,5896,6387) #492
@@ -285,5 +288,3 @@ shingeki_no_kyojin_tv_13_kyojin_eren_move_stone_05=Trim(shingeki_no_kyojin_tv_13
 shingeki_no_kyojin_tv_13_kyojin_eren_move_stone_06=Trim(shingeki_no_kyojin_tv_13,17631,17702) #72
 shingeki_no_kyojin_tv_13_armin_ask_kyojin_eren_move_stone=Trim(shingeki_no_kyojin_tv_13,17703,17951) #249 op1
 shingeki_no_kyojin_tv_13_annie_regret=Trim(shingeki_no_kyojin_tv_13,26950,27078) # 129 op1
-
-shingeki_no_kyojin_tv_17_megata_no_kyojin_jump=Trim(shingeki_no_kyojin_tv_17,16307,16329) #23 op1
