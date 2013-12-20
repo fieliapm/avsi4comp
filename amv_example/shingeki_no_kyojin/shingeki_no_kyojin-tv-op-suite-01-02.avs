@@ -16,7 +16,7 @@ shingeki_no_kyojin_tv_op_02=TCPSource("localhost",22052,"None")
 fade_length=24
 inter_movement_length=210-5
 
-shingeki_no_kyojin_tv_op_suite_mute=shingeki_no_kyojin_tv_op_01 \
+shingeki_no_kyojin_tv_op_suite_mute=TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_op_01,Framecount(shingeki_no_kyojin_tv_op_01)-24) \
 	++BlankClip(shingeki_no_kyojin_tv_16_wall_gate_open,length=inter_movement_length-Framecount(shingeki_no_kyojin_tv_16_wall_gate_open),color=color_black)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(FadeIn0(shingeki_no_kyojin_tv_16_wall_gate_open,fade_length),fade_length) \
 	++shingeki_no_kyojin_tv_op_02
 

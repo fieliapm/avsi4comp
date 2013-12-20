@@ -93,8 +93,8 @@ shingeki_no_kyojin_tv_clean_ed_01_04=Trim(shingeki_no_kyojin_tv_clean_ed_01,1953
 
 
 
-shingeki_no_kyojin_tv_01_survey_corps_attack_kyojin_01=Trim(shingeki_no_kyojin_tv_01,2446,2574) #129
-shingeki_no_kyojin_tv_01_survey_corps_attack_kyojin_02=Trim(shingeki_no_kyojin_tv_01,2575,2677) #102
+shingeki_no_kyojin_tv_01_survey_corps_attack_kyojin_01=Trim(shingeki_no_kyojin_tv_01,2446,2574) #129 op1
+shingeki_no_kyojin_tv_01_survey_corps_attack_kyojin_02=Trim(shingeki_no_kyojin_tv_01,2575,2677) #102 op1
 
 shingeki_no_kyojin_tv_01_field_01=Trim(shingeki_no_kyojin_tv_01,5651,5763) #113
 shingeki_no_kyojin_tv_01_mikasa_watch_eren=Trim(shingeki_no_kyojin_tv_01,5824,5895) #72
@@ -221,14 +221,16 @@ shingeki_no_kyojin_tv_05_eren_angry_dash=Trim(shingeki_no_kyojin_tv_05,26587,268
 shingeki_no_kyojin_tv_05_soldiers_are_catched=Trim(shingeki_no_kyojin_tv_05,27111,27155) #45
 
 shingeki_no_kyojin_tv_06_yumir_lean_on_historia=Trim(shingeki_no_kyojin_tv_06,4209,4412) #204 op1
-shingeki_no_kyojin_tv_06_mikasa_salute=Trim(shingeki_no_kyojin_tv_06,13280,13457) #178 op1
+shingeki_no_kyojin_tv_06_mikasa_salute=Trim(shingeki_no_kyojin_tv_06,13280,13457) #178
 shingeki_no_kyojin_tv_06_mikasa_family_01=Trim(shingeki_no_kyojin_tv_06,26617,26676) #60
 shingeki_no_kyojin_tv_06_mikasa_family_02=Trim(shingeki_no_kyojin_tv_06,26677,26730) #54
 shingeki_no_kyojin_tv_06_mikasa_family=shingeki_no_kyojin_tv_06_mikasa_family_01+shingeki_no_kyojin_tv_06_mikasa_family_02 #114 ed1
 
 shingeki_no_kyojin_tv_07_mikasa_look_at_rain=Trim(shingeki_no_kyojin_tv_07,6613,6672) #60
 shingeki_no_kyojin_tv_07_mikasa_attack=Trim(shingeki_no_kyojin_tv_07,17690,17899) #210 op1
-shingeki_no_kyojin_tv_07_mikasa_iaido=Trim(shingeki_no_kyojin_tv_07,22483,22661) #179
+shingeki_no_kyojin_tv_07_mikasa_iaido_01=Trim(shingeki_no_kyojin_tv_07,22483,22554) #72 op1
+shingeki_no_kyojin_tv_07_mikasa_iaido_02=Trim(shingeki_no_kyojin_tv_07,22555,22601) #47 op1
+shingeki_no_kyojin_tv_07_mikasa_iaido_03=Trim(shingeki_no_kyojin_tv_07,22602,22661) #60 op1
 shingeki_no_kyojin_tv_07_cm_mikasa_iaido=Trim(shingeki_no_kyojin_tv_07,22027,22601) #575 cm1
 shingeki_no_kyojin_tv_07_kyojin_eren_punch_kyojin_01=Trim(shingeki_no_kyojin_tv_07,25009,25186) #178 cm1
 shingeki_no_kyojin_tv_07_kyojin_eren_step_kyojin_01=Trim(shingeki_no_kyojin_tv_07,25833,26173) #341 op1
@@ -252,8 +254,8 @@ shingeki_no_kyojin_tv_08_ready_02=Trim(shingeki_no_kyojin_tv_08,21359,21421) #63
 shingeki_no_kyojin_tv_08_everyone_attack=Trim(shingeki_no_kyojin_tv_08,22031,22197) #167
 shingeki_no_kyojin_tv_08_kyojin_eren_angry=Trim(shingeki_no_kyojin_tv_08,27294,27377) #84
 shingeki_no_kyojin_tv_08_eren_rebirth=Trim(shingeki_no_kyojin_tv_08,28879,29030) #152 op1
-shingeki_no_kyojin_tv_08_armin_s_fingers_lace_with_eren_01=Trim(shingeki_no_kyojin_tv_08,31589,31681) #93 op1
-shingeki_no_kyojin_tv_08_armin_s_fingers_lace_with_eren_02=Trim(shingeki_no_kyojin_tv_08,31682,31741) #60 op1
+shingeki_no_kyojin_tv_08_armin_s_fingers_lace_with_eren_01=Trim(shingeki_no_kyojin_tv_08,31589,31681) #93
+shingeki_no_kyojin_tv_08_armin_s_fingers_lace_with_eren_02=Trim(shingeki_no_kyojin_tv_08,31682,31741) #60
 
 shingeki_no_kyojin_tv_09_levi_kill_kyojin_01=Trim(shingeki_no_kyojin_tv_09,6369,6417) #49 op1
 shingeki_no_kyojin_tv_09_hanji_dash=Trim(shingeki_no_kyojin_tv_09,7071,7125) #55 op1
@@ -263,7 +265,7 @@ shingeki_no_kyojin_tv_09_eren_mad_01=Trim(shingeki_no_kyojin_tv_09,16520,16555) 
 shingeki_no_kyojin_tv_09_eren_mad_02=Trim(shingeki_no_kyojin_tv_09,16556,16639) #84 op1
 shingeki_no_kyojin_tv_09_eren_mad=shingeki_no_kyojin_tv_09_eren_mad_01+shingeki_no_kyojin_tv_09_eren_mad_02 #120
 
-shingeki_no_kyojin_tv_10_eren_get_out_from_kyojin=Trim(shingeki_no_kyojin_tv_10,8250,8345) #96 op1
+shingeki_no_kyojin_tv_10_eren_get_out_from_kyojin=Trim(shingeki_no_kyojin_tv_10,8250,8345) #96
 shingeki_no_kyojin_tv_10_eren_watch_his_kyojin=Trim(shingeki_no_kyojin_tv_10_cache02,10034,10165) #132 op1
 shingeki_no_kyojin_tv_10_armin_thinking_about_eren=Trim(shingeki_no_kyojin_tv_10,16361,16451) #111
 shingeki_no_kyojin_tv_10_armin_devote_his_life_to_human_01=Trim(shingeki_no_kyojin_tv_10,23941,24123) #183 op1
