@@ -1,7 +1,7 @@
 ################################################################################
 #
 # avsi4comp - A set of AviSynth functions to help video compositing and editing
-# Copyright (C) 2010-present <fieliapm@gmail.com>
+# Copyright (C) 2010-present Himawari Tachibana <fieliapm@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
