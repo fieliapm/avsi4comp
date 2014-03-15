@@ -184,7 +184,6 @@ review_02_02=TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_25_kyojin_eren_catch_megata_
 
 ######## Combine ########
 
-# beginning 66
 # shingeki_no_kyojin_tv_clean_op_02_01 -5
 # shingeki_no_kyojin_tv_clean_op_02_02 6455
 # shingeki_no_kyojin_tv_clean_op_02_03 7695

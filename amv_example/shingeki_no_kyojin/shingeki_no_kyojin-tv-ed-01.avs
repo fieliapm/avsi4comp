@@ -64,7 +64,7 @@ shingeki_no_kyojin_tv_ed_01_mute=shingeki_no_kyojin_tv_ed_01_t01+DOUBLE_FADE_WIT
 
 ######## Music ########
 
-bgm_48khz=SSRC(WAVSource("src\shingeki_no_kyojin-tv-ed-cd-01.wav"),48000)
+bgm_48khz=SSRC(WAVSource("src\shingeki_no_kyojin-tv-ed-01-cd-01.wav"),48000)
 AudioDub(shingeki_no_kyojin_tv_ed_01_mute,bgm_48khz)
 #MixAudio(shingeki_no_kyojin_tv_ed_01_mute,bgm_48khz,3.0,0.5)
 
