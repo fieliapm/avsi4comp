@@ -246,6 +246,12 @@ function AUDIO_DUB_TONE(clip clip,int "frequency",int "samplerate",int "channels
 	return AudioDub(clip,tone)
 }
 
+######## Color Channel ########
+
+function SHOW_CHROMA(clip clip){
+	return YToUV(UToY(clip),VToY(clip))
+}
+
 ######## Trim ########
 
 function TRIM_FIRST_CLIP(clip clip,int length){
@@ -296,6 +302,12 @@ function ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg
 
 	animation_cg_vary_result=_ANIMATION_CG_VARY(animation_cg_set,dissolve_length,cg_length_array)
 	return strip?Trim(animation_cg_vary_result,dissolve_length/2,dissolve_length-Framecount(animation_cg_vary_result)):animation_cg_vary_result
+}
+
+######## Field Based Processing ########
+
+function PROGRESSIVE_TO_INTERLACE(clip clip){
+	return SelectEvery(DoubleWeave(ComplementParity(clip)),4,1)
 }
 
 ######## FPS ########

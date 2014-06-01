@@ -158,10 +158,10 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 
 ######## Combine ########
 
-#                                                 assume 24000/1001 fps
-#                                         film    then change to 30000/1001 fps
-# triggerheart_exelica_enhanced_op_t03    3367    4209
-# triggerheart_exelica_enhanced_op_t05    6044    7555
+#                                                   assume 24000/1001 fps
+#                                           film    then change to 30000/1001 fps
+# triggerheart_exelica_enhanced_op_03_04    3367    4209
+# triggerheart_exelica_enhanced_op_05_06    6044    7555
 #
 # triggerheart_exelica_enhanced_ps2_pv_01    -15
 
