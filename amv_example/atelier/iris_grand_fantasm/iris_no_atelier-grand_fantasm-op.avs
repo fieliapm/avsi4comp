@@ -26,20 +26,20 @@ Import("..\..\avsi4comp\macro.avsi")
 
 ######## YouTube (640*480) ########
 
-iris_no_atelier_grand_fantasm_op=SSRC(FFMS2_VIDEO_SOURCE("src\movie\youtube\Atelier Iris Grand Fantasm_OPENING-9FSkTpWX02U.360p.mp4",fpsnum=30000,fpsden=1001),48000)
+iris_no_atelier_grand_fantasm_op=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001),48000)
 
-iris_no_atelier_grand_fantasm_op_video=FFVideoSource("src\movie\youtube\Atelier Iris Grand Fantasm_OPENING-9FSkTpWX02U.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
+iris_no_atelier_grand_fantasm_op_video=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
 iris_no_atelier_grand_fantasm_op=AudioDub(iris_no_atelier_grand_fantasm_op_video,iris_no_atelier_grand_fantasm_op)
 
-#iris_no_atelier_grand_fantasm_web_pv_01_youtube=FFMS2_VIDEO_SOURCE("src\movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.mp4")
+#iris_no_atelier_grand_fantasm_web_pv_01_youtube=FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.360p.mp4")
 
 ######## Official Web (320*240) ########
 
-#iris_no_atelier_grand_fantasm_web_pv_01_path="src\movie\web\GF_webPV_01m.MP4"
-#iris_no_atelier_grand_fantasm_web_pv_02_path="src\movie\web\PV_vol_2m.MP4"
+#iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\GF_webPV_01m.MP4"
+#iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\PV_vol_2m.MP4"
 
-iris_no_atelier_grand_fantasm_web_pv_01_path="src\movie\web\GF_webPV_01s.wmv"
-iris_no_atelier_grand_fantasm_web_pv_02_path="src\movie\web\PV_vol_2s.wmv"
+iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\GF_webPV_01s.wmv"
+iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\PV_vol_2s.wmv"
 
 iris_no_atelier_grand_fantasm_web_pv_01=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_01_path,fpsnum=30000,fpsden=1001),48000)
 iris_no_atelier_grand_fantasm_web_pv_02=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),48000)
