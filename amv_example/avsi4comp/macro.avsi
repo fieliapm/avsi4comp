@@ -59,6 +59,22 @@ function CEIL_BS(val x,val n){
 	return Ceil(x/n)*n
 }
 
+######## Random ########
+
+global _next_pseudo_random_number=0
+
+function PSEUDO_RANDOM_SEED(int seed){
+	global _next_pseudo_random_number=seed
+}
+
+function PSEUDO_RANDOM(int "max"){
+	#global _next_pseudo_random_number=(_next_pseudo_random_number*1664525)+1013904223
+	next=(_next_pseudo_random_number*1103515245)+12345
+	global _next_pseudo_random_number=next<0?next+$80000000:next # next mod pow(2,31), when next is signed int
+
+	return Defined(max)?_next_pseudo_random_number%max:_next_pseudo_random_number
+}
+
 ######## Array ########
 
 global __ARRAY_DLM=","
@@ -671,11 +687,11 @@ function SUBTITLE_FX_PULL_IN_PULL_OUT(clip clip,string text,int x,int y,int star
 
 
 function RANDOM_JIS_CHAR(){
-	return Chr(Rand($E0-$A1)+$A1)
+	return Chr(PSEUDO_RANDOM($E0-$A1)+$A1)
 }
 
 function RANDOM_ASCII_CHAR(){
-	ascii_code=Rand($7E-$21)+$21
+	ascii_code=PSEUDO_RANDOM($7E-$21)+$21
 	ascii_code=ascii_code+((ascii_code>=$7C)?1:0)
 	return Chr(ascii_code)
 }
@@ -692,6 +708,7 @@ function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_f
 	random_text="RANDOM_STRING_OUT_OF_FRAME_RANGE("+THREE_DOUBLE_QUOTE_STRING(text)+",current_frame,"+String(start_frame)+","+String(end_frame)+","+DOUBLE_QUOTE_STRING(random_char_func)+")"
 	subtitle_rgba_containing_var=ScriptClip(subtitle_bg,"SUBTITlE_CLIP("+random_text+","+String(x)+","+String(y)+","+String(before_start_frame)+","+String(after_end_frame)+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+String(size)+",SCALE_SUBTITLE_COLOR_ALPHA("+String(text_color)+",alpha_factor),SCALE_SUBTITLE_COLOR_ALPHA("+String(halo_color)+",alpha_factor),subtitle_ex="+OPTIONAL_ARG_TO_STRING(subtitle_ex)+")")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba=FrameEvaluate(subtitle_rgba,"PSEUDO_RANDOM_SEED(current_frame)")
 
 	subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,10,true)
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba_slow_motion,clip)
