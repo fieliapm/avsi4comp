@@ -51,17 +51,19 @@ function EUCLIDEAN_MOD(int a,int b){
 	return ((a%b)+b)%b
 }
 
-function ROUND_BS(val x,val n){
-	return Round(x/n)*n
+function FLOOR_BS(val x,val n){
+	return Floor(Float(x)/n)*n
 }
 
 function CEIL_BS(val x,val n){
-	return Ceil(x/n)*n
+	return Ceil(Float(x)/n)*n
+}
+
+function ROUND_BS(val x,val n){
+	return Round(Float(x)/n)*n
 }
 
 ######## Random ########
-
-global _next_pseudo_random_number=0
 
 function PSEUDO_RANDOM_SEED(int seed){
 	global _next_pseudo_random_number=seed
@@ -74,6 +76,8 @@ function PSEUDO_RANDOM(int "max"){
 
 	return Defined(max)?_next_pseudo_random_number%max:_next_pseudo_random_number
 }
+
+PSEUDO_RANDOM_SEED(Int(Value(Time("%S"))))
 
 ######## Array ########
 
@@ -305,7 +309,7 @@ function STILL_LAST_FRAME(clip clip,int loop_count){
 
 function EXTEND_ANIMATION_CG(clip cg,int frame_count){
 	cg_frame_count=Framecount(cg)
-	return TRIM_FIRST_CLIP(Loop(cg,CEIL_BS(Float(frame_count),cg_frame_count)),frame_count)
+	return TRIM_FIRST_CLIP(Loop(cg,Ceil(Float(frame_count)/Float(cg_frame_count))),frame_count)
 }
 
 function _ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg_length_array){
@@ -710,7 +714,8 @@ function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_f
 	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba,"PSEUDO_RANDOM_SEED(current_frame)")
 
-	subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,10,true)
+	#subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,6,true)
+	subtitle_rgba_slow_motion=SLOW_MOTION_BY_DIVISOR(subtitle_rgba,3,true)
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba_slow_motion,clip)
 	clip_with_subtitle=Layer(clip_rgba,subtitle_rgba_resized,"Add")
 	return OVERWRITE_RANGE(clip_rgba,clip_with_subtitle,before_start_frame,after_end_frame)
