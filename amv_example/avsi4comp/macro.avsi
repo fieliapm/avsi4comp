@@ -714,8 +714,7 @@ function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_f
 	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba,"PSEUDO_RANDOM_SEED(current_frame)")
 
-	#subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,6,true)
-	subtitle_rgba_slow_motion=SLOW_MOTION_BY_DIVISOR(subtitle_rgba,3,true)
+	subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,10,true)
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba_slow_motion,clip)
 	clip_with_subtitle=Layer(clip_rgba,subtitle_rgba_resized,"Add")
 	return OVERWRITE_RANGE(clip_rgba,clip_with_subtitle,before_start_frame,after_end_frame)
