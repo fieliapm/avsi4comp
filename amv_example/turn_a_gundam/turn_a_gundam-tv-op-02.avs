@@ -41,8 +41,8 @@ turn_a_gundam_tv_clean_op_02_part08=Trim(turn_a_gundam_tv_clean_op_02,1580,0)
 
 ######## BD (1080P) ########
 
-turn_a_gundam_movie_02_cache01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-02.mp4")
-turn_a_gundam_movie_02_cache02=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-02.mp4")
+turn_a_gundam_movie_02_cache01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-bd-aac_2ch-02.mp4")
+turn_a_gundam_movie_02_cache02=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-bd-aac_2ch-02.mp4")
 
 turn_a_gundam_movie_02_gym_and_merrybell=Trim(turn_a_gundam_movie_02_cache01,519,793)
 turn_a_gundam_movie_02_space=Trim(turn_a_gundam_movie_02_cache01,2925,3389)

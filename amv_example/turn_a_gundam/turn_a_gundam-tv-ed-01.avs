@@ -33,8 +33,8 @@ turn_a_gundam_tv_clean_ed_01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-tv\special\tu
 turn_a_gundam_tv_clean_ed_01_part01=Trim(turn_a_gundam_tv_clean_ed_01,72,973)
 turn_a_gundam_tv_clean_ed_01_part02=Trim(turn_a_gundam_tv_clean_ed_01,974,0)
 
-turn_a_gundam_tv_21_cache01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-tv\part02\turn_a_gundam-tv-21.wmv",fpsnum=fpsnum,fpsden=fpsden)
-turn_a_gundam_tv_21_cache02=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-tv\part02\turn_a_gundam-tv-21.wmv",fpsnum=fpsnum,fpsden=fpsden)
+turn_a_gundam_tv_21_cache01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-tv\turn_a_gundam-tv-21.wmv",fpsnum=fpsnum,fpsden=fpsden)
+turn_a_gundam_tv_21_cache02=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-tv\turn_a_gundam-tv-21.wmv",fpsnum=fpsnum,fpsden=fpsden)
 
 turn_a_gundam_tv_21_turn_a_washer_part01=Trim(turn_a_gundam_tv_21_cache01,29206,29498)
 turn_a_gundam_tv_21_turn_a_washer_part02=Trim(turn_a_gundam_tv_21_cache01,29499,29548)
@@ -47,8 +47,8 @@ turn_a_gundam_tv_21_turn_a_washer_part08=Trim(turn_a_gundam_tv_21_cache01,30503,
 
 ######## BD (1080P) ########
 
-turn_a_gundam_movie_01_cache01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-01.mp4")
-turn_a_gundam_movie_01_cache02=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-01.mp4")
+turn_a_gundam_movie_01_cache01=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-bd-aac_2ch-01.mp4")
+turn_a_gundam_movie_01_cache02=FFMS2_VIDEO_SOURCE("src\turn_a_gundam-movie\bd-aac_2ch\turn_a_gundam-movie-bd-aac_2ch-01.mp4")
 
 turn_a_gundam_movie_01_space=Trim(turn_a_gundam_movie_01_cache01,542,1068)
 turn_a_gundam_movie_01_loran_in_space=Trim(turn_a_gundam_movie_01_cache01,1069,1359)
