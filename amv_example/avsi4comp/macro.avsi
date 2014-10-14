@@ -22,6 +22,7 @@
 
 #SetMemoryMax(64)
 
+#Import("Pantarheon3D.avsi")
 #Import("FFMS2.avsi")
 #LoadPlugin("DGDecode.dll")
 #LoadPlugin("zoom.dll")
@@ -140,7 +141,8 @@ function OVERWRITE_RANGE(clip clip,clip new_clip,int start_frame,int end_frame){
 }
 
 function APPLY_RANGE(clip clip,int start_frame,int end_frame,string func){
-	clip_filtered=ScriptClip(clip,func)
+	clip
+	clip_filtered=Eval(func)
 	return OVERWRITE_RANGE(clip,clip_filtered,start_frame,end_frame)
 }
 
@@ -340,12 +342,14 @@ function CONVERT_24P_TO_60P_PATTERN_AAIBB(clip clip){
 	return Interleave(clip_even,clip_even,clip_interpolation,clip_odd,clip_odd)
 }
 
-function ASSUME_FPS_SYNC_AUDIO(clip clip,int numerator,int "denominator"){
-	return AssumeFPS(clip,numerator,denominator,sync_audio=true)
+function ASSUME_FPS_SYNC_AUDIO(clip clip,val numerator,val "denominator"){
+	clip_audiorate=Audiorate(clip)
+	return ResampleAudio(AssumeFPS(clip,numerator,denominator,sync_audio=true),clip_audiorate)
 }
 
 function ASSUME_SCALED_FPS_SYNC_AUDIO(clip clip,int "multiplier",int "divisor"){
-	return AssumeScaledFPS(clip,multiplier,divisor,sync_audio=true)
+	clip_audiorate=Audiorate(clip)
+	return ResampleAudio(AssumeScaledFPS(clip,multiplier,divisor,sync_audio=true),clip_audiorate)
 }
 
 function ASSUME_30P(clip clip){
@@ -376,7 +380,7 @@ function CONVERT_FPS_AUTO_HQ(clip,fps){
 
 function CLIP_SPEED(clip clip,float speed,bool smooth){
 	frame_rate=Framerate(clip)
-	speeded_clip=AssumeFPS(clip,frame_rate*speed)
+	speeded_clip=ASSUME_FPS_SYNC_AUDIO(clip,frame_rate*speed)
 	return Apply(smooth?"CONVERT_FPS_AUTO_HQ":"ChangeFPS",speeded_clip,frame_rate)
 }
 
@@ -459,8 +463,8 @@ function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty"
 	Assert(factorX>0.0,"FAST_ZOOM(): factorX is not greater than 0.0")
 	Assert(factorY>0.0,"FAST_ZOOM(): factorY is not greater than 0.0")
 
-	border_size_x=extend?0:Ceil(Float(border_size)/factorX)
-	border_size_y=extend?0:Ceil(Float(border_size)/factorY)
+	border_size_x=extend?0:CEIL_BS(Float(border_size)/factorX,border_size)
+	border_size_y=extend?0:CEIL_BS(Float(border_size)/factorY,border_size)
 
 	clip_with_border=AddBorders(clip,border_size_x,border_size_y,border_size_x,border_size_y)
 	src_left=(srcx+border_size_x)-(dstx/factorX) # source_px=((target_px-dstx)/factorX)+(srcx+border_size_x)
@@ -528,6 +532,38 @@ function PULL_IN_OUT(clip clip,float "pull_ratio_x",float "pull_ratio_y"){
 
 	clip_zoomed=FAST_ZOOM(clip,0,0,-pull_x,-pull_y,extend=true)
 	return FAST_ZOOM(clip_zoomed,0,0,pull_x,pull_y,extend=true)
+}
+
+######## Stereoscopy ########
+
+function APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip clip,string func){
+	LeftRight3DToLeft(clip)
+	clip_left_filtered=Eval(func)
+
+	LeftRight3DToRight(clip)
+	clip_right_filtered=Eval(func)
+
+	return LeftRight3D(clip_left_filtered,clip_right_filtered)
+}
+
+function OFFSET_PARALLAX_OF_LEFT_RIGHT_3D_CLIP(clip clip,float parallax_ratio_offset){
+	clip_left=LeftRight3DToLeft(clip)
+	clip_right=LeftRight3DToRight(clip)
+
+	clip_width=Width(clip_left)
+	parallax_ratio_offset_half=parallax_ratio_offset*0.5
+
+	clip_left_cropped=FAST_ZOOM(clip_left,dstx=Float(clip_width)*(0.5-parallax_ratio_offset))
+	clip_right_cropped=FAST_ZOOM(clip_right,dstx=Float(clip_width)*(0.5+parallax_ratio_offset))
+
+	clip_left_offset=FAST_ZOOM(clip_left_cropped,dstx=Float(clip_width)*(0.5+parallax_ratio_offset_half))
+	clip_right_offset=FAST_ZOOM(clip_right_cropped,dstx=Float(clip_width)*(0.5-parallax_ratio_offset_half))
+
+	return LeftRight3D(clip_left_offset,clip_right_offset)
+}
+
+function MONO_CLIP_TO_LEFT_RIGHT_3D_CLIP(clip clip){
+	return LeftRight3D(clip,clip)
 }
 
 ######## Source ########
