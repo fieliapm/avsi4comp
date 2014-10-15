@@ -83,7 +83,7 @@ AudioDub(escha_and_logy_no_atelier_tv_op_mute,bgm_48khz)
 
 
 
-thumbnail=Trim(2730,-24*5)
+thumbnail=Trim(4303,-24*5)
 
 ######## Subtitle ########
 
@@ -165,8 +165,6 @@ ConvertToYV12(last)++escha_and_logy_no_atelier_tv_12_shallistera_and_shallotte
 #thumbnail
 
 ######## Post Processing ########
-
-
 
 ConvertToYV12()
 #ConvertToYUY2()
