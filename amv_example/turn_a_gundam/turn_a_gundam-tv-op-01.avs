@@ -204,3 +204,5 @@ SUBTITLE_FX("ターンAターン ターンAターン ターンA...",subtitle_x,subtitle_y,6301,
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer()

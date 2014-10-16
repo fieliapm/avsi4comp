@@ -24,7 +24,8 @@ Import("shingeki_no_kyojin-tv-common-01.avsi")
 
 ######## Source ########
 
-shingeki_no_kyojin_tv_ed=FFMS2_VIDEO_SOURCE("..\shingeki_no_kyojin-tv-ed-01.avi")
+#shingeki_no_kyojin_tv_ed=FFMS2_VIDEO_SOURCE("..\shingeki_no_kyojin-tv-ed-01.avi")
+shingeki_no_kyojin_tv_ed=TCPSource("localhost",22051,"None")
 
 ######## Pre Combine ########
 
@@ -163,3 +164,5 @@ cm_shingeki_no_kyojin_tv_01++shingeki_no_kyojin_tv_ed++cm_shingeki_no_kyojin_tv_
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer()

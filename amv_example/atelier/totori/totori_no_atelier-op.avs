@@ -252,3 +252,5 @@ SUBTITLE_FX("”Ş•û‚Ì’n•½ü‚ª ‰“‚Ì‚­‘O‚É",subtitle_x,subtitle_y,5697,5915)
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer()

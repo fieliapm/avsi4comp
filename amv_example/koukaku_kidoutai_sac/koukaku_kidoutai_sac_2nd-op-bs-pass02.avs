@@ -27,7 +27,7 @@ SetMemoryMax(64)
 ######## Pass-02 ########
 
 #OpenDMLSource("koukaku_kidoutai_sac_2nd-op-bs-pass01.avi")
-TCPSource("localhost")
+TCPSource("localhost",22051,"None")
 
 ######## Subtitle ########
 
@@ -169,3 +169,5 @@ REPEAT_SUBTITLE(6185)
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer()

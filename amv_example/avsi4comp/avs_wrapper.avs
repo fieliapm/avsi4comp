@@ -1,3 +1,3 @@
-# directly feed AVS script to MeGUI cannot reproduce correct rain effect
+# directly feed AVS script to MeGUI cannot reproduce correct effect (rain,cinema,...)
 
-TCPSource("localhost")
+TCPSource("localhost",compression="None")

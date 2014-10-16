@@ -129,3 +129,5 @@ Lanczos4Resize(640,480)
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer()

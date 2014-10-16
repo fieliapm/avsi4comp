@@ -233,3 +233,5 @@ SUBTITLE_N("ˆê“x‚«‚è‚Å I‚í‚é‚È‚ç",subtitle_x,subtitle_y-subtitle_size,5433,5864
 ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
+
+TCPServer()
