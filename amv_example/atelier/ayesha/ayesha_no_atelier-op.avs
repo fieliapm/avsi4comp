@@ -26,11 +26,11 @@ Import("..\..\avsi4comp\macro.avsi")
 
 ######## PV Online (720P) ########
 
-ayesha_op=AssumeFPS(FFMS2_VIDEO_SOURCE("src\special\movie\【アーシャのアトリエ】オープニングムービー.720p.mp4"),"ntsc_video")
-ayesha_design_movie=AssumeFPS(FFMS2_VIDEO_SOURCE("src\special\movie\【アーシャのアトリエ】ティザームービー.720p.mp4"),ayesha_op)
-ayesha_design_movie_cache02=AssumeFPS(FFMS2_VIDEO_SOURCE("src\special\movie\【アーシャのアトリエ】ティザームービー.720p.mp4"),ayesha_op)
-ayesha_promotion_movie=AssumeFPS(FFMS2_VIDEO_SOURCE("src\special\movie\【アーシャのアトリエ】プロモーションムービー.720p.mp4"),ayesha_op)
-ayesha_promotion_movie_cache02=AssumeFPS(FFMS2_VIDEO_SOURCE("src\special\movie\【アーシャのアトリエ】プロモーションムービー.720p.mp4"),ayesha_op)
+ayesha_op=AssumeFPS(FFMS2_VIDEO_SOURCE("src\official\special\movie\【アーシャのアトリエ】オープニングムービー.720p.mp4"),"ntsc_video")
+ayesha_design_movie=AssumeFPS(FFMS2_VIDEO_SOURCE("src\official\special\movie\【アーシャのアトリエ】ティザームービー.720p.mp4"),ayesha_op)
+ayesha_design_movie_cache02=AssumeFPS(FFMS2_VIDEO_SOURCE("src\official\special\movie\【アーシャのアトリエ】ティザームービー.720p.mp4"),ayesha_op)
+ayesha_promotion_movie=AssumeFPS(FFMS2_VIDEO_SOURCE("src\official\special\movie\【アーシャのアトリエ】プロモーションムービー.720p.mp4"),ayesha_op)
+ayesha_promotion_movie_cache02=AssumeFPS(FFMS2_VIDEO_SOURCE("src\official\special\movie\【アーシャのアトリエ】プロモーションムービー.720p.mp4"),ayesha_op)
 
 
 
