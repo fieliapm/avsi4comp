@@ -177,8 +177,8 @@ thumbnail=Trim(6564,-30*5)
 
 ######## Subtitle ########
 
-global subtitle_x=50
-global subtitle_y=400
+subtitle_x=50
+subtitle_y=400
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
@@ -193,8 +193,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	text_color=is_title?color_gold:subtitle_text_color
 	halo_color=is_title?color_firebrick:subtitle_halo_color
 
-	return APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip,"SUBTITLE_FX_PULL_IN_PULL_OUT("+DOUBLE_QUOTE_STRING(text)+","+String(x)+","+String(y)+","+String(start_frame)+","+String(end_frame)+",subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,"+String(text_color)+","+String(halo_color)+")")
 	#return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,halo_color)
+	return APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip,"SUBTITLE_FX_PULL_IN_PULL_OUT("+DOUBLE_QUOTE_STRING(text)+","+String(x)+","+String(y)+","+String(start_frame)+","+String(end_frame)+",subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,"+String(text_color)+","+String(halo_color)+")")
 }
 
 SUBTITLE_FX("Ç≥Ç©Ç≥Ç‹ê¢äE//íÜêÏ„ƒéq|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7395,7650,true)
