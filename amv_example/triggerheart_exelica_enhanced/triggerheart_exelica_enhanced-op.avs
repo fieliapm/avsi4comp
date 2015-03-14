@@ -105,19 +105,18 @@ triggerheart_exelica_dc_pv_01_fade_out_interlace=FADE_OUT_WITH_BRIGHTNESS_OFFSET
 triggerheart_exelica_dc_pv_01_fade_out_deinterlace=Bob(triggerheart_exelica_dc_pv_01_fade_out_interlace)
 triggerheart_exelica_dc_pv_01_fade_out=triggerheart_exelica_dc_pv_01_fade_out_deinterlace # select interlace/deinterlace
 
+is_deinterlace=(Framerate(triggerheart_exelica_dc_pv_01_fade_out)==Framerate(triggerheart_exelica_dc_pv_01_fade_out_deinterlace))?true:false
+global frame_index_scale=is_deinterlace?2:1
+
 
 
 triggerheart_exelica_enhanced_ps2_op_01_02=triggerheart_exelica_enhanced_ps2_op_01+triggerheart_exelica_enhanced_ps2_op_02
 triggerheart_exelica_enhanced_ps2_op_03_04=triggerheart_exelica_enhanced_ps2_op_03+triggerheart_exelica_enhanced_ps2_op_04
 triggerheart_exelica_enhanced_ps2_op_05_06=triggerheart_exelica_enhanced_ps2_op_05+triggerheart_exelica_enhanced_ps2_op_06
 
-#triggerheart_exelica_enhanced_ps2_op_01_02=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_dc_pv_01_fade_out)
-#triggerheart_exelica_enhanced_ps2_op_03_04=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_dc_pv_01_fade_out)
-#triggerheart_exelica_enhanced_ps2_op_05_06=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_dc_pv_01_fade_out)
-
-triggerheart_exelica_enhanced_ps2_op_01_02=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_01_02)
-triggerheart_exelica_enhanced_ps2_op_03_04=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_03_04)
-triggerheart_exelica_enhanced_ps2_op_05_06=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_05_06)
+triggerheart_exelica_enhanced_ps2_op_01_02=is_deinterlace?CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_01_02):ChangeFPS(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_dc_pv_01_fade_out)
+triggerheart_exelica_enhanced_ps2_op_03_04=is_deinterlace?CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_03_04):ChangeFPS(triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_dc_pv_01_fade_out)
+triggerheart_exelica_enhanced_ps2_op_05_06=is_deinterlace?CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_05_06):ChangeFPS(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_dc_pv_01_fade_out)
 
 
 
@@ -153,13 +152,14 @@ triggerheart_exelica_enhanced_ps2_op_pre03=LOOP_STILL_FRAME(FAST_ZOOM(triggerhea
 	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.86),7) \
 	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.96),6)
 
+#triggerheart_exelica_enhanced_ps2_op_pre03=is_deinterlace?CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_pre03):ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out)
 triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out)
-#triggerheart_exelica_enhanced_ps2_op_pre03=CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_pre03)
 
 ######## Combine ########
 
 #                                                   assume 24000/1001 fps
 #                                           film    then change to 30000/1001 fps
+# triggerheart_exelica_enhanced_op_01_02       0       0
 # triggerheart_exelica_enhanced_op_03_04    3367    4209
 # triggerheart_exelica_enhanced_op_05_06    6044    7555
 #
@@ -189,6 +189,10 @@ bgm_48khz_delayed=DelayAudio(bgm_48khz,0.454)
 
 AudioDub(triggerheart_exelica_enhanced_op_mute,bgm_48khz_delayed)
 
+
+
+thumbnail=Trim(4439*frame_index_scale,-30*5*frame_index_scale)
+
 ######## Subtitle ########
 
 subtitle_x=50
@@ -207,8 +211,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	halo_color=is_title?color_gold:subtitle_halo_color
 
-	#return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # interlace
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame*2,end_frame*2,subtitle_front_fade_count*2,subtitle_rear_fade_count*2,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # deinterlace
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # deinterlace
 }
 
 SUBTITLE_FX("GRAVITY ERROR//彩音|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)
@@ -255,6 +258,10 @@ SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,7362
 SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,7550,7938)
 SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,7939,8134)
 SUBTITLE_FX("掴め! 放て! 心のトリガーを引け!",subtitle_x,subtitle_y,8139,8317)
+
+
+
+#thumbnail
 
 ######## Post Processing ########
 
