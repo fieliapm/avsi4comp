@@ -35,11 +35,14 @@ iris_no_atelier_grand_fantasm_op=AudioDub(iris_no_atelier_grand_fantasm_op_video
 
 ######## Official Web (320*240) ########
 
-#iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\GF_webPV_01m.MP4"
-#iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\PV_vol_2m.MP4"
+#iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\GF_webPV_01.wmv"
+iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\PV_vol_2.wmv"
 
-iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\GF_webPV_01s.wmv"
-iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\PV_vol_2s.wmv"
+#iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\GF_webPV_01m.MP4"
+#iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\PV_vol_2m.MP4"
+
+iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\GF_webPV_01s.wmv"
+#iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\PV_vol_2s.wmv"
 
 iris_no_atelier_grand_fantasm_web_pv_01=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_01_path,fpsnum=30000,fpsden=1001),48000)
 iris_no_atelier_grand_fantasm_web_pv_02=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),48000)
@@ -77,12 +80,12 @@ iris_no_atelier_grand_fantasm_web_pv_01_11_trademark=Trim(iris_no_atelier_grand_
 
 
 iris_no_atelier_grand_fantasm_web_pv_02_01_rotating_book=Trim(iris_no_atelier_grand_fantasm_web_pv_02,0,897) #898
-iris_no_atelier_grand_fantasm_web_pv_02_02_title=Trim(iris_no_atelier_grand_fantasm_web_pv_02,898,1038) #141
-iris_no_atelier_grand_fantasm_web_pv_02_03_text=Trim(iris_no_atelier_grand_fantasm_web_pv_02,1039,1189) #151
+iris_no_atelier_grand_fantasm_web_pv_02_02_title=Trim(iris_no_atelier_grand_fantasm_web_pv_02,898,1030) #133
+iris_no_atelier_grand_fantasm_web_pv_02_03_text=Trim(iris_no_atelier_grand_fantasm_web_pv_02,1031,1189) #159
 iris_no_atelier_grand_fantasm_web_pv_02_04_1_game_play=Trim(iris_no_atelier_grand_fantasm_web_pv_02,1190,3260) #2071
 iris_no_atelier_grand_fantasm_web_pv_02_04_2_op=Trim(iris_no_atelier_grand_fantasm_web_pv_02,3261,4168)
-iris_no_atelier_grand_fantasm_web_pv_02_05_1_game_play=Trim(iris_no_atelier_grand_fantasm_web_pv_02_cache02,4169,4777) #609
-iris_no_atelier_grand_fantasm_web_pv_02_05_2_bg=Trim(iris_no_atelier_grand_fantasm_web_pv_02,4778,4832) #55
+iris_no_atelier_grand_fantasm_web_pv_02_05_1_game_play=Trim(iris_no_atelier_grand_fantasm_web_pv_02_cache02,4169,4778) #610
+iris_no_atelier_grand_fantasm_web_pv_02_05_2_bg=Trim(iris_no_atelier_grand_fantasm_web_pv_02,4779,4832) #54
 iris_no_atelier_grand_fantasm_web_pv_02_05_3_op_sell=Trim(iris_no_atelier_grand_fantasm_web_pv_02,4833,0)
 
 ######## Pre Combine ########
@@ -108,7 +111,7 @@ iris_no_atelier_grand_fantasm_op_t03=iris_no_atelier_grand_fantasm_web_pv_01_04_
 iris_no_atelier_grand_fantasm_op_t04=iris_no_atelier_grand_fantasm_web_pv_01_07_game_play+Dissolve(iris_no_atelier_grand_fantasm_web_pv_01_08_1_game_play,iris_no_atelier_grand_fantasm_web_pv_02_03_text,Framecount(iris_no_atelier_grand_fantasm_web_pv_02_03_text)-39)
 
 iris_no_atelier_grand_fantasm_op_t05=Dissolve(TRIM_MIDDLE_CLIP(iris_no_atelier_grand_fantasm_web_pv_01_10_omake,1067),Trim(iris_no_atelier_grand_fantasm_web_pv_02_01_rotating_book,120,-(280+dissolve_length+t05_t06_dissolve_length)),dissolve_length)
-iris_no_atelier_grand_fantasm_op_t06=Dissolve(iris_no_atelier_grand_fantasm_web_pv_02_05_1_game_play,TRIM_MIDDLE_CLIP(iris_no_atelier_grand_fantasm_web_pv_01_01_rotating_book,221+dissolve_length),dissolve_length)
+iris_no_atelier_grand_fantasm_op_t06=Dissolve(iris_no_atelier_grand_fantasm_web_pv_02_05_1_game_play,TRIM_MIDDLE_CLIP(iris_no_atelier_grand_fantasm_web_pv_01_01_rotating_book,220+dissolve_length),dissolve_length)
 iris_no_atelier_grand_fantasm_op_t07=iris_no_atelier_grand_fantasm_op_02
 
 
@@ -121,7 +124,6 @@ iris_no_atelier_grand_fantasm_op_mute=iris_no_atelier_grand_fantasm_op_t01+FADE_
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\iris_no_atelier-grand_fantasm-op-03.wav"),48000)
-
 AudioDub(iris_no_atelier_grand_fantasm_op_mute,bgm_48khz)
 
 
