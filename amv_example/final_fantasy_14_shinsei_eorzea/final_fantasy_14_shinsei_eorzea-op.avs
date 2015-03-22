@@ -89,9 +89,9 @@ global subtitle_front_fade_count=15
 global subtitle_rear_fade_count=15
 global subtitle_font="Ms Mincho"
 global subtitle_effects="b"
-global subtitle_size=20*1.5
+global subtitle_size=24*1.5
 global subtitle_text_color=color_white
-global subtitle_halo_color=color_deepskyblue
+global subtitle_halo_color=color_deeppink
 
 second_subtitle_x=50*1.5
 second_subtitle_y=50*1.5
@@ -99,7 +99,7 @@ second_subtitle_y=50*1.5
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	halo_color=is_title?color_deeppink:subtitle_halo_color
+	halo_color=is_title?color_deepskyblue:subtitle_halo_color
 
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color)
 }
@@ -125,18 +125,18 @@ SUBTITLE_FX("    feel      face        teach   fear",subtitle_x,subtitle_y,4712,
 SUBTITLE_FX("Suffer me Lonely me Weakness me Evil me",second_subtitle_x,second_subtitle_y,4712,4965)
 SUBTITLE_FX("      feel        face       teach     speak",subtitle_x,subtitle_y,4983,5235)
 SUBTITLE_FX("although me one must me stumble me listen me",second_subtitle_x,second_subtitle_y,4983,5235)
-SUBTITLE_FX("      speak    tell         tell          hope",subtitle_x,subtitle_y,5251,5506)
-SUBTITLE_FX("Although we might them we must them land of hope",second_subtitle_x,second_subtitle_y,5251,5506)
+SUBTITLE_FX("         speak    tell         tell         hope",subtitle_x,subtitle_y,5251,5506)
+SUBTITLE_FX("Although we we might them we must them land of hope",second_subtitle_x,second_subtitle_y,5251,5506)
 SUBTITLE_FX("    hope        wish       wish        roam",subtitle_x,subtitle_y,5521,5775)
 SUBTITLE_FX("Mother hope father with every wish has a home",second_subtitle_x,second_subtitle_y,5521,5775)
-SUBTITLE_FX("     roam      roam      roam         swim",subtitle_x,subtitle_y,5791,6044)
-SUBTITLE_FX("we must go listen go suffer home sanctum leap",second_subtitle_x,second_subtitle_y,5791,6044)
+SUBTITLE_FX("        roam      roam      roam         swim",subtitle_x,subtitle_y,5791,6044)
+SUBTITLE_FX("we must go go listen go suffer home sanctum leap",second_subtitle_x,second_subtitle_y,5791,6044)
 SUBTITLE_FX("    speak     sleep           sleep on",subtitle_x,subtitle_y,6059,6339)
 SUBTITLE_FX("And as we wander sleep answer sleep on",second_subtitle_x,second_subtitle_y,6059,6339)
 
 SUBTITLE_FX("Now open your eyes while our plight is repeated.",subtitle_x,subtitle_y,6576,6891)
 SUBTITLE_FX("Stell deaf to our cries, lost in hope we lie defeated.",subtitle_x,subtitle_y,6910,7234)
-SUBTITLE_FX("Our souls have been torn and our bpdies forsaken.",subtitle_x,subtitle_y,7250,7557)
+SUBTITLE_FX("Our souls have been torn and our bodies forsaken.",subtitle_x,subtitle_y,7250,7557)
 SUBTITLE_FX("Bearing sins of the past. for our future is taken.",subtitle_x,subtitle_y,7588,7910)
 
 SUBTITLE_FX("War, born of strife, these trials persuade us not.",subtitle_x,subtitle_y,7948,8210)
@@ -145,7 +145,7 @@ SUBTITLE_FX("Words without sound, these lies betray our thoughts.",subtitle_x,su
 SUBTITLE_FX("Mired by your plague of doubt, the Land, she mourns.",subtitle_x,subtitle_y,8667,8930)
 SUBTITLE_FX("See what? Hear what?",second_subtitle_x,second_subtitle_y,8847,9006)
 SUBTITLE_FX("Judgment binds all we hold to a memory of scorn.",subtitle_x,subtitle_y,9001,9339)
-SUBTITLE_FX("Tell us why, given life, we are meant to die. helpless in our cryies?",subtitle_x,subtitle_y,9360,9800)
+SUBTITLE_FX("Tell us why, given life, we are meant to die.|helpless in our cryies?",subtitle_x,subtitle_y-subtitle_size,9360,9800)
 
 SUBTITLE_FX("weakness suffer grovel reason",subtitle_x,subtitle_y,9836,10090)
 SUBTITLE_FX("       we     we     we     we",second_subtitle_x,second_subtitle_y,9836,10090)
