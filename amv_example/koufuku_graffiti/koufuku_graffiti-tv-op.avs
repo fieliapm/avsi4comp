@@ -22,18 +22,6 @@
 
 Import("koufuku_graffiti-tv-common.avsi")
 
-######## Function ########
-
-function MOVE_CG(clip cg,int dir_x,int dir_y,float move_offset,float scale){
-	cg_frame_count=Framecount(cg)
-	cg_width_half=Width(cg)/2
-	cg_height_half=Height(cg)/2
-	move_offset_half=move_offset*0.5
-
-	return ScriptClip(cg,"FAST_ZOOM(dstx=Spline(current_frame,0,"+String(cg_width_half)+"-("+String(move_offset_half)+"*("+String(dir_x)+")),"+String(cg_frame_count)+","+String(cg_width_half)+"+("+String(move_offset_half)+"*("+String(dir_x)+")),cubic=false)," \
-		+"dsty=Spline(current_frame,0,"+String(cg_height_half)+"-("+String(move_offset_half)+"*("+String(dir_y)+")),"+String(cg_frame_count)+","+String(cg_height_half)+"+("+String(move_offset_half)+"*("+String(dir_y)+")),cubic=false),factor="+String(scale)+",extend=true)")
-}
-
 ######## Pre Combine ########
 
 fade_length=12
@@ -60,7 +48,7 @@ koufuku_graffiti_tv_04_ryou_fly_to_dream_03=Trim(koufuku_graffiti_tv_04_ryou_fly
 
 
 koufuku_graffiti_tv_op_t01=BlankClip(koufuku_graffiti_tv_clean_op,length=11,color=color_black)+koufuku_graffiti_tv_clean_op_01
-koufuku_graffiti_tv_op_t02=TRIM_FIRST_CLIP(koufuku_graffiti_tv_05_shiina_s_mother_bring_cookie,141)+TRIM_LAST_CLIP(koufuku_graffiti_tv_01_kirin_see_ryou_eat_inari_sushi,113)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_ryou_turn_her_head_back_01,17)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_09_kirin_cry_and_punished_by_mother,17) \
+koufuku_graffiti_tv_op_t02=TRIM_FIRST_CLIP(koufuku_graffiti_tv_05_shiina_s_mother_bring_cookie,141)+TRIM_LAST_CLIP(koufuku_graffiti_tv_01_kirin_see_ryou_eat_inari_sushi,113)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_ryou_turn_her_head_back_01,17)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_09_kirin_cry_and_punished_by_rin,17) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_03_ryou_kirin_shiina_watch_tv_drama_first_last,140)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_08_ryou_and_classmates,78)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_07_tsuyuko_talk_with_ryou_and_cat_sleep_on_roof_moving,131)
 
 koufuku_graffiti_tv_op_t03=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_03_ryou_show_omurice_01,99)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_03_ryou_show_omurice_02,79)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_03_ryou_show_omurice_03,54) \
@@ -75,8 +63,8 @@ koufuku_graffiti_tv_op_t04=koufuku_graffiti_tv_clean_op_02+TRIM_FIRST_CLIP(koufu
 koufuku_graffiti_tv_op_t05=TRIM_FIRST_CLIP(koufuku_graffiti_tv_07_train_departure,35)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_09_kirin_dash_to_ryou,105)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_10_yuki_cry,35)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_ryou_sleep_on_grandmother_s_leg_moving,87)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_02_ryou_close_to_kirin,17) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_04_camera_toward_ryou_from_soup,35)+TRIM_LAST_CLIP(koufuku_graffiti_tv_08_ryou_feel_delicious,79)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_09_kirin_catch_ryou_s_hand,96)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_shiina_thumb_up,70)
 
-koufuku_graffiti_tv_op_t06=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_10_yuki_walking,140)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_09_akira_ryou_kirin_worship_to_god,139)
-koufuku_graffiti_tv_op_t07=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_08_ryou_walking_and_kirin_skipping,140)+TRIM_LAST_CLIP(koufuku_graffiti_tv_08_kirin_talk_with_her_mother,139) \
+koufuku_graffiti_tv_op_t06=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_10_yuki_walking,140)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_09_akira_ryou_kirin_worship_god,139)
+koufuku_graffiti_tv_op_t07=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_08_ryou_walking_and_kirin_skipping,140)+TRIM_LAST_CLIP(koufuku_graffiti_tv_08_kirin_talk_with_rin,139) \
 	+TRIM_FIRST_CLIP(koufuku_graffiti_tv_03_kirin_pull_down_shiina,139)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_09_ryou_feel_delicious,140) \
 	+TRIM_FIRST_CLIP(koufuku_graffiti_tv_01_kirin_unhappy,139)+TRIM_LAST_CLIP(koufuku_graffiti_tv_04_ryou_walk_in_rain,70) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_grandmother_and_ryou_sit_near_fan,140)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_10_yuki_alone_01,70)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_05_wind_chime_night,69)

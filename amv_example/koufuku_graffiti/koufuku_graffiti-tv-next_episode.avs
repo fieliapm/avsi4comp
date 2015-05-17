@@ -24,20 +24,36 @@ Import("koufuku_graffiti-tv-common.avsi")
 
 ######## Pre Combine ########
 
-fade_length=12
+fade_length=5
+
+koufuku_graffiti_tv_12_end_last_frame=Framecount(koufuku_graffiti_tv_12_end)-1
+koufuku_graffiti_tv_12_end_extend=Loop(koufuku_graffiti_tv_12_end,24*6,koufuku_graffiti_tv_12_end_last_frame,koufuku_graffiti_tv_12_end_last_frame)
 
 ######## Combine ########
 
-koufuku_graffiti_tv_sponser_t01=Loop(koufuku_graffiti_tv_04_ryou_bite_food_chan,13)
+# koufuku_graffiti_tv_01_next_episode_01 -5
+# koufuku_graffiti_tv_01_next_episode_12 5446
+
+koufuku_graffiti_tv_01_next_episode_01_00=Trim(koufuku_graffiti_tv_01_next_episode_01,0,4)
+koufuku_graffiti_tv_01_next_episode_01_01=Trim(koufuku_graffiti_tv_01_next_episode_01,5,0)
+
+koufuku_graffiti_tv_next_episode_t01=Dissolve(koufuku_graffiti_tv_01_next_episode_01_01,koufuku_graffiti_tv_02_next_episode_01,koufuku_graffiti_tv_03_next_episode_01,fade_length+1)
+koufuku_graffiti_tv_next_episode_t02=Dissolve(koufuku_graffiti_tv_04_next_episode_01,koufuku_graffiti_tv_05_next_episode_01,koufuku_graffiti_tv_06_next_episode_01,fade_length)
+koufuku_graffiti_tv_next_episode_t03=Dissolve(koufuku_graffiti_tv_07_next_episode_01,koufuku_graffiti_tv_08_next_episode_01,koufuku_graffiti_tv_09_next_episode_01,fade_length+1)
+koufuku_graffiti_tv_next_episode_t04=Dissolve(koufuku_graffiti_tv_10_next_episode_01,koufuku_graffiti_tv_11_next_episode_01,koufuku_graffiti_tv_12_end_extend,fade_length)
 
 
 
-koufuku_graffiti_tv_sponser_mute=koufuku_graffiti_tv_sponser_t01
+koufuku_graffiti_tv_next_episode_mute=Dissolve(koufuku_graffiti_tv_next_episode_t01,koufuku_graffiti_tv_next_episode_t02,koufuku_graffiti_tv_next_episode_t03,koufuku_graffiti_tv_next_episode_t04,fade_length)
 
 ######## Music ########
 
-bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-ed-02.wav"),48000)
-AudioDub(koufuku_graffiti_tv_sponser_mute,bgm_48khz)
+bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-ed-03.wav"),48000)
+AudioDub(koufuku_graffiti_tv_next_episode_mute,bgm_48khz)
+
+koufuku_graffiti_tv_01_next_episode_01_00++last
+
+thumbnail=Trim(0,-24*5)
 
 ######## Subtitle ########
 
@@ -64,11 +80,15 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,effects,Round(size),text_color,subtitle_halo_color)
 }
 
-koufuku_graffiti_tv_sponser_frame_count=Framecount(koufuku_graffiti_tv_sponser_mute)
+koufuku_graffiti_tv_next_episode_frame_count=Framecount()
 
-SUBTITLE_FX("♪ごはんの練習//リョウ&きりん(佐藤利奈&大亀あすか)|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,0,koufuku_graffiti_tv_sponser_frame_count,true)
+SUBTITLE_FX("♪しあわせグラフィティ//リョウ&きりん(佐藤利奈&大亀あすか)|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,0,koufuku_graffiti_tv_next_episode_frame_count,true)
 
-SUBTITLE_FX("提供||中央動画部||♪昼ごはんを食べようよ♪",subtitle_clip_width/2,100,0,koufuku_graffiti_tv_sponser_frame_count)
+SUBTITLE_FX("次回||ふたしなめ||『中央歌謡グラフィティ』",subtitle_clip_width/2,100,0,koufuku_graffiti_tv_next_episode_frame_count)
+
+
+
+#thumbnail
 
 ######## Post Processing ########
 

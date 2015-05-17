@@ -328,8 +328,20 @@ function ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg
 
 ######## Field Based Processing ########
 
+function BOB_AND_KEEP_PARITY(clip interlaced_clip,float "b",float "c",float "height"){
+	interlaced_clip_parity=GetParity(interlaced_clip)
+	bob_deinterlaced_clip=Bob(interlaced_clip,b,c,height)
+	return (interlaced_clip_parity)?AssumeTFF(bob_deinterlaced_clip):AssumeBFF(bob_deinterlaced_clip)
+}
+
 function PROGRESSIVE_TO_INTERLACE(clip clip){
 	return SelectEvery(DoubleWeave(ComplementParity(clip)),4,1)
+}
+
+function FILTER_INTERLACED_VIDEO(clip source_clip,string expression){
+	BOB_AND_KEEP_PARITY(source_clip)
+	filtered_clip=Eval(expression)
+	return PROGRESSIVE_TO_INTERLACED(filtered_clip)
 }
 
 ######## FPS ########
@@ -434,6 +446,16 @@ function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip1,clip clip2,int num_
 
 function DOUBLE_FADE(clip clip1,clip clip2,int num_frames_before,int num_frames_after,int color){
 	return FadeOut(clip1,num_frames_before,color)+FadeIn0(clip2,num_frames_after,color)
+}
+
+######## Transition ########
+
+function TRANSITION(clip clip_left,clip clip_right,int length,string func){
+	left=TRIM_LAST_CLIP(clip_left,length)
+	right=TRIM_FIRST_CLIP(clip_right,length)
+	transition_clip_video=TRIM_FIRST_CLIP(clip_left,Framecount(clip_left)-length)+Eval(func)+Trim(clip_right,length,0)
+	transition_clip_audio=Dissolve(clip_left,clip_right,length)
+	return AudioDub(transition_clip_video,transition_clip_audio)
 }
 
 ######## Transform & Resize ########
