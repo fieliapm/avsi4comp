@@ -51,7 +51,7 @@ koufuku_graffiti_tv_next_episode_mute=Dissolve(koufuku_graffiti_tv_next_episode_
 bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-ed-03.wav"),48000)
 AudioDub(koufuku_graffiti_tv_next_episode_mute,bgm_48khz)
 
-koufuku_graffiti_tv_01_next_episode_01_00++last
+AUDIO_DUB_TONE(koufuku_graffiti_tv_01_next_episode_01_00,samplerate=48000,channels=2,type="Silence")++last
 
 thumbnail=Trim(0,-24*5)
 
