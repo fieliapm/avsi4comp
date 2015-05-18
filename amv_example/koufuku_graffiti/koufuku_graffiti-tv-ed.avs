@@ -50,6 +50,18 @@ transition_temp=FLIP_TRANSITION(transition_temp,MOVE_CG(TRIM_MIDDLE_CLIP(koufuku
 transition_temp=FLIP_TRANSITION(transition_temp,MOVE_CG(TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_09_oden_05,53+transition_length),0,1,128.0,1.1),transition_length,-1,-1)
 transition_result=FLIP_TRANSITION(transition_temp,koufuku_graffiti_tv_clean_ed_05,transition_length,1,-1)
 
+
+
+fade_length=8
+
+koufuku_graffiti_tv_06_summer_sky_trimmed=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_summer_sky,14)
+center_x=(1.0/4.0)*Width(koufuku_graffiti_tv_06_summer_sky_trimmed)
+center_y=(1.0/4.0)*Height(koufuku_graffiti_tv_06_summer_sky_trimmed)
+koufuku_graffiti_tv_06_summer_sky_trimmed_last_frame=Framecount(koufuku_graffiti_tv_06_summer_sky_trimmed)-1
+koufuku_graffiti_tv_06_summer_sky_moving=ScriptClip(koufuku_graffiti_tv_06_summer_sky_trimmed,"FAST_ZOOM(srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=Spline(current_frame,0,1.75,koufuku_graffiti_tv_06_summer_sky_trimmed_last_frame,1.0,cubic=false))")
+
+
+
 koufuku_graffiti_tv_06_ryou_and_kirin_imagine_word=koufuku_graffiti_tv_06_ryou_and_kirin_imagine_word_03_curry+koufuku_graffiti_tv_06_ryou_and_kirin_imagine_word_04_sukiyaki
 
 ######## Combine ########
@@ -65,8 +77,6 @@ koufuku_graffiti_tv_06_ryou_and_kirin_imagine_word=koufuku_graffiti_tv_06_ryou_a
 # koufuku_graffiti_tv_12_ed_02 2096
 # koufuku_graffiti_tv_12_ed_03 2627
 # koufuku_graffiti_tv_12_ed_04 3092
-
-fade_length=8
 
 koufuku_graffiti_tv_ed_t01=BlankClip(koufuku_graffiti_tv_clean_ed,length=10,color=color_black)+koufuku_graffiti_tv_clean_ed_01
 
@@ -86,7 +96,7 @@ koufuku_graffiti_tv_ed_t09=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_10_yuki_like_kir
 	+TRIM_LAST_CLIP(koufuku_graffiti_tv_01_ryou_hadaka_apron,77)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_03_sakura_rain_01,47) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_11_vampire_ryou,18)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_12_530_meal,17)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_12_296_make,17)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_ryou_become_brilliant,42) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_04_ryou_walk_in_dream,56)
-koufuku_graffiti_tv_ed_t10=TRIM_LAST_CLIP(koufuku_graffiti_tv_03_drama_character_eat_omurice,137)+TRIM_LAST_CLIP(koufuku_graffiti_tv_11_ryou_and_kirin_fondle_shiina_god,137)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_akira_force_ryou_to_eat_cookie,137)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_07_kirin_catch_fired_sanma,111)+FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_summer_sky,14),fade_length)
+koufuku_graffiti_tv_ed_t10=TRIM_LAST_CLIP(koufuku_graffiti_tv_03_drama_character_eat_omurice,137)+TRIM_LAST_CLIP(koufuku_graffiti_tv_11_ryou_and_kirin_fondle_shiina_god,137)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_akira_force_ryou_to_eat_cookie,137)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_07_kirin_catch_fired_sanma,111)+FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_summer_sky_moving,14),fade_length)
 
 koufuku_graffiti_tv_ed_t11=koufuku_graffiti_tv_clean_ed_04
 koufuku_graffiti_tv_ed_t12=transition_result+BlankClip(koufuku_graffiti_tv_clean_op,length=24*5,color=color_black)
