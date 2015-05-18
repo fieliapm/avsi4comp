@@ -360,7 +360,7 @@ SUBTITLE_FX("Die Flugel der Freiheit!",subtitle_x,subtitle_x,7726,7772,false)
 
 
 
-shingeki_no_kyojin_tv_clean_op_02_01_00++ConvertToYV12(last)
+AUDIO_DUB_TONE(shingeki_no_kyojin_tv_clean_op_02_01_00,samplerate=48000,channels=2,type="Silence")++ConvertToYV12(last)
 
 
 
