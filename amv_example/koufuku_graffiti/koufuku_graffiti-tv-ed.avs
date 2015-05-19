@@ -58,7 +58,7 @@ koufuku_graffiti_tv_06_summer_sky_trimmed=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_0
 center_x=(1.0/4.0)*Width(koufuku_graffiti_tv_06_summer_sky_trimmed)
 center_y=(1.0/4.0)*Height(koufuku_graffiti_tv_06_summer_sky_trimmed)
 koufuku_graffiti_tv_06_summer_sky_trimmed_last_frame=Framecount(koufuku_graffiti_tv_06_summer_sky_trimmed)-1
-koufuku_graffiti_tv_06_summer_sky_moving=ScriptClip(koufuku_graffiti_tv_06_summer_sky_trimmed,"FAST_ZOOM(srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=Spline(current_frame,0,1.75,koufuku_graffiti_tv_06_summer_sky_trimmed_last_frame,1.0,cubic=false))")
+koufuku_graffiti_tv_06_summer_sky_moving=ScriptClip(koufuku_graffiti_tv_06_summer_sky_trimmed,"FAST_ZOOM(srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=Spline(current_frame,0,2.0,koufuku_graffiti_tv_06_summer_sky_trimmed_last_frame,1.0,cubic=false))")
 
 
 
