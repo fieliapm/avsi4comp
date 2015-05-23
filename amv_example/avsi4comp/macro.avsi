@@ -148,11 +148,16 @@ function APPLY_RANGE(clip clip,int start_frame,int end_frame,string func){
 
 ######## Color Component ########
 
-function GET_COLOR_A(int color){
+function GET_COLOR_A_2(int color){
 	divisor=$1000000
 	alpha=color/divisor
 	flag=(EUCLIDEAN_MOD(color,divisor)!=0)?1:0
 	return color<0?$100+alpha-flag:alpha
+}
+
+function GET_COLOR_A(int color){
+	divisor=$1000000
+	return EUCLIDEAN_MOD((color-EUCLIDEAN_MOD(color,divisor))/divisor,$100)
 }
 
 function GET_COLOR_R(int color){
