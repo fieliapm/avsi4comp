@@ -26,12 +26,19 @@ Import("..\..\avsi4comp\macro.avsi")
 
 ######## YouTube (640*480) ########
 
-iris_no_atelier_grand_fantasm_op=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001),48000)
+iris_no_atelier_grand_fantasm_op_360p=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001),48000)
 
 iris_no_atelier_grand_fantasm_op_video=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
-iris_no_atelier_grand_fantasm_op=AudioDub(iris_no_atelier_grand_fantasm_op_video,iris_no_atelier_grand_fantasm_op)
+iris_no_atelier_grand_fantasm_op=AudioDub(iris_no_atelier_grand_fantasm_op_video,iris_no_atelier_grand_fantasm_op_360p)
 
-#iris_no_atelier_grand_fantasm_web_pv_01_youtube=FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.360p.mp4")
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.360p.mp4"),48000)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p,6000),5001),4003),3001),2002),1001)
+
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_video=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube=AudioDub(iris_no_atelier_grand_fantasm_web_pv_01_youtube_video,iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p)
+
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_cache02=AudioDub(iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02,iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p)
 
 ######## Official Web (320*240) ########
 
@@ -52,6 +59,13 @@ iris_no_atelier_grand_fantasm_web_pv_02=RESIZE_TO_REF_CLIP(iris_no_atelier_grand
 iris_no_atelier_grand_fantasm_web_pv_02_cache02=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),48000)
 iris_no_atelier_grand_fantasm_web_pv_02_cache02=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_02_cache02,iris_no_atelier_grand_fantasm_op)
 
+iris_no_atelier_grand_fantasm_web_pv_01_cache02=iris_no_atelier_grand_fantasm_web_pv_01
+
+
+
+iris_no_atelier_grand_fantasm_web_pv_01=iris_no_atelier_grand_fantasm_web_pv_01_youtube # overwrite with youtube version
+iris_no_atelier_grand_fantasm_web_pv_01_cache02=iris_no_atelier_grand_fantasm_web_pv_01_youtube_cache02 # overwrite with youtube version
+
 ######## Trim ########
 
 op_single_music_start=98
@@ -64,7 +78,7 @@ iris_no_atelier_grand_fantasm_op_02=Trim(iris_no_atelier_grand_fantasm_op,1130,0
 
 
 
-iris_no_atelier_grand_fantasm_web_pv_01_01_rotating_book=Trim(iris_no_atelier_grand_fantasm_web_pv_01,0,1029) #1030
+iris_no_atelier_grand_fantasm_web_pv_01_01_rotating_book=Trim(iris_no_atelier_grand_fantasm_web_pv_01_cache02,0,1029) #1030
 iris_no_atelier_grand_fantasm_web_pv_01_02_text=Trim(iris_no_atelier_grand_fantasm_web_pv_01,1030,1157) #128
 iris_no_atelier_grand_fantasm_web_pv_01_03_op=Trim(iris_no_atelier_grand_fantasm_web_pv_01,1158,1630)
 iris_no_atelier_grand_fantasm_web_pv_01_04_main_character=Trim(iris_no_atelier_grand_fantasm_web_pv_01,1631,1912) #282
@@ -249,6 +263,9 @@ SUBTITLE_FX("                             1",subtitle_x+eszett_assemble_13_offse
 #thumbnail
 
 ######## Post Processing ########
+
+#### restore interlace ####
+Bob(AssumeTFF())
 
 ConvertToYV12()
 #ConvertToYUY2()
