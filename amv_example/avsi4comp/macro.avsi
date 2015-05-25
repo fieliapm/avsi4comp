@@ -629,7 +629,7 @@ function SUBTITLE_CLIP_BASE(clip ref_clip,int "length",int "width",int "height")
 	return BlankClip(ref_clip,length=length,width=width,height=height,pixel_type="RGB32",color=color_black)
 }
 
-function SUBTITlE_CLIP(clip subtitle_bg,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",int "line_margin",int "spc",bool "subtitle_ex"){
+function SUBTITLE_CLIP(clip subtitle_bg,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",int "line_margin",int "spc",bool "subtitle_ex"){
 	text_rgb_color=Defined(text_color)?OVERWRITE_COLOR_ALPHA(text_color,$0):text_color
 	halo_rgb_color=Defined(halo_color)?OVERWRITE_COLOR_ALPHA(halo_color,$0):halo_color
 	text_alpha=Defined(text_color)?GET_SUBTITLE_COLOR_A(text_color):$FF
@@ -661,14 +661,14 @@ global subtitle_clip_height=480
 
 function _SUBTITLE_NORMAL(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex"){
 	subtitle_bg=SUBTITLE_CLIP_BASE(clip,width=subtitle_clip_width,height=subtitle_clip_height)
-	subtitle_rgba=SUBTITlE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex=subtitle_ex)
+	subtitle_rgba=SUBTITLE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex=subtitle_ex)
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba,clip)
 	return Layer(clip,subtitle_rgba_resized,"Add")
 }
 
 function SUBTITLE_ZOOM(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex",float "srcx",float "srcy",float "dstx",float "dsty",float "factorX",float "factorY",float "factor"){
 	subtitle_bg=SUBTITLE_CLIP_BASE(clip,width=subtitle_clip_width,height=subtitle_clip_height)
-	subtitle_rgba=SUBTITlE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex=subtitle_ex)
+	subtitle_rgba=SUBTITLE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex=subtitle_ex)
 	subtitle_rgba_zoomed=FAST_ZOOM(subtitle_rgba,srcx,srcy,dstx,dsty,factorX,factorY,factor)
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba_zoomed,clip)
 	return Layer(clip,subtitle_rgba_resized,"Add")
@@ -676,7 +676,7 @@ function SUBTITLE_ZOOM(clip clip,string text,int "x",int "y",int "first_frame",i
 
 function SUBTITLE_PULL(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex",float "pull_ratio_x",float "pull_ratio_y"){
 	subtitle_bg=SUBTITLE_CLIP_BASE(clip,width=subtitle_clip_width,height=subtitle_clip_height)
-	subtitle_rgba=SUBTITlE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex=subtitle_ex)
+	subtitle_rgba=SUBTITLE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex=subtitle_ex)
 	subtitle_rgba_pulled=PULL_IN_OUT(subtitle_rgba,pull_ratio_x,pull_ratio_y)
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba_pulled,clip)
 	return Layer(clip,subtitle_rgba_resized,"Add")
@@ -773,7 +773,7 @@ function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_f
 	subtitle_bg=SUBTITLE_CLIP_BASE(clip_rgba,width=subtitle_clip_width,height=subtitle_clip_height)
 
 	random_text="RANDOM_STRING_OUT_OF_FRAME_RANGE("+THREE_DOUBLE_QUOTE_STRING(text)+",current_frame,"+String(start_frame)+","+String(end_frame)+","+DOUBLE_QUOTE_STRING(random_char_func)+")"
-	subtitle_rgba_containing_var=ScriptClip(subtitle_bg,"SUBTITlE_CLIP("+random_text+","+String(x)+","+String(y)+","+String(before_start_frame)+","+String(after_end_frame)+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+String(size)+",SCALE_SUBTITLE_COLOR_ALPHA("+String(text_color)+",alpha_factor),SCALE_SUBTITLE_COLOR_ALPHA("+String(halo_color)+",alpha_factor),subtitle_ex="+OPTIONAL_ARG_TO_STRING(subtitle_ex)+")")
+	subtitle_rgba_containing_var=ScriptClip(subtitle_bg,"SUBTITLE_CLIP("+random_text+","+String(x)+","+String(y)+","+String(before_start_frame)+","+String(after_end_frame)+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+String(size)+",SCALE_SUBTITLE_COLOR_ALPHA("+String(text_color)+",alpha_factor),SCALE_SUBTITLE_COLOR_ALPHA("+String(halo_color)+",alpha_factor),subtitle_ex="+OPTIONAL_ARG_TO_STRING(subtitle_ex)+")")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba,"PSEUDO_RANDOM_SEED(current_frame)")
 
@@ -802,7 +802,7 @@ function _SUBTITLE_FX_CLIP_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,
 	clear_text_color=OVERWRITE_COLOR_ALPHA(text_color,$FF)
 	clear_halo_color=OVERWRITE_COLOR_ALPHA(halo_color,$FF)
 
-	command_part01="SUBTITlE_CLIP("+THREE_DOUBLE_QUOTE_STRING(text)+","+command_part01_topleft_x+","+command_part01_topleft_y+","+command_part01_first_frame+","+command_part01_last_frame+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+command_part01_size+","
+	command_part01="SUBTITLE_CLIP("+THREE_DOUBLE_QUOTE_STRING(text)+","+command_part01_topleft_x+","+command_part01_topleft_y+","+command_part01_first_frame+","+command_part01_last_frame+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+command_part01_size+","
 	command_part02="text_color=COLOR_RGB_LINEAR(_var1-_var2,"+String(clear_text_color)+","+String(text_color)+"),"
 	command_part03="halo_color=COLOR_RGB_LINEAR(_var1-_var2,"+String(clear_halo_color)+","+String(halo_color)+"),"
 	command_part04="subtitle_ex="+OPTIONAL_ARG_TO_STRING(subtitle_ex)+")"
