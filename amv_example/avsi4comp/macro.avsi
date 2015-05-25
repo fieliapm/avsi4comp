@@ -625,6 +625,40 @@ function SUBTITLE_TEST(clip clip,string text,int "first_frame",int "last_frame",
 
 
 
+function _HEAVY_HALO_SUBTITLE(clip clip,string text,int offset_x,int offset_y,int halo_width,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",int "line_margin",int "spc"){
+	clip=SubtitleEx(clip,text,x+offset_x,y+offset_y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc)
+	offset_y=offset_x<halo_width?offset_y:offset_y+1
+	offset_x=offset_x<halo_width?offset_x+1:-halo_width
+	return offset_y>halo_width?clip:_HEAVY_HALO_SUBTITLE(clip,text,offset_x,offset_y,halo_width,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc)
+}
+
+function HEAVY_HALO_SUBTITLE(clip clip,string text,int "halo_width",int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "halo_color",int "line_margin",int "spc"){
+	halo_width=Default(halo_width,1)
+	x=Default(x,Round(Width(clip)*(-0.11)))
+	y=Default(y,Round(Height(clip)*(-0.17)))
+	halo_color=Default(halo_color,color_black)
+
+	max_alpha=Float($FF)
+	halo_alpha=GET_SUBTITLE_COLOR_A(halo_color)
+	halo_alpha=$FF-Round(Pow(Float($FF-halo_alpha)/max_alpha,1.0/Float((halo_width*4)+1))*max_alpha)
+
+	text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_black,$0)
+	halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(halo_color,halo_alpha)
+
+	return _HEAVY_HALO_SUBTITLE(clip,text,-halo_width,-halo_width,halo_width,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc)
+}
+
+function SUBTITLE_WITH_HEAVY_HALO(clip clip,string text,int "halo_width",int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",int "line_margin",int "spc"){
+	halo_color=Default(halo_color,color_black)
+
+	subtitle_text=SubtitleEx(clip,text,x,y,first_frame,last_frame,font,effects,size,text_color,OVERWRITE_SUBTITLE_COLOR_ALPHA(halo_color,$0),line_margin,spc)
+	return HEAVY_HALO_SUBTITLE(subtitle_text,text,halo_width,x,y,first_frame,last_frame,font,effects,size,halo_color,line_margin,spc)
+}
+
+
+
+global subtitle_clip_halo_width=0
+
 function SUBTITLE_CLIP_BASE(clip ref_clip,int "length",int "width",int "height"){
 	return BlankClip(ref_clip,length=length,width=width,height=height,pixel_type="RGB32",color=color_black)
 }
@@ -643,8 +677,10 @@ function SUBTITLE_CLIP(clip subtitle_bg,string text,int "x",int "y",int "first_f
 	subtitle_rgb_standard=Subtitle(subtitle_bg,text,x,y,first_frame,last_frame,font,size,text_rgb_color,halo_rgb_color,spc=spc,lsp=line_margin)
 
 	# SubtitleEx()
-	subtitle_mask_ex=SubtitleEx(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_mask_color,halo_mask_color,line_margin,spc)
-	subtitle_rgb_ex=SubtitleEx(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_rgb_color,halo_rgb_color,line_margin,spc)
+	#subtitle_mask_ex=SubtitleEx(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_mask_color,halo_mask_color,line_margin,spc)
+	#subtitle_rgb_ex=SubtitleEx(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_rgb_color,halo_rgb_color,line_margin,spc)
+	subtitle_mask_ex=SUBTITLE_WITH_HEAVY_HALO(subtitle_bg,text,subtitle_clip_halo_width,x,y,first_frame,last_frame,font,effects,size,text_mask_color,halo_mask_color,line_margin,spc)
+	subtitle_rgb_ex=SUBTITLE_WITH_HEAVY_HALO(subtitle_bg,text,subtitle_clip_halo_width,x,y,first_frame,last_frame,font,effects,size,text_rgb_color,halo_rgb_color,line_margin,spc)
 
 	subtitle_mask=subtitle_ex?subtitle_mask_ex:subtitle_mask_standard
 	subtitle_rgb=subtitle_ex?subtitle_rgb_ex:subtitle_rgb_standard

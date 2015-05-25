@@ -195,13 +195,17 @@ thumbnail=Trim(4439*frame_index_scale,-30*5*frame_index_scale)
 
 ######## Subtitle ########
 
-subtitle_x=50
-subtitle_y=400
+global subtitle_clip_halo_width=1
+global subtitle_clip_width=1280
+global subtitle_clip_height=720
+
+subtitle_x=50*1.5
+subtitle_y=400*1.5
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28
+global subtitle_size=28*1.5
 global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_purple,$3F)
 global subtitle_halo_color=color_white
 global subtitle_random_char_func="RANDOM_JIS_CHAR"
@@ -211,7 +215,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	halo_color=is_title?color_gold:subtitle_halo_color
 
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,x,y,start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # deinterlace
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func) # deinterlace
 }
 
 SUBTITLE_FX("GRAVITY ERROR//ç âπ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)

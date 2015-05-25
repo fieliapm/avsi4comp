@@ -41,16 +41,17 @@ AudioDub(koufuku_graffiti_tv_sponser_mute,bgm_48khz)
 
 ######## Subtitle ########
 
-#global subtitle_clip_width=1280
-#global subtitle_clip_height=720
+global subtitle_clip_halo_width=1
+global subtitle_clip_width=1280
+global subtitle_clip_height=720
 
-subtitle_x=50
-subtitle_y=400
+subtitle_x=50*1.5
+subtitle_y=400*1.5
 global subtitle_front_fade_count=8
 global subtitle_rear_fade_count=8
 global subtitle_font="MS Gothic"
 global subtitle_effects="bc"
-global subtitle_size=28
+global subtitle_size=28*1.5
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 
