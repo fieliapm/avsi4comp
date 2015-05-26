@@ -37,11 +37,11 @@ function UNDEFINED_(val "dummyArg"){
 }
 
 function MIN_(val a,val b){
-	return (a<b)?a:b
+	return a<b?a:b
 }
 
 function MAX_(val a,val b){
-	return (a>b)?a:b
+	return a>b?a:b
 }
 
 function CLAMP(val x,val low,val high){
@@ -151,7 +151,7 @@ function APPLY_RANGE(clip clip,int start_frame,int end_frame,string func){
 function GET_COLOR_A_2(int color){
 	divisor=$1000000
 	alpha=color/divisor
-	flag=(EUCLIDEAN_MOD(color,divisor)!=0)?1:0
+	flag=EUCLIDEAN_MOD(color,divisor)!=0?1:0
 	return color<0?$100+alpha-flag:alpha
 }
 
@@ -263,7 +263,7 @@ function RANDOM_STRING(string ref_string,string random_char_func){
 }
 
 function RANDOM_STRING_OUT_OF_FRAME_RANGE(string text,int current_frame,int start_frame,int end_frame,string random_char_func){
-	return (current_frame<start_frame||current_frame>end_frame)?RANDOM_STRING(text,random_char_func):text
+	return current_frame<start_frame||current_frame>end_frame?RANDOM_STRING(text,random_char_func):text
 }
 
 ######## Audio ########
@@ -336,7 +336,7 @@ function ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg
 function BOB_AND_KEEP_PARITY(clip interlaced_clip,float "b",float "c",float "height"){
 	interlaced_clip_parity=GetParity(interlaced_clip)
 	bob_deinterlaced_clip=Bob(interlaced_clip,b,c,height)
-	return (interlaced_clip_parity)?AssumeTFF(bob_deinterlaced_clip):AssumeBFF(bob_deinterlaced_clip)
+	return interlaced_clip_parity?AssumeTFF(bob_deinterlaced_clip):AssumeBFF(bob_deinterlaced_clip)
 }
 
 function PROGRESSIVE_TO_INTERLACE(clip clip){
@@ -392,7 +392,7 @@ function ASSUME_23_976P(clip clip){
 ######## Speed ########
 
 function CONVERT_FPS_AUTO_HQ(clip,fps){
-	return (Framerate(clip)/fps<=3.0/2.0)?ConvertFPS(clip,fps):ChangeFPS(clip,fps)
+	return Framerate(clip)/fps<=3.0/2.0?ConvertFPS(clip,fps):ChangeFPS(clip,fps)
 }
 
 function CLIP_SPEED(clip clip,float speed,bool smooth){
@@ -530,12 +530,12 @@ function LINEAR_MOVE(clip clip,string overlay_clip,string mode,int start_frame,i
 	extend=Default(extend,false)
 	overwrite=Default(overwrite,false)
 
-	overlay_clip_extend=((extend==true)?"BlankClip("+overlay_clip+",length="+String(start_frame)+",color=color_white)+":"")+overlay_clip
+	overlay_clip_extend=(extend==true?"BlankClip("+overlay_clip+",length="+String(start_frame)+",color=color_white)+":"")+overlay_clip
 
 	result_clip_containing_var=ScriptClip(clip,"Overlay("+overlay_clip_extend+",x=Round(LINEAR(_var,"+String(start_x)+","+String(end_x)+")),y=Round(LINEAR(_var,"+String(start_y)+","+String(end_y)+")),opacity=LINEAR(_var,"+String(start_opacity)+","+String(end_opacity)+"),mode="+DOUBLE_QUOTE_STRING(mode)+")")
 	result_clip=EVALUATE_VAR(result_clip_containing_var,"_var",start_frame,end_frame)
 
-	return (overwrite==true)?OVERWRITE_RANGE(clip,result_clip,start_frame,end_frame):result_clip
+	return overwrite==true?OVERWRITE_RANGE(clip,result_clip,start_frame,end_frame):result_clip
 }
 
 ######## Filter ########
@@ -626,10 +626,11 @@ function SUBTITLE_TEST(clip clip,string text,int "first_frame",int "last_frame",
 
 
 function _HEAVY_HALO_SUBTITLE(clip clip,string text,int offset_x,int offset_y,int halo_width,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",int "line_margin",int "spc"){
-	clip=SubtitleEx(clip,text,x+offset_x,y+offset_y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc)
-	offset_y=offset_x<halo_width?offset_y:offset_y+1
-	offset_x=offset_x<halo_width?offset_x+1:-halo_width
-	return offset_y>halo_width?clip:_HEAVY_HALO_SUBTITLE(clip,text,offset_x,offset_y,halo_width,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc)
+	return offset_y>halo_width \
+		?clip \
+		:_HEAVY_HALO_SUBTITLE( \
+			SubtitleEx(clip,text,x+offset_x,y+offset_y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc), \
+			text,offset_x<halo_width?offset_x+1:-halo_width,offset_x<halo_width?offset_y:offset_y+1,halo_width,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,line_margin,spc)
 }
 
 function HEAVY_HALO_SUBTITLE(clip clip,string text,int "halo_width",int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "halo_color",int "line_margin",int "spc"){
@@ -795,7 +796,7 @@ function RANDOM_JIS_CHAR(){
 
 function RANDOM_ASCII_CHAR(){
 	ascii_code=PSEUDO_RANDOM($7E-$21)+$21
-	ascii_code=ascii_code+((ascii_code>=$7C)?1:0)
+	ascii_code=ascii_code+(ascii_code>=$7C?1:0)
 	return Chr(ascii_code)
 }
 

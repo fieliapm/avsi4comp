@@ -31,19 +31,17 @@ TCPSource("localhost",22051,"None")
 
 ######## Subtitle ########
 
+global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
 global subtitle_x=50*2.25
 global subtitle_y=400*2.25
-#global subtitle_x=50
-#global subtitle_y=400
 global subtitle_front_fade_count=18
 global subtitle_rear_fade_count=18
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=24*2.25
-#global subtitle_size=24
 global subtitle_text_color=color_white
 global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_lime,$3F)
 global subtitle_random_char_func="RANDOM_ASCII_CHAR"
