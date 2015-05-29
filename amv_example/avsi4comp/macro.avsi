@@ -641,7 +641,7 @@ function HEAVY_HALO_SUBTITLE(clip clip,string text,int "halo_width",int "x",int 
 
 	max_alpha=Float($FF)
 	halo_alpha=GET_SUBTITLE_COLOR_A(halo_color)
-	halo_alpha=$FF-Round(Pow(Float($FF-halo_alpha)/max_alpha,1.0/Float((halo_width*4)+1))*max_alpha)
+	halo_alpha=$FF-Round(Pow(Float($FF-halo_alpha)/max_alpha,1.0/Float((halo_width*2)+1))*max_alpha)
 
 	text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_black,$0)
 	halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(halo_color,halo_alpha)
