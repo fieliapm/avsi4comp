@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Function ########
 
 global slow_motion_fps=6

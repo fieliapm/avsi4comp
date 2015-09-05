@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Anime Online (1080P) ########
 
 next_a_class_full_jp=FFMS2_VIDEO_SOURCE("src\next_a-class\anime\full\japanese\next_a-class_full_jp_1080p.mp4")

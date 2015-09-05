@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## PV Online (640*360) ########
 
 video_fps="ntsc_video"

@@ -20,11 +20,13 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
 Import("..\avsi4comp\macro.avsi")
 
-#Import("Pantarheon3D.avsi")
-
-SetMemoryMax(64)
+### inherit end ###
 
 ######## Function ########
 
@@ -166,16 +168,21 @@ puzzle_and_dragons_z_op_mute=puzzle_and_dragons_z_op_t01 \
 	+puzzle_and_dragons_z_op_t10 \
 	+puzzle_and_dragons_z_op_t11+puzzle_and_dragons_z_op_t12
 
-######## Music ########
-
-bgm_48khz=SSRC(WAVSource("src\nakagawa_shouko-2014_04_02-9lives-cd-03.wav"),48000)
-AudioDub(puzzle_and_dragons_z_op_mute,bgm_48khz)
+puzzle_and_dragons_z_op_mute
 
 
 
 thumbnail=Trim(6564,-30*5)
 
+### export clip: thumbnail
+
+### prefetch: 5,2
+
+### ###
+
 ######## Subtitle ########
+
+### inherit start ###
 
 subtitle_x=50
 subtitle_y=400
@@ -197,7 +204,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip,"SUBTITLE_FX_PULL_IN_PULL_OUT("+DOUBLE_QUOTE_STRING(text)+","+String(x)+","+String(y)+","+String(start_frame)+","+String(end_frame)+",subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,"+String(text_color)+","+String(halo_color)+")")
 }
 
-SUBTITLE_FX("さかさま世界//中川翔子|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7395,7650,true)
+### inherit end ###
 
 SUBTITLE_FX("きっと誰かが こんな風に呟くだろう",subtitle_x,subtitle_y,472,647)
 SUBTITLE_FX("どうして失くしながら 歩き続けるの?",subtitle_x,subtitle_y-subtitle_size,655,832)
@@ -217,6 +224,12 @@ SUBTITLE_FX("そして誰もが もう一度夢見るだろう",subtitle_x,subtitle_y,2692,2871)
 SUBTITLE_FX("どうして出会えたのに 探し続けるの?",subtitle_x,subtitle_y-subtitle_size,2877,3055)
 SUBTITLE_FX("そして僕らは 何度だって笑い飛ばす",subtitle_x,subtitle_y,3059,3228)
 SUBTITLE_FX("何もかもがきっと この路の上にある",subtitle_x,subtitle_y-subtitle_size,3253,3422)
+
+### pass clip: thumbnail
+
+### prefetch: 5,2
+
+### ###
 
 SUBTITLE_FX("見せかけじゃなくて 生き抜いてやりたいなら",subtitle_x,subtitle_y,3426,3617)
 SUBTITLE_FX("あの夜空の果てまで 彩られた花火の",subtitle_x,subtitle_y-subtitle_size,3621,3795)
@@ -239,9 +252,16 @@ SUBTITLE_FX("僕らはみんな 変わり続けたいのさ",subtitle_x,subtitle_y-subtitle_siz
 SUBTITLE_FX("目に見えないものだけ 信じてみるよ",subtitle_x,subtitle_y,6748,6929)
 SUBTITLE_FX("何度でも つぎの奇跡へ",subtitle_x,subtitle_y-subtitle_size,6942,7132)
 
+SUBTITLE_FX("さかさま世界//中川翔子|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7395,7650,true)
+
+######## Music ########
+
+bgm_48khz=SSRC(WAVSource("src\nakagawa_shouko-2014_04_02-9lives-cd-03.wav"),48000)
+AudioDub(bgm_48khz)
 
 
-introduction_3d=BlankClip(puzzle_and_dragons_z_op_digest_3d,length=30*14,color=color_black)
+
+introduction_3d=BlankClip(last,length=30*14,color=color_black)
 introduction_3d=SUBTITLE_FX(introduction_3d,"このムービーはアナグリフ式3Dです。|最高の3D視聴体験を得るために、|レッド/シアンの3Dメガネを着用してください。||
 本片為紅藍3D立體版影片。|請配戴紅藍3D立體眼鏡以獲得最佳3D觀賞體驗。||
 This movie is in anaglyph 3D format.|Please wear red/cyan 3D glasses|to get the best 3D viewing experience.",subtitle_x,subtitle_x,30*2,30*12)
@@ -251,6 +271,8 @@ introduction_3d++last
 
 
 #ConvertToRGB32(thumbnail)
+
+""")
 
 LeftRight3DToRCAnaglyph()
 

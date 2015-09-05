@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Game (1280*720) ########
 
 final_fantasy_14_shinsei_eorzea_game_op=GetChannel(SSRC(FFMS2_VIDEO_SOURCE("src\00001.dat",fpsnum=30000,fpsden=1001),48000),1,2)

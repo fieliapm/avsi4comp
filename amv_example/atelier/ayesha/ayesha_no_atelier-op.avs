@@ -22,8 +22,6 @@
 
 Import("..\..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## PV Online (720P) ########
 
 ayesha_op=AssumeFPS(FFMS2_VIDEO_SOURCE("src\official\special\movie\【アーシャのアトリエ】オープニングムービー.720p.mp4"),"ntsc_video")

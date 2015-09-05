@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Source Function ########
 
 function FFMS2_VIDEO_SOURCE_ALIGN_1920X1080(string filename){

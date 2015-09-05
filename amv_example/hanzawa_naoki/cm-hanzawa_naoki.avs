@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## TV (1920*1080) ########
 
 hanzawa_naoki_tv_09=FFMS2_VIDEO_SOURCE("src\hanzawa_naoki\【国内ドラマ】半沢直樹 第09話｢最終決戦! 出向をかけた金融庁検査｣(x264 720p aac).mp4")

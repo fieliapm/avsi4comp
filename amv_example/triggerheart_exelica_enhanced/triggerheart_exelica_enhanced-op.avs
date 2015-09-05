@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## DC (720*480) ########
 
 triggerheart_exelica_dc_pv_video=VOB_MPEG2_VIDEO_SOURCE("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv.d2v",upConv=1)

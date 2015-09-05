@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## DVD (480P) ########
 
 ys_special_collection_section_03=VOB_MPEG2_VIDEO_SOURCE("src\ys_special_collection\VTS_01_3.d2v",upConv=1)

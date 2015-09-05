@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## ¢ŠE–¼ìŒ€ê ########
 
 global subtitle_clip_width=640

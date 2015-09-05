@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## BD (1080P) ########
 
 yuruyuri_season_02_tv_01=FFMS2_VIDEO_SOURCE("src\anime\ゆるゆり♪♪ 第01話 「帰ってきた主人公」 (TX 1280x720 x264 AAC 10bit).mp4")

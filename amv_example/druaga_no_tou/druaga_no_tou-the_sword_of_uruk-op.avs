@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## TV (720P) ########
 
 fpsnum=30000

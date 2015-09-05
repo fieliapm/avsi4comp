@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## BD (1080P) ########
 
 yuruyuri_season_01_tv_clean_op=FFMS2_VIDEO_SOURCE("src\anime\bd\special\yuruyuri-season_01-bd-vol01-op.mp4")

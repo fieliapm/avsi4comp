@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Pass-02 ########
 
 #OpenDMLSource("koukaku_kidoutai_sac_2nd-op-bs-pass01.avi")

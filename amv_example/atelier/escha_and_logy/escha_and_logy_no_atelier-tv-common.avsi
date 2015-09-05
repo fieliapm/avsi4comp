@@ -22,8 +22,6 @@
 
 Import("..\..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## TV (1920*1080) ########
 
 escha_and_logy_no_atelier_tv_01=FFMS2_VIDEO_SOURCE("src\anime\(2014Q2) エスカ＆ロジーのアトリエ～黄昏の空の錬金術士～ 第01話 「ようこそアトリエへ！」 (MX 1280x720 x264-10b AAC).mp4")

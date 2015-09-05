@@ -20,7 +20,7 @@
 
 
 
-#SetMemoryMax(64)
+SetMemoryMax(64)
 
 ######## Import ########
 

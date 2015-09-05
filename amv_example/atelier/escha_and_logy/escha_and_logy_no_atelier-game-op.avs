@@ -22,8 +22,6 @@
 
 Import("..\..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Game (1280*720) ########
 
 escha_and_logy_no_atelier_game_op=SSRC(FFMS2_VIDEO_SOURCE("src\official-game\movie\【エスカ＆ロジー】オープニングムービー.720p.mp4",fpsnum=30000,fpsden=1001),48000)

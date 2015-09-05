@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## BD (1080P) ########
 
 jinrui_ha_suitaishimashita_tv_01=AssumeFPS(FFMS2_VIDEO_SOURCE("src\anime\人類は衰退しました 第01話 「妖精さんの、ひみつのこうじょう」 (TVS 1280x720 x264 AAC 10bit)ver2.mp4"),"ntsc_film")

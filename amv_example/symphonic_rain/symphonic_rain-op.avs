@@ -22,7 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
 #LoadLibrary("avslib")
 
 ######## Win32 Movie (640*480) ########
@@ -99,9 +98,12 @@ function RIPPLE_EFFECT(clip clip,int x,int y,int start_frame){
 	end_frame=start_frame+ripple_effect_length-1
 
 	clip_rgba=ConvertToRGB32(clip)
-	clip_containing_var=ScriptClip(clip_rgba,"SUBTITLE_ZOOM("+THREE_DOUBLE_QUOTE_STRING("Åõ")+",320,240-160,"+String(start_frame)+","+String(end_frame)+",subtitle_font,"+THREE_DOUBLE_QUOTE_STRING("c")+",256,SCALE_SUBTITLE_COLOR_ALPHA(second_subtitle_text_color,alpha_factor),OVERWRITE_COLOR_ALPHA(second_subtitle_text_color,$FF),dstx="+String(x)+",dsty="+String(y)+",factor=Spline(current_frame,-1,0.01,"+String(start_frame)+",0.01,"+String(end_frame)+",5.0,Framecount(),5.0,cubic=false))")
-	clip_with_ripple_effect=FrameEvaluate(clip_containing_var,"alpha_factor=Spline(current_frame,-1,1.0,"+String(start_frame)+",1.0,"+String(end_frame)+",0.0,Framecount(),0.0,cubic=false)")
-	return OVERWRITE_RANGE(clip_rgba,clip_with_ripple_effect,start_frame,end_frame)
+	clip_with_static_ripple=_SUBTITLE_FX_PRE(clip_rgba,"Åõ",320,240-165,start_frame,end_frame,subtitle_font,"c",256,second_subtitle_text_color,OVERWRITE_SUBTITLE_COLOR_ALPHA(second_subtitle_text_color,$0))
+
+	clip_with_faded_ripple=ScriptClip(clip_with_static_ripple,"RGBAdjust(a=Spline(current_frame,-1,1.0,"+String(start_frame)+",1.0,"+String(end_frame)+",0.0,Framecount(),0.0,cubic=false))")
+	clip_with_ripple_effect=ScriptClip(clip_with_faded_ripple,"FAST_ZOOM(dstx="+String(x)+",dsty="+String(y)+",factor=Spline(current_frame,-1,0.01,"+String(start_frame)+",0.01,"+String(end_frame)+",5.0,Framecount(),5.0,cubic=false))")
+
+	return _SUBTITLE_FX_POST(clip_rgba,clip_with_ripple_effect,start_frame,end_frame)
 }
 
 ######## Win32 CG (640*480) ########

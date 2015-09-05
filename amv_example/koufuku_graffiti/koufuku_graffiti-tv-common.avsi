@@ -22,8 +22,6 @@
 
 Import("..\avsi4comp\macro.avsi")
 
-SetMemoryMax(64)
-
 ######## Function ########
 
 function MOVE_CG(clip cg,int dir_x,int dir_y,float move_offset,float scale){

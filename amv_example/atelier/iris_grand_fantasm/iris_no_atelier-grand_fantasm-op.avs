@@ -22,8 +22,6 @@
 
 Import("..\..\avsi4comp\macro.avsi")
 
-#SetMemoryMax(64)
-
 ######## YouTube (640*480) ########
 
 iris_no_atelier_grand_fantasm_op_360p=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001),48000)
