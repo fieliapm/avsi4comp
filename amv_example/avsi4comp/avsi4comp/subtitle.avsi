@@ -121,9 +121,9 @@ function _SUBTITLE_FX_PRE(clip clip_rgba,string text,int "x",int "y",int "first_
 
 function _SUBTITLE_FX_POST(clip clip_rgba,clip subtitle_rgba,int first_frame,int last_frame){
 	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba,clip_rgba)
-	clip_with_subtitle=Layer(clip_rgba,subtitle_rgba_resized,"Add")
-	return OVERWRITE_RANGE(clip_rgba,clip_with_subtitle,first_frame,last_frame)
-	#return ApplyRange(clip_rgba,first_frame,last_frame,"Layer",subtitle_rgba_resized,"Add")
+	#clip_with_subtitle=Layer(clip_rgba,subtitle_rgba_resized,"Add")
+	#return OVERWRITE_RANGE(clip_rgba,clip_with_subtitle,first_frame,last_frame)
+	return ApplyRange(clip_rgba,first_frame,last_frame,"Layer",subtitle_rgba_resized,"Add")
 }
 
 
