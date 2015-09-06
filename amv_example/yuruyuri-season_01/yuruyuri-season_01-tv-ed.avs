@@ -147,7 +147,18 @@ omake_clip=omake_clip_part01+omake_clip_part02+omake_clip_part03+omake_clip_part
 
 
 
-function FLIP_PAGE(clip clip1,clip clip2,int num_frames){
+function _FLIP_PAGE(clip left,clip right){
+	length=Framecount(left)
+	left_height=Height(left)
+
+	return ConvertToYV12(TRANSFORM(left,right,srcx="0",srcy="0",dstx="0",dsty="-Float("+String(left_height)+")*Pow("+String(length)+"-1-n,2)/Pow("+String(length)+"-1,2)"))
+}
+
+function FLIP_PAGE(clip left,clip right,int length){
+	return TRANSITION(left,right,length,"_FLIP_PAGE(left,right)")
+}
+
+function FLIP_PAGE_2(clip clip1,clip clip2,int num_frames){
 	clip2_start=Framecount(clip1)-num_frames
 	clip1_extend=clip1+BlankClip(clip1,length=Framecount(clip2)-num_frames)
 	clip2_extend=BlankClip(clip2,length=clip2_start)+clip2
