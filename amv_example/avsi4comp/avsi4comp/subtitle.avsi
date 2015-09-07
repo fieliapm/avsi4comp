@@ -69,7 +69,13 @@ function SUBTITLE_WITH_HEAVY_HALO(clip clip,string text,int "halo_width",int "x"
 	halo_color_per_pass=_GET_HALO_COLOR_PER_PASS(halo_width,halo_color)
 
 	subtitle_text=SubtitleEx(clip,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color_per_pass,line_margin,spc)
-	return HEAVY_HALO_SUBTITLE(subtitle_text,text,halo_width,x,y,first_frame,last_frame,font,effects,size,halo_color_per_pass,line_margin,spc)
+	#return HEAVY_HALO_SUBTITLE(subtitle_text,text,halo_width,x,y,first_frame,last_frame,font,effects,size,halo_color_per_pass,line_margin,spc)
+	return halo_width<1 \
+		?subtitle_text \
+		:ScriptClip(subtitle_text,"HEAVY_HALO_SUBTITLE("+THREE_DOUBLE_QUOTE_STRING(text)+","+String(halo_width)+"," \
+			+OPTIONAL_ARG_TO_STRING(x)+","+OPTIONAL_ARG_TO_STRING(y)+","+OPTIONAL_ARG_TO_STRING(first_frame)+","+OPTIONAL_ARG_TO_STRING(last_frame)+"," \
+			+OPTIONAL_STRING_ARG(font)+","+OPTIONAL_STRING_ARG(effects)+","+OPTIONAL_ARG_TO_STRING(size)+","+OPTIONAL_ARG_TO_STRING(halo_color_per_pass)+"," \
+			+OPTIONAL_ARG_TO_STRING(line_margin)+","+OPTIONAL_ARG_TO_STRING(spc)+")")
 }
 
 ######## Subtitle Clip ########
