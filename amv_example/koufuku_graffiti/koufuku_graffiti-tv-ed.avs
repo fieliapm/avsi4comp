@@ -20,6 +20,14 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
+Import("..\avsi4comp\macro.avsi")
+
+### inherit end ###
+
 Import("koufuku_graffiti-tv-common.avsi")
 
 ######## Function ########
@@ -110,21 +118,17 @@ koufuku_graffiti_tv_ed_mute=koufuku_graffiti_tv_ed_t01 \
 	+koufuku_graffiti_tv_ed_t09+koufuku_graffiti_tv_ed_t10 \
 	+koufuku_graffiti_tv_ed_t11+koufuku_graffiti_tv_ed_t12
 
-######## Music ########
+koufuku_graffiti_tv_ed_mute
 
-bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-ed-01.wav"),48000)
+### export clip: koufuku_graffiti_tv_ed_mute
 
-bgm_48khz_nico=SSRC(FFMS2_VIDEO_SOURCE("src\koufuku_graffiti-tv-ed-miku.mp4"),48000) # for uploading to nicovideo
-bgm_48khz_nico=Trim(bgm_48khz_nico,47,0)
+### prefetch: 5,2
 
-AudioDub(koufuku_graffiti_tv_ed_mute,bgm_48khz)
-#AudioDub(koufuku_graffiti_tv_ed_mute,bgm_48khz_nico)
-
-
-
-thumbnail=Trim(1050,-24*5)
+### ###
 
 ######## Subtitle ########
+
+### inherit start ###
 
 global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
@@ -153,9 +157,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color)
 }
 
-SUBTITLE_FX("笑顔になる//      と      (        と          )|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,5494,5738,is_title=true)
-SUBTITLE_FX("            リョウ         佐藤利奈",subtitle_x,subtitle_y-subtitle_size,5494,5738,1)
-SUBTITLE_FX("                    きりん           大亀あすか",subtitle_x,subtitle_y-subtitle_size,5494,5738,2)
+### inherit end ###
 
 SUBTITLE_FX("コトコトコトコトコト",subtitle_x,subtitle_y,307,366,1)
 SUBTITLE_FX("グツグツグツグツ…グゥ",subtitle_x,subtitle_y,367,435,2)
@@ -181,6 +183,12 @@ SUBTITLE_FX("ほら",subtitle_x,subtitle_y,1574,1718,1)
 SUBTITLE_FX("     もう",subtitle_x,subtitle_y,1574,1718,2)
 SUBTITLE_FX("          いやーん 待てない!",subtitle_x,subtitle_y,1574,1718,3)
 SUBTITLE_FX("「シアワセ いただきます!」",subtitle_x,subtitle_y,1719,1819,3)
+
+### pass clip: koufuku_graffiti_tv_ed_mute
+
+### prefetch: 5,2
+
+### ###
 
 SUBTITLE_FX("もぐもぐもぐもぐもぐ",subtitle_x,subtitle_y,2096,2156,1)
 SUBTITLE_FX("ガツガツガツガツ…ガッツ！",subtitle_x,subtitle_y,2157,2220,2)
@@ -208,6 +216,12 @@ SUBTITLE_FX("          いやーん 待てない!",subtitle_x,subtitle_y,3364,3502,3)
 SUBTITLE_FX("    ほしみっつ",subtitle_x,subtitle_y,3509,3621,3,is_furigana=true)
 SUBTITLE_FX("「☆☆☆ いただきます!」",subtitle_x,subtitle_y,3509,3621,3)
 
+### pass clip: koufuku_graffiti_tv_ed_mute
+
+### prefetch: 5,2
+
+### ###
+
 SUBTITLE_FX("例えるならショートケーキに",subtitle_x,subtitle_y,3655,3791,1)
 SUBTITLE_FX("                           苺がない",subtitle_x,subtitle_y,3655,3791,2)
 SUBTITLE_FX("美味しいけど寂しい",subtitle_x,subtitle_y,3792,3928,1)
@@ -227,9 +241,32 @@ SUBTITLE_FX("     もう",subtitle_x,subtitle_y,5008,5143,2)
 SUBTITLE_FX("          はぁ。 終わる",subtitle_x,subtitle_y,5008,5143,3)
 SUBTITLE_FX("満腹で「ごちそうさま!」",subtitle_x,subtitle_y,5153,5248,3)
 
+SUBTITLE_FX("笑顔になる//      と      (        と          )|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,5494,5738,is_title=true)
+SUBTITLE_FX("            リョウ         佐藤利奈",subtitle_x,subtitle_y-subtitle_size,5494,5738,1)
+SUBTITLE_FX("                    きりん           大亀あすか",subtitle_x,subtitle_y-subtitle_size,5494,5738,2)
+
+######## Thumbnail ########
+
+is_thumbnail=false
+
+is_thumbnail?koufuku_graffiti_tv_ed_mute:last
+
+######## Music ########
+
+bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-ed-01.wav"),48000)
+
+bgm_48khz_nico=SSRC(FFMS2_VIDEO_SOURCE("src\koufuku_graffiti-tv-ed-miku.mp4"),48000) # for uploading to nicovideo
+bgm_48khz_nico=Trim(bgm_48khz_nico,47,0)
+
+AudioDub(bgm_48khz)
+#AudioDub(bgm_48khz_nico)
 
 
-#thumbnail
+
+thumbnail=Trim(1050,-24*5)
+is_thumbnail?thumbnail:last
+
+""")
 
 ######## Post Processing ########
 

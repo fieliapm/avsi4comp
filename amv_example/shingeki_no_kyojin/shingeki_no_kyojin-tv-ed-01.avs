@@ -20,6 +20,14 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
+Import("..\avsi4comp\macro.avsi")
+
+### inherit end ###
+
 Import("shingeki_no_kyojin-tv-common-01.avsi")
 
 ######## Pre Combine ########
@@ -37,6 +45,8 @@ shingeki_no_kyojin_tv_02_eren_mikasa_armin_farmimg_extend=shingeki_no_kyojin_tv_
 # shingeki_no_kyojin_tv_clean_ed_01_02 6091
 # shingeki_no_kyojin_tv_clean_ed_01_03 6219
 # shingeki_no_kyojin_tv_clean_ed_01_04 6776
+
+
 
 fade_length=24
 
@@ -59,14 +69,27 @@ shingeki_no_kyojin_tv_ed_01_t08=TRIM_MIDDLE_CLIP(SLOW_MOTION_WITH_CLIP_SPEED(CLI
 shingeki_no_kyojin_tv_ed_01_t09=PSEUDO_COLOR_PAPER(TRIM_MIDDLE_CLIP(MULTIPASS_PENCIL_FILTER_DEFAULT(shingeki_no_kyojin_tv_05_eren_mikasa_armin_in_class),17+116))+shingeki_no_kyojin_tv_clean_ed_01_02+shingeki_no_kyojin_tv_clean_ed_01_03
 shingeki_no_kyojin_tv_ed_01_t10=PSEUDO_COLOR_PAPER(TRIM_MIDDLE_CLIP(MULTIPASS_PENCIL_FILTER_DEFAULT(shingeki_no_kyojin_tv_04_104th_corps_graduates),271))+shingeki_no_kyojin_tv_clean_ed_01_04+BlankClip(shingeki_no_kyojin_tv_clean_ed_01,length=24*5,color=color_black)
 
+
+
 shingeki_no_kyojin_tv_ed_01_mute=shingeki_no_kyojin_tv_ed_01_t01+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(PSEUDO_COLOR_PAPER(shingeki_no_kyojin_tv_ed_01_t02+shingeki_no_kyojin_tv_ed_01_t03),PSEUDO_COLOR_GRAY(shingeki_no_kyojin_tv_ed_01_t04),fade_length,fade_length)+shingeki_no_kyojin_tv_ed_01_t05 \
 	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(PSEUDO_COLOR_PAPER(shingeki_no_kyojin_tv_ed_01_t06),shingeki_no_kyojin_tv_ed_01_t07,fade_length,fade_length),DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_ed_01_t08,shingeki_no_kyojin_tv_ed_01_t09,fade_length,fade_length),fade_length,fade_length)+shingeki_no_kyojin_tv_ed_01_t10
+
+shingeki_no_kyojin_tv_ed_01_mute
+
+### prefetch: 5,2
+
+### ###
+
+""")
 
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\shingeki_no_kyojin-tv-ed-01-cd-01.wav"),48000)
-AudioDub(shingeki_no_kyojin_tv_ed_01_mute,bgm_48khz)
-#MixAudio(shingeki_no_kyojin_tv_ed_01_mute,bgm_48khz,3.0,0.5)
+AudioDub(bgm_48khz)
+
+
+
+thumbnail=Trim(6385,-24*5)
 
 ######## Subtitle ########
 
@@ -129,6 +152,10 @@ SUBTITLE_FX("まだ生きていること「何故」と問うばかりで…",subtitle_x,subtitle_y,6
 SUBTITLE_FX("嗚呼ボクたちは この強さ 弱さで",subtitle_x,subtitle_y,6223,6351)
 SUBTITLE_FX("何を護るのだろう もう理性など",subtitle_x,subtitle_y,6358,6489)
 SUBTITLE_FX("無いならば",subtitle_x,subtitle_y,6494,6586)
+
+
+
+#thumbnail
 
 ######## Post Processing ########
 

@@ -20,6 +20,14 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
+Import("..\avsi4comp\macro.avsi")
+
+### inherit end ###
+
 Import("koufuku_graffiti-tv-common.avsi")
 
 ######## Pre Combine ########
@@ -82,21 +90,17 @@ koufuku_graffiti_tv_op_mute=koufuku_graffiti_tv_op_t01+FADE_IN_WITH_BRIGHTNESS_O
 	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(koufuku_graffiti_tv_op_t06,fade_length),koufuku_graffiti_tv_op_t07,fade_length,fade_length), \
 	koufuku_graffiti_tv_op_t08,fade_length,fade_length)+koufuku_graffiti_tv_op_t09
 
-######## Music ########
+koufuku_graffiti_tv_op_mute
 
-bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-op-01.wav"),48000)
+### export clip: koufuku_graffiti_tv_op_mute
 
-bgm_48khz_nico=SSRC(FFMS2_VIDEO_SOURCE("src\koufuku_graffiti-tv-op-miku.mp4"),48000) # for uploading to nicovideo
-bgm_48khz_nico=Trim(bgm_48khz_nico,2,0)
+### prefetch: 5,2
 
-AudioDub(koufuku_graffiti_tv_op_mute,bgm_48khz)
-#AudioDub(koufuku_graffiti_tv_op_mute,bgm_48khz_nico)
-
-
-
-thumbnail=Trim(6181,-24*5)
+### ###
 
 ######## Subtitle ########
+
+### inherit start ###
 
 global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
@@ -120,24 +124,24 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
 }
 
-SUBTITLE_FX("幸せについて私が知っている5つの方法//坂本真綾|- by fielia@AVISynth",-subtitle_x,subtitle_x,6472,6562,true)
+### inherit end ###
 
-SUBTITLE_FX(""""幸せ"という気持ちに最初に気づいた人が""",subtitle_x,subtitle_y,137,272)
+SUBTITLE_FX(""+DOUBLE_QUOTE_STRING("幸せ")+"という気持ちに最初に気づいた人が",subtitle_x,subtitle_y,137,272)
 SUBTITLE_FX("名前をつけたのかな それは",subtitle_x,subtitle_y,287,369)
 SUBTITLE_FX("誰かに伝えたいほど不思議でとても愛しい",subtitle_x,subtitle_y,383,514)
 SUBTITLE_FX("そんな感情だから",subtitle_x,subtitle_y,529,599)
 SUBTITLE_FX("成層圏の彼方まで舞い上がってしまうくらいに",subtitle_x,subtitle_y,609,837)
 
-SUBTITLE_FX("""目に見えない"幸せ"は 心のどこかからやって来るの""",subtitle_x,subtitle_y,841,1118)
+SUBTITLE_FX("目に見えない"+DOUBLE_QUOTE_STRING("幸せ")+"は 心のどこかからやって来るの",subtitle_x,subtitle_y,841,1118)
 SUBTITLE_FX("少し恥ずかしがりやな そのしっぽ 離さないでね",subtitle_x,subtitle_y,1119,1469)
 
-SUBTITLE_FX(""""淋しい"という気持ちに最初に気づいた人は""",subtitle_x,subtitle_y,1498,1633)
+SUBTITLE_FX(""+DOUBLE_QUOTE_STRING("淋しい")+"という気持ちに最初に気づいた人は",subtitle_x,subtitle_y,1498,1633)
 SUBTITLE_FX("恋をしていたのかな きっと",subtitle_x,subtitle_y,1647,1730)
 SUBTITLE_FX("誰か大切な人にとなりにいて欲しくて",subtitle_x,subtitle_y,1743,1875)
 SUBTITLE_FX("大好きになったから",subtitle_x,subtitle_y,1892,1962)
 SUBTITLE_FX("エメラルドグリーンの海に飛び込んでしまいたいほど",subtitle_x,subtitle_y,1970,2200)
 
-SUBTITLE_FX("""手にとれない"幸せ"は 誰かと一緒にいると分かるの""",subtitle_x,subtitle_y,2202,2479)
+SUBTITLE_FX("手にとれない"+DOUBLE_QUOTE_STRING("幸せ")+"は 誰かと一緒にいると分かるの",subtitle_x,subtitle_y,2202,2479)
 SUBTITLE_FX("こぼれそうなその笑顔 うれしくて 触れたいくらい",subtitle_x,subtitle_y,2481,2833)
 
 SUBTITLE_FX("会いたい日は 会いたいって言おうよ",subtitle_x,subtitle_y,2864,2976)
@@ -145,12 +149,18 @@ SUBTITLE_FX("泣きたい夜は 声あげて泣こう",subtitle_x,subtitle_y,3002,3112)
 SUBTITLE_FX("美味しい時は 美味しいって言おうよ",subtitle_x,subtitle_y,3143,3252)
 SUBTITLE_FX("大好きな君に",subtitle_x,subtitle_y,3256,3425)
 
+### pass clip: koufuku_graffiti_tv_op_mute
+
+### prefetch: 5,2
+
+### ###
+
 SUBTITLE_FX("そしていつか たくさんのハッピーを",subtitle_x,subtitle_y,3661,3805)
 SUBTITLE_FX("クッキーみたいに バラまいて 誰かのこと",subtitle_x,subtitle_y,3811,3948)
 SUBTITLE_FX("もっと幸せにできたなら 私も幸せになれる",subtitle_x,subtitle_y,3953,4304)
 SUBTITLE_FX("もっと きっと もっと",subtitle_x,subtitle_y,4310,4615)
 
-SUBTITLE_FX("""目に見えない"幸せ"は 心のどこかからやって来るの""",subtitle_x,subtitle_y,4747,5024)
+SUBTITLE_FX("目に見えない"+DOUBLE_QUOTE_STRING("幸せ")+"は 心のどこかからやって来るの",subtitle_x,subtitle_y,4747,5024)
 SUBTITLE_FX("少し恥ずかしがりやな そのしっぽ 離さずいてね",subtitle_x,subtitle_y,5026,5389)
 
 SUBTITLE_FX("会いたい日は 会いたいって言おうよ",subtitle_x,subtitle_y,5410,5526)
@@ -158,12 +168,33 @@ SUBTITLE_FX("泣きたい夜は 声あげて泣こう",subtitle_x,subtitle_y,5548,5658)
 SUBTITLE_FX("美味しい時は 美味しいって言おうよ",subtitle_x,subtitle_y,5689,5798)
 SUBTITLE_FX("大好きな君に",subtitle_x,subtitle_y,5803,5936)
 SUBTITLE_FX("もっと素直になれたなら",subtitle_x,subtitle_y,5949,6175)
-SUBTITLE_FX("""幸せな日は "幸せ"って言おうよ""",subtitle_x,subtitle_y,6176,6286)
+SUBTITLE_FX("幸せな日は "+DOUBLE_QUOTE_STRING("幸せ")+"って言おうよ",subtitle_x,subtitle_y,6176,6286)
 SUBTITLE_FX("大好きな君に",subtitle_x,subtitle_y,6291,6501)
 
+SUBTITLE_FX("幸せについて私が知っている5つの方法//坂本真綾|- by fielia@AVISynth",-subtitle_x,subtitle_x,6472,6562,true)
+
+######## Thumbnail ########
+
+is_thumbnail=false
+
+is_thumbnail?koufuku_graffiti_tv_op_mute:last
+
+######## Music ########
+
+bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-op-01.wav"),48000)
+
+bgm_48khz_nico=SSRC(FFMS2_VIDEO_SOURCE("src\koufuku_graffiti-tv-op-miku.mp4"),48000) # for uploading to nicovideo
+bgm_48khz_nico=Trim(bgm_48khz_nico,2,0)
+
+AudioDub(bgm_48khz)
+#AudioDub(bgm_48khz_nico)
 
 
-#thumbnail
+
+thumbnail=Trim(6181,-24*5)
+is_thumbnail?thumbnail:last
+
+""")
 
 ######## Post Processing ########
 

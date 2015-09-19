@@ -20,6 +20,7 @@
 
 
 
+Import("..\avsi4comp\macro.avsi")
 Import("shingeki_no_kyojin-tv-common-01.avsi")
 
 ######## Source ########

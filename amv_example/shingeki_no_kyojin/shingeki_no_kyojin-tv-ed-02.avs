@@ -20,6 +20,14 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
+Import("..\avsi4comp\macro.avsi")
+
+### inherit end ###
+
 Import("shingeki_no_kyojin-tv-common-02.avsi")
 
 ######## Pre Combine ########
@@ -65,10 +73,18 @@ shingeki_no_kyojin_tv_ed_02_mute=shingeki_no_kyojin_tv_ed_02_t01+ConvertToYV12(O
 	shingeki_no_kyojin_tv_ed_02_t06,fade_length,fade_length)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_ed_02_t07,fade_length) \
 	+shingeki_no_kyojin_tv_ed_02_t08))+shingeki_no_kyojin_tv_ed_02_t09
 
+shingeki_no_kyojin_tv_ed_02_mute
+
+### prefetch: 5,2
+
+### ###
+
+""")
+
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\shingeki_no_kyojin-tv-ed-02-01.wav"),48000)
-AudioDub(shingeki_no_kyojin_tv_ed_02_mute,bgm_48khz)
+AudioDub(bgm_48khz)
 
 
 

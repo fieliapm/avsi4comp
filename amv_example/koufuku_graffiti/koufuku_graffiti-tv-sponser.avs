@@ -20,6 +20,7 @@
 
 
 
+Import("..\avsi4comp\macro.avsi")
 Import("koufuku_graffiti-tv-common.avsi")
 
 ######## Pre Combine ########
@@ -38,6 +39,10 @@ koufuku_graffiti_tv_sponser_mute=koufuku_graffiti_tv_sponser_t01
 
 bgm_48khz=SSRC(WAVSource("src\koufuku_graffiti-tv-ed-02.wav"),48000)
 AudioDub(koufuku_graffiti_tv_sponser_mute,bgm_48khz)
+
+
+
+thumbnail=Trim(0,-24*5)
 
 ######## Subtitle ########
 
@@ -70,6 +75,10 @@ koufuku_graffiti_tv_sponser_frame_count=Framecount(koufuku_graffiti_tv_sponser_m
 SUBTITLE_FX("ô‚²‚Í‚ñ‚Ì—ûK//ƒŠƒ‡ƒE&‚«‚è‚ñ(²“¡—˜“Ş&‘å‹T‚ ‚·‚©)|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,0,koufuku_graffiti_tv_sponser_frame_count,true)
 
 SUBTITLE_FX("’ñ‹Ÿ||’†‰›“®‰æ•”||ô’‹‚²‚Í‚ñ‚ğH‚×‚æ‚¤‚æô",subtitle_clip_width/2,100*2.25,0,koufuku_graffiti_tv_sponser_frame_count)
+
+
+
+#thumbnail
 
 ######## Post Processing ########
 

@@ -20,8 +20,6 @@
 
 
 
-Import("..\avsi4comp\macro.avsi")
-
 ######## Function ########
 
 global slow_motion_fps=6

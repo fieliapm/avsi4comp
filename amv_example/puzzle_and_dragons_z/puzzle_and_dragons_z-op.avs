@@ -170,11 +170,7 @@ puzzle_and_dragons_z_op_mute=puzzle_and_dragons_z_op_t01 \
 
 puzzle_and_dragons_z_op_mute
 
-
-
-thumbnail=Trim(6564,-30*5)
-
-### export clip: thumbnail
+### export clip: puzzle_and_dragons_z_op_mute
 
 ### prefetch: 5,2
 
@@ -225,7 +221,7 @@ SUBTITLE_FX("どうして出会えたのに 探し続けるの?",subtitle_x,subtitle_y-subtitle_
 SUBTITLE_FX("そして僕らは 何度だって笑い飛ばす",subtitle_x,subtitle_y,3059,3228)
 SUBTITLE_FX("何もかもがきっと この路の上にある",subtitle_x,subtitle_y-subtitle_size,3253,3422)
 
-### pass clip: thumbnail
+### pass clip: puzzle_and_dragons_z_op_mute
 
 ### prefetch: 5,2
 
@@ -254,10 +250,20 @@ SUBTITLE_FX("何度でも つぎの奇跡へ",subtitle_x,subtitle_y-subtitle_size,6942,713
 
 SUBTITLE_FX("さかさま世界//中川翔子|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7395,7650,true)
 
+######## Thumbnail ########
+
+is_thumbnail=false
+
+is_thumbnail?ConvertToRGB32(puzzle_and_dragons_z_op_mute):last
+
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\nakagawa_shouko-2014_04_02-9lives-cd-03.wav"),48000)
 AudioDub(bgm_48khz)
+
+
+
+thumbnail=Trim(6564,-30*5)
 
 
 
@@ -270,7 +276,7 @@ introduction_3d++last
 
 
 
-#ConvertToRGB32(thumbnail)
+is_thumbnail?thumbnail:last
 
 """)
 

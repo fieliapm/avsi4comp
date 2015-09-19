@@ -20,63 +20,13 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
 Import("maoyuu-tv-common.avsi")
 
-######## Game ########
-
-puzzle_and_dragons_gameplay=FFMS2_VIDEO_SOURCE("src\puzzle_and_dragon\ƒpƒYƒ‹•ƒhƒ‰ƒSƒ“ƒY@ƒ€ƒ‰ƒRÁ‚µƒXƒyƒVƒƒƒ‹@™‰‹‰•Ò™.480p.flv",fpsnum=30000,fpsden=1001)
-puzzle_and_dragons_gameplay_short=Trim(puzzle_and_dragons_gameplay,754,1185)
-
-lovetra_sweet_pv=FFMS2_VIDEO_SOURCE("src\lovetra-web_resource\movie\lovetra_sweet-pv-720p.mp4")
-lovetra_sweet_pv_short=Trim(lovetra_sweet_pv,2728,2890)
-
-######## Pre Combine ########
-
-global map_audio=maoyuu_tv_07_byakuya_country_map_audio
-function OVERWRITE_MAP_AUDIO(clip clip){
-	return TRIM_FIRST_CLIP(AudioDub(clip,map_audio),Framecount(map_audio))
-}
-
-cm_kaimon_toshi_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_06_kaimon_toshi_map)
-cm_winter_country_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_04_winter_country_map)
-cm_church_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_03_church_map)
-cm_mazoku_attack_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_10_mazoku_attack_map)
-cm_doumei_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_03_doumei_map)
-cm_mazoku_and_human_boundry_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_03_mazoku_and_human_boundry_map)
-cm_lake_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_10_lake_map_01)
-cm_mazoku_vs_human=OVERWRITE_MAP_AUDIO(maoyuu_tv_02_mazoku_vs_human)
-
-
-
-maoyuu_tv_01_become_my_property_i_refuse=maoyuu_tv_01_become_my_property_i_refuse_01+maoyuu_tv_01_become_my_property_i_refuse_02+Invert(maoyuu_tv_01_become_my_property_i_refuse_03)
-maou_kiss_yuusha=maoyuu_tv_02_yuusha_sleep_on_maou_leg+maoyuu_tv_02_maou_kiss_yuusha_sleeping_on_leg_01+maoyuu_tv_02_maou_kiss_yuusha_sleeping_on_leg_02+maoyuu_tv_02_maou_kiss_yuusha_sleeping_on_leg_03
-maou_catch_yuusha_pillow=maoyuu_tv_05_maou_see_yuusha_pillow+maoyuu_tv_01_maou_kiss_yuusha_pillow_02
-maoyuu_tv_03_chief_maid_touch_maou_oppai=maoyuu_tv_03_chief_maid_touch_maou_oppai_01+maoyuu_tv_03_chief_maid_touch_maou_oppai_02+maoyuu_tv_03_chief_maid_touch_maou_oppai_03+maoyuu_tv_03_chief_maid_touch_maou_oppai_04
-maoyuu_tv_04_maou_cry=maoyuu_tv_04_maou_cry_01+maoyuu_tv_04_maou_cry_02
-maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow=maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow_01+maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow_02
-maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food=maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food_01+Invert(maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food_02)
-maoyuu_tv_08_party=maoyuu_tv_08_party+maoyuu_tv_08_grand_princess_fire_dragon_pour_wine_for_young_merchant
-
-prologue=maoyuu_tv_01_explain_the_other_side_of_the_hill
-do_not_eat_food_01=maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food
-do_not_eat_food_02=maoyuu_tv_08_party
-light_off_01=maoyuu_tv_10_onna_mahoutsukai_use_magic_to_grand_princess_fire_dragon
-light_off_02=maou_kiss_yuusha
-close_door=maoyuu_tv_07_chief_maid_close_door
-pass_mic=maou_catch_yuusha_pillow
-keep_quiet_01=maoyuu_tv_05_winter_king_sr_dead
-keep_quiet_02=maoyuu_tv_03_chief_maid_touch_maou_oppai
-do_not_fight=maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow
-
-refuse=maoyuu_tv_01_become_my_property_i_refuse+maoyuu_tv_05_yuusha_say_maou_is_punipuni_02+maoyuu_tv_05_maou_bed_sport
-to_be_continued=maoyuu_tv_04_maou_cry+maoyuu_tv_04_maou_teatime
-
-
-
-puzzle_and_dragons_gameplay_short=SSRC(RESIZE_TO_REF_CLIP(ConvertFPS(puzzle_and_dragons_gameplay_short,map_audio),map_audio),48000)
-lovetra_sweet_pv_short=SSRC(ConvertFPS(lovetra_sweet_pv_short,map_audio),48000)
-
-######## Pre Combine - Subtitle ########
+######## Function ########
 
 subtitle_x=50
 subtitle_y=400
@@ -109,34 +59,11 @@ function SUBTITLE_WARNING(clip clip,string text,int "x",int "y",int "first_frame
 	return SUBTITLE_FX_SMOOTH_BLINK(clip,text,x,y,first_frame,last_frame,subtitle_font,subtitle_effects,size,text_color,halo_color,min_opacity=0.2,max_opacity=1.0)
 }
 
+### inherit end ###
 
+prologue=maoyuu_tv_01_explain_the_other_side_of_the_hill
 
-cm_kaimon_toshi_map=SUBTITLE_N(cm_kaimon_toshi_map,"1.‹Ö~ˆùH",is_title=true)
-cm_kaimon_toshi_map=ConvertToYV12(cm_kaimon_toshi_map)
-
-cm_winter_country_map=SUBTITLE_N(cm_winter_country_map,"2.¿–Ü»‘¢‚—º“x",is_title=true)
-cm_winter_country_map=ConvertToYV12(cm_winter_country_map)
-
-cm_church_map=SUBTITLE_N(cm_church_map,"3.ç¬èè–å,AZ3P–çˆêé",is_title=true)
-cm_church_map=ConvertToYV12(cm_church_map)
-
-cm_mazoku_attack_map=SUBTITLE_N(cm_mazoku_attack_map,"4.•sPèêm•—",is_title=true)
-cm_mazoku_attack_map=ConvertToYV12(cm_mazoku_attack_map)
-
-cm_doumei_map=SUBTITLE_N(cm_doumei_map,"5.–Ü‘åãßŒ–‰Üäoˆú‹©",is_title=true)
-cm_doumei_map=ConvertToYV12(cm_doumei_map)
-
-cm_mazoku_and_human_boundry_map=SUBTITLE_N(cm_mazoku_and_human_boundry_map,"àŠ®‹K‘¥“I–‚‰¤˜ğ...",is_title=true)
-cm_mazoku_and_human_boundry_map=ConvertToYV12(cm_mazoku_and_human_boundry_map)
-
-cm_lake_map=SUBTITLE_N(cm_lake_map,"•vÈˆö¸˜a§‰Æ–\,‰—¥...",is_title=true)
-cm_lake_map=ConvertToYV12(cm_lake_map)
-
-cm_mazoku_vs_human=SUBTITLE_N(cm_mazoku_vs_human,"l–‚‘åD‰ÌæÕ‘¦›’ŠJn",is_title=true)
-cm_mazoku_vs_human=SUBTITLE_N(cm_mazoku_vs_human,"--------              ",is_title=true)
-cm_mazoku_vs_human=ConvertToYV12(cm_mazoku_vs_human)
-
-
+######## Pre Combine ########
 
 prologue=SUBTITLE_N(prologue,"‹‹”IŠÅˆêŒÂ“Œ¼",subtitle_x,subtitle_y,25,90,false)
 prologue=SUBTITLE_N(prologue,"šIˆ¢...ˆ¢!",subtitle_x,subtitle_y,195,260,false)
@@ -183,6 +110,99 @@ prologue=SUBTITLE_N(prologue,"ŠˆÈstaffË˜ğ‹êS’ù’è”‡±‹K‘¥",subtitle_x,subtitle
 prologue=SUBTITLE_N(prologue,"“ß›õAãã”Iàà‹K‘¥”b",subtitle_x,subtitle_y,3430,3475,false)
 prologue=SUBTITLE_N(prologue,"å«‘R‰ä¥•s•øY›õŠú–]",subtitle_x,subtitle_y,3515,3570,false)
 prologue=ConvertToYV12(prologue)
+
+prologue
+
+### prefetch: 5,2
+
+### ###
+
+""")
+
+prologue=AudioDub(last,maoyuu_tv_01_explain_the_other_side_of_the_hill)
+
+######## Game ########
+
+puzzle_and_dragons_gameplay=FFMS2_VIDEO_SOURCE("src\puzzle_and_dragon\ƒpƒYƒ‹•ƒhƒ‰ƒSƒ“ƒY@ƒ€ƒ‰ƒRÁ‚µƒXƒyƒVƒƒƒ‹@™‰‹‰•Ò™.480p.flv",fpsnum=30000,fpsden=1001)
+puzzle_and_dragons_gameplay_short=Trim(puzzle_and_dragons_gameplay,754,1185)
+
+lovetra_sweet_pv=FFMS2_VIDEO_SOURCE("src\lovetra-web_resource\movie\lovetra_sweet-pv-720p.mp4")
+lovetra_sweet_pv_short=Trim(lovetra_sweet_pv,2728,2890)
+
+######## Pre Combine ########
+
+global map_audio=maoyuu_tv_07_byakuya_country_map_audio
+function OVERWRITE_MAP_AUDIO(clip clip){
+	return TRIM_FIRST_CLIP(AudioDub(clip,map_audio),Framecount(map_audio))
+}
+
+cm_kaimon_toshi_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_06_kaimon_toshi_map)
+cm_winter_country_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_04_winter_country_map)
+cm_church_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_03_church_map)
+cm_mazoku_attack_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_10_mazoku_attack_map)
+cm_doumei_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_03_doumei_map)
+cm_mazoku_and_human_boundry_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_03_mazoku_and_human_boundry_map)
+cm_lake_map=OVERWRITE_MAP_AUDIO(maoyuu_tv_10_lake_map_01)
+cm_mazoku_vs_human=OVERWRITE_MAP_AUDIO(maoyuu_tv_02_mazoku_vs_human)
+
+
+
+maoyuu_tv_01_become_my_property_i_refuse=maoyuu_tv_01_become_my_property_i_refuse_01+maoyuu_tv_01_become_my_property_i_refuse_02+Invert(maoyuu_tv_01_become_my_property_i_refuse_03)
+maou_kiss_yuusha=maoyuu_tv_02_yuusha_sleep_on_maou_leg+maoyuu_tv_02_maou_kiss_yuusha_sleeping_on_leg_01+maoyuu_tv_02_maou_kiss_yuusha_sleeping_on_leg_02+maoyuu_tv_02_maou_kiss_yuusha_sleeping_on_leg_03
+maou_catch_yuusha_pillow=maoyuu_tv_05_maou_see_yuusha_pillow+maoyuu_tv_01_maou_kiss_yuusha_pillow_02
+maoyuu_tv_03_chief_maid_touch_maou_oppai=maoyuu_tv_03_chief_maid_touch_maou_oppai_01+maoyuu_tv_03_chief_maid_touch_maou_oppai_02+maoyuu_tv_03_chief_maid_touch_maou_oppai_03+maoyuu_tv_03_chief_maid_touch_maou_oppai_04
+maoyuu_tv_04_maou_cry=maoyuu_tv_04_maou_cry_01+maoyuu_tv_04_maou_cry_02
+maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow=maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow_01+maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow_02
+maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food=maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food_01+Invert(maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food_02)
+maoyuu_tv_08_party=maoyuu_tv_08_party+maoyuu_tv_08_grand_princess_fire_dragon_pour_wine_for_young_merchant
+
+#prologue=maoyuu_tv_01_explain_the_other_side_of_the_hill
+do_not_eat_food_01=maoyuu_tv_07_yuusha_and_eastern_fortress_general_eat_food
+do_not_eat_food_02=maoyuu_tv_08_party
+light_off_01=maoyuu_tv_10_onna_mahoutsukai_use_magic_to_grand_princess_fire_dragon
+light_off_02=maou_kiss_yuusha
+close_door=maoyuu_tv_07_chief_maid_close_door
+pass_mic=maou_catch_yuusha_pillow
+keep_quiet_01=maoyuu_tv_05_winter_king_sr_dead
+keep_quiet_02=maoyuu_tv_03_chief_maid_touch_maou_oppai
+do_not_fight=maoyuu_tv_05_maou_beat_yuusha_with_yuusha_pillow
+
+refuse=maoyuu_tv_01_become_my_property_i_refuse+maoyuu_tv_05_yuusha_say_maou_is_punipuni_02+maoyuu_tv_05_maou_bed_sport
+to_be_continued=maoyuu_tv_04_maou_cry+maoyuu_tv_04_maou_teatime
+
+
+
+puzzle_and_dragons_gameplay_short=SSRC(RESIZE_TO_REF_CLIP(ConvertFPS(puzzle_and_dragons_gameplay_short,map_audio),map_audio),48000)
+lovetra_sweet_pv_short=SSRC(ConvertFPS(lovetra_sweet_pv_short,map_audio),48000)
+
+######## Pre Combine - Subtitle ########
+
+cm_kaimon_toshi_map=SUBTITLE_N(cm_kaimon_toshi_map,"1.‹Ö~ˆùH",is_title=true)
+cm_kaimon_toshi_map=ConvertToYV12(cm_kaimon_toshi_map)
+
+cm_winter_country_map=SUBTITLE_N(cm_winter_country_map,"2.¿–Ü»‘¢‚—º“x",is_title=true)
+cm_winter_country_map=ConvertToYV12(cm_winter_country_map)
+
+cm_church_map=SUBTITLE_N(cm_church_map,"3.ç¬èè–å,AZ3P–çˆêé",is_title=true)
+cm_church_map=ConvertToYV12(cm_church_map)
+
+cm_mazoku_attack_map=SUBTITLE_N(cm_mazoku_attack_map,"4.•sPèêm•—",is_title=true)
+cm_mazoku_attack_map=ConvertToYV12(cm_mazoku_attack_map)
+
+cm_doumei_map=SUBTITLE_N(cm_doumei_map,"5.–Ü‘åãßŒ–‰Üäoˆú‹©",is_title=true)
+cm_doumei_map=ConvertToYV12(cm_doumei_map)
+
+cm_mazoku_and_human_boundry_map=SUBTITLE_N(cm_mazoku_and_human_boundry_map,"àŠ®‹K‘¥“I–‚‰¤˜ğ...",is_title=true)
+cm_mazoku_and_human_boundry_map=ConvertToYV12(cm_mazoku_and_human_boundry_map)
+
+cm_lake_map=SUBTITLE_N(cm_lake_map,"•vÈˆö¸˜a§‰Æ–\,‰—¥...",is_title=true)
+cm_lake_map=ConvertToYV12(cm_lake_map)
+
+cm_mazoku_vs_human=SUBTITLE_N(cm_mazoku_vs_human,"l–‚‘åD‰ÌæÕ‘¦›’ŠJn",is_title=true)
+cm_mazoku_vs_human=SUBTITLE_N(cm_mazoku_vs_human,"--------              ",is_title=true)
+cm_mazoku_vs_human=ConvertToYV12(cm_mazoku_vs_human)
+
+
 
 do_not_eat_food_01=SUBTITLE_WARNING(do_not_eat_food_01,"[staff”Vˆê,ˆÈ•°à–ˆ×Ù“I‰Î—´Œö—]",second_subtitle_x,second_subtitle_y,430,590)
 do_not_eat_food_01=SUBTITLE_N(do_not_eat_food_01,"‘¾”ü–¡f~~~",subtitle_x,subtitle_y,1,60,false)
