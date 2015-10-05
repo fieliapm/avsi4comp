@@ -388,7 +388,7 @@ function ASSUME_23_976P(clip clip){
 ######## Speed ########
 
 function CONVERT_FPS_AUTO_HQ(clip,fps){
-	return Framerate(clip)/fps<=3.0/2.0?ConvertFPS(clip,fps):ChangeFPS(clip,fps)
+	return Apply(fps*3.0<Framerate(clip)*2.0?"ChangeFPS":"ConvertFPS",clip,fps)
 }
 
 function CLIP_SPEED(clip clip,float speed,bool smooth){
@@ -397,13 +397,13 @@ function CLIP_SPEED(clip clip,float speed,bool smooth){
 	return Apply(smooth?"CONVERT_FPS_AUTO_HQ":"ChangeFPS",speeded_clip,frame_rate)
 }
 
-function SLOW_MOTION_TO_FPS(clip clip,float fps,bool smooth){
-	clip_slowed_down=ChangeFPS(clip,fps)
+function SLOW_MOTION_TO_FPS(clip clip,float fps,bool smooth,bool "linear"){
+	clip_slowed_down=ChangeFPS(clip,fps,linear=linear)
 	return Apply(smooth?"CONVERT_FPS_AUTO_HQ":"ChangeFPS",clip_slowed_down,Framerate(clip))
 }
 
-function SLOW_MOTION_BY_DIVISOR(clip clip,int fps_divisor,bool smooth){
-	return SLOW_MOTION_TO_FPS(clip,Framerate(clip)/fps_divisor,smooth)
+function SLOW_MOTION_BY_DIVISOR(clip clip,int fps_divisor,bool smooth,bool "linear"){
+	return SLOW_MOTION_TO_FPS(clip,Framerate(clip)/fps_divisor,smooth,linear=linear)
 }
 
 ######## Fade ########
