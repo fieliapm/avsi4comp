@@ -550,8 +550,8 @@ function PULL_IN_OUT(clip clip,float "pull_ratio_x",float "pull_ratio_y"){
 	pull_ratio_x=Default(pull_ratio_x,0.0)
 	pull_ratio_y=Default(pull_ratio_y,0.0)
 
-	pull_x=pull_ratio_x*Width(clip)
-	pull_y=pull_ratio_y*Height(clip)
+	pull_x=pull_ratio_x*Float(Width(clip))
+	pull_y=pull_ratio_y*Float(Height(clip))
 
 	clip_zoomed=FAST_ZOOM(clip,0.0,0.0,-pull_x,-pull_y,extend=true)
 	return FAST_ZOOM(clip_zoomed,0.0,0.0,pull_x,pull_y,extend=true)
