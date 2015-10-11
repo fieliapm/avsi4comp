@@ -39,7 +39,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	text_color=is_title?color_indianred:subtitle_text_color
 
-	return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
+	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }
 
 function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame"){

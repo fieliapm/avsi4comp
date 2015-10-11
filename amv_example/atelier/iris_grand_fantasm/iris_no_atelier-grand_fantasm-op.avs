@@ -24,18 +24,18 @@ Import("..\..\avsi4comp\macro.avsi")
 
 ######## YouTube (640*480) ########
 
-iris_no_atelier_grand_fantasm_op_360p=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001),48000)
+iris_no_atelier_grand_fantasm_op_360p=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001)),48000)
 
-iris_no_atelier_grand_fantasm_op_video=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
+iris_no_atelier_grand_fantasm_op_video=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1))
 iris_no_atelier_grand_fantasm_op=AudioDub(iris_no_atelier_grand_fantasm_op_video,iris_no_atelier_grand_fantasm_op_360p)
 
-iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=SSRC(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.360p.mp4"),48000)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.360p.mp4")),48000)
 iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p,6000),5001),4003),3001),2002),1001)
 
-iris_no_atelier_grand_fantasm_web_pv_01_youtube_video=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_video=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1),interlaced=true)
 iris_no_atelier_grand_fantasm_web_pv_01_youtube=AudioDub(iris_no_atelier_grand_fantasm_web_pv_01_youtube_video,iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p)
 
-iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02=FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1),interlaced=true)
 iris_no_atelier_grand_fantasm_web_pv_01_youtube_cache02=AudioDub(iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02,iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p)
 
 ######## Official Web (320*240) ########
@@ -49,13 +49,13 @@ iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-
 iris_no_atelier_grand_fantasm_web_pv_01_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\GF_webPV_01s.wmv"
 #iris_no_atelier_grand_fantasm_web_pv_02_path="src\iris_no_atelier-grand_fantasm-movie\official\movie\PV_vol_2s.wmv"
 
-iris_no_atelier_grand_fantasm_web_pv_01=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_01_path,fpsnum=30000,fpsden=1001),48000)
-iris_no_atelier_grand_fantasm_web_pv_02=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),48000)
-iris_no_atelier_grand_fantasm_web_pv_01=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_01,iris_no_atelier_grand_fantasm_op)
-iris_no_atelier_grand_fantasm_web_pv_02=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_02,iris_no_atelier_grand_fantasm_op)
+iris_no_atelier_grand_fantasm_web_pv_01=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_01_path,fpsnum=30000,fpsden=1001)),48000)
+iris_no_atelier_grand_fantasm_web_pv_02=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),interlaced=true),48000)
+iris_no_atelier_grand_fantasm_web_pv_02_cache02=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),interlaced=true),48000)
 
-iris_no_atelier_grand_fantasm_web_pv_02_cache02=SSRC(FFMS2_VIDEO_SOURCE(iris_no_atelier_grand_fantasm_web_pv_02_path,fpsnum=30000,fpsden=1001),48000)
-iris_no_atelier_grand_fantasm_web_pv_02_cache02=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_02_cache02,iris_no_atelier_grand_fantasm_op)
+iris_no_atelier_grand_fantasm_web_pv_01=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_01,iris_no_atelier_grand_fantasm_op)
+#iris_no_atelier_grand_fantasm_web_pv_02=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_02,iris_no_atelier_grand_fantasm_op)
+#iris_no_atelier_grand_fantasm_web_pv_02_cache02=RESIZE_TO_REF_CLIP(iris_no_atelier_grand_fantasm_web_pv_02_cache02,iris_no_atelier_grand_fantasm_op)
 
 iris_no_atelier_grand_fantasm_web_pv_01_cache02=iris_no_atelier_grand_fantasm_web_pv_01
 
@@ -128,9 +128,9 @@ iris_no_atelier_grand_fantasm_op_t07=iris_no_atelier_grand_fantasm_op_02
 
 
 
-iris_no_atelier_grand_fantasm_op_mute=iris_no_atelier_grand_fantasm_op_t01+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(iris_no_atelier_grand_fantasm_op_t02,fade_length) \
+iris_no_atelier_grand_fantasm_op_mute=iris_no_atelier_grand_fantasm_op_t01+FADE_OUT_WITH_BRIGHTNESS_OFFSET(iris_no_atelier_grand_fantasm_op_t02,fade_length) \
 	+iris_no_atelier_grand_fantasm_op_t03+iris_no_atelier_grand_fantasm_op_t04 \
-	+Dissolve(iris_no_atelier_grand_fantasm_op_t05,FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(iris_no_atelier_grand_fantasm_op_t06,fade_length),t05_t06_dissolve_length) \
+	+Dissolve(iris_no_atelier_grand_fantasm_op_t05,FADE_OUT_WITH_BRIGHTNESS_OFFSET(iris_no_atelier_grand_fantasm_op_t06,fade_length),t05_t06_dissolve_length) \
 	+iris_no_atelier_grand_fantasm_op_t07
 
 ######## Music ########
@@ -251,7 +251,7 @@ SUBTITLE_FX("                            1",subtitle_x+eszett_assemble_13_offset
 
 
 
-Dissolve(iris_no_atelier_grand_fantasm_op_00,ConvertToYV12(last),op_single_music_start_overlap)
+Dissolve(iris_no_atelier_grand_fantasm_op_00,ConvertToYUY2(last),op_single_music_start_overlap)
 
 SUBTITLE_FX("Die er Sie, kleine Schwarzwei3.",subtitle_x,subtitle_x,op_single_music_start+7,op_single_music_start+77)
 SUBTITLE_FX("                             1",subtitle_x+eszett_assemble_13_offset,subtitle_x,op_single_music_start+7,op_single_music_start+77)

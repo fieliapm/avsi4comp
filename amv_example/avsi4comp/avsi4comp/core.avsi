@@ -526,12 +526,12 @@ function LINEAR_MOVE(clip clip,string overlay_clip,string mode,int start_frame,i
 	extend=Default(extend,false)
 	overwrite=Default(overwrite,false)
 
-	overlay_clip_extend=(extend==true?"BlankClip("+overlay_clip+",length="+String(start_frame)+",color=color_white)+":"")+overlay_clip
+	overlay_clip_extend=(extend?"BlankClip("+overlay_clip+",length="+String(start_frame)+",color=color_white)+":"")+overlay_clip
 
 	result_clip_containing_var=ScriptClip(clip,"Overlay("+overlay_clip_extend+",x=Round(LINEAR(_var,"+String(start_x)+","+String(end_x)+")),y=Round(LINEAR(_var,"+String(start_y)+","+String(end_y)+")),opacity=LINEAR(_var,"+String(start_opacity)+","+String(end_opacity)+"),mode="+DOUBLE_QUOTE_STRING(mode)+")")
 	result_clip=EVALUATE_VAR(result_clip_containing_var,"_var",start_frame,end_frame)
 
-	return overwrite==true?OVERWRITE_RANGE(clip,result_clip,start_frame,end_frame):result_clip
+	return overwrite?OVERWRITE_RANGE(clip,result_clip,start_frame,end_frame):result_clip
 }
 
 ######## Filter ########
@@ -546,15 +546,35 @@ function MOSAIC_MASK(clip clip,clip mask,float mosaic_factor){
 	return Overlay(clip,clip_mosaic,mask=mask,mode="Blend")
 }
 
-function PULL_IN_OUT(clip clip,float "pull_ratio_x",float "pull_ratio_y"){
-	pull_ratio_x=Default(pull_ratio_x,0.0)
-	pull_ratio_y=Default(pull_ratio_y,0.0)
+function PIXEL_SMEAR(clip clip,float "smear_ratio_x",float "smear_ratio_y"){
+	smear_ratio_x=Default(smear_ratio_x,0.0)
+	smear_ratio_y=Default(smear_ratio_y,0.0)
 
-	pull_x=pull_ratio_x*Float(Width(clip))
-	pull_y=pull_ratio_y*Float(Height(clip))
+	smear_x=smear_ratio_x*Float(Width(clip))
+	smear_y=smear_ratio_y*Float(Height(clip))
 
-	clip_zoomed=FAST_ZOOM(clip,0.0,0.0,-pull_x,-pull_y,extend=true)
-	return FAST_ZOOM(clip_zoomed,0.0,0.0,pull_x,pull_y,extend=true)
+	clip_zoomed=FAST_ZOOM(clip,0.0,0.0,-smear_x,-smear_y,extend=true)
+	return FAST_ZOOM(clip_zoomed,0.0,0.0,smear_x,smear_y,extend=true)
+}
+
+function SCALE_WIPE(clip clip,float "wipe_ratio_x",float "wipe_ratio_y",float "scale_factor_x",float "scale_factor_y"){
+	wipe_ratio_x=Default(wipe_ratio_x,0.0)
+	wipe_ratio_y=Default(wipe_ratio_y,0.0)
+	scale_factor_x=Default(scale_factor_x,1.0)
+	scale_factor_y=Default(scale_factor_y,1.0)
+
+	clip_width=Float(Width(clip))
+	clip_height=Float(Height(clip))
+	wipe_x=wipe_ratio_x*clip_width
+	wipe_y=wipe_ratio_y*clip_height
+	offset_x=wipe_ratio_x<0.0?clip_width:0.0
+	offset_y=wipe_ratio_y<0.0?clip_height:0.0
+
+	clip_rgb32=ConvertToRGB32(clip)
+	clip_mask=FAST_ZOOM(BlankClip(clip_rgb32,color=color_white),0.0,0.0,wipe_x,wipe_y)
+	clip_origin=Mask(clip_rgb32,clip_mask)
+	clip_scaled=FAST_ZOOM(clip_rgb32,0.0,0.0,(offset_x+wipe_x)*(1.0-scale_factor_x),(offset_y+wipe_y)*(1.0-scale_factor_y),scale_factor_x,scale_factor_y)
+	return Layer(clip_scaled,clip_origin,"Add")
 }
 
 ######## Stereoscopy ########

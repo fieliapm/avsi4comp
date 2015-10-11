@@ -202,17 +202,17 @@ function SUBTITLE_FX_FLY_IN_FLY_OUT(clip clip,string text,int x,int y,int start_
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
 
-function SUBTITLE_FX_PULL_IN_PULL_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex"){
+function SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex"){
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_ex)
 
-	subtitle_rgba_pulled_containing_var=ScriptClip(subtitle_rgba,"PULL_IN_OUT(pull_ratio_x=pull_ratio_x)")
-	subtitle_rgba_pulled=FrameEvaluate(subtitle_rgba_pulled_containing_var,"pull_ratio_x=Spline(current_frame,"+String(before_start_frame)+",-1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",1.0,cubic=false)")
+	subtitle_rgba_smeared_containing_var=ScriptClip(subtitle_rgba,"PIXEL_SMEAR(smear_ratio_x=smear_ratio_x)")
+	subtitle_rgba_smeared=FrameEvaluate(subtitle_rgba_smeared_containing_var,"smear_ratio_x=Spline(current_frame,"+String(before_start_frame)+",-1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",1.0,cubic=false)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_pulled,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_smeared,before_start_frame,after_end_frame)
 }
 
 function SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex",float "appear_offset"){

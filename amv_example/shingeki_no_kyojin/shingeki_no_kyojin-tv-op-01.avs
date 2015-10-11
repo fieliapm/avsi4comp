@@ -116,7 +116,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	halo_color=is_title?OVERWRITE_COLOR_ALPHA(color_orangered,$3F):subtitle_halo_color
 	size=is_title?subtitle_size:subtitle_size*0.8
 
-	return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
+	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
 }
 
 SUBTITLE_FX("çgò@ÇÃã|ñÓ//Linked Horizon|- by fielia@AVISynth",-subtitle_x,subtitle_x,565,821,true)

@@ -196,8 +196,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	text_color=is_title?color_gold:subtitle_text_color
 	halo_color=is_title?color_firebrick:subtitle_halo_color
 
-	#return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,halo_color)
-	return APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip,"SUBTITLE_FX_PULL_IN_PULL_OUT("+DOUBLE_QUOTE_STRING(text)+","+String(x)+","+String(y)+","+String(start_frame)+","+String(end_frame)+",subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,"+String(text_color)+","+String(halo_color)+")")
+	#return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,halo_color)
+	return APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip,"SUBTITLE_FX_SMEAR_IN_SMEAR_OUT("+DOUBLE_QUOTE_STRING(text)+","+String(x)+","+String(y)+","+String(start_frame)+","+String(end_frame)+",subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,"+String(text_color)+","+String(halo_color)+")")
 }
 
 ### inherit end ###

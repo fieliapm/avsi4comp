@@ -228,7 +228,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	text_color=is_title?OVERWRITE_COLOR_ALPHA(color_skyblue,$3F):subtitle_text_color
 
-	return SUBTITLE_FX_PULL_IN_PULL_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
+	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }
 
 SUBTITLE_FX("Questions?//’†‘º—D|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,341,583,true)

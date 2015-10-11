@@ -147,7 +147,7 @@ subtitle_size=28
 subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_red,$3F)
 subtitle_halo_color=color_gold
 
-SUBTITLE_FX_PULL_IN_PULL_OUT("- by fielia & niwa0daisuke@AVISynth",subtitle_x,subtitle_y,231,406,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
+SUBTITLE_FX_SMEAR_IN_SMEAR_OUT("- by fielia & niwa0daisuke@AVISynth",subtitle_x,subtitle_y,231,406,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
 
 #LoadPlugin("VSFilter.dll")
 TextSub("maoyuu-tv-op.ass")
