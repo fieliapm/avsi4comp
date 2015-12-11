@@ -163,7 +163,7 @@ puzzle_and_dragons_z_op_t12=last_part_patch+puzzle_and_dragons_z_op_digest_3d_04
 puzzle_and_dragons_z_op_mute=puzzle_and_dragons_z_op_t01 \
 	+puzzle_and_dragons_z_op_t02+puzzle_and_dragons_z_op_t03+puzzle_and_dragons_z_op_t04 \
 	+puzzle_and_dragons_z_op_t05 \
-	+puzzle_and_dragons_z_op_t06_t07+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(puzzle_and_dragons_z_op_t08, \
+	+puzzle_and_dragons_z_op_t06_t07+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(puzzle_and_dragons_z_op_t08, \
 	puzzle_and_dragons_z_op_t09,fade_length,fade_length) \
 	+puzzle_and_dragons_z_op_t10 \
 	+puzzle_and_dragons_z_op_t11+puzzle_and_dragons_z_op_t12

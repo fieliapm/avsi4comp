@@ -406,59 +406,6 @@ function SLOW_MOTION_BY_DIVISOR(clip clip,int fps_divisor,bool smooth,bool "line
 	return SLOW_MOTION_TO_FPS(clip,Framerate(clip)/fps_divisor,smooth,linear=linear)
 }
 
-######## Fade ########
-
-function BRIGHTNESS_OFFSET(clip clip,float offset){
-	offset_level=Round(offset*255.0)
-	return Levels(clip,0,1.0,255,offset_level,offset_level+255,coring=false)
-}
-
-function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_out){
-	zero_val_frame=is_fade_out?start_frame:end_frame
-	one_val_frame=is_fade_out?end_frame:start_frame
-	clip_faded_containing_var=ScriptClip(clip,"BRIGHTNESS_OFFSET(_var)")
-	clip_faded=EVALUATE_VAR(clip_faded_containing_var,"_var",zero_val_frame,one_val_frame)
-	return OVERWRITE_RANGE(clip,clip_faded,start_frame,end_frame)
-}
-
-function FADE_IN_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames){
-	return FADE_WITH_BRIGHTNESS_OFFSET(clip,0,num_frames-1,false)
-}
-
-function FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames){
-	return FADE_WITH_BRIGHTNESS_OFFSET(clip,Framecount(clip)-num_frames,Framecount(clip)-1,true)
-}
-
-function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(clip clip1,clip clip2,int num_frames_before,int num_frames_after){
-	return FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip1,num_frames_before)+FADE_IN_WITH_BRIGHTNESS_OFFSET(clip2,num_frames_after)
-}
-
-function FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip,int num_frames){
-	return ConvertToYV12(FADE_IN_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip),num_frames))
-}
-
-function FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip,int num_frames){
-	return ConvertToYV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip),num_frames))
-}
-
-function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip1,clip clip2,int num_frames_before,int num_frames_after){
-	return ConvertToYV12(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip1),ConvertToRGB24(clip2),num_frames_before,num_frames_after))
-}
-
-function DOUBLE_FADE(clip clip1,clip clip2,int num_frames_before,int num_frames_after,int color){
-	return FadeOut(clip1,num_frames_before,color)+FadeIn0(clip2,num_frames_after,color)
-}
-
-######## Transition ########
-
-function TRANSITION(clip clip_left,clip clip_right,int length,string func){
-	left=TRIM_LAST_CLIP(clip_left,length)
-	right=TRIM_FIRST_CLIP(clip_right,length)
-	transition_clip_video=TRIM_FIRST_CLIP(clip_left,Framecount(clip_left)-length)+Eval(func)+Trim(clip_right,length,0)
-	transition_clip_audio=Dissolve(clip_left,clip_right,length)
-	return AudioDub(transition_clip_video,transition_clip_audio)
-}
-
 ######## Transform & Resize ########
 
 function RESIZE_TO_REF_CLIP(clip clip,clip ref_clip){
@@ -534,6 +481,59 @@ function LINEAR_MOVE(clip clip,string overlay_clip,string mode,int start_frame,i
 	return overwrite?OVERWRITE_RANGE(clip,result_clip,start_frame,end_frame):result_clip
 }
 
+######## Transition ########
+
+function TRANSITION(clip clip_left,clip clip_right,int length,string func){
+	left=TRIM_LAST_CLIP(clip_left,length)
+	right=TRIM_FIRST_CLIP(clip_right,length)
+	transition_clip_video=TRIM_FIRST_CLIP(clip_left,Framecount(clip_left)-length)+Eval(func)+Trim(clip_right,length,0)
+	transition_clip_audio=Dissolve(clip_left,clip_right,length)
+	return AudioDub(transition_clip_video,transition_clip_audio)
+}
+
+######## Fade ########
+
+function BRIGHTNESS_OFFSET(clip clip,float offset){
+	offset_level=Round(offset*255.0)
+	return Levels(clip,0,1.0,255,offset_level,offset_level+255,coring=false)
+}
+
+function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_out){
+	zero_val_frame=is_fade_out?start_frame:end_frame
+	one_val_frame=is_fade_out?end_frame:start_frame
+	clip_faded_containing_var=ScriptClip(clip,"BRIGHTNESS_OFFSET(_var)")
+	clip_faded=EVALUATE_VAR(clip_faded_containing_var,"_var",zero_val_frame,one_val_frame)
+	return OVERWRITE_RANGE(clip,clip_faded,start_frame,end_frame)
+}
+
+function FADE_IN_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames){
+	return FADE_WITH_BRIGHTNESS_OFFSET(clip,0,num_frames-1,false)
+}
+
+function FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames){
+	return FADE_WITH_BRIGHTNESS_OFFSET(clip,Framecount(clip)-num_frames,Framecount(clip)-1,true)
+}
+
+function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(clip clip1,clip clip2,int num_frames_before,int num_frames_after){
+	return FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip1,num_frames_before)+FADE_IN_WITH_BRIGHTNESS_OFFSET(clip2,num_frames_after)
+}
+
+function FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip,int num_frames){
+	return ConvertToYV12(FADE_IN_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip),num_frames))
+}
+
+function FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip,int num_frames){
+	return ConvertToYV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip),num_frames))
+}
+
+function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip1,clip clip2,int num_frames_before,int num_frames_after){
+	return ConvertToYV12(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip1),ConvertToRGB24(clip2),num_frames_before,num_frames_after))
+}
+
+function DOUBLE_FADE(clip clip1,clip clip2,int num_frames_before,int num_frames_after,int color){
+	return FadeOut(clip1,num_frames_before,color)+FadeIn0(clip2,num_frames_after,color)
+}
+
 ######## Filter ########
 
 function MOSAIC_ALL(clip clip,float mosaic_factor){
@@ -557,6 +557,26 @@ function PIXEL_SMEAR(clip clip,float "smear_ratio_x",float "smear_ratio_y"){
 	return FAST_ZOOM(clip_zoomed,0.0,0.0,smear_x,smear_y,extend=true)
 }
 
+function PIXEL_SMEAR_FX(clip clip,string mode,int smear_direction,int start_frame,int end_frame,bool is_out){
+	Assert(mode=="x" || mode=="y","invalid mode")
+
+	smear_ratio=Float(Sign(smear_direction))
+	zero_val_frame=is_out?start_frame:end_frame
+	one_val_frame=is_out?end_frame:start_frame
+
+	clip_pixel_smeared_containing_var=ScriptClip(clip,"PIXEL_SMEAR(smear_ratio_"+mode+"=_var*("+String(smear_ratio)+"))")
+	clip_pixel_smeared=EVALUATE_VAR(clip_pixel_smeared_containing_var,"_var",zero_val_frame,one_val_frame)
+	return OVERWRITE_RANGE(clip,clip_pixel_smeared,start_frame,end_frame)
+}
+
+function PIXEL_SMEAR_IN(clip clip,string mode,int smear_direction,int num_frames){
+	return PIXEL_SMEAR_FX(clip,mode,smear_direction,0,num_frames-1,false)
+}
+
+function PIXEL_SMEAR_OUT(clip clip,string mode,int smear_direction,int num_frames){
+	return PIXEL_SMEAR_FX(clip,mode,smear_direction,Framecount(clip)-num_frames,Framecount(clip)-1,true)
+}
+
 function SCALE_WIPE(clip clip,float "wipe_ratio_x",float "wipe_ratio_y",float "scale_factor_x",float "scale_factor_y"){
 	wipe_ratio_x=Default(wipe_ratio_x,0.0)
 	wipe_ratio_y=Default(wipe_ratio_y,0.0)
@@ -575,6 +595,27 @@ function SCALE_WIPE(clip clip,float "wipe_ratio_x",float "wipe_ratio_y",float "s
 	clip_origin=Mask(clip_rgb32,clip_mask)
 	clip_scaled=FAST_ZOOM(clip_rgb32,0.0,0.0,(offset_x+wipe_x)*(1.0-scale_factor_x),(offset_y+wipe_y)*(1.0-scale_factor_y),scale_factor_x,scale_factor_y)
 	return Layer(clip_scaled,clip_origin,"Add")
+}
+
+function SCALE_WIPE_FX(clip clip,string mode,int wipe_direction,float scale_factor,int start_frame,int end_frame,bool is_out){
+	Assert(mode=="x" || mode=="y","invalid mode")
+
+	wipe_ratio=Float(Sign(wipe_direction))
+	zero_val_frame=is_out?start_frame:end_frame
+	one_val_frame=is_out?end_frame:start_frame
+
+	clip_rgb32=ConvertToRGB32(clip)
+	clip_scale_wiped_containing_var=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_var*("+String(wipe_ratio)+"),scale_factor_"+mode+"=Spline(_var,0.0,1.0,1.0,"+String(scale_factor)+"))")
+	clip_scale_wiped=EVALUATE_VAR(clip_scale_wiped_containing_var,"_var",zero_val_frame,one_val_frame)
+	return OVERWRITE_RANGE(clip_rgb32,clip_scale_wiped,start_frame,end_frame)
+}
+
+function SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,float scale_factor,int num_frames){
+	return SCALE_WIPE_FX(clip,mode,wipe_direction,scale_factor,0,num_frames-1,false)
+}
+
+function SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,float scale_factor,int num_frames){
+	return SCALE_WIPE_FX(clip,mode,wipe_direction,scale_factor,Framecount(clip)-num_frames,Framecount(clip)-1,true)
 }
 
 ######## Stereoscopy ########
