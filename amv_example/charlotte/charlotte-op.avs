@@ -112,7 +112,7 @@ function SPELL(string trim_func_01,clip clip_01,string trim_func_02,clip clip_02
 
 ### inherit end ###
 
-spell_01=SPELL("TRIM_MIDDLE_CLIP",charlotte_12_yuu_promise_nao_under_sunset,"TRIM_MIDDLE_CLIP",charlotte_02_nao_and_kazuki_s_genie,"TRIM_MIDDLE_CLIP",charlotte_07_yuu_kick_cups_toward_yumi_02,"TRIM_MIDDLE_CLIP",charlotte_07_yuu_kick_cups_toward_yumi_01,"TRIM_MIDDLE_CLIP",charlotte_11_burned_witches,"TRIM_MIDDLE_CLIP",charlotte_11_tsutsumiuchi_see_comet_core, \
+spell_01=SPELL("TRIM_MIDDLE_CLIP",charlotte_12_yuu_promise_nao_under_sunset,"TRIM_MIDDLE_CLIP",charlotte_02_nao_and_kazuki_s_genie,"TRIM_MIDDLE_CLIP",charlotte_07_yuu_kick_cups_toward_yumi_02,"TRIM_MIDDLE_CLIP",charlotte_07_yuu_kick_cups_toward_yumi_01,"TRIM_LAST_CLIP",charlotte_11_burned_witches,"TRIM_MIDDLE_CLIP",charlotte_11_tsutsumiuchi_see_comet_core, \
 	"TRIM_MIDDLE_CLIP",charlotte_12_nao_and_yuu_make_deal_01,"TRIM_MIDDLE_CLIP",charlotte_09_nao_hold_yuu_s_hand_02,"TRIM_LAST_CLIP",charlotte_06_ayumi_use_collapse_02,"TRIM_FIRST_CLIP",charlotte_06_ayumi_fall_down_01,"TRIM_MIDDLE_CLIP",charlotte_02_nao_alone,"TRIM_MIDDLE_CLIP",charlotte_01_joujirou_stand,"TRIM_MIDDLE_CLIP",charlotte_08_yusa_and_dog,"TRIM_FIRST_CLIP",charlotte_05_nao_fishing)
 
 spell_01
