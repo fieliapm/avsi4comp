@@ -139,7 +139,7 @@ function SUBTITLE_RIPPLE(clip clip,int start_frame,int end_frame,bool is_spell){
 
 	ass_align=113
 	ass_font_size=63
-	ass_preline_duration=12
+	ass_preline_duration=16
 	ass_time_shift=-6
 
 	ripple_start_frame=start_frame-(ass_preline_duration)+ass_time_shift
