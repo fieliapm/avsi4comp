@@ -34,6 +34,8 @@ Import("charlotte-common.avsi")
 
 ### inherit start ###
 
+PSEUDO_RANDOM_SEED(361499553)
+
 function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex"){
 	first_frame=Default(first_frame,0)
 	last_frame=Default(last_frame,Framecount(clip)-1)
@@ -41,8 +43,7 @@ function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "fir
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex)
 
-	subtitle_rgba_zoomed_containing_var=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()),dsty=PSEUDO_RANDOM(Height()),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*2.0)+0.1)")
-	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_var,"PSEUDO_RANDOM_SEED(current_frame)")
+	subtitle_rgba_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()),dsty=PSEUDO_RANDOM(Height()),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*2.0)+0.1)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,first_frame,last_frame)
 }
@@ -71,7 +72,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 function SUBTITLE_FX_SPELL(clip clip,string text,int start_num_frames,int end_num_frames){
 	effects="c"
-	size=120*1.5
+	size=90*1.5
 	text_color=OVERWRITE_COLOR_ALPHA(color_magenta,$BF)
 	halo_color=OVERWRITE_COLOR_ALPHA(color_magenta,$BF)
 	x=subtitle_clip_width/2
