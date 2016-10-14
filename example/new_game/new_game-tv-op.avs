@@ -114,7 +114,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	halo_color=is_title?color_mediumpurple:subtitle_halo_color
 
-	return SUBTITLE_FX_MOSAIC_FADE_IN_MOSAIC_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color)
+	return SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color)
 }
 
 function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",bool "is_title"){

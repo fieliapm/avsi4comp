@@ -69,7 +69,6 @@ global subtitle_effects="b"
 global subtitle_size=28*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_darkcyan
-global subtitle_mosaic_factor=64
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)

@@ -189,7 +189,7 @@ function SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,i
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
 
-function SUBTITLE_FX_MOSAIC_FADE_IN_MOSAIC_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex",float "min_mosaic_factor",float "max_mosaic_factor"){
+function SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex",float "min_mosaic_factor",float "max_mosaic_factor"){
 	min_mosaic_factor=Default(min_mosaic_factor,1.0)
 	max_mosaic_factor=Default(max_mosaic_factor,size)
 
