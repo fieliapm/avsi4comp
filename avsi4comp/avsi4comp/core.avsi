@@ -415,7 +415,7 @@ function RESIZE_TO_REF_CLIP(clip clip,clip ref_clip){
 }
 
 function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty",float "factorX",float "factorY",float "factor",int "width",int "height",string "resize_func",bool "extend"){
-	border_size=4
+	border_size=8
 	clip_width=Width(clip)
 	clip_height=Height(clip)
 

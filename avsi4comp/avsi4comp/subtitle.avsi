@@ -189,6 +189,27 @@ function SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,i
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
 
+function SUBTITLE_FX_MOSAIC_FADE_IN_MOSAIC_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex",float "min_mosaic_factor",float "max_mosaic_factor"){
+	min_mosaic_factor=Default(min_mosaic_factor,1.0)
+	max_mosaic_factor=Default(max_mosaic_factor,size)
+
+	min_mosaic_factor_pow=Log(min_mosaic_factor)/Log(2.0)
+	max_mosaic_factor_pow=Log(max_mosaic_factor)/Log(2.0)
+
+	before_start_frame=start_frame-front_fade_count
+	after_end_frame=end_frame+rear_fade_count
+
+	clip_rgba=ConvertToRGB32(clip)
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_ex)
+
+	subtitle_rgba_mosaic_containing_var=ScriptClip(subtitle_rgba,"MOSAIC_ALL(mosaic_factor)")
+	subtitle_rgba_mosaic=FrameEvaluate(subtitle_rgba_mosaic_containing_var,"mosaic_factor=Pow(2.0,Spline(current_frame,"+String(before_start_frame)+","+String(max_mosaic_factor_pow)+","+String(start_frame)+","+String(min_mosaic_factor_pow)+","+String(end_frame)+","+String(min_mosaic_factor_pow)+","+String(after_end_frame)+","+String(max_mosaic_factor_pow)+",cubic=false))")
+	subtitle_rgba_faded_containing_var=ScriptClip(subtitle_rgba_mosaic,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+
+	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_faded,before_start_frame,after_end_frame)
+}
+
 function SUBTITLE_FX_FLY_IN_FLY_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex"){
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
