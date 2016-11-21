@@ -24,10 +24,10 @@ Import("..\..\..\avsi4comp\avsi4comp.avsi")
 
 ######## Game (1280*720) ########
 
-sophie_no_atelier_op=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\11_19発売予定！【ソフィーのアトリエ】オープニングムービー.720p.mp4"),48000)
-sophie_no_atelier_teaser_movie=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\11_19発売予定！【ソフィーのアトリエ】ティザームービー Full Ver..720p.mp4"),48000)
-sophie_no_atelier_promotion_movie_01=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\11_19発売予定！【ソフィーのアトリエ】プロモーションムービー.720p.mp4"),48000)
-sophie_no_atelier_promotion_movie_02=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\11_19発売予定！【ソフィーのアトリエ】プロモーションムービー第２弾.720p.mp4"),48000)
+sophie_no_atelier_op=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\【ソフィーのアトリエ】オープニングムービー.720p.mp4"),48000)
+sophie_no_atelier_teaser_movie=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\【ソフィーのアトリエ】ティザームービー Full Ver..720p.mp4"),48000)
+sophie_no_atelier_promotion_movie_01=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\【ソフィーのアトリエ】プロモーションムービー.720p.mp4"),48000)
+sophie_no_atelier_promotion_movie_02=SSRC(FFMS2_VIDEO_SOURCE("src\official\movie\【ソフィーのアトリエ】プロモーションムービー第２弾.720p.mp4"),48000)
 
 ######## Trim ########
 
