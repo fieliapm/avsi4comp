@@ -198,12 +198,12 @@ global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=400*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28*1.5
+global subtitle_size=32*1.5
 global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_purple,$3F)
 global subtitle_halo_color=color_white
 global subtitle_random_char_func="RANDOM_JIS_CHAR"
