@@ -99,22 +99,24 @@ global subtitle_clip_width=428
 global subtitle_clip_height=240
 
 subtitle_x=50*0.5
-subtitle_y=400*0.5
+subtitle_y=395*0.5
 global subtitle_front_fade_count=24
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28*0.5
+global subtitle_size=32*0.5
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_darkcyan
 global subtitle_mosaic_factor=64
 
-function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
-	is_title=Default(is_title,false)
+function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title_color",bool "is_title_size"){
+	is_title_color=Default(is_title_color,false)
+	is_title_size=Default(is_title_size,false)
 
-	halo_color=is_title?color_mediumpurple:subtitle_halo_color
+	halo_color=is_title_color?color_mediumpurple:subtitle_halo_color
+	size=is_title_size?subtitle_size*0.875:subtitle_size
 
-	return SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color)
+	return SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
 }
 
 function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",bool "is_title"){
@@ -200,8 +202,8 @@ SUBTITLE_FX("笑顔をぎゅっと詰めこんで",subtitle_x,subtitle_y-subtitle_size,4916,
 SUBTITLE_FX("熱いキモチでのっていこう!",subtitle_x,subtitle_y,4986,5057)
 
 # start_frame 5270 or 5345
-SUBTITLE_FX("SAKURAスキップ//fourfolium|    (涼風青葉(CV:高田憂希),滝本ひふみ(CV:山口愛),|    篠田はじめ(CV:戸田めぐみ),飯島ゆん(CV:竹尾歩美))|- by                                fielia@AVISynth",subtitle_x,subtitle_x,5270,5418,true)
-SUBTITLE_FX("     寫程式編輯影音的遊戲程式設計師",subtitle_x,subtitle_x+subtitle_size*3,5270,5418,false)
+SUBTITLE_FX("SAKURAスキップ//fourfolium|    (涼風青葉(CV:高田憂希),滝本ひふみ(CV:山口愛),|    篠田はじめ(CV:戸田めぐみ),飯島ゆん(CV:竹尾歩美))|- by                                fielia@AVISynth",subtitle_x,subtitle_x,5270,5418,true,true)
+SUBTITLE_FX("|||     寫程式編輯影音的遊戲程式設計師",subtitle_x,subtitle_x,5270,5418,false,true)
 
 ######## Preface ########
 
@@ -210,7 +212,7 @@ Import("new_game-tv-common-cross_process.avsi")
 kyou_mo_ichinichi_ganbaruzoi_audio=FadeIn0(FadeOut0(Normalize(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full),3),3)
 kyou_mo_ichinichi_ganbaruzoi=AudioDub(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full,kyou_mo_ichinichi_ganbaruzoi_audio)
 
-kyou_mo_ichinichi_ganbaruzoi=SUBTITLE_N(kyou_mo_ichinichi_ganbaruzoi,"今日も一日がんばるぞい",first_frame=107,last_frame=158)
+kyou_mo_ichinichi_ganbaruzoi=SUBTITLE_N(kyou_mo_ichinichi_ganbaruzoi,"今日も一日がんばるぞい",y=Round(subtitle_y),first_frame=107,last_frame=158)
 
 ######## Thumbnail ########
 
@@ -221,7 +223,6 @@ is_thumbnail?ConvertToRGB32(new_game_tv_op_mute):last
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\01 - SAKURA SKIP.wav"),48000)
-#bgm_48khz=SSRC(WAVSource("src\1.SAKURAスキップ(TVアニメ「NEW GAME!」　OPテーマ).wav"),48000)
 AudioDub(bgm_48khz)
 
 
