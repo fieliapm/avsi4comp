@@ -94,7 +94,7 @@ new_game_tv_ed_t03=TRIM_FIRST_CLIP(new_game_tv_04_rin_and_kou_lie_in_sauna_exten
 new_game_tv_ed_t04=SCALE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_11_nene_kirakira,53,0)),239),960.0,360.0,1.3,1.0)
 
 new_game_tv_ed_t05=SCALE_CG(STILL_LAST_FRAME(new_game_tv_02_aoba_see_cocktail,238),320.0,360.0,1.0,1.3)+ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_11_kou_another_style_01,56,57)),239),640.0,360.0,-10.0,10.0,1.3)
-new_game_tv_ed_t06=MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_02_hifumi_sit_down,238),1,0,128.0,1.1)+MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_12_aoba_catch_kou_s_hand_01_loop,179),0,1,72.0,1.1)+ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_12_aoba_catch_kou_s_hand_02,0,92)),112),640.0,360.0,10.0,-10.0,1.3)
+new_game_tv_ed_t06=MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_02_hifumi_sit_down,238),1,0,128.0,1.1)+MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_12_aoba_catch_kou_s_hand_01_loop,179),0,1,72.0,1.1)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_12_aoba_catch_kou_s_hand_02,0,92)),112),640.0,360.0,10.0,-10.0,1.3),fade_length)
 new_game_tv_ed_t07=MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_01_hifumi_hajime_yun_aoba_eat_dessert,245),1,0,128.0,1.1)+MOVE_CG(STILL_FRAME(new_game_tv_07_umiko_shoot_kou,47,239),-1,0,128.0,1.1)
 
 new_game_tv_ed_t08=SCALE_CG(STILL_FIRST_FRAME(new_game_tv_01_aoba_twin_tail,239),320.0,360.0,1.3,1.0)
