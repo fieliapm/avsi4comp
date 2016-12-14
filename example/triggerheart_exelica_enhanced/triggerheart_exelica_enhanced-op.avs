@@ -103,6 +103,7 @@ triggerheart_exelica_enhanced_ps2_pv_01=Trim(triggerheart_exelica_enhanced_ps2_p
 ######## Pre Combine ########
 
 is_deinterlace=true # select interlace/deinterlace
+
 global frame_index_scale=is_deinterlace?2:1
 
 
