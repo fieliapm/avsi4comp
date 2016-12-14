@@ -22,6 +22,12 @@
 
 Import("..\..\avsi4comp\avsi4comp.avsi")
 
+######## Function ########
+
+function FRAME_RATE_2X(clip clip,bool enable){
+	return enable?SelectEvery(clip,1,0,0):clip
+}
+
 ######## DC (720*480) ########
 
 triggerheart_exelica_dc_pv_video=VOB_MPEG2_VIDEO_SOURCE("src\triggerheart_exelica-movie\dc\triggerheart_exelica-dc-pv.d2v",upConv=1)
@@ -96,15 +102,17 @@ triggerheart_exelica_enhanced_ps2_pv_01=Trim(triggerheart_exelica_enhanced_ps2_p
 
 ######## Pre Combine ########
 
+is_deinterlace=true # select interlace/deinterlace
+global frame_index_scale=is_deinterlace?2:1
+
+
+
 fade_length=15
 
 triggerheart_exelica_dc_pv_01=AddBorders(triggerheart_exelica_dc_pv_01,68,0,68,0)
 triggerheart_exelica_dc_pv_01_fade_out_interlace=FADE_OUT_WITH_BRIGHTNESS_OFFSET(triggerheart_exelica_dc_pv_01,fade_length)
 triggerheart_exelica_dc_pv_01_fade_out_deinterlace=Bob(triggerheart_exelica_dc_pv_01_fade_out_interlace)
-triggerheart_exelica_dc_pv_01_fade_out=triggerheart_exelica_dc_pv_01_fade_out_deinterlace # select interlace/deinterlace
-
-is_deinterlace=(Framerate(triggerheart_exelica_dc_pv_01_fade_out)==Framerate(triggerheart_exelica_dc_pv_01_fade_out_deinterlace))?true:false
-global frame_index_scale=is_deinterlace?2:1
+triggerheart_exelica_dc_pv_01_fade_out=is_deinterlace?triggerheart_exelica_dc_pv_01_fade_out_deinterlace:triggerheart_exelica_dc_pv_01_fade_out_interlace
 
 
 
@@ -147,9 +155,10 @@ center_x=30
 center_y=-295
 triggerheart_exelica_enhanced_ps2_op_03_still_frame=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_op_03,1)
 triggerheart_exelica_enhanced_ps2_op_pre03=LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.76),7) \
-	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.86),7) \
-	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.96),6)
+	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.84),7) \
+	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.92),6)
 
+triggerheart_exelica_enhanced_ps2_op_pre03_frame_count=Framecount(ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out_interlace))
 #triggerheart_exelica_enhanced_ps2_op_pre03=is_deinterlace?CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_pre03):ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out)
 triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out)
 
@@ -164,16 +173,16 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 # triggerheart_exelica_enhanced_ps2_pv_01    -15
 
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-25)
+triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-triggerheart_exelica_enhanced_ps2_op_pre03_frame_count)
 triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_pre03+triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,762),fade_length)
 triggerheart_exelica_enhanced_op_t05=ConvertToYV12(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01_fade_out,triggerheart_exelica_xbla_game_review))
 triggerheart_exelica_enhanced_op_t06=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t07=BlankClip(triggerheart_exelica_xbla_game_review,length=30*4,color=color_black)
 
-triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+ChangeFPS(triggerheart_exelica_enhanced_op_t02,triggerheart_exelica_dc_pv_01_fade_out) \
-	+triggerheart_exelica_enhanced_op_t03+ChangeFPS(triggerheart_exelica_enhanced_op_t04,triggerheart_exelica_dc_pv_01_fade_out) \
-	+triggerheart_exelica_enhanced_op_t05+triggerheart_exelica_enhanced_op_t06+ChangeFPS(triggerheart_exelica_enhanced_op_t07,triggerheart_exelica_dc_pv_01_fade_out)
+triggerheart_exelica_enhanced_op_mute=triggerheart_exelica_enhanced_op_t01+FRAME_RATE_2X(triggerheart_exelica_enhanced_op_t02,is_deinterlace) \
+	+triggerheart_exelica_enhanced_op_t03+FRAME_RATE_2X(triggerheart_exelica_enhanced_op_t04,is_deinterlace) \
+	+triggerheart_exelica_enhanced_op_t05+triggerheart_exelica_enhanced_op_t06+FRAME_RATE_2X(triggerheart_exelica_enhanced_op_t07,is_deinterlace)
 
 ######## Music ########
 
