@@ -82,7 +82,8 @@ triggerheart_exelica_enhanced_ps2_pv=FFMS2_VIDEO_SOURCE("src\triggerheart_exelic
 
 ######## Trim ########
 
-triggerheart_exelica_dc_pv_01=Trim(triggerheart_exelica_dc_pv,114,1538) # original: 114~1764
+triggerheart_exelica_dc_pv_01=Trim(triggerheart_exelica_dc_pv,114,1538)
+triggerheart_exelica_dc_pv_01_post=Trim(triggerheart_exelica_dc_pv,1539,1764)
 
 triggerheart_exelica_xbla_game_review_01=Trim(triggerheart_exelica_xbla_game_review,192,302)
 triggerheart_exelica_xbla_game_review_02=Trim(triggerheart_exelica_xbla_game_review,400,1466)
@@ -152,12 +153,19 @@ triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelic
 
 
 
+pre03_last_still_frame=51
+triggerheart_exelica_enhanced_ps2_op_03_still_frame_01=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,pre03_last_still_frame)
+triggerheart_exelica_enhanced_ps2_op_03_still_frame_02=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,pre03_last_still_frame/2)
+triggerheart_exelica_enhanced_ps2_op_03_still_frame_03=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,0)
+
 center_x=30
-center_y=-295
-triggerheart_exelica_enhanced_ps2_op_03_still_frame=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_op_03,1)
-triggerheart_exelica_enhanced_ps2_op_pre03=LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.76),7) \
-	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.84),7) \
-	+LOOP_STILL_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=0.92),6)
+center_y=-290
+function PRE03_SCALE_FACTOR(float x){
+	return Spline(x,0.0,1.0,3.0,0.758,cubic=false)
+}
+triggerheart_exelica_enhanced_ps2_op_pre03=LOOP_ONE_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame_01,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=PRE03_SCALE_FACTOR(3.0)),7) \
+	+LOOP_ONE_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame_02,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=PRE03_SCALE_FACTOR(2.0)),7) \
+	+LOOP_ONE_FRAME(FAST_ZOOM(triggerheart_exelica_enhanced_ps2_op_03_still_frame_03,srcx=center_x,srcy=center_y,dstx=center_x,dsty=center_y,factor=PRE03_SCALE_FACTOR(1.0)),6)
 
 triggerheart_exelica_enhanced_ps2_op_pre03_frame_count=Framecount(ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out_interlace))
 #triggerheart_exelica_enhanced_ps2_op_pre03=is_deinterlace?CONVERT_24P_TO_60P_PATTERN_AAIBB(triggerheart_exelica_enhanced_ps2_op_pre03):ChangeFPS(triggerheart_exelica_enhanced_ps2_op_pre03,triggerheart_exelica_dc_pv_01_fade_out)

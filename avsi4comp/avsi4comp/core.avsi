@@ -289,25 +289,29 @@ function TRIM_LAST_CLIP(clip clip,int length){
 	return Trim(clip,Framecount(clip)-length,0)
 }
 
-function LOOP_STILL_FRAME(clip clip,int loop_count){
-	Assert(Framecount(clip)==1,"must be still frame")
+function TRIM_ONE_FRAME(clip clip,int frame_index){
+	return Trim(clip,frame_index,-1)
+}
+
+function LOOP_ONE_FRAME(clip clip,int loop_count){
+	Assert(Framecount(clip)==1,"must be one frame")
 	return Loop(clip,loop_count,0,0)
 }
 
 function STILL_FRAME(clip clip,int frame_index,int loop_count){
-	return LOOP_STILL_FRAME(Trim(clip,frame_index,-1),loop_count)
+	return LOOP_ONE_FRAME(TRIM_ONE_FRAME(clip,frame_index),loop_count)
 }
 
 function STILL_FIRST_FRAME(clip clip,int loop_count){
-	return LOOP_STILL_FRAME(TRIM_FIRST_CLIP(clip,1),loop_count)
+	return LOOP_ONE_FRAME(TRIM_FIRST_CLIP(clip,1),loop_count)
 }
 
 function STILL_MIDDLE_FRAME(clip clip,int loop_count){
-	return LOOP_STILL_FRAME(TRIM_MIDDLE_CLIP(clip,1),loop_count)
+	return LOOP_ONE_FRAME(TRIM_MIDDLE_CLIP(clip,1),loop_count)
 }
 
 function STILL_LAST_FRAME(clip clip,int loop_count){
-	return LOOP_STILL_FRAME(TRIM_LAST_CLIP(clip,1),loop_count)
+	return LOOP_ONE_FRAME(TRIM_LAST_CLIP(clip,1),loop_count)
 }
 
 function EXTEND_ANIMATION_CG(clip cg,int frame_count){
@@ -605,7 +609,7 @@ function SCALE_WIPE_FX(clip clip,string mode,int wipe_direction,float scale_fact
 	one_val_frame=is_out?end_frame:start_frame
 
 	clip_rgb32=ConvertToRGB32(clip)
-	clip_scale_wiped_containing_var=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_var*("+String(wipe_ratio)+"),scale_factor_"+mode+"=Spline(_var,0.0,1.0,1.0,"+String(scale_factor)+"))")
+	clip_scale_wiped_containing_var=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_var*("+String(wipe_ratio)+"),scale_factor_"+mode+"=Spline(_var,0.0,1.0,1.0,"+String(scale_factor)+",cubic=false))")
 	clip_scale_wiped=EVALUATE_VAR(clip_scale_wiped_containing_var,"_var",zero_val_frame,one_val_frame)
 	return OVERWRITE_RANGE(clip_rgb32,clip_scale_wiped,start_frame,end_frame)
 }
