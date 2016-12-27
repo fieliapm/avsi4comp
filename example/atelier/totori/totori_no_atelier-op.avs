@@ -154,10 +154,10 @@ totori_pv01_04=Trim(totori_pv01,2875,0)
 
 
 
-func="ColorYUV(off_u=-32.0,cont_u=-256.0,off_v=32.0,cont_v=-256.0)"
-totori_pv01_03_01=APPLY_RANGE(totori_pv01_03_01,1406,1481,func)
-totori_pv01_03_01=APPLY_RANGE(totori_pv01_03_01,1808,1850,func)
-totori_pv01_03_01=APPLY_RANGE(totori_pv01_03_01,1998,2044,func)
+filter_expression="ColorYUV(off_u=-32.0,cont_u=-256.0,off_v=32.0,cont_v=-256.0)"
+totori_pv01_03_01=APPLY_RANGE(totori_pv01_03_01,1406,1481,filter_expression)
+totori_pv01_03_01=APPLY_RANGE(totori_pv01_03_01,1808,1850,filter_expression)
+totori_pv01_03_01=APPLY_RANGE(totori_pv01_03_01,1998,2044,filter_expression)
 
 ######## PS3 (720P) ########
 

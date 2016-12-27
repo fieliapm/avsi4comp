@@ -263,7 +263,8 @@ SUBTITLE_FX("                             1",subtitle_x+eszett_assemble_13_offse
 ######## Post Processing ########
 
 #### restore interlace ####
-Bob(AssumeTFF())
+AssumeTFF()
+Bob()
 
 ConvertToYV12()
 #ConvertToYUY2()

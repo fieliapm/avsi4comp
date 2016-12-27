@@ -65,8 +65,8 @@ rorona_demo_02=Trim(rorona_pv_dvd_03,2274,2918)
 rorona_story_01=Trim(rorona_pv_dvd_01,0,1163)
 rorona_story_02=Trim(rorona_pv_dvd_03,0,1047)
 
-func="ColorYUV(off_u=-32.0,cont_u=-256.0,off_v=32.0,cont_v=-256.0)"
-rorona_story_01_post_processed=APPLY_RANGE(APPLY_RANGE(rorona_story_01,378,518,func),680,859,func)
+filter_expression="ColorYUV(off_u=-32.0,cont_u=-256.0,off_v=32.0,cont_v=-256.0)"
+rorona_story_01_post_processed=APPLY_RANGE(APPLY_RANGE(rorona_story_01,378,518,filter_expression),680,859,filter_expression)
 rorona_story=Dissolve(rorona_story_01_post_processed,rorona_story_02,130)
 
 #PV-01

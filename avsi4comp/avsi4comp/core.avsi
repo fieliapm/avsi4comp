@@ -136,9 +136,9 @@ function OVERWRITE_RANGE(clip clip,clip new_clip,int start_frame,int end_frame){
 	return ConditionalFilter(clip,clip,clip_conditional_half,"current_frame",">",String(end_frame))
 }
 
-function APPLY_RANGE(clip clip,int start_frame,int end_frame,string func){
+function APPLY_RANGE(clip clip,int start_frame,int end_frame,string expression){
 	clip
-	clip_filtered=Eval(func)
+	clip_filtered=Eval(expression)
 	return OVERWRITE_RANGE(clip,clip_filtered,start_frame,end_frame)
 }
 
@@ -487,10 +487,10 @@ function LINEAR_MOVE(clip clip,string overlay_clip,string mode,int start_frame,i
 
 ######## Transition ########
 
-function TRANSITION(clip clip_left,clip clip_right,int length,string func){
+function TRANSITION(clip clip_left,clip clip_right,int length,string expression){
 	left=TRIM_LAST_CLIP(clip_left,length)
 	right=TRIM_FIRST_CLIP(clip_right,length)
-	transition_clip_video=TRIM_FIRST_CLIP(clip_left,Framecount(clip_left)-length)+Eval(func)+Trim(clip_right,length,0)
+	transition_clip_video=TRIM_FIRST_CLIP(clip_left,Framecount(clip_left)-length)+Eval(expression)+Trim(clip_right,length,0)
 	transition_clip_audio=Dissolve(clip_left,clip_right,length)
 	return AudioDub(transition_clip_video,transition_clip_audio)
 }
@@ -624,12 +624,12 @@ function SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,float scale_fac
 
 ######## Stereoscopy ########
 
-function APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip clip,string func){
+function APPLY_FILTER_TO_LEFT_RIGHT_3D_CLIP(clip clip,string expression){
 	LeftRight3DToLeft(clip)
-	clip_left_filtered=Eval(func)
+	clip_left_filtered=Eval(expression)
 
 	LeftRight3DToRight(clip)
-	clip_right_filtered=Eval(func)
+	clip_right_filtered=Eval(expression)
 
 	return LeftRight3D(clip_left_filtered,clip_right_filtered)
 }
