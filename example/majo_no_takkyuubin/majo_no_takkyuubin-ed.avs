@@ -70,13 +70,15 @@ majo_no_takkyuubin_01_mark++ConvertToYUY2(FADE_IN_WITH_BRIGHTNESS_OFFSET(last,30
 
 ######## Post Processing ########
 
+is_deinterlace=false # select interlace/deinterlace
+
 #### restore interlace ####
-Bob()
+is_deinterlace?Bob():last
 
 #### restore aspect ratio ####
 Lanczos4Resize(856,480)
 
-ConvertToYV12()
+ConvertToYV12(interlaced=!is_deinterlace)
 #ConvertToYUY2()
 #ConvertToRGB24()
 

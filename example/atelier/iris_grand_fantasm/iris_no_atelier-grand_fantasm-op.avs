@@ -262,11 +262,13 @@ SUBTITLE_FX("                             1",subtitle_x+eszett_assemble_13_offse
 
 ######## Post Processing ########
 
+is_deinterlace=false # select interlace/deinterlace
+
 #### restore interlace ####
 AssumeTFF()
-Bob()
+is_deinterlace?Bob():last
 
-ConvertToYV12()
+ConvertToYV12(interlaced=!is_deinterlace)
 #ConvertToYUY2()
 #ConvertToRGB24()
 
