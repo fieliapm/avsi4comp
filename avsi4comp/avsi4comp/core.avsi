@@ -333,13 +333,20 @@ function ANIMATION_CG_VARY(string animation_cg_set,int dissolve_length,string cg
 
 ######## Field Based Processing ########
 
+function BOB_PRESERVE_ORIGINAL_FIELD(clip clip,float "b",float "c",float "height"){
+	b=Default(b,0.0)
+	c=Default(c,0.5)
+
+	return Bob(clip,b,c,height)
+}
+
 function BOB_AND_KEEP_PARITY(clip interlaced_clip,float "b",float "c",float "height"){
 	interlaced_clip_parity=GetParity(interlaced_clip)
-	bob_deinterlaced_clip=Bob(interlaced_clip,b,c,height)
+	bob_deinterlaced_clip=BOB_PRESERVE_ORIGINAL_FIELD(interlaced_clip,b,c,height)
 	return interlaced_clip_parity?AssumeTFF(bob_deinterlaced_clip):AssumeBFF(bob_deinterlaced_clip)
 }
 
-function PROGRESSIVE_TO_INTERLACE(clip clip){
+function PROGRESSIVE_TO_INTERLACED(clip clip){
 	return SelectEvery(DoubleWeave(ComplementParity(clip)),4,1)
 }
 

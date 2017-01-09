@@ -266,7 +266,7 @@ is_deinterlace=false # select interlace/deinterlace
 
 #### restore interlace ####
 AssumeTFF()
-is_deinterlace?Bob():last
+is_deinterlace?BOB_PRESERVE_ORIGINAL_FIELD():last
 
 ConvertToYV12(interlaced=!is_deinterlace)
 #ConvertToYUY2()

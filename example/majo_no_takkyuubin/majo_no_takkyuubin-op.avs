@@ -100,7 +100,7 @@ majo_no_takkyuubin_01_mark++ConvertToYUY2(last)
 is_deinterlace=false # select interlace/deinterlace
 
 #### restore interlace ####
-is_deinterlace?Bob():last
+is_deinterlace?BOB_PRESERVE_ORIGINAL_FIELD():last
 
 #### restore aspect ratio ####
 Lanczos4Resize(856,480)

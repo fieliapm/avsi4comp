@@ -121,7 +121,7 @@ ys_tenkuu_no_shinden_section_01_title++ConvertToYUY2(last)
 is_deinterlace=false # select interlace/deinterlace
 
 #### restore interlace ####
-is_deinterlace?Bob():last
+is_deinterlace?BOB_PRESERVE_ORIGINAL_FIELD():last
 
 #### restore aspect ratio ####
 Lanczos4Resize(640,480)
