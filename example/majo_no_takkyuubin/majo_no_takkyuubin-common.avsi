@@ -24,8 +24,10 @@ Import("..\..\avsi4comp\avsi4comp.avsi")
 
 ######## Subtitle ########
 
-subtitle_x=50
-subtitle_y=400
+global frame_index_scale=2
+
+global subtitle_x=50
+global subtitle_y=400
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
@@ -39,11 +41,11 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	text_color=is_title?color_indianred:subtitle_text_color
 
-	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
+	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,x,y,start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }
 
 function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame"){
-	return SUBTITLE_NORMAL(clip,text,x,y,first_frame,last_frame,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
+	return SUBTITLE_NORMAL(clip,text,x,y,first_frame*frame_index_scale,last_frame*frame_index_scale,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
 }
 
 ######## DVD (480P) ########
