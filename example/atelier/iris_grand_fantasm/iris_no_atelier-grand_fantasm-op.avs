@@ -140,6 +140,9 @@ AudioDub(iris_no_atelier_grand_fantasm_op_mute,bgm_48khz)
 
 
 
+AssumeTFF()
+iris_no_atelier_grand_fantasm_op_00=AssumeTFF(iris_no_atelier_grand_fantasm_op_00)
+
 thumbnail=Trim(8300,-30*5)
 
 ######## Subtitle ########
@@ -283,7 +286,6 @@ FILTER_INTERLACED_VIDEO("APPLY_SUBTITLE_PRE()")
 is_deinterlace=false # select interlace/deinterlace
 
 #### restore interlace ####
-AssumeTFF()
 is_deinterlace?BOB_PRESERVE_ORIGINAL_FIELD():last
 
 ConvertToYV12(interlaced=!is_deinterlace)
