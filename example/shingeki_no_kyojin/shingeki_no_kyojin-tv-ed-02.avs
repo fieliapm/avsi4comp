@@ -96,52 +96,53 @@ global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=400*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=24
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=24*1.5
+global subtitle_size=32*1.5
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_orangered
 
-function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_kana",bool "is_title"){
-	is_kana=Default(is_kana,false)
+function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_furigana",bool "is_title"){
+	is_furigana=Default(is_furigana,false)
 	is_title=Default(is_title,false)
 
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(color_orangered,$3F):subtitle_halo_color
-	size=is_kana?subtitle_size*0.5:subtitle_size
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_orangered,$C0):subtitle_halo_color
+	size=is_furigana?subtitle_size*0.5:subtitle_size
+	y=is_furigana?y-size:y
 
 	return SUBTITLE_FX_FLY_IN_FLY_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
 }
 
 SUBTITLE_FX("great escape//cinema staff|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,4835,4930,is_title=true)
 
-SUBTITLE_FX("例えば俺が俺じゃないとして、お前はお前だと言いきれるのか?",subtitle_x,subtitle_y,357,606)
-SUBTITLE_FX("砂の器を壊して、こぼれた心を拾って集められるか?",subtitle_x,subtitle_y-(subtitle_size*2),607,857)
+SUBTITLE_FX("例えば俺が俺じゃないとして、|お前はお前だと言いきれるのか?",subtitle_x,subtitle_y-subtitle_size,357,606)
+SUBTITLE_FX("砂の器を壊して、|こぼれた心を拾って集められるか?",subtitle_x,subtitle_y-(subtitle_size*3),607,857)
 
 SUBTITLE_FX("誰かの呼ぶ声が耳鳴りに変わった。",subtitle_x,subtitle_y,858,1073)
 SUBTITLE_FX("時が止まったみたいだ。さあ、目を覚ませ。",subtitle_x,subtitle_y-(subtitle_size*2),1077,1266)
 
-SUBTITLE_FX("                                                 はやて",subtitle_x,subtitle_y-(subtitle_size/2),1269,1513,is_kana=true)
+SUBTITLE_FX("                                                 はやて",subtitle_x,subtitle_y,1269,1513,is_furigana=true)
 SUBTITLE_FX("深い闇を俺は抜け出した。疾風みたいに逃げ出した。",subtitle_x,subtitle_y,1269,1513)
 SUBTITLE_FX("生きた屍みたいだった俺達は、壁の外へ。",subtitle_x,subtitle_y-(subtitle_size*2),1519,1755)
 
-SUBTITLE_FX("例えば世界に光が無いとして、お前はお前を見つけられるか?",subtitle_x,subtitle_y,1756,2005)
-SUBTITLE_FX("スローモーションで映った景色のピースを数えて繋げられるか?",subtitle_x,subtitle_y-(subtitle_size*2),2007,2255)
+SUBTITLE_FX("例えば世界に光が無いとして、|お前はお前を見つけられるか?",subtitle_x,subtitle_y-subtitle_size,1756,2005)
+SUBTITLE_FX("スローモーションで映った景色の|ピースを数えて繋げられるか?",subtitle_x,subtitle_y-(subtitle_size*3),2007,2255)
 
 SUBTITLE_FX("誰かの泣き声が地響きに変わった。",subtitle_x,subtitle_y,2257,2472)
 SUBTITLE_FX("ゼロから始めよう。さらば、最後の夜。",subtitle_x,subtitle_y-(subtitle_size*2),2475,2667)
 
-SUBTITLE_FX("長い夢を俺は抜け出した。赤い身体で逃げ出した。",subtitle_x,subtitle_y,2668,2914)
-SUBTITLE_FX("          けだもの",subtitle_x,subtitle_y-(subtitle_size/2)-(subtitle_size*2),2918,3156,is_kana=true)
+SUBTITLE_FX("長い夢を俺は抜け出した。|赤い身体で逃げ出した。",subtitle_x,subtitle_y-subtitle_size,2668,2914)
+SUBTITLE_FX("          けだもの",subtitle_x,subtitle_y-(subtitle_size*2),2918,3156,is_furigana=true)
 SUBTITLE_FX("飢えた獣みたいだった、俺達の目。",subtitle_x,subtitle_y-(subtitle_size*2),2918,3156)
 
 SUBTITLE_FX("嵐の彼方へ踏み込み、手を伸ばし、",subtitle_x,subtitle_y,3294,3539)
-SUBTITLE_FX("               やいば",subtitle_x,subtitle_y-(subtitle_size/2)-(subtitle_size*2),3543,4042,is_kana=true)
-SUBTITLE_FX("刺さった刃をおもいきり抜いて言った。「俺はお前だ」",subtitle_x,subtitle_y-(subtitle_size*2),3543,4042)
+SUBTITLE_FX("               やいば",subtitle_x,subtitle_y-(subtitle_size*3),3543,4042,is_furigana=true)
+SUBTITLE_FX("刺さった刃をおもいきり抜いて言った。|「俺はお前だ」",subtitle_x,subtitle_y-(subtitle_size*3),3543,4042)
 
-SUBTITLE_FX("                                                 はやて",subtitle_x,subtitle_y-(subtitle_size/2),4044,4289,is_kana=true)
+SUBTITLE_FX("                                                 はやて",subtitle_x,subtitle_y,4044,4289,is_furigana=true)
 SUBTITLE_FX("深い闇を俺は抜け出した。疾風みたいに逃げ出した。",subtitle_x,subtitle_y,4044,4289)
 SUBTITLE_FX("生きた屍みたいだった俺達は、壁の外へ。",subtitle_x,subtitle_y-(subtitle_size*2),4294,4523)
 SUBTITLE_FX("また会おうぜ、地図にない場所で。",subtitle_x,subtitle_y,4524,4675)

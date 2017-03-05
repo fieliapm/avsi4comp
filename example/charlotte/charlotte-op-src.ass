@@ -16,14 +16,14 @@ Video File: charlotte-op.avs
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,ＭＳ ゴシック,63,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4.5,4.5,2,113,113,113,1
-Style: Spell,ＭＳ ゴシック,63,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4.5,4.5,8,113,113,113,1
+Style: Default,ＭＳ ゴシック,72,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4.5,4.5,2,113,113,113,1
+Style: Spell,ＭＳ ゴシック,72,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4.5,4.5,8,113,113,113,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Comment: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,code once,function random_array(min,max,n) local newtbl={} for i=1,n do newtbl[i]=math.random(min,max) end return newtbl end
 Comment: 0,0:00:00.00,0:00:00.02,Default,,0000,0000,0000,code once,color_table={"&HBF00BF&","&HBF0000&","&HBFBF00&","&H00BF00&","&H00BFFF&","&H0000BF&"} color_index=1
-Comment: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,code once,max_offset_x=63*4 max_offset_y=2 preline_duration=666 fade_duration=100 postline_duration=500 postline_epsilon=5 time_shift=-250
+Comment: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,code once,max_offset_x=72*4 max_offset_y=2 preline_duration=666 fade_duration=100 postline_duration=500 postline_epsilon=5 time_shift=-250
 Comment: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,code line,start_array=random_array(fade_duration,preline_duration,0xFF) halo_color=color_table[color_index] color_index=color_index+1 if color_index>6 then color_index=1 end
 Comment: 0,0:00:00.00,0:00:00.02,Default,,0000,0000,0000,template syl loop 8,!retime("preline",-(preline_duration*((maxj-j+1)/maxj))+time_shift,-(preline_duration*((maxj-j)/maxj))+time_shift)!{\pos(!$sx+math.random(math.max($lleft+($swidth/2)-$swidth-$sx,-max_offset_x)*((maxj-j+1)/maxj),math.min($lright-($swidth/2)+$swidth-$sx,max_offset_x)*((maxj-j+1)/maxj))!,!$sy+math.random(-max_offset_y,max_offset_y)!)\fade(255,0,255,!-start_array[$si+1]+preline_duration*((maxj-j+1)/maxj)!,!-start_array[$si+1]+preline_duration*((maxj-j+1)/maxj)+fade_duration!,!preline_duration*((maxj-j+1)/maxj)+postline_epsilon!,!preline_duration*((maxj-j+1)/maxj)+postline_epsilon+1!)}{\3c!halo_color!\shad0}
 Comment: 0,0:00:00.00,0:00:00.02,Default,,0000,0000,0000,template syl,!retime("line",0+time_shift,postline_duration+time_shift)!{\pos(!$sx!,!$sy!)\fad(0,!postline_duration!)}{\3c!halo_color!\shad0}

@@ -102,17 +102,17 @@ koufuku_graffiti_tv_op_mute
 
 ### inherit start ###
 
-global subtitle_clip_halo_width=1
+#global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
 subtitle_x=50*2.25
-subtitle_y=400*2.25
+subtitle_y=395*2.25
 global subtitle_front_fade_count=8
 global subtitle_rear_fade_count=8
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28*2.25
+global subtitle_size=32*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 
@@ -121,7 +121,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	text_color=is_title?color_pink:subtitle_text_color
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
 
 ### inherit end ###
@@ -132,17 +132,17 @@ SUBTITLE_FX("誰かに伝えたいほど不思議でとても愛しい",subtitle_x,subtitle_y,383,5
 SUBTITLE_FX("そんな感情だから",subtitle_x,subtitle_y,529,599)
 SUBTITLE_FX("成層圏の彼方まで舞い上がってしまうくらいに",subtitle_x,subtitle_y,609,837)
 
-SUBTITLE_FX("目に見えない"+DOUBLE_QUOTE_STRING("幸せ")+"は 心のどこかからやって来るの",subtitle_x,subtitle_y,841,1118)
-SUBTITLE_FX("少し恥ずかしがりやな そのしっぽ 離さないでね",subtitle_x,subtitle_y,1119,1469)
+SUBTITLE_FX("目に見えない"+DOUBLE_QUOTE_STRING("幸せ")+"は|心のどこかからやって来るの",subtitle_x,subtitle_y-subtitle_size,841,1118)
+SUBTITLE_FX("少し恥ずかしがりやな|そのしっぽ 離さないでね",subtitle_x,subtitle_y-subtitle_size,1119,1469)
 
 SUBTITLE_FX(""+DOUBLE_QUOTE_STRING("淋しい")+"という気持ちに最初に気づいた人は",subtitle_x,subtitle_y,1498,1633)
 SUBTITLE_FX("恋をしていたのかな きっと",subtitle_x,subtitle_y,1647,1730)
 SUBTITLE_FX("誰か大切な人にとなりにいて欲しくて",subtitle_x,subtitle_y,1743,1875)
 SUBTITLE_FX("大好きになったから",subtitle_x,subtitle_y,1892,1962)
-SUBTITLE_FX("エメラルドグリーンの海に飛び込んでしまいたいほど",subtitle_x,subtitle_y,1970,2200)
+SUBTITLE_FX("エメラルドグリーンの海に飛び込んで|                          しまいたいほど",subtitle_x,subtitle_y-subtitle_size,1970,2200)
 
-SUBTITLE_FX("手にとれない"+DOUBLE_QUOTE_STRING("幸せ")+"は 誰かと一緒にいると分かるの",subtitle_x,subtitle_y,2202,2479)
-SUBTITLE_FX("こぼれそうなその笑顔 うれしくて 触れたいくらい",subtitle_x,subtitle_y,2481,2833)
+SUBTITLE_FX("手にとれない"+DOUBLE_QUOTE_STRING("幸せ")+"は|誰かと一緒にいると分かるの",subtitle_x,subtitle_y-subtitle_size,2202,2479)
+SUBTITLE_FX("こぼれそうなその笑顔|うれしくて 触れたいくらい",subtitle_x,subtitle_y-subtitle_size,2481,2833)
 
 SUBTITLE_FX("会いたい日は 会いたいって言おうよ",subtitle_x,subtitle_y,2864,2976)
 SUBTITLE_FX("泣きたい夜は 声あげて泣こう",subtitle_x,subtitle_y,3002,3112)
@@ -160,8 +160,8 @@ SUBTITLE_FX("クッキーみたいに バラまいて 誰かのこと",subtitle_x,subtitle_y,3811,
 SUBTITLE_FX("もっと幸せにできたなら 私も幸せになれる",subtitle_x,subtitle_y,3953,4304)
 SUBTITLE_FX("もっと きっと もっと",subtitle_x,subtitle_y,4310,4615)
 
-SUBTITLE_FX("目に見えない"+DOUBLE_QUOTE_STRING("幸せ")+"は 心のどこかからやって来るの",subtitle_x,subtitle_y,4747,5024)
-SUBTITLE_FX("少し恥ずかしがりやな そのしっぽ 離さずいてね",subtitle_x,subtitle_y,5026,5389)
+SUBTITLE_FX("目に見えない"+DOUBLE_QUOTE_STRING("幸せ")+"は|心のどこかからやって来るの",subtitle_x,subtitle_y-subtitle_size,4747,5024)
+SUBTITLE_FX("少し恥ずかしがりやな|そのしっぽ 離さずいてね",subtitle_x,subtitle_y-subtitle_size,5026,5389)
 
 SUBTITLE_FX("会いたい日は 会いたいって言おうよ",subtitle_x,subtitle_y,5410,5526)
 SUBTITLE_FX("泣きたい夜は 声あげて泣こう",subtitle_x,subtitle_y,5548,5658)

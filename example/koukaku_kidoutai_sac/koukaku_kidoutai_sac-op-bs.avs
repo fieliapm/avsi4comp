@@ -329,7 +329,7 @@ koukaku_kidoutai_sac_op_bs_part02_29p
 
 global time_ratio_30p=4
 
-global subtitle_clip_halo_width=1
+#global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
@@ -341,7 +341,7 @@ global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=24*2.25
 global subtitle_text_color=color_white
-global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_dodgerblue,$3F)
+global subtitle_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_dodgerblue,$C0)
 global subtitle_random_char_func="RANDOM_ASCII_CHAR"
 
 function EXTEND_ONE_FRAME(clip clip){
@@ -365,7 +365,7 @@ function REMAP_30P_SUBTITLE_LENGTH(int frame_count_30p,bool is_24p_session){
 function SUBTITLE_FX_1(clip clip,string text,float x,float y,int start_frame,int end_frame,int session_start_120p,bool is_24p_session,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(subtitle_halo_color,$0):subtitle_halo_color
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_halo_color,$FF):subtitle_halo_color
 
 	start_frame=REMAP_30P_SUBTITLE_TIME(start_frame,session_start_120p,is_24p_session)
 	end_frame=REMAP_30P_SUBTITLE_TIME(end_frame,session_start_120p,is_24p_session)
@@ -374,7 +374,7 @@ function SUBTITLE_FX_1(clip clip,string text,float x,float y,int start_frame,int
 
 	#return clip
 	#return SUBTITLE_TEST(clip,text,start_frame-front_fade_count,end_frame+rear_fade_count)
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,random_char_func=subtitle_random_char_func)
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_thick",subtitle_random_char_func)
 }
 
 function SUBTITLE_FX_2(clip clip,string text,float x,float y,int start_frame,int end_frame,int session_start_120p,bool is_24p_session){
@@ -385,7 +385,7 @@ function SUBTITLE_FX_2(clip clip,string text,float x,float y,int start_frame,int
 
 	#return clip
 	#return SUBTITLE_TEST(clip,text,start_frame-front_fade_count,end_frame+rear_fade_count)
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,subtitle_halo_color,"ex_thick")
 }
 
 ### inherit end ###

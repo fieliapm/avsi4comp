@@ -34,7 +34,7 @@ global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_lightgrey,$1F)
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_lightgrey,$E0)
 global subtitle_halo_color=color_black
 
 second_subtitle_x=50
@@ -45,7 +45,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	is_second_subtitle=Default(is_second_subtitle,false)
 	is_title=Default(is_title,false)
 
-	text_color=is_second_subtitle?OVERWRITE_COLOR_ALPHA(color_gray,$1F):subtitle_text_color
+	text_color=is_second_subtitle?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_gray,$E0):subtitle_text_color
 	halo_color=is_title?color_blue:subtitle_halo_color
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,halo_color)
@@ -66,7 +66,7 @@ function SUBTITLE_CENTER(clip clip,string text){
 	x=subtitle_clip_text_x-(subtitle_clip_font_size*StrLen(text)/4)
 	y=subtitle_clip_text_y
 
-	return SUBTITLE_NORMAL(clip,text,x,y,font=subtitle_clip_font,effects=subtitle_clip_effects,size=subtitle_clip_font_size,text_color=subtitle_clip_text_color,halo_color=subtitle_clip_halo_color,subtitle_ex=false)
+	return SUBTITLE_NORMAL(clip,text,x,y,font=subtitle_clip_font,effects=subtitle_clip_effects,size=subtitle_clip_font_size,text_color=subtitle_clip_text_color,halo_color=subtitle_clip_halo_color,subtitle_mode="standard")
 }
 
 function SEKAI_MEISAKU_GEKIJOU_CLIP(clip ref_clip,int length){

@@ -76,13 +76,13 @@ global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_aliceblue,$3F)
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_aliceblue,$C0)
 global subtitle_halo_color=color_black
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	text_color=is_title?OVERWRITE_COLOR_ALPHA(color_gold,$3F):subtitle_text_color
+	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_gold,$C0):subtitle_text_color
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }

@@ -8,15 +8,15 @@ PlayResX: 1920
 PlayResY: 1080
 ScaledBorderAndShadow: yes
 Video Aspect Ratio: 0
-Video Zoom: 2
+Video Zoom: 4
 Video Position: 0
 Last Style Storage: Default
 Video File: shingeki_no_kyojin-tv-op-01.avs
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default-furigana,ＭＳ ゴシック,31,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2.25,2.25,2,113,113,113,1
-Style: Default,ＭＳ ゴシック,63,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4.5,4.5,2,113,113,113,1
+Style: Default-furigana,ＭＳ ゴシック,36,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2.25,2.25,2,113,113,113,1
+Style: Default,ＭＳ ゴシック,72,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4.5,4.5,2,113,113,113,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -28,66 +28,66 @@ Comment: 0,0:00:00.00,0:00:00.00,Default,,0000,0000,0000,template syl notext loo
 Comment: 0,0:00:00.00,0:00:00.00,Default-furigana,,0000,0000,0000,template syl keeptags,!retime("line",-fx_split_constant["subtitle_fade_duration"]+fx_split_constant["time_shift"],fx_split_constant["subtitle_fade_duration"]+fx_split_constant["time_shift"])!{\fad(!fx_split_constant["subtitle_fade_duration"]!,!fx_split_constant["subtitle_fade_duration"]!)}{\1c&HFFFFFF&\3c!fx_split_constant["color2"]!\shad0}
 Dialogue: 0,0:00:21.36,0:00:24.03,Default,,0000,0000,0000,,Seid ihr das Essen? Nein, wir sind der Jäger!
 Dialogue: 0,0:00:35.98,0:00:41.04,Default,,0000,0000,0000,,踏まれた花の 名前も知らずに
-Dialogue: 0,0:00:35.98,0:00:41.04,Default-furigana,,0000,0000,0000,,{\pos(870,890)}ふ             はな       なまえ      し
+Dialogue: 0,0:00:35.98,0:00:41.04,Default-furigana,,0000,0000,0000,,{\pos(850,880)}ふ             はな       なまえ      し
 Dialogue: 0,0:00:41.30,0:00:46.46,Default,,0000,0000,0000,,地に墜ちた鳥は 風を待ち侘びる
-Dialogue: 0,0:00:41.30,0:00:46.46,Default-furigana,,0000,0000,0000,,{\pos(900,890)}ち      お         とり      かぜ     ま      わ
+Dialogue: 0,0:00:41.30,0:00:46.46,Default-furigana,,0000,0000,0000,,{\pos(890,880)}ち      お         とり      かぜ     ま      わ
 Dialogue: 0,0:00:46.61,0:00:51.79,Default,,0000,0000,0000,,祈ったところで 何も変わらない
-Dialogue: 0,0:00:46.61,0:00:51.79,Default-furigana,,0000,0000,0000,,{\pos(830,890)}いの                          なに     か
+Dialogue: 0,0:00:46.61,0:00:51.79,Default-furigana,,0000,0000,0000,,{\pos(810,880)}いの                          なに     か
 Dialogue: 0,0:00:51.87,0:00:57.13,Default,,0000,0000,0000,,≪不本意な現状≫を変えるのは 戦う覚悟だ...
-Dialogue: 0,0:00:51.87,0:00:57.13,Default-furigana,,0000,0000,0000,,{\pos(990,890)}いま                   か                  たたか    かくご
+Dialogue: 0,0:00:51.87,0:00:57.13,Default-furigana,,0000,0000,0000,,{\pos(990,880)}いま                   か                  たたか    かくご
 Dialogue: 0,0:00:57.19,0:00:59.33,Default,,0000,0000,0000,,屍踏み越えて
-Dialogue: 0,0:00:57.19,0:00:59.33,Default-furigana,,0000,0000,0000,,{\pos(860,890)}しかばね ふ      こ
+Dialogue: 0,0:00:57.19,0:00:59.33,Default-furigana,,0000,0000,0000,,{\pos(840,880)}しかばね ふ      こ
 Comment: 0,0:00:59.55,0:01:02.29,Default,,0000,0000,0000,,進む意志を 嗤う豚よ
-Comment: 0,0:00:59.55,0:01:02.29,Default-furigana,,0000,0000,0000,,{\pos(920,890)}すす      いし        わら     ぶ
+Comment: 0,0:00:59.55,0:01:02.29,Default-furigana,,0000,0000,0000,,{\pos(920,880)}すす      いし        わら     ぶ
 Comment: 0,0:01:02.39,0:01:07.81,Default,,0000,0000,0000,,家畜の安寧 虚偽の繁栄 死せる餓狼の自由を!
-Comment: 0,0:01:02.39,0:01:07.81,Default-furigana,,0000,0000,0000,,{\pos(910,890)}かちく     あんねい   きょぎ     はんえい   し          がろう      じゆう
+Comment: 0,0:01:02.39,0:01:07.81,Default-furigana,,0000,0000,0000,,{\pos(910,880)}かちく     あんねい   きょぎ     はんえい   し          がろう      じゆう
 Dialogue: 0,0:01:07.83,0:01:13.02,Default,,0000,0000,0000,,囚われた屈辱は 反撃の嚆矢だ
-Dialogue: 0,0:01:07.83,0:01:13.02,Default-furigana,,0000,0000,0000,,{\pos(920,890)}とら           くつじょく     はんげき     こうし
+Dialogue: 0,0:01:07.83,0:01:13.02,Default-furigana,,0000,0000,0000,,{\pos(920,880)}とら           くつじょく     はんげき     こうし
 Dialogue: 0,0:01:13.18,0:01:18.35,Default,,0000,0000,0000,,城壁の其の彼方 獲物を屠る≪狩人≫
-Dialogue: 0,0:01:13.18,0:01:18.35,Default-furigana,,0000,0000,0000,,{\pos(930,890)}じょうへき    そ      かなた    えもの     ほふ       イェーガー
+Dialogue: 0,0:01:13.18,0:01:18.35,Default-furigana,,0000,0000,0000,,{\pos(930,880)}じょうへき    そ      かなた    えもの     ほふ       イェーガー
 Dialogue: 0,0:01:18.50,0:01:23.71,Default,,0000,0000,0000,,迸る≪殺意≫に 其の身を灼きながら
-Dialogue: 0,0:01:18.50,0:01:23.71,Default-furigana,,0000,0000,0000,,{\pos(810,890)}ほとばし     しょうどう          そ      み      や
+Dialogue: 0,0:01:18.50,0:01:23.71,Default-furigana,,0000,0000,0000,,{\pos(790,880)}ほとばし     しょうどう          そ      み      や
 Dialogue: 0,0:01:23.80,0:01:30.36,Default,,0000,0000,0000,,黄昏に緋を穿つ 紅蓮の弓矢
-Dialogue: 0,0:01:23.80,0:01:30.36,Default-furigana,,0000,0000,0000,,{\pos(950,890)}たそがれ     ひ     うが       ぐれん      ゆみや
+Dialogue: 0,0:01:23.80,0:01:30.36,Default-furigana,,0000,0000,0000,,{\pos(950,880)}たそがれ     ひ     うが       ぐれん      ゆみや
 Dialogue: 0,0:01:50.26,0:01:55.36,Default,,0000,0000,0000,,矢を番え追い駈ける 標的は逃がさない
-Dialogue: 0,0:01:50.26,0:01:55.36,Default-furigana,,0000,0000,0000,,{\pos(840,890)}や     つが     お      か             やつ       に
+Dialogue: 0,0:01:50.26,0:01:55.36,Default-furigana,,0000,0000,0000,,{\pos(820,880)}や     つが     お      か             やつ       に
 Dialogue: 0,0:01:55.53,0:02:00.70,Default,,0000,0000,0000,,矢を放ち追い詰める 決して逃がさない
-Dialogue: 0,0:01:55.53,0:02:00.70,Default-furigana,,0000,0000,0000,,{\pos(840,890)}や     はな     お      つ            け          に
+Dialogue: 0,0:01:55.53,0:02:00.70,Default-furigana,,0000,0000,0000,,{\pos(820,880)}や     はな     お      つ            け          に
 Dialogue: 0,0:02:00.98,0:02:05.83,Default,,0000,0000,0000,,限界まで引き絞る はち切れそうな弦
-Dialogue: 0,0:02:00.98,0:02:05.83,Default-furigana,,0000,0000,0000,,{\pos(960,890)}げんかい         び     しぼ               き                 つる
+Dialogue: 0,0:02:00.98,0:02:05.83,Default-furigana,,0000,0000,0000,,{\pos(960,880)}げんかい         び     しぼ               き                 つる
 Dialogue: 0,0:02:06.15,0:02:11.10,Default,,0000,0000,0000,,≪標的≫が息絶えるまで 何度でも放つ
-Dialogue: 0,0:02:06.15,0:02:11.10,Default-furigana,,0000,0000,0000,,{\pos(980,890)}やつ          いき た                    なんど         はな
+Dialogue: 0,0:02:06.15,0:02:11.10,Default-furigana,,0000,0000,0000,,{\pos(980,880)}やつ          いき た                    なんど         はな
 Dialogue: 0,0:02:11.55,0:02:14.01,Default,,0000,0000,0000,,獲物を殺すのは
-Dialogue: 0,0:02:11.55,0:02:14.01,Default-furigana,,0000,0000,0000,,{\pos(880,890)}えもの     ころ
+Dialogue: 0,0:02:11.55,0:02:14.01,Default-furigana,,0000,0000,0000,,{\pos(860,880)}えもの     ころ
 Dialogue: 0,0:02:14.07,0:02:16.97,Default,,0000,0000,0000,,≪凶器≫でも 技術でもない
-Dialogue: 0,0:02:14.07,0:02:16.97,Default-furigana,,0000,0000,0000,,{\pos(870,890)}どうぐ               ぎじゅつ
+Dialogue: 0,0:02:14.07,0:02:16.97,Default-furigana,,0000,0000,0000,,{\pos(860,880)}どうぐ               ぎじゅつ
 Dialogue: 0,0:02:17.21,0:02:22.10,Default,,0000,0000,0000,,研ぎ澄まされた お前自身の殺意だ
-Dialogue: 0,0:02:17.21,0:02:22.10,Default-furigana,,0000,0000,0000,,{\pos(930,890)}と      す                       まえ じしん      さつい
+Dialogue: 0,0:02:17.21,0:02:22.10,Default-furigana,,0000,0000,0000,,{\pos(920,880)}と      す                       まえ じしん      さつい
 Dialogue: 0,0:02:22.25,0:02:27.24,Default,,0000,0000,0000,,Wir sind die Jäger 焔のように熱く!
-Dialogue: 0,0:02:22.25,0:02:27.24,Default-furigana,,0000,0000,0000,,{\pos(1200,890)}ほのお                や
+Dialogue: 0,0:02:22.25,0:02:27.24,Default-furigana,,0000,0000,0000,,{\pos(1230,880)}ほのお                や
 Dialogue: 0,0:02:27.55,0:02:33.72,Default,,0000,0000,0000,,Wir sind die Jäger 氷のように冷ややかに!
-Dialogue: 0,0:02:27.55,0:02:33.72,Default-furigana,,0000,0000,0000,,{\pos(1100,890)}こおり                ひ
+Dialogue: 0,0:02:27.55,0:02:33.72,Default-furigana,,0000,0000,0000,,{\pos(1120,880)}こおり                ひ
 Dialogue: 0,0:02:32.87,0:02:37.87,Default,,0000,0000,0000,,Wir sind die Jäger 已を矢に込めて
-Dialogue: 0,0:02:32.87,0:02:37.87,Default-furigana,,0000,0000,0000,,{\pos(1180,890)}おのれ    や      こ
+Dialogue: 0,0:02:32.87,0:02:37.87,Default-furigana,,0000,0000,0000,,{\pos(1210,880)}おのれ    や      こ
 Dialogue: 0,0:02:38.19,0:02:44.85,Default,,0000,0000,0000,,Wir sind die Jäger 全てを貫いて征け
-Dialogue: 0,0:02:38.19,0:02:44.85,Default-furigana,,0000,0000,0000,,{\pos(1220,890)}すべ       つらぬ        い
+Dialogue: 0,0:02:38.19,0:02:44.85,Default-furigana,,0000,0000,0000,,{\pos(1260,880)}すべ       つらぬ        い
 Dialogue: 0,0:03:49.43,0:03:54.13,Default,,0000,0000,0000,,何かを変える事が出来るのは
-Dialogue: 0,0:03:49.43,0:03:54.13,Default-furigana,,0000,0000,0000,,{\pos(850,890)}なに         か         こと      でき
+Dialogue: 0,0:03:49.43,0:03:54.13,Default-furigana,,0000,0000,0000,,{\pos(830,880)}なに         か         こと      でき
 Dialogue: 0,0:03:54.77,0:03:59.57,Default,,0000,0000,0000,,何かを捨てる事が出来るもの
-Dialogue: 0,0:03:54.77,0:03:59.57,Default-furigana,,0000,0000,0000,,{\pos(850,890)}なに         す         こと      でき
+Dialogue: 0,0:03:54.77,0:03:59.57,Default-furigana,,0000,0000,0000,,{\pos(830,880)}なに         す         こと      でき
 Dialogue: 0,0:03:59.68,0:04:05.13,Default,,0000,0000,0000,,何ひとつ≪危險性≫等 背負わないままで
-Dialogue: 0,0:03:59.68,0:04:05.13,Default-furigana,,0000,0000,0000,,{\pos(760,890)}なに                   リスク       など    せお
+Dialogue: 0,0:03:59.68,0:04:05.13,Default-furigana,,0000,0000,0000,,{\pos(730,880)}なに                   リスク       など    せお
 Dialogue: 0,0:04:05.44,0:04:09.54,Default,,0000,0000,0000,,何かが叶う等......
-Dialogue: 0,0:04:05.44,0:04:09.54,Default-furigana,,0000,0000,0000,,{\pos(870,890)}なに        かな    など
+Dialogue: 0,0:04:05.44,0:04:09.54,Default-furigana,,0000,0000,0000,,{\pos(850,880)}なに        かな    など
 Dialogue: 0,0:04:09.67,0:04:14.83,Default,,0000,0000,0000,,暗愚の想定 ...唯の幻影 ...今はに無謀な勇気も...
-Dialogue: 0,0:04:09.67,0:04:14.83,Default-furigana,,0000,0000,0000,,{\pos(875,890)}あん ぐ     そうてい        ただ    げんえい        いま         むぼう      ゆうき
+Dialogue: 0,0:04:09.67,0:04:14.83,Default-furigana,,0000,0000,0000,,{\pos(860,880)}あん ぐ     そうてい        ただ    げんえい        いま         むぼう      ゆうき
 Dialogue: 0,0:04:14.99,0:04:20.23,Default,,0000,0000,0000,,『自由』の尖兵 ...賭けの攻勢 奔る奴隷に勝利を!
-Dialogue: 0,0:04:14.99,0:04:20.23,Default-furigana,,0000,0000,0000,,{\pos(950,890)}じゆう         せんぺい         か         こうせい  はし     どれい     しょうり
+Dialogue: 0,0:04:14.99,0:04:20.23,Default-furigana,,0000,0000,0000,,{\pos(950,880)}じゆう         せんぺい         か         こうせい  はし     どれい     しょうり
 Dialogue: 0,0:04:20.46,0:04:25.58,Default,,0000,0000,0000,,架せられた不条理は 進撃の嚆矢だ
-Dialogue: 0,0:04:20.46,0:04:25.58,Default-furigana,,0000,0000,0000,,{\pos(930,890)}か                  ふじょうり       しんげき     こうし
+Dialogue: 0,0:04:20.46,0:04:25.58,Default-furigana,,0000,0000,0000,,{\pos(920,880)}か                  ふじょうり       しんげき     こうし
 Dialogue: 0,0:04:25.76,0:04:31.02,Default,,0000,0000,0000,,奪われた其の地平 『自由』を望む≪あの日の少年≫
-Dialogue: 0,0:04:25.76,0:04:31.02,Default-furigana,,0000,0000,0000,,{\pos(860,890)}うば             そ      ちへい        せかい         のぞ                 エレン
+Dialogue: 0,0:04:25.76,0:04:31.02,Default-furigana,,0000,0000,0000,,{\pos(840,880)}うば             そ      ちへい        せかい         のぞ                 エレン
 Dialogue: 0,0:04:31.11,0:04:36.29,Default,,0000,0000,0000,,止めどなき≪殺意≫に 其の身を侵されながら
-Dialogue: 0,0:04:31.11,0:04:36.29,Default-furigana,,0000,0000,0000,,{\pos(810,890)}と                    しょうどう          そ      み     おか
+Dialogue: 0,0:04:31.11,0:04:36.29,Default-furigana,,0000,0000,0000,,{\pos(790,880)}と                    しょうどう          そ      み     おか
 Dialogue: 0,0:04:36.39,0:04:42.91,Default,,0000,0000,0000,,宵闇に紫を運ぶ 冥府の弓矢
-Dialogue: 0,0:04:36.39,0:04:42.91,Default-furigana,,0000,0000,0000,,{\pos(950,890)}よいやみ     し     はこ       めいふ      ゆみや
+Dialogue: 0,0:04:36.39,0:04:42.91,Default-furigana,,0000,0000,0000,,{\pos(950,880)}よいやみ     し     はこ       めいふ      ゆみや

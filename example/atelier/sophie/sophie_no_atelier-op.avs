@@ -99,25 +99,25 @@ thumbnail=Trim(7082,-30*5)
 
 ######## Subtitle ########
 
-#global subtitle_clip_width=1280
-#global subtitle_clip_height=720
+global subtitle_clip_width=1920
+global subtitle_clip_height=1080
 
-subtitle_x=50
-subtitle_y=400
+subtitle_x=50*2.25
+subtitle_y=395*2.25
 global subtitle_front_fade_count=15
 global subtitle_rear_fade_count=15
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28
+global subtitle_size=32*2.25
 global subtitle_text_color=color_forestgreen
 global subtitle_halo_color=color_white
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	text_color=is_title?OVERWRITE_COLOR_ALPHA(subtitle_text_color,$3F):subtitle_text_color
+	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$C0):subtitle_text_color
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
 
 SUBTITLE_FX("Phronesis//RURUTIA|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7611,7834,true)

@@ -42,7 +42,7 @@ hanzawa_naoki_tv_09_oowata_angry=OVERWRITE_RANGE(hanzawa_naoki_tv_09_oowata_angr
 ######## Pre Combine - Subtitle ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
 global subtitle_size=32

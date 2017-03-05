@@ -175,7 +175,7 @@ global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_pink,$2F)
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_pink,$D0)
 global subtitle_halo_color=color_black
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){

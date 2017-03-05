@@ -118,22 +118,22 @@ global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=400*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28*1.5
+global subtitle_size=32*1.5
 global subtitle_session01_text_color=color_black
-global subtitle_session01_halo_color=OVERWRITE_COLOR_ALPHA(color_white,$3F)
+global subtitle_session01_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_white,$C0)
 global subtitle_session02_text_color=color_white
-global subtitle_session02_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$3F)
+global subtitle_session02_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_black,$C0)
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool is_session_01){
 	text_color=is_session_01?subtitle_session01_text_color:subtitle_session02_text_color
 	halo_color=is_session_01?subtitle_session01_halo_color:subtitle_session02_halo_color
 
-	return SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,halo_color)
+	return SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,halo_color,"ex_thick")
 }
 
 SUBTITLE_FX("‰Ô•W//–ìŒ©ŽR–r–¢|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,382,702,true)

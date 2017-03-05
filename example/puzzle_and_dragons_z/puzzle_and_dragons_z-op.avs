@@ -181,12 +181,12 @@ puzzle_and_dragons_z_op_mute
 ### inherit start ###
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28
+global subtitle_size=32
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 

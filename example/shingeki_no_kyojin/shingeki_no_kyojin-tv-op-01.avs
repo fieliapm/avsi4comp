@@ -101,19 +101,21 @@ global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=400*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=24
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28*1.5
+global subtitle_size=32*1.5
 global subtitle_text_color=color_white
-global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_black,$3F)
+global subtitle_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_black,$C0)
+umlaut_offset=7
+slogan_space=62
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(color_orangered,$3F):subtitle_halo_color
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_orangered,$C0):subtitle_halo_color
 	size=is_title?subtitle_size:subtitle_size*0.8
 
 	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
@@ -121,14 +123,14 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 SUBTITLE_FX("çgò@ÇÃã|ñÓ//Linked Horizon|- by fielia@AVISynth",-subtitle_x,subtitle_x,565,821,true)
 
-SUBTITLE_FX("Angriff auf die Titanen.",subtitle_x,65*1*1.5,4688,5480) # 4688,4748
-SUBTITLE_FX("Der Junge von einst wird bald zum Schwert greifen.",subtitle_x,65*2*1.5,4775,5480) # 4775,4907
-SUBTITLE_FX("""                                                     "      """,subtitle_x,(65*3-5)*1.5,4979,5480) # 4979,5098
-SUBTITLE_FX("Wer nur seine Machtlosigkeit beklagt, kann nichts verandern.",subtitle_x,65*3*1.5,4979,5480) # 4979,5098
-SUBTITLE_FX("Der Junge von einst wird bald das schwarze Schwert ergreifen.",subtitle_x,65*4*1.5,5108,5480) # 5108,5224
-SUBTITLE_FX("Hass und Zorn sind eine zweischneidige Klinge.",subtitle_x,65*5*1.5,5237,5480) # 5237,5330
-SUBTITLE_FX("""                                              "           """,subtitle_x,(65*6-5)*1.5,5355,5480) # 5355,5480
-SUBTITLE_FX("Bald, eines Tages, wird er dem Schicksal die Zahne zeigen.",subtitle_x,65*6*1.5,5355,5480) # 5355,5480
+SUBTITLE_FX("Angriff auf die Titanen.",subtitle_x,slogan_space*1*1.5,4688,5480) # 4688,4748
+SUBTITLE_FX("Der Junge von einst wird bald zum Schwert greifen.",subtitle_x,slogan_space*2*1.5,4775,5480) # 4775,4907
+SUBTITLE_FX("""                                                     "      """,subtitle_x,(slogan_space*3-umlaut_offset)*1.5,4979,5480) # 4979,5098
+SUBTITLE_FX("Wer nur seine Machtlosigkeit beklagt, kann nichts verandern.",subtitle_x,slogan_space*3*1.5,4979,5480) # 4979,5098
+SUBTITLE_FX("Der Junge von einst wird bald das schwarze Schwert ergreifen.",subtitle_x,slogan_space*4*1.5,5108,5480) # 5108,5224
+SUBTITLE_FX("Hass und Zorn sind eine zweischneidige Klinge.",subtitle_x,slogan_space*5*1.5,5237,5480) # 5237,5330
+SUBTITLE_FX("""                                              "           """,subtitle_x,(slogan_space*6-umlaut_offset)*1.5,5355,5480) # 5355,5480
+SUBTITLE_FX("Bald, eines Tages, wird er dem Schicksal die Zahne zeigen.",subtitle_x,slogan_space*6*1.5,5355,5480) # 5355,5480
 
 
 

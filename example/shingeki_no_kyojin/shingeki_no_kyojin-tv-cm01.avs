@@ -45,11 +45,11 @@ cm_ending=shingeki_no_kyojin_tv_01_cm_cruel_world
 ######## Pre Combine - Subtitle ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_white,$3F)
+global subtitle_size=32
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_white,$C0)
 global subtitle_halo_color=color_black
 
 second_subtitle_x=-50

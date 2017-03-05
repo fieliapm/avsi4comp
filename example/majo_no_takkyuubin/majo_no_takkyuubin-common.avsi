@@ -27,13 +27,13 @@ Import("..\..\avsi4comp\avsi4comp.avsi")
 global frame_index_scale=2
 
 global subtitle_x=50
-global subtitle_y=400
+global subtitle_y=395
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_lightpink,$3F)
+global subtitle_size=32
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_lightpink,$C0)
 global subtitle_halo_color=color_midnightblue
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){

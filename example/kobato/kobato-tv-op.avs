@@ -200,12 +200,12 @@ AudioDub(kobato_tv_op_mute,bgm_48khz)
 ######## Subtitle ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_front_fade_count=12
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28
+global subtitle_size=32
 global subtitle_text_color=color_pink
 global subtitle_halo_color=color_red
 

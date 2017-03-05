@@ -29,11 +29,11 @@ Import("maoyuu-tv-common.avsi")
 ######## Function ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_gold,$3F)
+global subtitle_size=32
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_gold,$C0)
 global subtitle_halo_color=color_black
 
 second_subtitle_x=-50
@@ -42,19 +42,19 @@ second_subtitle_y=50
 function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",bool "is_title"){
 	is_title=Default(is_title,false)
 
-	text_color=is_title?OVERWRITE_COLOR_ALPHA(color_red,$3F):subtitle_text_color
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(subtitle_text_color,$0):subtitle_halo_color
+	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_red,$C0):subtitle_text_color
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$FF):subtitle_halo_color
 	size=is_title?subtitle_size*2:subtitle_size
 	x=is_title?(subtitle_clip_width/2)-(size*StrLen(text)/4):x
-	y=is_title?240:y
+	y=is_title?(subtitle_clip_height/2)-(size/2):y
 
 	return SUBTITLE_NORMAL(clip,text,x,y,first_frame,last_frame,subtitle_font,subtitle_effects,size,text_color,halo_color)
 }
 
 function SUBTITLE_WARNING(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame"){
-	text_color=OVERWRITE_COLOR_ALPHA(color_red,$3F)
-	halo_color=OVERWRITE_COLOR_ALPHA(subtitle_text_color,$0)
-	size=Round(subtitle_size*1.2)
+	text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_red,$C0)
+	halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$FF)
+	size=Round(subtitle_size*1.1)
 
 	return SUBTITLE_FX_SMOOTH_BLINK(clip,text,x,y,first_frame,last_frame,subtitle_font,subtitle_effects,size,text_color,halo_color,min_opacity=0.2,max_opacity=1.0)
 }
@@ -73,7 +73,7 @@ prologue=SUBTITLE_N(prologue,"ê•â‰èäì≤ú€ìIèÓåi",subtitle_x,subtitle_y,480,515,fa
 prologue=SUBTITLE_N(prologue,"îIìI...ì≤ú€...?",subtitle_x,subtitle_y,580,635,false)
 prologue=SUBTITLE_N(prologue,"ê•ìI",subtitle_x,subtitle_y,675,685,false)
 prologue=SUBTITLE_N(prologue,"ìﬂå¬ô‘òAö±ìIè„ñ óLèYõı,îIëzâﬂöv?",subtitle_x,subtitle_y,740,825,false)
-prologue=SUBTITLE_N(prologue,"<--(íÜâõëÂõ{)",-60,80,740,825,false)
+prologue=SUBTITLE_N(prologue,"<--(íÜâõëÂõ{)",-60,75,740,825,false)
 prologue=SUBTITLE_N(prologue,"àΩê•ëzâﬂëÂçuì∞ìIó°ñ óLèYõıöv?",subtitle_x,subtitle_y,875,975,false)
 prologue=SUBTITLE_N(prologue,"(îáä‘òèÍìIñºéö)",second_subtitle_x,second_subtitle_y,875,975,false)
 prologue=SUBTITLE_N(prologue,"ñÁãñóLîb...ú‰äYê‡èÌîáõıëzâﬂ...",subtitle_x,subtitle_y,1000,1065,false)
@@ -217,10 +217,10 @@ do_not_eat_food_01=ConvertToYV12(do_not_eat_food_01)
 
 do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"óvê•ä∏õÊà˘óøêiòèÍäÖìIòb,òîÌstaff‡ñéÄöG!",subtitle_x,subtitle_y,30,90,false)
 do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"úÉõıîáõıñÏÂ≈!",subtitle_x,subtitle_y,105,135,false)
-do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"ïsä£óπà˘óøçƒêièÍìIòb,â¬‚iïsè„ê•èÖéÁãKë•öG(éEüÜ)",subtitle_x,subtitle_y,145,260,false)
+do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"ïsä£óπà˘óøçƒêièÍìIòb|â¬‚iïsè„ê•èÖéÁãKë•öG(éEüÜ)",subtitle_x,subtitle_y-subtitle_size,145,260,false)
 do_not_eat_food_02=ConvertToYV12(do_not_eat_food_02)
 
-light_off_01=SUBTITLE_N(light_off_01,"àˆà◊çÑçÑÁ≤è•âÃÁ≤äﬂP&D,èäà»îÌçHçÏêlàıópñÇñ@ËêãŸï¬óπ",subtitle_x,subtitle_y,5,120,false)
+light_off_01=SUBTITLE_N(light_off_01,"àˆà◊çÑçÑÁ≤è•âÃÁ≤äﬂP&D|èäà»îÌçHçÏêlàıópñÇñ@ËêãŸï¬óπ",subtitle_x,subtitle_y-subtitle_size,5,120,false)
 light_off_01=ConvertToYV12(light_off_01)
 
 light_off_02=SUBTITLE_WARNING(light_off_02,"[ï˙ëMåıçsà◊éãìØêªë¢çÇó∫ìx]",second_subtitle_x,second_subtitle_y,5,515)
@@ -254,7 +254,7 @@ keep_quiet_01=ConvertToYV12(keep_quiet_01)
 
 keep_quiet_02=SUBTITLE_WARNING(keep_quiet_02,"[ñ‹ëÂ„ﬂà˙ã©,·¢ê∂ê´ÈzèÔêøó‚ËŒí ímíÜçTë‰]",second_subtitle_x,second_subtitle_y,5,305)
 keep_quiet_02=SUBTITLE_N(keep_quiet_02,"à¢,â∂à¢à¢!îIîáê•ç›òÙèYõı!?",subtitle_x,subtitle_y,10,75,false)
-keep_quiet_02=SUBTITLE_N(keep_quiet_02,"îáô_å¬åéîIìsüìäﬂKinectìIÉâÉuÅôÉgÉå,‡’é©ï¬ËêòÙâÃ",subtitle_x,subtitle_y,80,175,false)
+keep_quiet_02=SUBTITLE_N(keep_quiet_02,"îáô_å¬åéîIìsüìäﬂKinectìIÉâÉuÅôÉgÉå|‡’é©ï¬ËêòÙâÃ",subtitle_x,subtitle_y-subtitle_size,80,175,false)
 keep_quiet_02=SUBTITLE_N(keep_quiet_02,"ë ì˜ìxâ ëRïsù–˙ùâ¡",subtitle_x,subtitle_y,200,240,false)
 keep_quiet_02=SUBTITLE_N(keep_quiet_02,"óvãéóπ~~~!!!",subtitle_x,subtitle_y,245,265,false)
 keep_quiet_02=ConvertToYV12(keep_quiet_02)
@@ -280,7 +280,7 @@ refuse=ConvertToYV12(refuse)
 do_not_fight=SUBTITLE_WARNING(do_not_fight,"[ã÷é~â∆ñ\ìôäiÈ¶çsà◊,ópà§êlï¯ñçäCKñíìØ]",second_subtitle_x,second_subtitle_y,12,410)
 do_not_fight=SUBTITLE_N(do_not_fight,"ä≤èYõı",subtitle_x,subtitle_y,85,105,false)
 do_not_fight=SUBTITLE_N(do_not_fight,"çƒê‡îÏìsìs,çƒê‡êlâ∆îÏìsìsë ì˜ñÇâ§à¢!",subtitle_x,subtitle_y,120,235,false)
-do_not_fight=SUBTITLE_N(do_not_fight,"âÃÊèç’ë¸óvëzè•èAâ¬à»óπà¢,ä«îIê•ïsê•‚úí`ëÂâπís!",subtitle_x,subtitle_y,255,365,false)
+do_not_fight=SUBTITLE_N(do_not_fight,"âÃÊèç’ë¸óvëzè•èAâ¬à»óπà¢|ä«îIê•ïsê•‚úí`ëÂâπís!",subtitle_x,subtitle_y-subtitle_size,255,365,false)
 do_not_fight=SUBTITLE_N(do_not_fight,"ïsâ¬î\ìﬂõıä»ödîb",subtitle_x,subtitle_y,375,410,false)
 do_not_fight=ConvertToYV12(do_not_fight)
 

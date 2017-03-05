@@ -60,17 +60,17 @@ thumbnail=Trim(0,-24*5)
 
 ######## Subtitle ########
 
-global subtitle_clip_halo_width=1
+#global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
 subtitle_x=50*2.25
-subtitle_y=400*2.25
+subtitle_y=390*2.25
 global subtitle_front_fade_count=8
 global subtitle_rear_fade_count=8
 global subtitle_font="MS Gothic"
 global subtitle_effects="bc"
-global subtitle_size=28*2.25
+global subtitle_size=40*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 
@@ -79,9 +79,10 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	text_color=is_title?color_pink:subtitle_text_color
 	effects=is_title?"b":subtitle_effects
-	size=is_title?18*2.25:subtitle_size
+	size=is_title?20*2.25:subtitle_size
+	y=is_title?y+(subtitle_size*2)-(size*2):y
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,effects,Round(size),text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,effects,Round(size),text_color,subtitle_halo_color,"ex_thick")
 }
 
 koufuku_graffiti_tv_next_episode_frame_count=Framecount()

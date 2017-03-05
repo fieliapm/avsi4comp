@@ -253,16 +253,16 @@ thumbnail=Trim(4586,-24*5)
 
 ######## Subtitle ########
 
-#global subtitle_clip_width=1280
-#global subtitle_clip_height=720
+global subtitle_clip_width=1920
+global subtitle_clip_height=1080
 
-subtitle_x=50
-subtitle_y=395
+subtitle_x=50*2.25
+subtitle_y=395*2.25
 global subtitle_front_fade_count=12
 global subtitle_rear_fade_count=12
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=32
+global subtitle_size=32*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 
@@ -276,12 +276,13 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_black,$C0):text_color
 	halo_color=is_title?color_pink:halo_color
 
+	subtitle_mode=is_furigana?"ex":"ex_thick_reduce_memory"
 	size=is_furigana?subtitle_size*0.5:subtitle_size
 	y=is_furigana?y-size:y
 	front_fade_count=is_title?238-214:subtitle_front_fade_count
 	rear_fade_count=is_title?1:subtitle_rear_fade_count
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color,subtitle_mode)
 }
 
 SUBTITLE_FX("あーーーー",subtitle_x,subtitle_y-subtitle_size*2,24,86,is_denormal_kasi=true)
@@ -303,8 +304,8 @@ SUBTITLE_FX("一枚一枚増える色の違う写真めくる様に",subtitle_x,subtitle_y-subtitl
 SUBTITLE_FX("つた                    こと    いま   むかし               おな",subtitle_x,subtitle_y,1882,2403,true)
 SUBTITLE_FX("伝えたかった事は今も昔もずっと同じままだよ",subtitle_x,subtitle_y,1882,2403)
 SUBTITLE_FX("Darling",subtitle_x,subtitle_y-subtitle_size*2,2409,2447)
-SUBTITLE_FX("まよ                ある                                               みちしるべ",subtitle_x,subtitle_y,2442,3018,true)
-SUBTITLE_FX("迷わぬよう歩いていけるたったひとつの道標",subtitle_x,subtitle_y,2442,3018)
+SUBTITLE_FX("まよ                ある                                               みちしるべ",subtitle_x,subtitle_x+subtitle_size,2442,3018,true)
+SUBTITLE_FX("迷わぬよう歩いていけるたったひとつの道標",subtitle_x,subtitle_x+subtitle_size,2442,3018)
 
 SUBTITLE_FX("        まえ む",subtitle_x,subtitle_y,3145,3298,true)
 SUBTITLE_FX("ねぇ前向いて　あたしはここにいるでしょ？",subtitle_x,subtitle_y,3145,3298)
@@ -325,8 +326,8 @@ SUBTITLE_FX("落ちる雨に映る二人　世界は誰も知らない",subtitle_x,subtitle_y,4831,
 SUBTITLE_FX("あーーーー",subtitle_x,subtitle_y-subtitle_size*2,5375,5440,is_denormal_kasi=true)
 SUBTITLE_FX("こい                                         な                 なん ど  め",subtitle_x,subtitle_y,5444,5661,true)
 SUBTITLE_FX("恋をしたのはいつからか泣いたのは何度目か",subtitle_x,subtitle_y,5444,5661)
-SUBTITLE_FX("かぞ            よる     あ                 こま",subtitle_x,subtitle_y-subtitle_size*2,5663,5911,true)
-SUBTITLE_FX("数えると夜が明けるわ　困るな...",subtitle_x,subtitle_y-subtitle_size*2,5663,5911)
+SUBTITLE_FX("かぞ            よる     あ                 こま",subtitle_x,subtitle_x+subtitle_size,5663,5911,true)
+SUBTITLE_FX("数えると夜が明けるわ　困るな...",subtitle_x,subtitle_x+subtitle_size,5663,5911)
 SUBTITLE_FX("Darling",subtitle_x,subtitle_y,5918,6022,is_denormal_kasi=true)
 
 SUBTITLE_FX("つた                    こと    いま   むかし               おな",subtitle_x,subtitle_y,6513,7036,true)

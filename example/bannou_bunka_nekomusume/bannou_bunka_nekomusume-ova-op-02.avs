@@ -34,7 +34,7 @@ global subtitle_rear_fade_count=8
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
 global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_white,$3F)
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_white,$C0)
 global subtitle_halo_color=color_black
 
 

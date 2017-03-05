@@ -36,29 +36,28 @@ Import("charlotte-common.avsi")
 
 PSEUDO_RANDOM_SEED(361499553)
 
-function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",bool "subtitle_ex"){
+function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
 	first_frame=Default(first_frame,0)
 	last_frame=Default(last_frame,Framecount(clip)-1)
 
 	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_ex)
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()),dsty=PSEUDO_RANDOM(Height()),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*2.0)+0.1)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,first_frame,last_frame)
 }
 
-global subtitle_clip_halo_width=0
 global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=400*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=8
 global subtitle_rear_fade_count=8
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28*1.5
+global subtitle_size=32*1.5
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 
@@ -73,8 +72,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 function SUBTITLE_FX_SPELL(clip clip,string text,int start_num_frames,int end_num_frames){
 	effects="c"
 	size=90*1.5
-	text_color=OVERWRITE_COLOR_ALPHA(color_magenta,$BF)
-	halo_color=OVERWRITE_COLOR_ALPHA(color_magenta,$BF)
+	text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
+	halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
 	x=subtitle_clip_width/2
 	y=(subtitle_clip_height/2)-(size/2)
 
@@ -139,7 +138,7 @@ function SUBTITLE_RIPPLE(clip clip,int start_frame,int end_frame,bool is_spell){
 	ripple_start_amp=16
 
 	ass_align=113
-	ass_font_size=63
+	ass_font_size=72
 	ass_preline_duration=16
 	ass_time_shift=-6
 

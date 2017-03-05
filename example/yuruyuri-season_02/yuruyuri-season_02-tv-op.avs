@@ -266,13 +266,13 @@ yui_tenkousei=RESIZE_TO_REF_CLIP(yui_tenkousei,yuruyuri_season_02_tv_clean_op)
 ######## Subtitle ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_front_fade_count=12
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_pink,$2F)
+global subtitle_size=32
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_pink,$D0)
 global subtitle_halo_color=color_black
 
 second_subtitle_x=50
@@ -282,7 +282,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	is_second_subtitle=Default(is_second_subtitle,false)
 	is_title=Default(is_title,false)
 
-	text_color=is_second_subtitle?OVERWRITE_COLOR_ALPHA(color_hotpink,$2F):subtitle_text_color
+	text_color=is_second_subtitle?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_hotpink,$D0):subtitle_text_color
 	halo_color=is_title?color_hotpink:subtitle_halo_color
 
 	result_clip=is_title? \

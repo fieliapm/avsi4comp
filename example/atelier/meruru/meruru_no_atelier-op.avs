@@ -161,21 +161,21 @@ AudioDub(meruru_op_mute,bgm_48khz)
 ######## Subtitle ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_front_fade_count=15
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_pink,$2F)
+global subtitle_size=32
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_pink,$D0)
 global subtitle_halo_color=color_black
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_second_subtitle",bool "is_title"){
 	is_second_subtitle=Default(is_second_subtitle,false)
 	is_title=Default(is_title,false)
 
-	size=is_second_subtitle?24:subtitle_size
-	text_color=is_second_subtitle?OVERWRITE_COLOR_ALPHA(color_navajowhite,$2F):subtitle_text_color
+	size=is_second_subtitle?28:subtitle_size
+	text_color=is_second_subtitle?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_navajowhite,$D0):subtitle_text_color
 	halo_color=is_title?color_firebrick:subtitle_halo_color
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,size,text_color,halo_color)
@@ -184,7 +184,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 
 title_x=50
-title_y=360
+title_y=345
 
 SUBTITLE_FX("Cadena//ŽR–{”ü”HŽq|- by fielia@AVISynth",title_x,title_y-subtitle_size,6193,6343,is_title=true)
 

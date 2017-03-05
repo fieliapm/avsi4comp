@@ -130,17 +130,17 @@ koufuku_graffiti_tv_ed_mute
 
 ### inherit start ###
 
-global subtitle_clip_halo_width=1
+#global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
 subtitle_x=50*2.25
-subtitle_y=400*2.25
+subtitle_y=395*2.25
 global subtitle_front_fade_count=8
 global subtitle_rear_fade_count=8
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28*2.25
+global subtitle_size=32*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 
@@ -154,7 +154,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	size=is_furigana?subtitle_size*0.5:subtitle_size
 	y=is_furigana?y-size:y
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color,"ex_thick_reduce_memory")
 }
 
 ### inherit end ###
@@ -241,9 +241,9 @@ SUBTITLE_FX("     もう",subtitle_x,subtitle_y,5008,5143,2)
 SUBTITLE_FX("          はぁ。 終わる",subtitle_x,subtitle_y,5008,5143,3)
 SUBTITLE_FX("満腹で「ごちそうさま!」",subtitle_x,subtitle_y,5153,5248,3)
 
-SUBTITLE_FX("笑顔になる//      と      (        と          )|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,5494,5738,is_title=true)
-SUBTITLE_FX("            リョウ         佐藤利奈",subtitle_x,subtitle_y-subtitle_size,5494,5738,1)
-SUBTITLE_FX("                    きりん           大亀あすか",subtitle_x,subtitle_y-subtitle_size,5494,5738,2)
+SUBTITLE_FX("笑顔になる//      と      |         (        と          )|- by fielia@AVISynth",subtitle_x,subtitle_y-(subtitle_size*2),5494,5738,is_title=true)
+SUBTITLE_FX("            リョウ        |          佐藤利奈",subtitle_x,subtitle_y-(subtitle_size*2),5494,5738,1)
+SUBTITLE_FX("                    きりん|                    大亀あすか",subtitle_x,subtitle_y-(subtitle_size*2),5494,5738,2)
 
 ######## Thumbnail ########
 

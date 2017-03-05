@@ -143,8 +143,8 @@ subtitle_front_fade_count=24
 subtitle_rear_fade_count=24
 subtitle_font="MS Gothic"
 subtitle_effects="b"
-subtitle_size=28
-subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_red,$3F)
+subtitle_size=32
+subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_red,$C0)
 subtitle_halo_color=color_gold
 
 SUBTITLE_FX_SMEAR_IN_SMEAR_OUT("- by fielia & niwa0daisuke@AVISynth",subtitle_x,subtitle_y,231,406,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)

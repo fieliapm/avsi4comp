@@ -236,7 +236,7 @@ koukaku_kidoutai_sac_2nd_op_bs_mute
 
 ### inherit start ###
 
-global subtitle_clip_halo_width=1
+#global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
@@ -248,7 +248,7 @@ global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
 global subtitle_size=24*2.25
 global subtitle_text_color=color_white
-global subtitle_halo_color=OVERWRITE_COLOR_ALPHA(color_lime,$3F)
+global subtitle_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_lime,$C0)
 global subtitle_random_char_func="RANDOM_ASCII_CHAR"
 
 function SUBTITLE_FX_1(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
@@ -257,17 +257,17 @@ function SUBTITLE_FX_1(clip clip,string text,float x,float y,int start_frame,int
 	front_fade_count=is_title?title_subtitle_front_fade_count:subtitle_front_fade_count
 	rear_fade_count=is_title?title_subtitle_rear_fade_count:subtitle_rear_fade_count
 	size=is_title?title_subtitle_size:subtitle_size
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(subtitle_halo_color,$0):subtitle_halo_color
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_halo_color,$FF):subtitle_halo_color
 	random_char_func=is_title?title_subtitle_random_char_func:subtitle_random_char_func
 
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color,random_char_func=random_char_func)
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color,"ex_thick",random_char_func)
 }
 
 global second_subtitle_front_fade_count=24
 global second_subtitle_rear_fade_count=24
 
 function SUBTITLE_FX_2(clip clip,string text,float x,float y,int start_frame,int end_frame){
-	return SUBTITLE_FX_FLY_IN_FLY_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,second_subtitle_front_fade_count,second_subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FLY_IN_FLY_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,second_subtitle_front_fade_count,second_subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,subtitle_halo_color,"ex_thick")
 }
 
 ### inherit end ###

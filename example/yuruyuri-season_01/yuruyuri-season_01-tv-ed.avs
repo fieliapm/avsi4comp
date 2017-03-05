@@ -119,8 +119,8 @@ global subtitle_clip_text_x=subtitle_clip_width/2
 global subtitle_clip_text_y=subtitle_clip_height/2-subtitle_clip_font_size/2
 
 global subtitle_clip_footage_text_x=856-50
-global subtitle_clip_footage_text_y=400
-global subtitle_clip_footage_font_size=30
+global subtitle_clip_footage_text_y=395
+global subtitle_clip_footage_font_size=32
 
 function SUBTITLE_CENTER(clip clip,string text,bool "is_footage"){
 	is_footage=Default(is_footage,false)
@@ -129,7 +129,7 @@ function SUBTITLE_CENTER(clip clip,string text,bool "is_footage"){
 	effects=is_footage?"b":subtitle_clip_effects
 	size=is_footage?subtitle_clip_footage_font_size:subtitle_clip_font_size
 
-	return SUBTITLE_NORMAL(clip,text,x,y,font=subtitle_clip_font,effects=effects,size=size,text_color=subtitle_clip_text_color,halo_color=subtitle_clip_halo_color,subtitle_ex=false)
+	return SUBTITLE_NORMAL(clip,text,x,y,font=subtitle_clip_font,effects=effects,size=size,text_color=subtitle_clip_text_color,halo_color=subtitle_clip_halo_color,subtitle_mode="standard")
 }
 
 subtitle_clip_length=96
@@ -236,13 +236,13 @@ AudioDub(yuruyuri_season_01_tv_op_mute,bgm_48khz)
 ######## Subtitle ########
 
 subtitle_x=50
-subtitle_y=400
+subtitle_y=395
 global subtitle_front_fade_count=12
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="bi"
-global subtitle_size=28
-global subtitle_text_color=OVERWRITE_COLOR_ALPHA(color_pink,$2F)
+global subtitle_size=32
+global subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_pink,$D0)
 global subtitle_halo_color=color_black
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
@@ -257,7 +257,7 @@ function SUBTITLE_N(clip clip,string text,float x,float y,int start_frame,int en
 	return SUBTITLE_NORMAL(clip,text,x,y,start_frame,end_frame,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
 }
 
-SUBTITLE_FX("マイペースでいきましょう//七森中☆ごらく部|- by 赤座あかね & fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,375,497)
+SUBTITLE_FX("マイペースでいきましょう//七森中☆ごらく部|- by 赤座あかね & fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,375,497,true)
 
 SUBTITLE_FX("いつもミラクル......",subtitle_x,subtitle_y-subtitle_size,32,238)
 SUBTITLE_N("ミラクル",subtitle_x,subtitle_y,239,249)

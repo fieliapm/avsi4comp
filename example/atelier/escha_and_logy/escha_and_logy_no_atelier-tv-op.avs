@@ -87,30 +87,30 @@ thumbnail=Trim(4303,-24*5)
 
 ######## Subtitle ########
 
-#global subtitle_clip_width=1280
-#global subtitle_clip_height=720
+global subtitle_clip_width=1280
+global subtitle_clip_height=720
 
-subtitle_x=50
-subtitle_y=400
+subtitle_x=50*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=12
 global subtitle_rear_fade_count=12
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=28
+global subtitle_size=32*1.5
 global subtitle_text_color=color_dodgerblue
 global subtitle_halo_color=color_white
 
-second_subtitle_x=50
-second_subtitle_y=50
+second_subtitle_x=50*1.5
+second_subtitle_y=50*1.5
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_second_subtitle",bool "is_title"){
 	is_second_subtitle=Default(is_second_subtitle,false)
 	is_title=Default(is_title,false)
 
-	text_color=is_second_subtitle?OVERWRITE_COLOR_ALPHA(subtitle_text_color,$3F):subtitle_text_color
-	text_color=is_title?OVERWRITE_COLOR_ALPHA(subtitle_text_color,$3F):subtitle_text_color
+	text_color=is_second_subtitle?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$C0):subtitle_text_color
+	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$C0):subtitle_text_color
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
 
 SUBTITLE_FX("ƒAƒXƒCƒ//‘ºì—œˆß|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,6583,6818,is_title=true)
@@ -123,7 +123,7 @@ SUBTITLE_FX("è‚ğŒq‚¢‚Å‹ó‚Ö‚Æ—·—§‚Á‚Ä‚­",subtitle_x,subtitle_y,991,1145)
 SUBTITLE_FX("‰_‚É‰B‚ê‚½‹ó‚ÌŒü‚±‚¤‚É‰½‚©‚ª‘Ò‚Á‚Ä‚¢‚é‚Ì",second_subtitle_x,second_subtitle_y,1107,1217,true)
 SUBTITLE_FX("‚«‚Á‚Æ",subtitle_x,subtitle_y,1212,1268)
 SUBTITLE_FX("‚»‚±‚É„‚Ì’m‚ç‚È‚¢¢ŠE‚ªL‚ª‚Á‚Ä‚¢‚é ‚¾‚©‚ç",second_subtitle_x,second_subtitle_y,1231,1346,true)
-SUBTITLE_FX("‚ ‚Ì“ú–²Œ©‚½‚±‚±‚Æ‚Íˆá‚¤‚Ç‚±‚©‰“‚¢êŠ‚ğ–Úw‚µ‚Ä",subtitle_x,subtitle_y,1356,1573)
+SUBTITLE_FX("‚ ‚Ì“ú–²Œ©‚½|‚±‚±‚Æ‚Íˆá‚¤‚Ç‚±‚©‰“‚¢êŠ‚ğ–Úw‚µ‚Ä",subtitle_x,subtitle_y-subtitle_size,1356,1573)
 
 SUBTITLE_FX("“ø‚Ì‹´‚ğ–¾“ú‚Ö‚Æ‰Ë‚¯‚Ä",subtitle_x,subtitle_y,1577,1698)
 SUBTITLE_FX("–é‚Ìæ‚ğŒ©‚Â‚ß‚Ä‘–‚é",subtitle_x,subtitle_y,1703,1822)

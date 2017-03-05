@@ -56,7 +56,7 @@ new_game_tv_11_op_mute
 
 ### inherit start ###
 
-global subtitle_clip_halo_width=1
+#global subtitle_clip_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
@@ -75,7 +75,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	halo_color=is_title?color_mediumpurple:subtitle_halo_color
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_thick_reduce_memory")
 }
 
 ### inherit end ###

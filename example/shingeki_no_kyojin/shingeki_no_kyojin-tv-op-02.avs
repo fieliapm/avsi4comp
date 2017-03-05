@@ -276,21 +276,23 @@ global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=400*1.5
+subtitle_y=395*1.5
 global subtitle_front_fade_count=24
 global subtitle_rear_fade_count=24
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=24*1.5
+global subtitle_size=32*1.5
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
+umlaut_offset=7*1.5
 
-function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool is_fade_fx,bool "is_kana",bool "is_title"){
-	is_kana=Default(is_kana,false)
+function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool is_fade_fx,bool "is_furigana",bool "is_title"){
+	is_furigana=Default(is_furigana,false)
 	is_title=Default(is_title,false)
 
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(color_orangered,$3F):subtitle_halo_color
-	size=is_kana?subtitle_size*0.5:subtitle_size
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_orangered,$C0):subtitle_halo_color
+	size=is_furigana?subtitle_size*0.5:subtitle_size
+	y=is_furigana?y-size:y
 
 	return is_fade_fx? \
 		SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color) \
@@ -306,63 +308,63 @@ SUBTITLE_FX("O mein Freund!",subtitle_x,subtitle_y,1,21,false)
 SUBTITLE_FX("Jetzt hier ist ein Sieg.",subtitle_x,subtitle_y-(subtitle_size*2),22,94,false)
 SUBTITLE_FX("Dies ist der erste Gloria.",subtitle_x,subtitle_y,97,171,false)
 SUBTITLE_FX("O mein Freund!",subtitle_x,subtitle_y-(subtitle_size*2),172,191,false)
-SUBTITLE_FX("""                        "       "             """,subtitle_x,subtitle_y-5,192,322,false)
+SUBTITLE_FX("""                        "       "             """,subtitle_x,subtitle_y-umlaut_offset,192,322,false)
 SUBTITLE_FX("Feiern wir dieser Sieg fur den nachsten Kampf!",subtitle_x,subtitle_y,192,322,false)
 
 
 
 SUBTITLE_FX("「無意味な死であった」",subtitle_x,subtitle_y,673,746,false)
 SUBTITLE_FX("と...言わせない",subtitle_x,subtitle_y-(subtitle_size*2),747,802,false)
-SUBTITLE_FX("                 ひとり",subtitle_x,subtitle_y-(subtitle_size/2),806,936,false,is_kana=true)
+SUBTITLE_FX("                 ひとり",subtitle_x,subtitle_y,806,936,false,is_furigana=true)
 SUBTITLE_FX("最後の《一矢》になるまで......",subtitle_x,subtitle_y,806,936,false)
 
 SUBTITLE_FX("Der feind ist grausam... Wir bringen...",subtitle_x,subtitle_x,930,1002,false)
 SUBTITLE_FX("Der feind ist riesig... Wir springen...",subtitle_x,subtitle_y-(subtitle_size*2),1003,1077,false)
 
-SUBTITLE_FX("""                                         "                """,subtitle_x,subtitle_y-subtitle_size-5,1076,1330,false)
-SUBTITLE_FX("         Gloria            Sieg        Flugel der Freiheit",subtitle_x,subtitle_y-subtitle_size,1076,1330,false)
-SUBTITLE_FX("両手には《鋼刃》 唄うのは《凱歌》 背中には《自由の翼》",subtitle_x,subtitle_y,1076,1330,false)
-SUBTITLE_FX("                                  Ringe der Torheit",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*2),1362,1622,false)
-SUBTITLE_FX("握り締めた決意を左胸に 斬り裂くのは《愚行の螺旋》",subtitle_x,subtitle_y-(subtitle_size*2),1362,1622,false)
-SUBTITLE_FX("""        "                """,subtitle_x,subtitle_y-subtitle_size-5,1654,1811,false)
+SUBTITLE_FX("""                                 |||       "                """,subtitle_x,subtitle_y-subtitle_size-(subtitle_size*3)-umlaut_offset,1076,1330,false)
+SUBTITLE_FX("         Gloria            Sieg  |||     Flugel der Freiheit",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*3),1076,1330,false)
+SUBTITLE_FX("両手には《鋼刃》 唄うのは《凱歌》|||背中には《自由の翼》",subtitle_x,subtitle_y-(subtitle_size*3),1076,1330,false)
+SUBTITLE_FX("                      ||           Ringe der Torheit",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*4),1362,1622,false)
+SUBTITLE_FX("握り締めた決意を左胸に||斬り裂くのは《愚行の螺旋》",subtitle_x,subtitle_y-(subtitle_size*4),1362,1622,false)
+SUBTITLE_FX("""        "                """,subtitle_x,subtitle_y-subtitle_size-umlaut_offset,1654,1811,false)
 SUBTITLE_FX("      Flugel der Freiheit",subtitle_x,subtitle_y-subtitle_size,1654,1811,false)
 SUBTITLE_FX("蒼穹を舞う 自由の翼",subtitle_x,subtitle_y,1654,1811,false)
 
 
 
-SUBTITLE_FX("鳥は飛ぶ為に其の殻を破ってきた 無様に地を這う為じゃないだろ?",subtitle_x,subtitle_y,2318,2610,false)
-SUBTITLE_FX("お前の翼は何の為にある 籠の中の空は狭過ぎるだろ?",subtitle_x,subtitle_y-(subtitle_size*2),2611,2907,false)
+SUBTITLE_FX("鳥は飛ぶ為に其の殻を破ってきた|無様に地を這う為じゃないだろ?",subtitle_x,subtitle_y-subtitle_size,2318,2610,false)
+SUBTITLE_FX("お前の翼は何の為にある|籠の中の空は狭過ぎるだろ?",subtitle_x,subtitle_y-(subtitle_size*3),2611,2907,false)
 
-SUBTITLE_FX("Die Freiheit und der Tod. Die beiden sind Zwillinge.",subtitle_x,subtitle_y,2912,3052,false)
+SUBTITLE_FX("Die Freiheit und der Tod.|Die beiden sind Zwillinge.",subtitle_x,subtitle_y-subtitle_size,2912,3052,false)
 SUBTITLE_FX("Die Freiheit oder der Tod?",subtitle_x,subtitle_y-(subtitle_size*2),3059,3121,false)
 SUBTITLE_FX("Unser Freund ist ein!",subtitle_x,subtitle_y,3122,3193,false)
 
-SUBTITLE_FX("何の為に生まれて来たのかなんて... 小難しい事は解らないけど...",subtitle_x,subtitle_y-(subtitle_size*2),3196,3461,false)
-SUBTITLE_FX("例え其れが過ちだったとしても... 何の為に生きているかは判る...",subtitle_x,subtitle_y,3487,3717,false)
-SUBTITLE_FX("其れは... 理屈じゃない... 存在... 故の『自由』!",subtitle_x,subtitle_y-(subtitle_size*2),3718,3869,false)
+SUBTITLE_FX("何の為に生まれて来たのかなんて...|小難しい事は解らないけど...",subtitle_x,subtitle_y-(subtitle_size*3),3196,3461,false)
+SUBTITLE_FX("例え其れが過ちだったとしても...|何の為に生きているかは判る...",subtitle_x,subtitle_y-subtitle_size,3487,3717,false)
+SUBTITLE_FX("其れは... 理屈じゃない...|存在... 故の『自由』!",subtitle_x,subtitle_y-(subtitle_size*3),3718,3869,false)
 
 
 
-SUBTITLE_FX("""      "                """,subtitle_x,subtitle_y-5,5240,5315,true)
+SUBTITLE_FX("""      "                 """,subtitle_x,subtitle_y-umlaut_offset,5240,5315,true)
 SUBTITLE_FX("Die Flugel der Freiheit.",subtitle_x,subtitle_y,5240,5315,true)
 
 
 
 SUBTITLE_FX("隠された真実は 衝撃の嚆矢だ",subtitle_x,subtitle_y,5790,5935,true)
-SUBTITLE_FX("                                       Titanen",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*2),5937,6081,true)
-SUBTITLE_FX("                              やみ                 ひかり",subtitle_x,subtitle_y-(subtitle_size/2)-(subtitle_size*2),5937,6081,true,is_kana=true)
-SUBTITLE_FX("鎖された其の《深層》と 《表層》に潜む《巨人達》",subtitle_x,subtitle_y-(subtitle_size*2),5937,6081,true)
-SUBTITLE_FX("崩れ然る固定観念 迷いを抱きながら 其れでも尚 『自由』へ進め!!!",subtitle_x,subtitle_y,6082,6320,true)
+SUBTITLE_FX("                      ||                Titanen",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*4),5937,6081,true)
+SUBTITLE_FX("                              やみ          ||||     ひかり",subtitle_x,subtitle_y-(subtitle_size*4),5937,6081,true,is_furigana=true)
+SUBTITLE_FX("鎖された其の《深層》と||《表層》に潜む《巨人達》",subtitle_x,subtitle_y-(subtitle_size*4),5937,6081,true)
+SUBTITLE_FX("崩れ然る固定観念 迷いを抱きながら|其れでも尚 『自由』へ進め!!!",subtitle_x,subtitle_y-subtitle_size,6082,6320,true)
 
-SUBTITLE_FX("Rechter Weg? Linker Weg? Na, ein Weg welcher ist?",subtitle_x,subtitle_x,6301,6373,false)
-SUBTITLE_FX("Der Feind? Der Freund? Mensch, Sie welche sind?",subtitle_x,subtitle_y-(subtitle_size*2),6374,6447,false)
+SUBTITLE_FX("Rechter Weg? Linker Weg?|Na, ein Weg welcher ist?",subtitle_x,subtitle_x,6301,6373,false)
+SUBTITLE_FX("Der Feind? Der Freund?|Mensch, Sie welche sind?",subtitle_x,subtitle_y-(subtitle_size*5),6374,6447,false)
 
-SUBTITLE_FX("       Instrument          Licht        Horizont der Freiheit",subtitle_x,subtitle_y-subtitle_size,6448,6703,false)
-SUBTITLE_FX("両手には《戦意》 唄うのは《希望》 背中には《自由の地平線》",subtitle_x,subtitle_y,6448,6703,false)
-SUBTITLE_FX("""                                             "         """,subtitle_x,subtitle_y-subtitle_size-5-(subtitle_size*2),6734,6994,false)
-SUBTITLE_FX("                            Hinterfront der Moglichkeit",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*2),6734,6994,false)
-SUBTITLE_FX("世界を繋ぐ鎖を各々胸に 奏でるのは《可能性の背面》",subtitle_x,subtitle_y-(subtitle_size*2),6734,6994,false)
-SUBTITLE_FX("""        "                """,subtitle_x,subtitle_y-subtitle_size-5,7026,7184,false)
+SUBTITLE_FX("       Instrument          Licht ||      Horizont der Freiheit",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*2),6448,6703,false)
+SUBTITLE_FX("両手には《戦意》 唄うのは《希望》||背中には《自由の地平線》",subtitle_x,subtitle_y-(subtitle_size*2),6448,6703,false)
+SUBTITLE_FX("""                      ||                      "         """,subtitle_x,subtitle_y-subtitle_size-umlaut_offset-(subtitle_size*6),6734,6994,false)
+SUBTITLE_FX("                      ||     Hinterfront der Moglichkeit",subtitle_x,subtitle_y-subtitle_size-(subtitle_size*6),6734,6994,false)
+SUBTITLE_FX("世界を繋ぐ鎖を各々胸に||奏でるのは《可能性の背面》",subtitle_x,subtitle_y-(subtitle_size*6),6734,6994,false)
+SUBTITLE_FX("""        "                """,subtitle_x,subtitle_y-subtitle_size-umlaut_offset,7026,7184,false)
 SUBTITLE_FX("      Flugel der Freiheit",subtitle_x,subtitle_y-subtitle_size,7026,7184,false)
 SUBTITLE_FX("蒼穹を舞え 自由の翼",subtitle_x,subtitle_y,7026,7184,false)
 
@@ -372,10 +374,10 @@ SUBTITLE_FX("O mein Freund!",subtitle_x,subtitle_x,7387,7406,false)
 SUBTITLE_FX("Jetzt hier ist ein Sieg.",subtitle_x,subtitle_x+(subtitle_size*2),7407,7471,false)
 SUBTITLE_FX("Dies ist der erste Gloria.",subtitle_x,subtitle_x,7472,7532,false)
 SUBTITLE_FX("O mein Freund!",subtitle_x,subtitle_x+(subtitle_size*2),7533,7551,false)
-SUBTITLE_FX("""                        "       "             """,subtitle_x,subtitle_x-5,7552,7653,false)
+SUBTITLE_FX("""                        "       "      """,subtitle_x,subtitle_x-umlaut_offset,7552,7653,false)
 SUBTITLE_FX("Feiern wir dieser Sieg fur den nachsten",subtitle_x,subtitle_x,7552,7653,false)
 SUBTITLE_FX("Der Feind ist riesig... Wir springen...",subtitle_x,subtitle_x+(subtitle_size*2),7654,7725,false)
-SUBTITLE_FX("""      "                """,subtitle_x,subtitle_x-5,7726,7772,false)
+SUBTITLE_FX("""      "                 """,subtitle_x,subtitle_x-umlaut_offset,7726,7772,false)
 SUBTITLE_FX("Die Flugel der Freiheit!",subtitle_x,subtitle_x,7726,7772,false)
 
 

@@ -83,9 +83,9 @@ function SUBTITLE_N(clip clip,string text,int x,int y,int "first_frame",int "las
 
 	halo_color=is_title?color_blue:subtitle_halo_color
 	size=is_title?title_subtitle_size:subtitle_size
-	subtitle_ex=!is_title
+	subtitle_mode=is_title?"standard":"ex"
 
-	return SUBTITLE_NORMAL(clip,text,x,y,first_frame,last_frame,subtitle_font,subtitle_effects,size,subtitle_text_color,halo_color,subtitle_ex)
+	return SUBTITLE_NORMAL(clip,text,x,y,first_frame,last_frame,subtitle_font,subtitle_effects,size,subtitle_text_color,halo_color,subtitle_mode)
 }
 
 function SUBTITLE_WARNING(clip clip,string text,int x,int y,int "first_frame",int "last_frame"){

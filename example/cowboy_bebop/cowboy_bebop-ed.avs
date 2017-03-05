@@ -187,7 +187,7 @@ function SUBTITLE_N(clip clip,string text,float x,float y,int start_frame,int en
 
 	text_color=is_title?color_mediumpurple:subtitle_text_color
 
-	return SUBTITLE_NORMAL(clip,text,x,y,start_frame,end_frame,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color,false)
+	return SUBTITLE_NORMAL(clip,text,x,y,start_frame,end_frame,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color,"standard")
 }
 
 SUBTITLE_N("THE REAL FOLK BLUES//éRç™ñÉàﬂ",subtitle_x,subtitle_y-subtitle_size,8022,8597,true)
