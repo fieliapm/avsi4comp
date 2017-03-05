@@ -68,7 +68,7 @@ global subtitle_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_black,$C0)
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_title"){
 	is_title=Default(is_title,false)
 
-	halo_color=is_title?OVERWRITE_COLOR_ALPHA(color_orangered,$3F):subtitle_halo_color
+	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(color_orangered,$C0):subtitle_halo_color
 	size=is_title?subtitle_size:subtitle_size*0.8
 
 	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
