@@ -73,24 +73,7 @@ enable_multi_thread=false
 
 koukaku_kidoutai_sac_op_bs=FFMS2_VIDEO_SOURCE("src\koukaku_kidoutai\koukaku_kidoutai_sac\special\koukaku_kidoutai_sac-tv-sp-op.mp4",fpsnum=fpsnum,fpsden=fpsden,enable_multi_thread=enable_multi_thread)
 
-koukaku_kidoutai_sac_op_bs_01_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_bs,2,10758)) #10757
-koukaku_kidoutai_sac_op_bs_02_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_bs,10759,11038)) #280
-
-
-
 koukaku_kidoutai_sac_op_temp=FFMS2_VIDEO_SOURCE("src\koukaku_kidoutai\koukaku_kidoutai_sac\special\koukaku_kidoutai_sac-tv-sp-op-temporary.mp4",fpsnum=fpsnum,fpsden=fpsden,enable_multi_thread=enable_multi_thread)
-
-koukaku_kidoutai_sac_op_temp_01_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_temp,3,358)) #356
-koukaku_kidoutai_sac_op_temp_02_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_temp,359,1038)) #680
-koukaku_kidoutai_sac_op_temp_02_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,1039,3168)) #2130
-koukaku_kidoutai_sac_op_temp_03_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,3169,4528)) #1360
-koukaku_kidoutai_sac_op_temp_04_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,4529,5858)) #1330
-koukaku_kidoutai_sac_op_temp_05_title_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_temp,5859,7358)) #1492
-koukaku_kidoutai_sac_op_temp_06_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,7359,7912)) #554
-koukaku_kidoutai_sac_op_temp_07_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,7913,9147)) #1235
-koukaku_kidoutai_sac_op_temp_08_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,9148,11037)) #1890
-
-
 
 koukaku_kidoutai_sac_tv_01=FFMS2_VIDEO_SOURCE("src\koukaku_kidoutai\koukaku_kidoutai_sac\koukaku_kidoutai_sac-tv-01.mp4",fpsnum=fpsnum,fpsden=fpsden,enable_multi_thread=enable_multi_thread)
 koukaku_kidoutai_sac_tv_02=FFMS2_VIDEO_SOURCE("src\koukaku_kidoutai\koukaku_kidoutai_sac\koukaku_kidoutai_sac-tv-02.mp4",fpsnum=fpsnum,fpsden=fpsden,enable_multi_thread=enable_multi_thread)
@@ -120,6 +103,25 @@ koukaku_kidoutai_sac_tv_19=FFMS2_VIDEO_SOURCE("src\koukaku_kidoutai\koukaku_kido
 koukaku_kidoutai_sac_tv_26=FFMS2_VIDEO_SOURCE("src\koukaku_kidoutai\koukaku_kidoutai_sac\koukaku_kidoutai_sac-tv-26.mp4",fpsnum=fpsnum,fpsden=fpsden,enable_multi_thread=enable_multi_thread)
 
 koukaku_kidoutai_sac_tv_01_op=Trim(koukaku_kidoutai_sac_tv_01,2,10766) #10765 (too more duplicate frames at 4498~4502)
+
+######## Trim ########
+
+koukaku_kidoutai_sac_op_bs_01_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_bs,2,10758)) #10757
+koukaku_kidoutai_sac_op_bs_02_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_bs,10759,11038)) #280
+
+
+
+koukaku_kidoutai_sac_op_temp_01_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_temp,3,358)) #356
+koukaku_kidoutai_sac_op_temp_02_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_temp,359,1038)) #680
+koukaku_kidoutai_sac_op_temp_02_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,1039,3168)) #2130
+koukaku_kidoutai_sac_op_temp_03_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,3169,4528)) #1360
+koukaku_kidoutai_sac_op_temp_04_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,4529,5858)) #1330
+koukaku_kidoutai_sac_op_temp_05_title_29p=CHANGE_120P_TO_30P(Trim(koukaku_kidoutai_sac_op_temp,5859,7358)) #1492
+koukaku_kidoutai_sac_op_temp_06_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,7359,7912)) #554
+koukaku_kidoutai_sac_op_temp_07_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,7913,9147)) #1235
+koukaku_kidoutai_sac_op_temp_08_23p=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_op_temp,9148,11037)) #1890
+
+
 
 koukaku_kidoutai_sac_tv_01_motoko_fight_against_terrorist_01=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_tv_01,16143,16377)) #235 op
 koukaku_kidoutai_sac_tv_01_motoko_fight_against_terrorist_02=CHANGE_120P_TO_24P(Trim(koukaku_kidoutai_sac_tv_01,16378,16472)) #95 op
