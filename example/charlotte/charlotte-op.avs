@@ -36,16 +36,59 @@ Import("charlotte-common.avsi")
 
 PSEUDO_RANDOM_SEED(361499553)
 
-function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
+function SUBTITLE_FX_RANDOM_SCALE_OLD(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
 	first_frame=Default(first_frame,0)
 	last_frame=Default(last_frame,Framecount(clip)-1)
 
 	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()),dsty=PSEUDO_RANDOM(Height()),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*2.0)+0.1)")
+	subtitle_rgba_random_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()-(50*2))+50,dsty=PSEUDO_RANDOM(Height()-(50*2))+50,factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.5)+0.5)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,first_frame,last_frame)
+	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_random_zoomed,first_frame,last_frame)
+}
+
+function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
+	first_frame=Default(first_frame,0)
+	last_frame=Default(last_frame,Framecount(clip)-1)
+
+	subtitle_clip=_SUBTITLE_FX_PRE_OPAQUE(clip,color_black,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
+
+	subtitle_clip_random_zoomed=ScriptClip(subtitle_clip,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()-(50*2))+50,dsty=PSEUDO_RANDOM(Height()-(50*2))+50,factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.5)+0.5)")
+
+	subtitle_clip_random_zoomed_resized=RESIZE_TO_REF_CLIP(subtitle_clip_random_zoomed,clip)
+	clip_with_subtitle=Overlay(clip,subtitle_clip_random_zoomed_resized,opacity=0.75,mode="Exclusion",pc_range=true)
+	clip_with_subtitle=MergeChroma(clip_with_subtitle,clip)
+	return clip_with_subtitle
+	#return OVERWRITE_RANGE(clip,clip_with_subtitle,first_frame,last_frame)
+}
+
+function DISPERSION(clip clip,float offset){
+	clip_rgb=ConvertToRGB24(clip)
+	clip_r=FAST_ZOOM(ShowRed(clip_rgb),factor=1.0+offset,extend=true)
+	clip_g=ShowGreen(clip_rgb)
+	clip_b=FAST_ZOOM(ShowBlue(clip_rgb),factor=1.0-offset,extend=true)
+	return MergeRGB(clip_r,clip_g,clip_b)
+}
+
+function CHARLOTTE_DISPERSION(clip clip){
+	return DISPERSION(clip,0.005)
+}
+
+function CHARLOTTE_SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,int scale_wipe_length){
+	return SCALE_WIPE_IN(clip,mode,wipe_direction,10.0,scale_wipe_length)
+}
+
+function CHARLOTTE_SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,int scale_wipe_length){
+	return SCALE_WIPE_OUT(clip,mode,wipe_direction,10.0,scale_wipe_length)
+}
+
+function EXTEND_ONE_FRAME(clip clip){
+        return clip+BlankClip(clip,length=1,color=color_black)
+}
+
+function UNDO_EXTEND_ONE_FRAME(clip clip){
+        return Trim(clip,0,Framecount(clip)-2)
 }
 
 global subtitle_clip_width=1280
@@ -72,22 +115,19 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 function SUBTITLE_FX_SPELL(clip clip,string text,int start_num_frames,int end_num_frames){
 	effects="c"
 	size=90*1.5
-	text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
-	halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
+	#text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
+	#halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
+	text_color=color_white
+	halo_color=color_white
 	x=subtitle_clip_width/2
 	y=(subtitle_clip_height/2)-(size/2)
 
 	frame_count=Framecount(clip)
-	one_pass_clip=SUBTITLE_FX_RANDOM_SCALE(clip,text,Round(x),Round(y),0,start_num_frames-1,subtitle_font,effects,Round(size),text_color,halo_color)
-	return SUBTITLE_FX_RANDOM_SCALE(one_pass_clip,text,Round(x),Round(y),frame_count-end_num_frames,frame_count-1,subtitle_font,effects,Round(size),text_color,halo_color)
-}
-
-function CHARLITTE_SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,int scale_wipe_length){
-	return SCALE_WIPE_IN(clip,mode,wipe_direction,10.0,scale_wipe_length)
-}
-
-function CHARLITTE_SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,int scale_wipe_length){
-	return SCALE_WIPE_OUT(clip,mode,wipe_direction,10.0,scale_wipe_length)
+	clip_yv12=ConvertToYV12(clip)
+	one_pass_clip=SUBTITLE_FX_RANDOM_SCALE(clip_yv12,text,Round(x),Round(y),0,start_num_frames-1,subtitle_font,effects,Round(size),text_color,halo_color)
+	one_pass_clip=EXTEND_ONE_FRAME(one_pass_clip)
+	two_pass_clip=SUBTITLE_FX_RANDOM_SCALE(one_pass_clip,text,Round(x),Round(y),frame_count-end_num_frames,frame_count-1,subtitle_font,effects,Round(size),text_color,halo_color)
+	return UNDO_EXTEND_ONE_FRAME(two_pass_clip)
 }
 
 ### inherit end ###
@@ -100,14 +140,21 @@ function SPELL(string trim_func_01,clip clip_01,string trim_func_02,clip clip_02
 		string trim_func_03_01,clip clip_03_01,string trim_func_03_02,clip clip_03_02,string trim_func_04_01,clip clip_04_01,string trim_func_04_02,clip clip_04_02, \
 		string trim_func_05_01,clip clip_05_01,string trim_func_05_02,clip clip_05_02,string trim_func_06_01,clip clip_06_01,string trim_func_06_02,clip clip_06_02, \
 		string trim_func_07_01,clip clip_07_01,string trim_func_07_02,clip clip_07_02,string trim_func_08_01,clip clip_08_01,string trim_func_08_02,clip clip_08_02){
-	spell_clip=SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(FadeIn0(Apply(trim_func_01,clip_01,38),11),"y",-1,4),"我他人を思う",11,4)+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_02,clip_02,38),"y",1,4),"y",-1,3),"絶望の旋律",4,3) \
-		+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_03_01,clip_03_01,19),"y",1,4),"x",1,4),"恋と炎",4,4)+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_03_02,clip_03_02,23),"x",-1,4),"y",-1,6),"刹那の本気",4,6) \
-		+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_04_01,clip_04_01,11),"y",1,3),"y",-1,5),"いつか聴いた音",3,5)+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_04_02,clip_04_02,29),"y",1,4),"y",-1,7),"気づかなかった幸せ",4,7) \
-		+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_05_01,clip_05_01,7),"y",1,3),"y",1,2),"逃避行の果てに",3,2)+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_05_02,clip_05_02,28),"y",-1,6),"x",1,5),"邂逅",6,5) \
-		+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_06_01,clip_06_01,9),"x",-1,4),"x",1,4),"ここにない世界",4,4)+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_06_02,clip_06_02,24),"x",-1,3),"x",1,4),"略奪",3,4) \
-		+SUBTITLE_FX_SPELL(CHARLITTE_SCALE_WIPE_OUT(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_07_01,clip_07_01,29),"x",1,6),"x",-1,14),"シャーロット",6,14)+SUBTITLE_FX_SPELL(FADE_OUT_WITH_BRIGHTNESS_OFFSET(CHARLITTE_SCALE_WIPE_IN(Apply(trim_func_07_02,clip_07_02,13),"x",1,5),3),"約束",5,3) \
-		+SUBTITLE_FX_SPELL(FADE_IN_WITH_BRIGHTNESS_OFFSET(ConvertToRGB32(Apply(trim_func_08_01,clip_08_01,19)),3),"これからの記録",3,8)
-	return Dissolve(ConvertToYV12(spell_clip),Apply(trim_func_08_02,clip_08_02,29),8)
+	spell_clip=SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(FadeIn0(CHARLOTTE_DISPERSION(Apply(trim_func_01,clip_01,38)),11),"y",-1,4),"我他人を思う",11,4) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_02,clip_02,38)),"y",1,4),"y",-1,3),"絶望の旋律",4,3) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_03_01,clip_03_01,19)),"y",1,4),"x",1,4),"恋と炎",4,4) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_03_02,clip_03_02,23)),"x",-1,4),"y",-1,6),"刹那の本気",4,6) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_04_01,clip_04_01,11)),"y",1,3),"y",-1,5),"いつか聴いた音",3,5) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_04_02,clip_04_02,29)),"y",1,4),"y",-1,7),"気づかなかった幸せ",4,7) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_05_01,clip_05_01,7)),"y",1,3),"y",1,2),"逃避行の果てに",3,2) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_05_02,clip_05_02,28)),"y",-1,6),"x",1,5),"邂逅",6,5) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_06_01,clip_06_01,9)),"x",-1,4),"x",1,4),"ここにない世界",4,4) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_06_02,clip_06_02,24)),"x",-1,3),"x",1,4),"略奪",3,4) \
+		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_07_01,clip_07_01,29)),"x",1,6),"x",-1,14),"シャーロット",6,14) \
+		+SUBTITLE_FX_SPELL(FADE_OUT_WITH_BRIGHTNESS_OFFSET(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_07_02,clip_07_02,13)),"x",1,5),3),"約束",5,3) \
+		+SUBTITLE_FX_SPELL(FADE_IN_WITH_BRIGHTNESS_OFFSET(CHARLOTTE_DISPERSION(Apply(trim_func_08_01,clip_08_01,19)),3),"これからの記録",3,8)
+	spell_clip_full=Dissolve(ConvertToYV12(spell_clip),Apply(trim_func_08_02,clip_08_02,29),8)
+	return Tweak(spell_clip_full,sat=1.2,bright=64.0,cont=0.8)
 }
 
 ### inherit end ###
