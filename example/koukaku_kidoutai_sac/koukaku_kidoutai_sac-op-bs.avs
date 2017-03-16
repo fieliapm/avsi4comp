@@ -331,7 +331,7 @@ koukaku_kidoutai_sac_op_bs_part02_29p
 
 global time_ratio_30p=4
 
-#global subtitle_clip_halo_width=1
+#global subtitle_heavy_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 

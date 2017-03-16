@@ -116,7 +116,7 @@ charlotte_ed_mute
 
 ### inherit start ###
 
-#global subtitle_clip_halo_width=1
+#global subtitle_heavy_halo_width=1
 global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 

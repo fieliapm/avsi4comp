@@ -33,7 +33,7 @@ new_game_tv_op=TCPSource("localhost",22052,"None")
 
 ######## Function ########
 
-#global subtitle_clip_halo_width=1
+#global subtitle_heavy_halo_width=1
 global subtitle_clip_width=428
 global subtitle_clip_height=240
 

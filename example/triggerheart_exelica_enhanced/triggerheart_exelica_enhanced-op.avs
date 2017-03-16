@@ -211,7 +211,7 @@ thumbnail=Trim(4439*frame_index_scale,-30*5*frame_index_scale)
 
 ######## Subtitle ########
 
-global subtitle_clip_halo_width=1
+global subtitle_heavy_halo_width=1
 global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
