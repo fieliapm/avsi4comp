@@ -43,7 +43,7 @@ function SUBTITLE_FX_RANDOM_SCALE_OLD(clip clip,string text,int "x",int "y",int 
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_random_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()-(50*2))+50,dsty=PSEUDO_RANDOM(Height()-(50*2))+50,factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.5)+0.5)")
+	subtitle_rgba_random_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Round(Width()-((50*1.5)*2)))+(50*1.5),dsty=PSEUDO_RANDOM(Round(Height()-((50*1.5)*2)))+(50*1.5),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.0)+0.5)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_random_zoomed,first_frame,last_frame)
 }
@@ -54,7 +54,7 @@ function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "fir
 
 	subtitle_clip=_SUBTITLE_FX_PRE_OPAQUE(clip,color_black,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_clip_random_zoomed=ScriptClip(subtitle_clip,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Width()-(50*2))+50,dsty=PSEUDO_RANDOM(Height()-(50*2))+50,factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.5)+0.5)")
+	subtitle_clip_random_zoomed=ScriptClip(subtitle_clip,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Round(Width()-((50*1.5)*2)))+(50*1.5),dsty=PSEUDO_RANDOM(Round(Height()-((50*1.5)*2)))+(50*1.5),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.0)+0.5)")
 
 	subtitle_clip_random_zoomed_resized=RESIZE_TO_REF_CLIP(subtitle_clip_random_zoomed,clip)
 	clip_with_subtitle=Overlay(clip,subtitle_clip_random_zoomed_resized,opacity=0.75,mode="Exclusion",pc_range=true)
@@ -72,15 +72,15 @@ function DISPERSION(clip clip,float offset){
 }
 
 function CHARLOTTE_DISPERSION(clip clip){
-	return DISPERSION(clip,0.005)
+	return DISPERSION(clip,-0.005)
 }
 
 function CHARLOTTE_SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,int scale_wipe_length){
-	return SCALE_WIPE_IN(clip,mode,wipe_direction,10.0,scale_wipe_length)
+	return SCALE_WIPE_IN(clip,mode,wipe_direction,10.0,scale_wipe_length+1)
 }
 
 function CHARLOTTE_SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,int scale_wipe_length){
-	return SCALE_WIPE_OUT(clip,mode,wipe_direction,10.0,scale_wipe_length)
+	return SCALE_WIPE_OUT(clip,mode,wipe_direction,10.0,scale_wipe_length+1)
 }
 
 function EXTEND_ONE_FRAME(clip clip){
@@ -113,20 +113,21 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 }
 
 function SUBTITLE_FX_SPELL(clip clip,string text,int start_num_frames,int end_num_frames){
+	font="MS Mincho"
 	effects="c"
-	size=90*1.5
+	size=64*1.5
 	#text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
 	#halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_magenta,$40)
 	text_color=color_white
-	halo_color=color_white
+	halo_color=color_black
 	x=subtitle_clip_width/2
 	y=(subtitle_clip_height/2)-(size/2)
 
 	frame_count=Framecount(clip)
 	clip_yv12=ConvertToYV12(clip)
-	one_pass_clip=SUBTITLE_FX_RANDOM_SCALE(clip_yv12,text,Round(x),Round(y),0,start_num_frames-1,subtitle_font,effects,Round(size),text_color,halo_color)
+	one_pass_clip=SUBTITLE_FX_RANDOM_SCALE(clip_yv12,text,Round(x),Round(y),0,start_num_frames-1,font,effects,Round(size),text_color,halo_color)
 	one_pass_clip=EXTEND_ONE_FRAME(one_pass_clip)
-	two_pass_clip=SUBTITLE_FX_RANDOM_SCALE(one_pass_clip,text,Round(x),Round(y),frame_count-end_num_frames,frame_count-1,subtitle_font,effects,Round(size),text_color,halo_color)
+	two_pass_clip=SUBTITLE_FX_RANDOM_SCALE(one_pass_clip,text,Round(x),Round(y),frame_count-end_num_frames,frame_count-1,font,effects,Round(size),text_color,halo_color)
 	return UNDO_EXTEND_ONE_FRAME(two_pass_clip)
 }
 
