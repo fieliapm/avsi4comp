@@ -63,6 +63,7 @@ function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "fir
 	#return OVERWRITE_RANGE(clip,clip_with_subtitle,first_frame,last_frame)
 }
 
+# chromatic aberration
 function DISPERSION(clip clip,float offset){
 	clip_rgb=ConvertToRGB24(clip)
 	clip_r=FAST_ZOOM(ShowRed(clip_rgb),factor=1.0+offset,extend=true)
@@ -72,7 +73,7 @@ function DISPERSION(clip clip,float offset){
 }
 
 function CHARLOTTE_DISPERSION(clip clip){
-	return DISPERSION(clip,-0.005)
+	return DISPERSION(Tweak(clip,sat=0.8,bright=32.0),-0.005)
 }
 
 function CHARLOTTE_SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,int scale_wipe_length){
@@ -154,8 +155,7 @@ function SPELL(string trim_func_01,clip clip_01,string trim_func_02,clip clip_02
 		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_07_01,clip_07_01,29)),"x",1,6),"x",-1,14),"シャーロット",6,14) \
 		+SUBTITLE_FX_SPELL(FADE_OUT_WITH_BRIGHTNESS_OFFSET(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_07_02,clip_07_02,13)),"x",1,5),3),"約束",5,3) \
 		+SUBTITLE_FX_SPELL(FADE_IN_WITH_BRIGHTNESS_OFFSET(CHARLOTTE_DISPERSION(Apply(trim_func_08_01,clip_08_01,19)),3),"これからの記録",3,8)
-	spell_clip_full=Dissolve(ConvertToYV12(spell_clip),Apply(trim_func_08_02,clip_08_02,29),8)
-	return Tweak(spell_clip_full,sat=1.2,bright=64.0,cont=0.8)
+	return Dissolve(ConvertToYV12(spell_clip),Apply(trim_func_08_02,clip_08_02,29),8)
 }
 
 ### inherit end ###
