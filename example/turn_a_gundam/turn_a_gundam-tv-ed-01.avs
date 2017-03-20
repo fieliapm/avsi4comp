@@ -87,10 +87,10 @@ sekai_meisaku_gekijou=SEKAI_MEISAKU_GEKIJOU_CLIP(turn_a_gundam_tv_clean_ed_01_pa
 turn_a_gundam_tv_clean_ed_01=turn_a_gundam_tv_clean_ed_01_part01+turn_a_gundam_tv_clean_ed_01_part02
 
 mask_base=BlankClip(turn_a_gundam_tv_clean_ed_01,color=color_black)
-mask_with_var=ScriptClip(mask_base,"Overlay(BlankClip(turn_a_gundam_tv_clean_ed_01_part01,width=32,height=32,color=color_white),x=mask_x,y=mask_y,opacity=mask_opacity)")
-mask_with_var=FrameEvaluate(mask_with_var,"mask_x=Round(Spline(current_frame,0,280,1031,280,1085,320,1157,320,1205,280,1313,280,1361,320,1469,320,1505,360,Framecount()-1,360,cubic=false))")
-mask_with_var=FrameEvaluate(mask_with_var,"mask_y=Round(Spline(current_frame,0,165,1031,165,1085,150,1157,150,1205,165,1313,165,1361,150,Framecount()-1,150,cubic=false))")
-mask=FrameEvaluate(mask_with_var,"mask_opacity=current_frame>=1031?1.0:0.0")
+mask_with_parameter=ScriptClip(mask_base,"Overlay(BlankClip(turn_a_gundam_tv_clean_ed_01_part01,width=32,height=32,color=color_white),x=mask_x,y=mask_y,opacity=mask_opacity)")
+mask_with_parameter=FrameEvaluate(mask_with_parameter,"mask_x=Round(Spline(current_frame,0,280,1031,280,1085,320,1157,320,1205,280,1313,280,1361,320,1469,320,1505,360,Framecount()-1,360,cubic=false))")
+mask_with_parameter=FrameEvaluate(mask_with_parameter,"mask_y=Round(Spline(current_frame,0,165,1031,165,1085,150,1157,150,1205,165,1313,165,1361,150,Framecount()-1,150,cubic=false))")
+mask=FrameEvaluate(mask_with_parameter,"mask_opacity=current_frame>=1031?1.0:0.0")
 
 turn_a_gundam_tv_clean_ed_01_mosaic=MOSAIC_MASK(turn_a_gundam_tv_clean_ed_01,mask,8.0)
 

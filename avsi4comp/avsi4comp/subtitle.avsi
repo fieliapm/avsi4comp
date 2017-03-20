@@ -188,8 +188,8 @@ function SUBTITLE_FX_SMOOTH_BLINK(clip clip,string text,int "x",int "y",int "fir
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_blink_containing_var=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
-	subtitle_rgba_blink=FrameEvaluate(subtitle_rgba_blink_containing_var,"alpha_factor=Spline(-Cos((current_frame-("+OPTIONAL_ARG_TO_STRING(first_frame)+"))*Pi()*2.0/("+OPTIONAL_ARG_TO_STRING(blink_interval)+")),-1.0,"+OPTIONAL_ARG_TO_STRING(min_opacity)+",1.0,"+OPTIONAL_ARG_TO_STRING(max_opacity)+",cubic=false)")
+	subtitle_rgba_blink_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_blink=FrameEvaluate(subtitle_rgba_blink_containing_parameter,"alpha_factor=Spline(-Cos((current_frame-("+OPTIONAL_ARG_TO_STRING(first_frame)+"))*Pi()*2.0/("+OPTIONAL_ARG_TO_STRING(blink_interval)+")),-1.0,"+OPTIONAL_ARG_TO_STRING(min_opacity)+",1.0,"+OPTIONAL_ARG_TO_STRING(max_opacity)+",cubic=false)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_blink,first_frame,last_frame)
 }
@@ -201,8 +201,8 @@ function SUBTITLE_FX_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,int star
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_faded_containing_var=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
-	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_faded,before_start_frame,after_end_frame)
 }
@@ -216,10 +216,10 @@ function SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,i
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_faded_containing_var=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
-	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
-	subtitle_rgba_zoomed_containing_var=ScriptClip(subtitle_rgba_faded,"FAST_ZOOM(srcx=0.0,dstx=dstx)")
-	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_var,"dstx=Spline(current_frame,"+String(start_frame)+",0.0,"+String(end_frame)+","+String(appear_offset)+",cubic=false)")
+	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba_zoomed_containing_parameter=ScriptClip(subtitle_rgba_faded,"FAST_ZOOM(srcx=0.0,dstx=dstx)")
+	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_parameter,"dstx=Spline(current_frame,"+String(start_frame)+",0.0,"+String(end_frame)+","+String(appear_offset)+",cubic=false)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
@@ -237,10 +237,10 @@ function SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip clip,string text,int x,int y,int 
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_mosaic_containing_var=ScriptClip(subtitle_rgba,"MOSAIC_ALL(mosaic_factor)")
-	subtitle_rgba_mosaic=FrameEvaluate(subtitle_rgba_mosaic_containing_var,"mosaic_factor=Pow(2.0,Spline(current_frame,"+String(before_start_frame)+","+String(max_mosaic_factor_pow)+","+String(start_frame)+","+String(min_mosaic_factor_pow)+","+String(end_frame)+","+String(min_mosaic_factor_pow)+","+String(after_end_frame)+","+String(max_mosaic_factor_pow)+",cubic=false))")
-	subtitle_rgba_faded_containing_var=ScriptClip(subtitle_rgba_mosaic,"RGBAdjust(a=alpha_factor)")
-	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba_mosaic_containing_parameter=ScriptClip(subtitle_rgba,"MOSAIC_ALL(mosaic_factor)")
+	subtitle_rgba_mosaic=FrameEvaluate(subtitle_rgba_mosaic_containing_parameter,"mosaic_factor=Pow(2.0,Spline(current_frame,"+String(before_start_frame)+","+String(max_mosaic_factor_pow)+","+String(start_frame)+","+String(min_mosaic_factor_pow)+","+String(end_frame)+","+String(min_mosaic_factor_pow)+","+String(after_end_frame)+","+String(max_mosaic_factor_pow)+",cubic=false))")
+	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba_mosaic,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_faded,before_start_frame,after_end_frame)
 }
@@ -252,8 +252,8 @@ function SUBTITLE_FX_FLY_IN_FLY_OUT(clip clip,string text,int x,int y,int start_
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_zoomed_containing_var=ScriptClip(subtitle_rgba,"FAST_ZOOM(srcx=0.0,dstx=dstx)")
-	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_var,"dstx=Float(Width())*Pow(Spline(current_frame,"+String(before_start_frame)+",1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",-1.0,cubic=false),3.0)")
+	subtitle_rgba_zoomed_containing_parameter=ScriptClip(subtitle_rgba,"FAST_ZOOM(srcx=0.0,dstx=dstx)")
+	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_parameter,"dstx=Float(Width())*Pow(Spline(current_frame,"+String(before_start_frame)+",1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",-1.0,cubic=false),3.0)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
@@ -265,8 +265,8 @@ function SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip clip,string text,int x,int y,int st
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_smeared_containing_var=ScriptClip(subtitle_rgba,"PIXEL_SMEAR(smear_ratio_x=smear_ratio_x)")
-	subtitle_rgba_smeared=FrameEvaluate(subtitle_rgba_smeared_containing_var,"smear_ratio_x=Spline(current_frame,"+String(before_start_frame)+",-1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",1.0,cubic=false)")
+	subtitle_rgba_smeared_containing_parameter=ScriptClip(subtitle_rgba,"PIXEL_SMEAR(smear_ratio_x=smear_ratio_x)")
+	subtitle_rgba_smeared=FrameEvaluate(subtitle_rgba_smeared_containing_parameter,"smear_ratio_x=Spline(current_frame,"+String(before_start_frame)+",-1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",1.0,cubic=false)")
 
 	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_smeared,before_start_frame,after_end_frame)
 }
@@ -280,11 +280,11 @@ function SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,int st
 	clip_rgba=ConvertToRGB32(clip)
 	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
-	subtitle_rgba_faded_containing_var=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
-	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
-	subtitle_rgba_zoomed_containing_var=ScriptClip(subtitle_rgba_faded,"FAST_ZOOM(srcx=0.0,srcy=0.0,dstx=dstx,dsty=dsty)")
-	subtitle_rgba_zoomed_containing_var=FrameEvaluate(subtitle_rgba_zoomed_containing_var,"dstx=Spline(current_frame,"+String(before_start_frame)+","+String(-appear_offset)+","+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+","+String(appear_offset)+",cubic=false)")
-	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_var,"dsty=Spline(current_frame,"+String(before_start_frame)+","+String(-appear_offset)+","+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba_zoomed_containing_parameter=ScriptClip(subtitle_rgba_faded,"FAST_ZOOM(srcx=0.0,srcy=0.0,dstx=dstx,dsty=dsty)")
+	subtitle_rgba_zoomed_containing_parameter=FrameEvaluate(subtitle_rgba_zoomed_containing_parameter,"dstx=Spline(current_frame,"+String(before_start_frame)+","+String(-appear_offset)+","+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+","+String(appear_offset)+",cubic=false)")
+	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_parameter,"dsty=Spline(current_frame,"+String(before_start_frame)+","+String(-appear_offset)+","+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",0.0,cubic=false)")
 
 	subtitle_rgba_with_fx=EffectWater(subtitle_rgba_zoomed,end_frame,after_end_frame,amp=1,eamp=100)
 
@@ -313,8 +313,8 @@ function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_f
 	subtitle_bg=SUBTITLE_CLIP_BASE(clip_rgba,width=subtitle_clip_width,height=subtitle_clip_height)
 
 	random_text="RANDOM_STRING_OUT_OF_FRAME_RANGE("+THREE_DOUBLE_QUOTE_STRING(text)+",current_frame,"+String(start_frame)+","+String(end_frame)+","+DOUBLE_QUOTE_STRING(random_char_func)+")"
-	subtitle_rgba_containing_var=ScriptClip(subtitle_bg,"RENDER_SUBTITLE_CLIP("+random_text+","+String(x)+","+String(y)+","+String(before_start_frame)+","+String(after_end_frame)+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+String(size)+",SCALE_SUBTITLE_COLOR_ALPHA("+String(text_color)+",alpha_factor),SCALE_SUBTITLE_COLOR_ALPHA("+String(halo_color)+",alpha_factor),subtitle_mode="+OPTIONAL_STRING_ARG(subtitle_mode)+")")
-	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_var,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+	subtitle_rgba_containing_parameter=ScriptClip(subtitle_bg,"RENDER_SUBTITLE_CLIP("+random_text+","+String(x)+","+String(y)+","+String(before_start_frame)+","+String(after_end_frame)+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+String(size)+",SCALE_SUBTITLE_COLOR_ALPHA("+String(text_color)+",alpha_factor),SCALE_SUBTITLE_COLOR_ALPHA("+String(halo_color)+",alpha_factor),subtitle_mode="+OPTIONAL_STRING_ARG(subtitle_mode)+")")
+	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba,"PSEUDO_RANDOM_SEED(current_frame)")
 
 	subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,10,true,linear=false)

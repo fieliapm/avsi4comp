@@ -117,7 +117,7 @@ yuruyuri_season_01_tv_12_bloody_chitose=Trim(yuruyuri_season_01_tv_12,28785,2885
 
 #### Title Call ####
 
-func="ColorYUV(off_u=-32.0*_var,cont_u=-256.0*_var,off_v=32.0*_var,cont_v=-256.0*_var)"
+func="ColorYUV(off_u=-32.0*_parameter,cont_u=-256.0*_parameter,off_v=32.0*_parameter,cont_v=-256.0*_parameter)"
 
 disappear_interval=80
 yuruyuri_season_01_tv_01_title_call_static_mute=KillAudio(Loop(Trim(yuruyuri_season_01_tv_01_title_call,95,95),Framecount(yuruyuri_season_01_tv_01_akari_weak_sense_of_presence)))
@@ -126,8 +126,8 @@ yuruyuri_season_01_tv_01_title_call_akari_disappear_mute=Dissolve(KillAudio(yuru
 yuruyuri_season_01_tv_01_title_call_akari_disappear=AudioDub(yuruyuri_season_01_tv_01_title_call_akari_disappear_mute,KillVideo(yuruyuri_season_01_tv_01_title_call))
 
 yuruyuri_season_01_tv_01_title_call_akari_cry=AudioDub(yuruyuri_season_01_tv_01_title_call_static_mute,KillVideo(yuruyuri_season_01_tv_01_akari_weak_sense_of_presence))
-yuruyuri_season_01_tv_01_title_call_akari_cry_containing_var=ScriptClip(yuruyuri_season_01_tv_01_title_call_akari_cry,func)
-yuruyuri_season_01_tv_01_title_call_akari_cry=FrameEvaluate(yuruyuri_season_01_tv_01_title_call_akari_cry_containing_var,"_var=Spline(current_frame,179,0.0,180,0.0,195,1.0,196,1.0,false)") 
+yuruyuri_season_01_tv_01_title_call_akari_cry_containing_parameter=ScriptClip(yuruyuri_season_01_tv_01_title_call_akari_cry,func)
+yuruyuri_season_01_tv_01_title_call_akari_cry=FrameEvaluate(yuruyuri_season_01_tv_01_title_call_akari_cry_containing_parameter,"_parameter=Spline(current_frame,179,0.0,180,0.0,195,1.0,196,1.0,false)") 
 
 yuruyuri_season_01_tv_01_title_call_mtv_version=yuruyuri_season_01_tv_01_title_call_akari_disappear+yuruyuri_season_01_tv_01_title_call_akari_cry
 

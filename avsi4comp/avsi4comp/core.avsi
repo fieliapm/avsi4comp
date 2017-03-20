@@ -41,7 +41,7 @@ function MAX_(val a,val b){
 }
 
 function CLAMP(val x,val low,val high){
-	return MAX_(MIN_(x,high),low)
+	return MAX_(low,MIN_(high,x))
 }
 
 function EUCLIDEAN_MOD(int a,int b){
@@ -109,24 +109,28 @@ function ARRAY_FILL(val base,int count){
 	return element+(count>1?__ARRAY_DLM+ARRAY_FILL(base,count-1):"")
 }
 
-######## Variant ########
+######## Linear Interpolation ########
 
-function _LINEAR_VAR(float x,float start,float end){
+function INVERSE_LERP(float x,float start,float end){
 	f_x=Float(x)
 	f_start=Float(start)
 	f_end=Float(end)
 	return (f_x-f_start)/(f_end-f_start)
 }
 
-function LINEAR(float x,float start,float end){
-	f_x=Float(x)
+function LERP(float t,float start,float end){
+	f_t=Float(t)
 	f_start=Float(start)
 	f_end=Float(end)
-	return (f_end-f_start)*f_x+f_start
+	return ((1.0-f_t)*f_start)+(f_t*f_end)
 }
 
-function EVALUATE_VAR(clip clip,string var,int zero_val_frame,int one_val_frame,bool "after_frame"){
-	return FrameEvaluate(clip,var+"=CLAMP(_LINEAR_VAR(current_frame,"+String(zero_val_frame)+","+String(one_val_frame)+"),0.0,1.0)",after_frame=after_frame)
+function INVERSE_LERP_CLAMPED(float x,float start,float end){
+	return CLAMP(INVERSE_LERP(x,start,end),0.0,1.0)
+}
+
+function EVALUATE_LERP_PARAMETER(clip clip,string parameter_name,int zero_val_frame,int one_val_frame,bool "after_frame"){
+	return FrameEvaluate(clip,parameter_name+"=INVERSE_LERP_CLAMPED(current_frame,"+String(zero_val_frame)+","+String(one_val_frame)+")",after_frame=after_frame)
 }
 
 ######## Apply Range ########
@@ -216,7 +220,7 @@ function SCALE_SUBTITLE_COLOR_ALPHA(int color,float factor){
 	return OVERWRITE_SUBTITLE_COLOR_ALPHA(color,a_scaled)
 }
 
-function COLOR_RGB_LINEAR(float x,int color1,int color2){
+function COLOR_LERP(float t,int color1,int color2){
 	color1_r=GET_COLOR_R(color1)
 	color1_g=GET_COLOR_G(color1)
 	color1_b=GET_COLOR_B(color1)
@@ -227,7 +231,7 @@ function COLOR_RGB_LINEAR(float x,int color1,int color2){
 	color2_b=GET_COLOR_B(color2)
 	color2_a=GET_COLOR_A(color2)
 
-	return ASSIGN_COLOR_RGB(Round(LINEAR(x,color1_r,color2_r)),Round(LINEAR(x,color1_g,color2_g)),Round(LINEAR(x,color1_b,color2_b)),Round(LINEAR(x,color1_a,color2_a)))
+	return ASSIGN_COLOR_RGB(Round(LERP(t,color1_r,color2_r)),Round(LERP(t,color1_g,color2_g)),Round(LERP(t,color1_b,color2_b)),Round(LERP(t,color1_a,color2_a)))
 }
 
 ######## String ########
@@ -466,8 +470,8 @@ function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",
 	global_clip_name="_transform_overlay_clip_zoomed_"+String(_transform_overlay_clip_count)
 	global _transform_overlay_clip_count=_transform_overlay_clip_count+1
 	Eval("global "+global_clip_name+"=Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,base_clip_rgb32_width,base_clip_rgb32_height,show)")
-	result_clip_containing_var=ScriptClip(base_clip_rgb32,"Layer("+global_clip_name+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
-	return FrameEvaluate(result_clip_containing_var,"global n=current_frame")
+	result_clip_containing_parameter=ScriptClip(base_clip_rgb32,"Layer("+global_clip_name+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
+	return FrameEvaluate(result_clip_containing_parameter,"global n=current_frame")
 }
 
 
@@ -486,8 +490,8 @@ function LINEAR_MOVE(clip clip,string overlay_clip,string mode,int start_frame,i
 
 	overlay_clip_extend=(extend?"BlankClip("+overlay_clip+",length="+String(start_frame)+",color=color_white)+":"")+overlay_clip
 
-	result_clip_containing_var=ScriptClip(clip,"Overlay("+overlay_clip_extend+",x=Round(LINEAR(_var,"+String(start_x)+","+String(end_x)+")),y=Round(LINEAR(_var,"+String(start_y)+","+String(end_y)+")),opacity=LINEAR(_var,"+String(start_opacity)+","+String(end_opacity)+"),mode="+DOUBLE_QUOTE_STRING(mode)+")")
-	result_clip=EVALUATE_VAR(result_clip_containing_var,"_var",start_frame,end_frame)
+	result_clip_containing_parameter=ScriptClip(clip,"Overlay("+overlay_clip_extend+",x=Round(LERP(_parameter,"+String(start_x)+","+String(end_x)+")),y=Round(LERP(_parameter,"+String(start_y)+","+String(end_y)+")),opacity=LERP(_parameter,"+String(start_opacity)+","+String(end_opacity)+"),mode="+DOUBLE_QUOTE_STRING(mode)+")")
+	result_clip=EVALUATE_LERP_PARAMETER(result_clip_containing_parameter,"_parameter",start_frame,end_frame)
 
 	return overwrite?OVERWRITE_RANGE(clip,result_clip,start_frame,end_frame):result_clip
 }
@@ -512,8 +516,8 @@ function BRIGHTNESS_OFFSET(clip clip,float offset){
 function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_out){
 	zero_val_frame=is_fade_out?start_frame:end_frame
 	one_val_frame=is_fade_out?end_frame:start_frame
-	clip_faded_containing_var=ScriptClip(clip,"BRIGHTNESS_OFFSET(_var)")
-	clip_faded=EVALUATE_VAR(clip_faded_containing_var,"_var",zero_val_frame,one_val_frame)
+	clip_faded_containing_parameter=ScriptClip(clip,"BRIGHTNESS_OFFSET(_parameter)")
+	clip_faded=EVALUATE_LERP_PARAMETER(clip_faded_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
 	return OVERWRITE_RANGE(clip,clip_faded,start_frame,end_frame)
 }
 
@@ -575,8 +579,8 @@ function PIXEL_SMEAR_FX(clip clip,string mode,int smear_direction,int start_fram
 	zero_val_frame=is_out?start_frame:end_frame
 	one_val_frame=is_out?end_frame:start_frame
 
-	clip_pixel_smeared_containing_var=ScriptClip(clip,"PIXEL_SMEAR(smear_ratio_"+mode+"=_var*("+String(smear_ratio)+"))")
-	clip_pixel_smeared=EVALUATE_VAR(clip_pixel_smeared_containing_var,"_var",zero_val_frame,one_val_frame)
+	clip_pixel_smeared_containing_parameter=ScriptClip(clip,"PIXEL_SMEAR(smear_ratio_"+mode+"=_parameter*("+String(smear_ratio)+"))")
+	clip_pixel_smeared=EVALUATE_LERP_PARAMETER(clip_pixel_smeared_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
 	return OVERWRITE_RANGE(clip,clip_pixel_smeared,start_frame,end_frame)
 }
 
@@ -616,8 +620,8 @@ function SCALE_WIPE_FX(clip clip,string mode,int wipe_direction,float scale_fact
 	one_val_frame=is_out?end_frame:start_frame
 
 	clip_rgb32=ConvertToRGB32(clip)
-	clip_scale_wiped_containing_var=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_var*("+String(wipe_ratio)+"),scale_factor_"+mode+"=Spline(_var,0.0,1.0,1.0,"+String(scale_factor)+",cubic=false))")
-	clip_scale_wiped=EVALUATE_VAR(clip_scale_wiped_containing_var,"_var",zero_val_frame,one_val_frame)
+	clip_scale_wiped_containing_parameter=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_parameter*("+String(wipe_ratio)+"),scale_factor_"+mode+"=LERP(_parameter,1.0,"+String(scale_factor)+"))")
+	clip_scale_wiped=EVALUATE_LERP_PARAMETER(clip_scale_wiped_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
 	return OVERWRITE_RANGE(clip_rgb32,clip_scale_wiped,start_frame,end_frame)
 }
 

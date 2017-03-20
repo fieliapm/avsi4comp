@@ -193,10 +193,10 @@ koukaku_kidoutai_sac_2nd_tv_16_niihamasi_zoomed=ConvertToYV12(Zoom(ConvertToRGB3
 	angle="45.0*"+koukaku_kidoutai_sac_2nd_tv_16_niihamasi_trimmed_expression))
 
 mask_base=BlankClip(koukaku_kidoutai_sac_2nd_tv_13_kaori_change_gitai,color=color_black)
-mask_with_var=ScriptClip(mask_base,"Overlay(BlankClip(koukaku_kidoutai_sac_2nd_tv_13_kaori_change_gitai,width=128,height=128,color=color_white),x=mask_x,y=mask_y,opacity=mask_opacity)")
-mask_with_var=FrameEvaluate(mask_with_var,"mask_x=Round(Spline(current_frame,0,1150,200,1150,227,1150,254,1290,Framecount()-1,1290,cubic=false))")
-mask_with_var=FrameEvaluate(mask_with_var,"mask_y=Round(Spline(current_frame,0,680,200,680,227,680,254,660,Framecount()-1,660,cubic=false))")
-mask=FrameEvaluate(mask_with_var,"mask_opacity=current_frame>=200?1.0:0.0")
+mask_with_parameter=ScriptClip(mask_base,"Overlay(BlankClip(koukaku_kidoutai_sac_2nd_tv_13_kaori_change_gitai,width=128,height=128,color=color_white),x=mask_x,y=mask_y,opacity=mask_opacity)")
+mask_with_parameter=FrameEvaluate(mask_with_parameter,"mask_x=Round(Spline(current_frame,0,1150,200,1150,227,1150,254,1290,Framecount()-1,1290,cubic=false))")
+mask_with_parameter=FrameEvaluate(mask_with_parameter,"mask_y=Round(Spline(current_frame,0,680,200,680,227,680,254,660,Framecount()-1,660,cubic=false))")
+mask=FrameEvaluate(mask_with_parameter,"mask_opacity=current_frame>=200?1.0:0.0")
 koukaku_kidoutai_sac_2nd_tv_13_kaori_change_gitai_mosaic=MOSAIC_MASK(koukaku_kidoutai_sac_2nd_tv_13_kaori_change_gitai,mask,24.0)
 
 ######## Combine ########
