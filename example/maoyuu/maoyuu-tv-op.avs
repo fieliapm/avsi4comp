@@ -88,7 +88,7 @@ maoyuu_tv_08_maou_enter_grave_overlay=OVERLAY_BG_AND_CHAR_ADD_2(TRIM_LAST_CLIP(m
 
 fade_length=24
 
-maoyuu_tv_op_t01=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(maoyuu_tv_01_yuusha_team,159),14)+maoyuu_tv_clean_op_01
+maoyuu_tv_op_t01=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(maoyuu_tv_01_yuusha_team,159),14)+maoyuu_tv_clean_op_01
 
 maoyuu_tv_op_t02=maoyuu_tv_clean_op_02+TRIM_FIRST_CLIP(maoyuu_tv_02_maou_teach_student,81) \
 	+TRIM_LAST_CLIP(maoyuu_tv_01_maou_oppai,5)+TRIM_MIDDLE_CLIP(maoyuu_tv_07_onna_kishi_oppai,6)+TRIM_MIDDLE_CLIP(maoyuu_tv_03_chief_maid_touch_maou_oppai_01,6)+TRIM_MIDDLE_CLIP(maoyuu_tv_08_grand_princess_fire_dragon_and_mazoku_musume_oppai,6)
@@ -128,7 +128,7 @@ maoyuu_tv_op_t10=maoyuu_tv_clean_op_03+BlankClip(maoyuu_tv_clean_op,length=72,co
 
 
 
-maoyuu_tv_op_mute=maoyuu_tv_op_t01+maoyuu_tv_op_t02+maoyuu_tv_op_t03+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(maoyuu_tv_op_t04,fade_length/2)+maoyuu_tv_op_t05+maoyuu_tv_op_t06+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(maoyuu_tv_op_t07,fade_length),maoyuu_tv_op_t08,fade_length,fade_length)+maoyuu_tv_op_t09+maoyuu_tv_op_t10
+maoyuu_tv_op_mute=maoyuu_tv_op_t01+maoyuu_tv_op_t02+maoyuu_tv_op_t03+FADE_OUT_WITH_BRIGHTNESS_OFFSET(maoyuu_tv_op_t04,fade_length/2)+maoyuu_tv_op_t05+maoyuu_tv_op_t06+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(FADE_IN_WITH_BRIGHTNESS_OFFSET(maoyuu_tv_op_t07,fade_length),maoyuu_tv_op_t08,fade_length,fade_length)+maoyuu_tv_op_t09+maoyuu_tv_op_t10
 
 ######## Music ########
 
@@ -146,6 +146,8 @@ subtitle_effects="b"
 subtitle_size=32
 subtitle_text_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_red,$C0)
 subtitle_halo_color=color_gold
+
+ConvertToRGB32()
 
 SUBTITLE_FX_SMEAR_IN_SMEAR_OUT("- by fielia & niwa0daisuke@AVISynth",subtitle_x,subtitle_y,231,406,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
 

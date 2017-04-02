@@ -78,7 +78,7 @@ rorona_gallery_01=Trim(rorona_pv_dvd_01,1833,2075)
 rorona_gallery_02=Trim(rorona_pv_dvd_01_cache02,3226,3386)
 rorona_gallery_03=Trim(rorona_pv_dvd_03,2159,2273)
 
-rorona_gallery_t01=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(rorona_gallery_03,rorona_gallery_02,30,30)
+rorona_gallery_t01=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(rorona_gallery_03,rorona_gallery_02,30,30)
 
 #PV-02
 rorona_op_pv_02=Dissolve(rorona_gallery_t01,rorona_gallery_01,39)+rorona_demo_01
@@ -119,7 +119,7 @@ rorona_op_t01=BlankClip(rorona_op_web_01,length=3,color=color_black)+rorona_op_w
 rorona_op_t02=Dissolve(rorona_op_t01,FIT_OP_WEB(rorona_op_pv_01),9)
 rorona_op_t03=Dissolve(rorona_op_t02,FIT_OP_WEB(rorona_character),85)
 rorona_op_t04=Dissolve(rorona_op_t03,FIT_OP_WEB(rorona_op_pv_02),5)
-rorona_op_mute=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(rorona_op_t04,rorona_op_web_02,15,15)+BlankClip(rorona_op_web_01,length=180,color=color_white)
+rorona_op_mute=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(rorona_op_t04,rorona_op_web_02,15,15)+BlankClip(rorona_op_web_01,length=180,color=color_white)
 
 ######## Music ########
 
@@ -145,6 +145,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("Falling, The Star Light//ŽR–{”ü”HŽq|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,60,150,true)
 

@@ -138,7 +138,7 @@ function RESIZE_TO_480P(clip clip){
 }
 
 ninokuni_shikkoku_no_madoushi_ed_t01=BlankClip(ninokuni_tgs_2009,length=35,color=color_black)+RESIZE_TO_480P(ninokuni_ds_pv2_07_demo)
-ninokuni_shikkoku_no_madoushi_ed_t02=RESIZE_TO_480P(FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(ninokuni_ds_pv_02_scroll_trimmed,15))+ninokuni_tgs_2009_04_anime_01+RESIZE_TO_480P(ninokuni_ds_tgs_2010_02_anime_02)
+ninokuni_shikkoku_no_madoushi_ed_t02=RESIZE_TO_480P(FADE_IN_WITH_BRIGHTNESS_OFFSET(ninokuni_ds_pv_02_scroll_trimmed,15))+ninokuni_tgs_2009_04_anime_01+RESIZE_TO_480P(ninokuni_ds_tgs_2010_02_anime_02)
 ninokuni_shikkoku_no_madoushi_ed_t03=Dissolve(RESIZE_TO_480P(ninokuni_ds_tgs_2010_02_anime_01),RESIZE_TO_480P(ninokuni_ds_pv2_03_ninokuni_logo),FadeOut(ninokuni_tgs_2009_04_anime_02,15,color_black),32)
 ninokuni_shikkoku_no_madoushi_ed_t04=RESIZE_TO_480P(ninokuni_ds_pv2_05_demo+ninokuni_ds_pv_06_anime_02)
 ninokuni_shikkoku_no_madoushi_ed_t05=Dissolve(RESIZE_TO_480P(ninokuni_ds_pv2_06_anime_01+ninokuni_ds_cm_pv_01_anime),ninokuni_tgs_2009_07_comment,25)
@@ -146,7 +146,7 @@ ninokuni_shikkoku_no_madoushi_ed_t06=RESIZE_TO_480P(ninokuni_ds_tgs_2010_04_anim
 ninokuni_shikkoku_no_madoushi_ed_t07=RESIZE_TO_480P(ninokuni_ds_pv2_02_anime_trimmed+CLIP_SPEED(ninokuni_ds_tgs_2010_08_ninokuni_logo_deluxe,0.5,true))+BlankClip(ninokuni_tgs_2009,length=90,color=color_black)
 
 ninokuni_shikkoku_no_madoushi_ed_mute=ninokuni_shikkoku_no_madoushi_ed_t01+ninokuni_shikkoku_no_madoushi_ed_t02+ninokuni_shikkoku_no_madoushi_ed_t03 \
-	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(ninokuni_shikkoku_no_madoushi_ed_t04,ninokuni_shikkoku_no_madoushi_ed_t05,15,15)+ninokuni_shikkoku_no_madoushi_ed_t06+ninokuni_shikkoku_no_madoushi_ed_t07
+	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(ninokuni_shikkoku_no_madoushi_ed_t04,ninokuni_shikkoku_no_madoushi_ed_t05,15,15)+ninokuni_shikkoku_no_madoushi_ed_t06+ninokuni_shikkoku_no_madoushi_ed_t07
 
 ######## Music ########
 
@@ -172,6 +172,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("êSÇÃÇ©ÇØÇÁ//ñÉàﬂ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7190,7435,true)
 

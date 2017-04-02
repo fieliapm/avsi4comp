@@ -36,7 +36,7 @@ function PBP_ONE_CLIP(clip clip,int dir_x,int dir_y,float factor){
 	clip_width=Width(clip)
 	clip_height=Height(clip)
 
-	return Zoom(ConvertToRGB32(clip),dstx=String((clip_width*0.5)*(1.0+((1.0-factor)*Float(dir_x)))),dsty="(("+String(clip_height)+")*0.5)*(1.0+((1.0-("+String(factor)+"))*("+String(dir_y)+")*Spline(n,0,1.0,"+String(Framecount(clip))+",0.5,cubic=false)))",factor=String(factor))
+	return Zoom(clip,dstx=String((clip_width*0.5)*(1.0+((1.0-factor)*Float(dir_x)))),dsty="(("+String(clip_height)+")*0.5)*(1.0+((1.0-("+String(factor)+"))*("+String(dir_y)+")*Spline(n,0,1.0,"+String(Framecount(clip))+",0.5,cubic=false)))",factor=String(factor))
 }
 
 function PBP_EFFECT(clip clip1,clip clip2,int dir_x,int dir_y,float factor){
@@ -138,18 +138,19 @@ shingeki_no_kyojin_tv_16_bell_and_crow=Merge(shingeki_no_kyojin_tv_17_crow_fly_s
 
 shingeki_no_kyojin_tv_06_mikasa_in_rain_slow_motion=TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CLIP_SPEED(shingeki_no_kyojin_tv_06_mikasa_in_rain),146+146)
 shingeki_no_kyojin_tv_25_bird_fly_slow_motion=BlankClip(shingeki_no_kyojin_tv_clean_op_02,length=146,color=color_black)+FadeIn0(TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(shingeki_no_kyojin_tv_25_bird_fly_02),146),fade_length)
-mikasa_in_rain=PBP_EFFECT(shingeki_no_kyojin_tv_25_bird_fly_slow_motion,shingeki_no_kyojin_tv_06_mikasa_in_rain_slow_motion,1,1,0.7)
-mikasa_in_rain=ConvertToYV12(mikasa_in_rain)
+mikasa_in_rain=ConvertToYV12(PBP_EFFECT(ConvertToRGB32(shingeki_no_kyojin_tv_25_bird_fly_slow_motion),ConvertToRGB32(shingeki_no_kyojin_tv_06_mikasa_in_rain_slow_motion),1,1,0.7))
 
 
 
 levi_see_partner_killed=TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_21_levi_see_gunter_killed,36+(fade_length/2))+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_21_levi_see_eldo_killed,37)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_21_levi_see_aruro_killed,36)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_21_levi_see_petra_killed,37)
 
-eren_s_painful_experience_01=PBP_EFFECT(Trim(SLOW_MOTION_WITH_CLIP_SPEED(shingeki_no_kyojin_tv_24_eren_is_frustrated_01),480,-(146+(fade_length/2))),TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(shingeki_no_kyojin_tv_16_fire_and_people),146+(fade_length/2)),1,-1,0.7)
-eren_s_painful_experience_01=ConvertToYV12(eren_s_painful_experience_01)
+shingeki_no_kyojin_tv_24_eren_is_frustrated_01_slow_motion=Trim(SLOW_MOTION_WITH_CLIP_SPEED(shingeki_no_kyojin_tv_24_eren_is_frustrated_01),480,-(146+(fade_length/2)))
+shingeki_no_kyojin_tv_16_fire_and_people_slow_motion=TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(shingeki_no_kyojin_tv_16_fire_and_people),146+(fade_length/2))
+eren_s_painful_experience_01=ConvertToYV12(PBP_EFFECT(ConvertToRGB32(shingeki_no_kyojin_tv_24_eren_is_frustrated_01_slow_motion),ConvertToRGB32(shingeki_no_kyojin_tv_16_fire_and_people_slow_motion),1,-1,0.7))
 
-eren_s_painful_experience_02=PBP_EFFECT(TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(shingeki_no_kyojin_tv_24_eren_is_frustrated_02),146+(fade_length/2)),TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(levi_see_partner_killed),146+(fade_length/2)),1,1,0.7)
-eren_s_painful_experience_02=ConvertToYV12(eren_s_painful_experience_02)
+shingeki_no_kyojin_tv_24_eren_is_frustrated_02_slow_motion=TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(shingeki_no_kyojin_tv_24_eren_is_frustrated_02),146+(fade_length/2))
+levi_see_partner_killed_slow_motion=TRIM_FIRST_CLIP(SLOW_MOTION_WITH_CONVERT_FPS(levi_see_partner_killed),146+(fade_length/2))
+eren_s_painful_experience_02=ConvertToYV12(PBP_EFFECT(ConvertToRGB32(shingeki_no_kyojin_tv_24_eren_is_frustrated_02_slow_motion),ConvertToRGB32(levi_see_partner_killed_slow_motion),1,1,0.7))
 
 eren_s_painful_experience_03=Dissolve(TRIM_LAST_CLIP(shingeki_no_kyojin_tv_01_kyojin_catch_carla_01,73+(fade_length/2)),TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_01_kyojin_catch_carla_02,73+(fade_length/2)+Floor(fast_fade_length/2.0)),fade_length)
 
@@ -205,7 +206,7 @@ shingeki_no_kyojin_tv_op_01_t02=TRIM_LAST_CLIP(shingeki_no_kyojin_tv_21_mikasa_g
 	+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_20_levi_kill_many_kyojin,73)+TRIM_LAST_CLIP(shingeki_no_kyojin_tv_17_soldier_cut_kyojin_leg,73)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_17_survey_corps_attack_kyojin_04,74)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_18_solder_attack_megata_no_kyojin_01,36)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_18_solder_attack_megata_no_kyojin_03,36) \
 	+TRIM_LAST_CLIP(shingeki_no_kyojin_tv_16_wings_of_freedom,38+13)+Dissolve(TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_18_historia_cry,22+fade_length),TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_17_levi_squad_dash_forward,74),fade_length)
 
-shingeki_no_kyojin_tv_op_01_t03=Dissolve(TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_23_annie_laugh,74),FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(flash_cut,fade_length),fade_length)
+shingeki_no_kyojin_tv_op_01_t03=Dissolve(TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_23_annie_laugh,74),FADE_OUT_WITH_BRIGHTNESS_OFFSET(flash_cut,fade_length),fade_length)
 shingeki_no_kyojin_tv_op_01_t04=TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_17_reiner_armin_follow_megata_no_kyojin,146)+TRIM_LAST_CLIP(shingeki_no_kyojin_tv_19_megata_no_kyojin_is_under_attack,109)+TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_23_mikasa_ready_to_fight_with_annie_01,37)
 
 shingeki_no_kyojin_tv_op_01_t05=TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_17_armin_ride_horse_in_field,146)+TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_17_armin_shoot_flare_gun,146) \
@@ -229,25 +230,25 @@ shingeki_no_kyojin_tv_op_01_t11=TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_21_kyojin
 
 shingeki_no_kyojin_tv_op_01_t12=Dissolve(TRIM_MIDDLE_CLIP(shingeki_no_kyojin_tv_22_petra_s_body_is_dropped_01,36+(fade_length/2)),shingeki_no_kyojin_tv_16_bell_slow_motion_scaled,shingeki_no_kyojin_tv_16_bell_and_crow,fade_length)
 shingeki_no_kyojin_tv_op_01_t13=TRIM_FIRST_CLIP(mikasa_in_rain,146+146)
-shingeki_no_kyojin_tv_op_01_t14=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(Dissolve(TRIM_FIRST_CLIP(eren_s_painful_experience_01,146+(fade_length/2)),TRIM_FIRST_CLIP(eren_s_painful_experience_02,146+(fade_length/2)),fade_length), \
+shingeki_no_kyojin_tv_op_01_t14=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(Dissolve(TRIM_FIRST_CLIP(eren_s_painful_experience_01,146+(fade_length/2)),TRIM_FIRST_CLIP(eren_s_painful_experience_02,146+(fade_length/2)),fade_length), \
 	Dissolve(TRIM_FIRST_CLIP(eren_s_painful_experience_03,146+Floor(fast_fade_length/2.0)),TRIM_FIRST_CLIP(eren_angry_and_transform,74+fast_fade_length),fast_fade_length),fade_length,fade_length)
 
 shingeki_no_kyojin_tv_op_01_t15=review_02_01+review_02_02
 
 shingeki_no_kyojin_tv_op_01_t16=shingeki_no_kyojin_tv_clean_op_02_02+TRIM_LAST_CLIP(shingeki_no_kyojin_tv_25_kyojin_eren_scream_02,37)
-shingeki_no_kyojin_tv_op_01_t17=TRIM_LAST_CLIP(shingeki_no_kyojin_tv_18_forest_edge_01,148)+TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_17_erwin_squad_ride_horse_in_field,72)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_22_survey_corps_retreat_in_field_03,37),fade_length) \
+shingeki_no_kyojin_tv_op_01_t17=TRIM_LAST_CLIP(shingeki_no_kyojin_tv_18_forest_edge_01,148)+TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_17_erwin_squad_ride_horse_in_field,72)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_22_survey_corps_retreat_in_field_03,37),fade_length) \
 	+TRIM_FIRST_CLIP(shingeki_no_kyojin_tv_25_kyojin_eren_get_mad_02,35)+shingeki_no_kyojin_tv_clean_op_02_03+BlankClip(shingeki_no_kyojin_tv_clean_op_02,length=24*1,color=color_white)
 
 
 
 shingeki_no_kyojin_tv_op_02_mute=shingeki_no_kyojin_tv_op_01_t01+shingeki_no_kyojin_tv_op_01_t02 \
-	+shingeki_no_kyojin_tv_op_01_t03+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_op_01_t04, \
-	shingeki_no_kyojin_tv_op_01_t05,fade_length,fade_length)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_op_01_t06, \
-	FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_op_01_t07,fade_length),fade_length,fade_length) \
-	+shingeki_no_kyojin_tv_op_01_t08+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_op_01_t09,fade_length) \
+	+shingeki_no_kyojin_tv_op_01_t03+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_op_01_t04, \
+	shingeki_no_kyojin_tv_op_01_t05,fade_length,fade_length)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_op_01_t06, \
+	FADE_OUT_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_op_01_t07,fade_length),fade_length,fade_length) \
+	+shingeki_no_kyojin_tv_op_01_t08+FADE_OUT_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_op_01_t09,fade_length) \
 	+shingeki_no_kyojin_tv_op_01_t10+shingeki_no_kyojin_tv_op_01_t11 \
 	+FadeOut0(shingeki_no_kyojin_tv_op_01_t12,fade_length)+FadeOut0(FadeIn0(shingeki_no_kyojin_tv_op_01_t13,fade_length),fade_length)+Dissolve(FadeIn0(shingeki_no_kyojin_tv_op_01_t14,fade_length),shingeki_no_kyojin_tv_op_01_t15,fast_fade_length) \
-	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_op_01_t16,shingeki_no_kyojin_tv_op_01_t17,fade_length,fade_length)
+	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_op_01_t16,shingeki_no_kyojin_tv_op_01_t17,fade_length,fade_length)
 
 shingeki_no_kyojin_tv_op_02_mute
 
@@ -299,6 +300,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 		: \
 		SUBTITLE_FX_FLY_IN_FLY_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("Ž©—R‚Ì—ƒ//Linked Horizon|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,7731,7840,false,is_title=true)
 
@@ -382,7 +385,7 @@ SUBTITLE_FX("Die Flugel der Freiheit!",subtitle_x,subtitle_x,7726,7772,false)
 
 
 
-AUDIO_DUB_TONE(shingeki_no_kyojin_tv_clean_op_02_01_00,samplerate=48000,channels=2,type="Silence")++ConvertToYV12(last)
+ConvertToRGB32(AUDIO_DUB_TONE(shingeki_no_kyojin_tv_clean_op_02_01_00,samplerate=48000,channels=2,type="Silence"))++last
 
 
 

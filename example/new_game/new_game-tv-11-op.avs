@@ -80,6 +80,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 ### inherit end ###
 
+ConvertToRGB32()
+
 SUBTITLE_FX("á§Œ‰‚ªµ‚­‚Ù‚ç",subtitle_x,subtitle_y-subtitle_size,382,470)
 SUBTITLE_FX("I‚í‚è‚Ì‰€",subtitle_x,subtitle_y,475,551)
 SUBTITLE_FX("(İ–û)",subtitle_x,subtitle_x,532,572)

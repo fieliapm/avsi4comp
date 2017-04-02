@@ -246,8 +246,8 @@ yuruyuri_season_02_tv_op_t09=yuruyuri_season_02_tv_clean_op_part03
 yuruyuri_season_02_tv_op_t10=TRIM_FIRST_CLIP(yuruyuri_season_02_tv_12_akari_kiss_robot,73)+TRIM_LAST_CLIP(yuruyuri_season_02_tv_12_bomb,53) \
 	+yuruyuri_season_02_tv_clean_op_part04+TRIM_FIRST_CLIP(yuruyuri_season_02_tv_12_akari_go_on_stage,87)+yuruyuri_season_02_tv_clean_op_part05
 
-yuruyuri_season_02_tv_op_mute=yuruyuri_season_02_tv_op_t01+yuruyuri_season_02_tv_op_t02+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(yuruyuri_season_02_tv_op_t03,fade_length) \
-	+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(yuruyuri_season_02_tv_op_t04,fade_length)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(yuruyuri_season_02_tv_op_t05,yuruyuri_season_02_tv_op_t06,fade_length,fade_length) \
+yuruyuri_season_02_tv_op_mute=yuruyuri_season_02_tv_op_t01+yuruyuri_season_02_tv_op_t02+FADE_OUT_WITH_BRIGHTNESS_OFFSET(yuruyuri_season_02_tv_op_t03,fade_length) \
+	+FADE_OUT_WITH_BRIGHTNESS_OFFSET(yuruyuri_season_02_tv_op_t04,fade_length)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(yuruyuri_season_02_tv_op_t05,yuruyuri_season_02_tv_op_t06,fade_length,fade_length) \
 	+yuruyuri_season_02_tv_op_t07+yuruyuri_season_02_tv_op_t08+yuruyuri_season_02_tv_op_t09+yuruyuri_season_02_tv_op_t10
 
 ######## Music ########
@@ -291,6 +291,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return result_clip
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("‚¢‚¥‚·!‚ä‚ä‚ä™‚ä‚é‚ä‚èôô//µX’†™‚²‚ç‚­•”|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,390,516,is_title=true)
 
@@ -422,6 +424,7 @@ function SUBTITLE_N(clip clip,string text,float x,float y,int start_frame,int en
 
 title_call_subtitle_y=370
 
+yuruyuri_season_02_tv_01_title_call_mtv_version=ConvertToRGB32(yuruyuri_season_02_tv_01_title_call_mtv_version)
 yuruyuri_season_02_tv_01_title_call_mtv_version=SUBTITLE_N(yuruyuri_season_02_tv_01_title_call_mtv_version,"_±¯¶È°İ^",center_subtitle_x,title_call_subtitle_y,45,95,true)
 yuruyuri_season_02_tv_01_title_call_mtv_version=SUBTITLE_N(yuruyuri_season_02_tv_01_title_call_mtv_version,"‚Í```‚¢",subtitle_x,subtitle_y,100,125)
 yuruyuri_season_02_tv_01_title_call_mtv_version=SUBTITLE_N(yuruyuri_season_02_tv_01_title_call_mtv_version,"‚ª‚¿‚ä‚èAn‚Ü‚é‚æ```",subtitle_x,subtitle_y,135,200)
@@ -429,6 +432,7 @@ yuruyuri_season_02_tv_01_title_call_mtv_version=SUBTITLE_N(yuruyuri_season_02_tv
 cm_subtitle_01_y=50
 cm_subtitle_02_y=50+(center_subtitle_size*5)
 
+yui_tenkousei=ConvertToRGB32(yui_tenkousei)
 yui_tenkousei=SUBTITLE_N(yui_tenkousei,"   ’ñ‹Ÿ   ",center_subtitle_x,cm_subtitle_01_y,10,250,true,true)
 yui_tenkousei=SUBTITLE_N(yui_tenkousei,"’†‰›“®‰æ•”",center_subtitle_x,cm_subtitle_02_y,10,250,true,true)
 

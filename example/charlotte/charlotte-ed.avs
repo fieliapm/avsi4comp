@@ -139,6 +139,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 ### inherit end ###
 
+ConvertToRGB32()
+
 SUBTITLE_FX("Œ©“n‚¹‚éêŠ‚É¡’©‚Í’H‚è’…‚­",subtitle_x,subtitle_y,749,920)
 SUBTITLE_FX("‰“‚­ü˜H‚ªL‚Ñ‚é",subtitle_x,subtitle_y,927,1051)
 SUBTITLE_FX("‚±‚Ñ‚è‚Â‚¢‚½“y‚©‚©‚Æ‚©‚ç—‚Æ‚µ",subtitle_x,subtitle_y,1104,1268)

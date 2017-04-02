@@ -79,7 +79,7 @@ sophie_no_atelier_promotion_movie_01_past_atelier_faster=CLIP_SPEED(sophie_no_at
 
 
 sophie_no_atelier_op_t01=BlankClip(sophie_no_atelier_op,length=2,color=color_black)+sophie_no_atelier_op_01
-sophie_no_atelier_op_t02=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_LAST_CLIP(sophie_no_atelier_teaser_movie_02,475+575),fade_length)
+sophie_no_atelier_op_t02=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(sophie_no_atelier_teaser_movie_02,475+575),fade_length)
 sophie_no_atelier_op_t03=sophie_no_atelier_promotion_movie_02_01+sophie_no_atelier_promotion_movie_02_02
 sophie_no_atelier_op_t04=TRIM_FIRST_CLIP(sophie_no_atelier_teaser_movie_03,240)+sophie_no_atelier_promotion_movie_02_03
 sophie_no_atelier_op_t05=TRIM_FIRST_CLIP(sophie_no_atelier_promotion_movie_01_03,541)
@@ -119,6 +119,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("Phronesis//RURUTIA|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7611,7834,true)
 

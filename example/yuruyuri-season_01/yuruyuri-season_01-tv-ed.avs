@@ -133,12 +133,12 @@ function SUBTITLE_CENTER(clip clip,string text,bool "is_footage"){
 }
 
 subtitle_clip_length=96
-omake_clip_part01=BlankClip(yuruyuri_season_01_tv_clean_ed_part01,length=subtitle_clip_length,color=color_black)
+omake_clip_part01=BlankClip(yuruyuri_season_01_tv_clean_ed_part01,length=subtitle_clip_length,pixel_type="RGB32",color=color_black)
 omake_clip_part01=ConvertToYV12(SUBTITLE_CENTER(omake_clip_part01,"Ç«Ç§ÇµÇƒÇ†Ç©ÇËÇÒÇÃèoî‘Ç™Ç†ÇÈ?"))
-omake_clip_part02=BlankClip(yuruyuri_season_01_tv_clean_ed_part02,length=subtitle_clip_length,color=color_black)
+omake_clip_part02=BlankClip(yuruyuri_season_01_tv_clean_ed_part02,length=subtitle_clip_length,pixel_type="RGB32",color=color_black)
 omake_clip_part02=ConvertToYV12(SUBTITLE_CENTER(omake_clip_part02,"ÇªÇÍÇÕ......"))
 omake_clip_part03=yuruyuri_season_01_tv_01_akari_sister_room
-omake_clip_part04=BlankClip(yuruyuri_season_01_tv_clean_ed_part04,length=subtitle_clip_length,color=color_black)
+omake_clip_part04=BlankClip(yuruyuri_season_01_tv_clean_ed_part04,length=subtitle_clip_length,pixel_type="RGB32",color=color_black)
 omake_clip_part04=SUBTITLE_CENTER(omake_clip_part04,"Å_±Ø∂ÿ∞›Å^")
 omake_clip_part04=SUBTITLE_CENTER(omake_clip_part04,"----------")
 omake_clip_part04=SUBTITLE_CENTER(omake_clip_part04,"                   <-ã÷é~!")
@@ -151,7 +151,7 @@ function _FLIP_PAGE(clip left,clip right){
 	length=Framecount(left)
 	left_height=Height(left)
 
-	return ConvertToYV12(TRANSFORM(left,right,srcx="0",srcy="0",dstx="0",dsty="-Float("+String(left_height)+")*Pow("+String(length)+"-1-n,2)/Pow("+String(length)+"-1,2)"))
+	return ConvertToYV12(TRANSFORM(ConvertToRGB32(left),ConvertToRGB32(right),srcx="0",srcy="0",dstx="0",dsty="-Float("+String(left_height)+")*Pow("+String(length)+"-1-n,2)/Pow("+String(length)+"-1,2)"))
 }
 
 function FLIP_PAGE(clip left,clip right,int length){
@@ -163,7 +163,7 @@ function FLIP_PAGE_2(clip clip1,clip clip2,int num_frames){
 	clip1_extend=clip1+BlankClip(clip1,length=Framecount(clip2)-num_frames)
 	clip2_extend=BlankClip(clip2,length=clip2_start)+clip2
 	clip1_height=Height(clip1)
-	return TRANSFORM(clip1_extend,clip2_extend,srcx="0",srcy="0",dstx="0",dsty="n<"+String(clip2_start)+"?-"+String(clip1_height)+":(n>"+String(clip2_start)+"+"+String(num_frames)+"-1?0:-Int(Float("+String(clip1_height)+")/Pow("+String(num_frames)+"-1,2)*Pow("+String(clip2_start)+"+"+String(num_frames)+"-1-n,2)))")
+	return ConvertToYV12(TRANSFORM(ConvertToRGB32(clip1_extend),ConvertToRGB32(clip2_extend),srcx="0",srcy="0",dstx="0",dsty="n<"+String(clip2_start)+"?-"+String(clip1_height)+":(n>"+String(clip2_start)+"+"+String(num_frames)+"-1?0:-Int(Float("+String(clip1_height)+")/Pow("+String(num_frames)+"-1,2)*Pow("+String(clip2_start)+"+"+String(num_frames)+"-1-n,2)))"))
 }
 
 flip_page_length=8
@@ -196,7 +196,7 @@ yuruyuri_season_01_tv_04_akkariin_extend=Loop(yuruyuri_season_01_tv_04_akkariin,
 timing_offset=13
 
 yuruyuri_season_01_tv_ed_t01=Trim(yuruyuri_season_01_tv_clean_ed_01,1,0)
-yuruyuri_season_01_tv_ed_t02=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_kyouko_dont_care,124)+ConvertToYV12(yuruyuri_season_01_tv_ed_t99)
+yuruyuri_season_01_tv_ed_t02=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_kyouko_dont_care,124)+yuruyuri_season_01_tv_ed_t99
 yuruyuri_season_01_tv_ed_t03=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_himawari_big_breast_01,121)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_himawari_big_breast_02,121)
 yuruyuri_season_01_tv_ed_t04=TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_kyouko_cry,122)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_03_kyouko_thanks_to_yui,61) \
 	+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_04_chinatsu_twinkle_01,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_04_chinatsu_twinkle_02,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_04_kyouko_and_ayako_draw,30)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_01_akkariin,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_sakurako_vs_himawari_01,15)+TRIM_MIDDLE_CLIP(yuruyuri_season_01_tv_02_sakurako_vs_himawari_02,30-timing_offset)
@@ -221,7 +221,7 @@ yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_t
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t06
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t07
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t08
-yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(yuruyuri_season_01_tv_ed_t09,yuruyuri_season_01_tv_ed_t10,fade_length,fade_length)
+yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(yuruyuri_season_01_tv_ed_t09,yuruyuri_season_01_tv_ed_t10,fade_length,fade_length)
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t11
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t12
 yuruyuri_season_01_tv_ed_temp=yuruyuri_season_01_tv_ed_temp+yuruyuri_season_01_tv_ed_t13
@@ -256,6 +256,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 function SUBTITLE_N(clip clip,string text,float x,float y,int start_frame,int end_frame){
 	return SUBTITLE_NORMAL(clip,text,x,y,start_frame,end_frame,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,subtitle_halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("É}ÉCÉyÅ[ÉXÇ≈Ç¢Ç´Ç‹ÇµÇÂÇ§//éµêXíÜÅôÇ≤ÇÁÇ≠ïî|- by ê‘ç¿Ç†Ç©ÇÀ & fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,375,497,true)
 
@@ -331,6 +333,7 @@ hint_blink_string_y=50
 hint_blink_string_first_frame=subtitle_clip_length*2+24
 hint_blink_string_last_frame=hint_blink_string_first_frame+Framecount(omake_clip_part03)-48
 
+omake_clip=ConvertToRGB32(omake_clip)
 omake_clip=SUBTITLE_FX_SMOOTH_BLINK(omake_clip,hint_blink_string,hint_blink_string_x,hint_blink_string_y,hint_blink_string_first_frame,hint_blink_string_last_frame,subtitle_font,subtitle_effects,subtitle_size,color_yellow,subtitle_halo_color,min_opacity=0.2,max_opacity=0.9)
 
 

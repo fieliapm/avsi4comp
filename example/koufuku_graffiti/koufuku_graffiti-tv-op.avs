@@ -85,9 +85,9 @@ koufuku_graffiti_tv_op_t09=koufuku_graffiti_tv_clean_op_03+TRIM_FIRST_CLIP(koufu
 
 
 
-koufuku_graffiti_tv_op_mute=koufuku_graffiti_tv_op_t01+FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(koufuku_graffiti_tv_op_t02,fade_length) \
+koufuku_graffiti_tv_op_mute=koufuku_graffiti_tv_op_t01+FADE_IN_WITH_BRIGHTNESS_OFFSET(koufuku_graffiti_tv_op_t02,fade_length) \
 	+koufuku_graffiti_tv_op_t03+koufuku_graffiti_tv_op_t04+koufuku_graffiti_tv_op_t05 \
-	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(koufuku_graffiti_tv_op_t06,fade_length),koufuku_graffiti_tv_op_t07,fade_length,fade_length), \
+	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(FADE_IN_WITH_BRIGHTNESS_OFFSET(koufuku_graffiti_tv_op_t06,fade_length),koufuku_graffiti_tv_op_t07,fade_length,fade_length), \
 	koufuku_graffiti_tv_op_t08,fade_length,fade_length)+koufuku_graffiti_tv_op_t09
 
 koufuku_graffiti_tv_op_mute
@@ -125,6 +125,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 }
 
 ### inherit end ###
+
+ConvertToRGB32()
 
 SUBTITLE_FX(""+DOUBLE_QUOTE_STRING("幸せ")+"という気持ちに最初に気づいた人が",subtitle_x,subtitle_y,137,272)
 SUBTITLE_FX("名前をつけたのかな それは",subtitle_x,subtitle_y,287,369)

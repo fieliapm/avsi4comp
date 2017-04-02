@@ -51,6 +51,8 @@ AudioDub(majo_no_takkyuubin_op_mute,bgm_48khz)
 
 ######## Subtitle ########
 
+ConvertToRGB32()
+
 function APPLY_SUBTITLE(clip clip){
 	clip
 
@@ -92,7 +94,7 @@ FILTER_INTERLACED_VIDEO("APPLY_SUBTITLE()")
 
 
 majo_no_takkyuubin_01_op_00=AUDIO_DUB_TONE(majo_no_takkyuubin_01_op_00,samplerate=48000,channels=2,type="Silence")
-majo_no_takkyuubin_op=FadeIn0(majo_no_takkyuubin_01_op_00,fade_length)+ConvertToYUY2(last)
+majo_no_takkyuubin_op=ConvertToRGB32(FadeIn0(majo_no_takkyuubin_01_op_00,fade_length))+last
 kiki_talk=FadeOut0(Trim(majo_no_takkyuubin_01_op,0,168+fade_length),fade_length)
 MixAudio(majo_no_takkyuubin_op,kiki_talk,1.0,1.0)
 

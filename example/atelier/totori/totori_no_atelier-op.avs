@@ -193,7 +193,7 @@ totori_op_t05=FIT_OP_WEB(AssumeFPS(totori_pv_dvd_title01_03_01+totori_pv_dvd_tit
 
 totori_op_t06=FIT_OP_WEB(Dissolve(totori_final_image_trailer_04,totori_final_image_trailer_05,10))
 
-totori_op_mute=Dissolve(Dissolve(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(totori_op_t01+FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(totori_op_t02,30),totori_op_t03,20,20),totori_op_t04,30),totori_op_t05,5)+totori_op_t06
+totori_op_mute=Dissolve(Dissolve(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(totori_op_t01+FADE_IN_WITH_BRIGHTNESS_OFFSET(totori_op_t02,30),totori_op_t03,20,20),totori_op_t04,30),totori_op_t05,5)+totori_op_t06
 
 ######## Music ########
 
@@ -219,6 +219,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("Pilgrimage//ŽR–{”ü”HŽq|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,420,520,true)
 

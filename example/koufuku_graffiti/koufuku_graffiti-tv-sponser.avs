@@ -71,6 +71,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,effects,Round(size),text_color,subtitle_halo_color,"ex_thick")
 }
 
+ConvertToRGB32()
+
 koufuku_graffiti_tv_sponser_frame_count=Framecount(koufuku_graffiti_tv_sponser_mute)
 
 SUBTITLE_FX("ô‚²‚Í‚ñ‚Ì—ûK//ƒŠƒ‡ƒE&‚«‚è‚ñ(²“¡—˜“Ş&‘å‹T‚ ‚·‚©)|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,0,koufuku_graffiti_tv_sponser_frame_count,true)

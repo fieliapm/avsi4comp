@@ -40,6 +40,8 @@ AudioDub(majo_no_takkyuubin_ed_mute,bgm_48khz_delayed)
 
 ######## Subtitle ########
 
+ConvertToRGB32()
+
 function APPLY_SUBTITLE(clip clip){
 	clip
 

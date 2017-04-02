@@ -35,13 +35,12 @@ Import("koufuku_graffiti-tv-common.avsi")
 function _FLIP_TRANSITION(clip left,clip right,int dir_x,int dir_y){
 	length=Framecount(right)
 
-	mask_base=BlankClip(right,color=color_black)
-	mask_overlay=BlankClip(right,color=color_white)
+	mask=BlankClip(right,pixel_type="RGB24",color=color_white)
 	mask_width=Width(right)
 	mask_height=Height(right)
 	mask_frame_count=Framecount(right)
 
-	mask=TRANSFORM(mask_base,mask_overlay,srcx="0",srcy="0",dstx="Spline(n,-1,"+String(-mask_width*dir_x)+","+String(mask_frame_count)+",0,cubic=false)",dsty="Spline(n,-1,"+String(-mask_height*dir_y)+","+String(mask_frame_count)+",0,cubic=false)")
+	mask=ScriptClip(mask,"FAST_ZOOM(srcx=0.0,srcy=0.0,dstx=Spline(current_frame,-1,"+String(-mask_width*dir_x)+","+String(mask_frame_count)+",0,cubic=false),dsty=Spline(current_frame,-1,"+String(-mask_height*dir_y)+","+String(mask_frame_count)+",0,cubic=false))")
 	return Overlay(left,right,mask=mask,mode="Blend")
 }
 
@@ -104,7 +103,7 @@ koufuku_graffiti_tv_ed_t09=TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_10_yuki_like_kir
 	+TRIM_LAST_CLIP(koufuku_graffiti_tv_01_ryou_hadaka_apron,77)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_03_sakura_rain_01,47) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_11_vampire_ryou,18)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_12_530_meal,17)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_12_296_make,17)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_ryou_become_brilliant,42) \
 	+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_04_ryou_walk_in_dream,56)
-koufuku_graffiti_tv_ed_t10=TRIM_LAST_CLIP(koufuku_graffiti_tv_03_drama_character_eat_omurice,137)+TRIM_LAST_CLIP(koufuku_graffiti_tv_11_ryou_and_kirin_fondle_shiina_god,137)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_akira_force_ryou_to_eat_cookie,137)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_07_kirin_catch_fired_sanma,111)+FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_summer_sky_moving,14),fade_length)
+koufuku_graffiti_tv_ed_t10=TRIM_LAST_CLIP(koufuku_graffiti_tv_03_drama_character_eat_omurice,137)+TRIM_LAST_CLIP(koufuku_graffiti_tv_11_ryou_and_kirin_fondle_shiina_god,137)+TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_02_akira_force_ryou_to_eat_cookie,137)+TRIM_FIRST_CLIP(koufuku_graffiti_tv_07_kirin_catch_fired_sanma,111)+FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(koufuku_graffiti_tv_06_summer_sky_moving,14),fade_length)
 
 koufuku_graffiti_tv_ed_t11=koufuku_graffiti_tv_clean_ed_04
 koufuku_graffiti_tv_ed_t12=transition_result+BlankClip(koufuku_graffiti_tv_clean_op,length=24*5,color=color_black)
@@ -158,6 +157,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 }
 
 ### inherit end ###
+
+ConvertToRGB32()
 
 SUBTITLE_FX("コトコトコトコトコト",subtitle_x,subtitle_y,307,366,1)
 SUBTITLE_FX("グツグツグツグツ…グゥ",subtitle_x,subtitle_y,367,435,2)

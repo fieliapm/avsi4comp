@@ -155,16 +155,16 @@ function _SUBTITLE_FX_PRE_OPAQUE(clip clip,int bg_color,string text,int "x",int 
 	return RENDER_SUBTITLE(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode=subtitle_mode)
 }
 
-function _SUBTITLE_FX_PRE(clip clip_rgba,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
-	subtitle_bg=SUBTITLE_CLIP_BASE(clip_rgba,width=subtitle_clip_width,height=subtitle_clip_height)
+function _SUBTITLE_FX_PRE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
+	subtitle_bg=SUBTITLE_CLIP_BASE(clip,width=subtitle_clip_width,height=subtitle_clip_height)
 	return RENDER_SUBTITLE_CLIP(subtitle_bg,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode=subtitle_mode)
 }
 
-function _SUBTITLE_FX_POST(clip clip_rgba,clip subtitle_rgba,int first_frame,int last_frame){
-	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba,clip_rgba)
-	#clip_with_subtitle=Layer(clip_rgba,subtitle_rgba_resized,"Add")
-	#return OVERWRITE_RANGE(clip_rgba,clip_with_subtitle,first_frame,last_frame)
-	return ApplyRange(clip_rgba,first_frame,last_frame,"Layer",subtitle_rgba_resized,"Add")
+function _SUBTITLE_FX_POST(clip clip,clip subtitle_rgba,int first_frame,int last_frame){
+	subtitle_rgba_resized=RESIZE_TO_REF_CLIP(subtitle_rgba,clip)
+	#clip_with_subtitle=Layer(clip,subtitle_rgba_resized,"Add")
+	#return OVERWRITE_RANGE(clip,clip_with_subtitle,first_frame,last_frame)
+	return ApplyRange(clip,first_frame,last_frame,"Layer",subtitle_rgba_resized,"Add")
 }
 
 
@@ -173,9 +173,10 @@ function SUBTITLE_NORMAL(clip clip,string text,int "x",int "y",int "first_frame"
 	first_frame=Default(first_frame,0)
 	last_frame=Default(last_frame,Framecount(clip)-1)
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba,first_frame,last_frame)
+	Assert(IsRGB32(clip),"SUBTITLE_NORMAL(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba,first_frame,last_frame)
 }
 
 function SUBTITLE_FX_SMOOTH_BLINK(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode",float "blink_interval",float "min_opacity",float "max_opacity"){
@@ -185,26 +186,28 @@ function SUBTITLE_FX_SMOOTH_BLINK(clip clip,string text,int "x",int "y",int "fir
 	min_opacity=Default(min_opacity,0.0)
 	max_opacity=Default(max_opacity,1.0)
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_SMOOTH_BLINK(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,first_frame,last_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_blink_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
 	subtitle_rgba_blink=FrameEvaluate(subtitle_rgba_blink_containing_parameter,"alpha_factor=Spline(-Cos((current_frame-("+OPTIONAL_ARG_TO_STRING(first_frame)+"))*Pi()*2.0/("+OPTIONAL_ARG_TO_STRING(blink_interval)+")),-1.0,"+OPTIONAL_ARG_TO_STRING(min_opacity)+",1.0,"+OPTIONAL_ARG_TO_STRING(max_opacity)+",cubic=false)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_blink,first_frame,last_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_blink,first_frame,last_frame)
 }
 
 function SUBTITLE_FX_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_FADE_IN_FADE_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
 	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_faded,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_faded,before_start_frame,after_end_frame)
 }
 
 function SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode",float "appear_offset"){
@@ -213,15 +216,16 @@ function SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip clip,string text,int x,int y,i
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
 	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 	subtitle_rgba_zoomed_containing_parameter=ScriptClip(subtitle_rgba_faded,"FAST_ZOOM(srcx=0.0,dstx=dstx)")
 	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_parameter,"dstx=Spline(current_frame,"+String(start_frame)+",0.0,"+String(end_frame)+","+String(appear_offset)+",cubic=false)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
 
 function SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode",float "min_mosaic_factor",float "max_mosaic_factor"){
@@ -234,41 +238,44 @@ function SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(clip clip,string text,int x,int y,int 
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_MOSAIC_IN_MOSAIC_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_mosaic_containing_parameter=ScriptClip(subtitle_rgba,"MOSAIC_ALL(mosaic_factor)")
 	subtitle_rgba_mosaic=FrameEvaluate(subtitle_rgba_mosaic_containing_parameter,"mosaic_factor=Pow(2.0,Spline(current_frame,"+String(before_start_frame)+","+String(max_mosaic_factor_pow)+","+String(start_frame)+","+String(min_mosaic_factor_pow)+","+String(end_frame)+","+String(min_mosaic_factor_pow)+","+String(after_end_frame)+","+String(max_mosaic_factor_pow)+",cubic=false))")
 	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba_mosaic,"RGBAdjust(a=alpha_factor)")
 	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_faded,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_faded,before_start_frame,after_end_frame)
 }
 
 function SUBTITLE_FX_FLY_IN_FLY_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_FLY_IN_FLY_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_zoomed_containing_parameter=ScriptClip(subtitle_rgba,"FAST_ZOOM(srcx=0.0,dstx=dstx)")
 	subtitle_rgba_zoomed=FrameEvaluate(subtitle_rgba_zoomed_containing_parameter,"dstx=Float(Width())*Pow(Spline(current_frame,"+String(before_start_frame)+",1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",-1.0,cubic=false),3.0)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_zoomed,before_start_frame,after_end_frame)
 }
 
 function SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_smeared_containing_parameter=ScriptClip(subtitle_rgba,"PIXEL_SMEAR(smear_ratio_x=smear_ratio_x)")
 	subtitle_rgba_smeared=FrameEvaluate(subtitle_rgba_smeared_containing_parameter,"smear_ratio_x=Spline(current_frame,"+String(before_start_frame)+",-1.0,"+String(start_frame)+",0.0,"+String(end_frame)+",0.0,"+String(after_end_frame)+",1.0,cubic=false)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_smeared,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_smeared,before_start_frame,after_end_frame)
 }
 
 function SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode",float "appear_offset"){
@@ -277,8 +284,9 @@ function SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,int st
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_SLIDE_IN_WATER_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
 	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
@@ -288,7 +296,7 @@ function SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip clip,string text,int x,int y,int st
 
 	subtitle_rgba_with_fx=EffectWater(subtitle_rgba_zoomed,end_frame,after_end_frame,amp=1,eamp=100)
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_with_fx,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_with_fx,before_start_frame,after_end_frame)
 }
 
 
@@ -303,21 +311,22 @@ function RANDOM_ASCII_CHAR(){
 	return Chr(ascii_code)
 }
 
-function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string font,string effects,int size,int text_color,int halo_color,string "subtitle_mode",string "random_char_func"){
+function SUBTITLE_FX_RANDOM_STRING(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string font,string effects,int size,int text_color,int halo_color,string "subtitle_mode",string "random_char_func",string "exclude_char_set"){
 	random_char_func=Default(random_char_func,"RANDOM_ASCII_CHAR")
 
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_bg=SUBTITLE_CLIP_BASE(clip_rgba,width=subtitle_clip_width,height=subtitle_clip_height)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_RANDOM_STRING(): clip only support RGB32 format")
 
-	random_text="RANDOM_STRING_OUT_OF_FRAME_RANGE("+THREE_DOUBLE_QUOTE_STRING(text)+",current_frame,"+String(start_frame)+","+String(end_frame)+","+DOUBLE_QUOTE_STRING(random_char_func)+")"
+	subtitle_bg=SUBTITLE_CLIP_BASE(clip,width=subtitle_clip_width,height=subtitle_clip_height)
+
+	random_text="RANDOM_STRING_OUT_OF_FRAME_RANGE("+THREE_DOUBLE_QUOTE_STRING(text)+",current_frame,"+String(start_frame)+","+String(end_frame)+","+DOUBLE_QUOTE_STRING(random_char_func)+","+OPTIONAL_STRING_ARG_CONTAIN_DOUBLE_QUOTE_CHAR(exclude_char_set)+")"
 	subtitle_rgba_containing_parameter=ScriptClip(subtitle_bg,"RENDER_SUBTITLE_CLIP("+random_text+","+String(x)+","+String(y)+","+String(before_start_frame)+","+String(after_end_frame)+","+DOUBLE_QUOTE_STRING(font)+","+DOUBLE_QUOTE_STRING(effects)+","+String(size)+",SCALE_SUBTITLE_COLOR_ALPHA("+String(text_color)+",alpha_factor),SCALE_SUBTITLE_COLOR_ALPHA("+String(halo_color)+",alpha_factor),subtitle_mode="+OPTIONAL_STRING_ARG(subtitle_mode)+")")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame)+",0.0,"+String(start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
 	subtitle_rgba=FrameEvaluate(subtitle_rgba,"PSEUDO_RANDOM_SEED(current_frame)")
 
 	subtitle_rgba_slow_motion=SLOW_MOTION_TO_FPS(subtitle_rgba,10,true,linear=false)
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_slow_motion,before_start_frame,after_end_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_slow_motion,before_start_frame,after_end_frame)
 }

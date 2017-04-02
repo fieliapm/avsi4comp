@@ -85,6 +85,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,effects,Round(size),text_color,subtitle_halo_color,"ex_thick")
 }
 
+ConvertToRGB32()
+
 koufuku_graffiti_tv_next_episode_frame_count=Framecount()
 
 SUBTITLE_FX("♪しあわせグラフィティ//リョウ&きりん(佐藤利奈&大亀あすか)|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,0,koufuku_graffiti_tv_next_episode_frame_count,true)

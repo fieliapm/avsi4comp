@@ -40,17 +40,20 @@ function SUBTITLE_FX_RANDOM_SCALE_OLD(clip clip,string text,int "x",int "y",int 
 	first_frame=Default(first_frame,0)
 	last_frame=Default(last_frame,Framecount(clip)-1)
 
-	clip_rgba=ConvertToRGB32(clip)
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip_rgba,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
+	Assert(IsRGB32(clip),"SUBTITLE_FX_RANDOM_SCALE(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
 
 	subtitle_rgba_random_zoomed=ScriptClip(subtitle_rgba,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Round(Width()-((50*1.5)*2)))+(50*1.5),dsty=PSEUDO_RANDOM(Round(Height()-((50*1.5)*2)))+(50*1.5),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.0)+0.5)")
 
-	return _SUBTITLE_FX_POST(clip_rgba,subtitle_rgba_random_zoomed,first_frame,last_frame)
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_random_zoomed,first_frame,last_frame)
 }
 
 function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "first_frame",int "last_frame",string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
 	first_frame=Default(first_frame,0)
 	last_frame=Default(last_frame,Framecount(clip)-1)
+
+	Assert(IsYUV(clip),"SUBTITLE_FX_RANDOM_SCALE(): clip only support YUV format")
 
 	subtitle_clip=_SUBTITLE_FX_PRE_OPAQUE(clip,color_black,text,x,y,first_frame,last_frame+1,font,effects,size,text_color,halo_color,subtitle_mode)
 
@@ -69,7 +72,7 @@ function DISPERSION(clip clip,float offset){
 	clip_r=FAST_ZOOM(ShowRed(clip_rgb),factor=1.0+offset,extend=true)
 	clip_g=ShowGreen(clip_rgb)
 	clip_b=FAST_ZOOM(ShowBlue(clip_rgb),factor=1.0-offset,extend=true)
-	return MergeRGB(clip_r,clip_g,clip_b)
+	return MergeRGB(clip_r,clip_g,clip_b,pixel_type="RGB24")
 }
 
 function CHARLOTTE_DISPERSION(clip clip){
@@ -77,11 +80,11 @@ function CHARLOTTE_DISPERSION(clip clip){
 }
 
 function CHARLOTTE_SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,int scale_wipe_length){
-	return SCALE_WIPE_IN(clip,mode,wipe_direction,10.0,scale_wipe_length+1)
+	return SCALE_WIPE_IN(clip,mode,wipe_direction,10.0,scale_wipe_length)
 }
 
 function CHARLOTTE_SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,int scale_wipe_length){
-	return SCALE_WIPE_OUT(clip,mode,wipe_direction,10.0,scale_wipe_length+1)
+	return SCALE_WIPE_OUT(clip,mode,wipe_direction,10.0,scale_wipe_length)
 }
 
 function EXTEND_ONE_FRAME(clip clip){
@@ -220,32 +223,32 @@ charlotte_02_nao_s_mother_smile_trimmed=SCALE_OUT(TRIM_FIRST_CLIP(charlotte_02_n
 
 charlotte_op_t01=charlotte_clean_op_01
 charlotte_op_t02=AUDIO_DUB_TONE(last,samplerate=48000,channels=2,type="Silence")
-charlotte_op_t03=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(charlotte_10_shunsuke_kumagami_see_city,77),fade_length)+TRIM_LAST_CLIP(charlotte_08_yusa_singing,84)+TRIM_FIRST_CLIP(charlotte_13_yuu_jump_down,65)+TRIM_FIRST_CLIP(charlotte_11_nao_punched_02,71) \
+charlotte_op_t03=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(charlotte_10_shunsuke_kumagami_see_city,77),fade_length)+TRIM_LAST_CLIP(charlotte_08_yusa_singing,84)+TRIM_FIRST_CLIP(charlotte_13_yuu_jump_down,65)+TRIM_FIRST_CLIP(charlotte_11_nao_punched_02,71) \
 	+TRIM_LAST_CLIP(charlotte_06_oikawa_nomura_konishi_around_ayumi,58)+TRIM_FIRST_CLIP(charlotte_04_misa_hit_baseball,20)+blank_out+TRIM_MIDDLE_CLIP(charlotte_01_key_coffee_02,23)+TRIM_MIDDLE_CLIP(charlotte_08_sara_walk_nearby_yuu_02,23)+TRIM_MIDDLE_CLIP(charlotte_12_yusa_hug_parent,37) \
 	+TRIM_MIDDLE_CLIP(charlotte_12_medoki_shichino_maedomari,76)+TRIM_MIDDLE_CLIP(charlotte_05_nao_and_yuu_see_night_scene,80)
 
 charlotte_op_t04=TRIM_LAST_CLIP(charlotte_03_joujirou_and_yuu_in_school_restaurant,154)+TRIM_LAST_CLIP(charlotte_13_yuu_touch_eye_then_break_glass,148)
 
-charlotte_op_t05=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(charlotte_07_telescope_and_rain,77),fade_length)+TRIM_MIDDLE_CLIP(charlotte_13_yuu_see_explosion,92) \
-	+blank_out+TRIM_MIDDLE_CLIP(charlotte_07_street,58)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(charlotte_12_nao_and_yuu_make_deal_02,152),fade_length)
-charlotte_op_t06=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(charlotte_13_shunsuke_see_airplane,79),fade_length)+TRIM_FIRST_CLIP(charlotte_07_yumi_ask_yuu_to_go_outside_02,75)+TRIM_LAST_CLIP(charlotte_12_misa_eat_soba_and_cry,78)+TRIM_LAST_CLIP(charlotte_05_yuu_on_field_01,38)+TRIM_LAST_CLIP(charlotte_05_yuu_on_field_02,40) \
+charlotte_op_t05=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(charlotte_07_telescope_and_rain,77),fade_length)+TRIM_MIDDLE_CLIP(charlotte_13_yuu_see_explosion,92) \
+	+blank_out+TRIM_MIDDLE_CLIP(charlotte_07_street,58)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(charlotte_12_nao_and_yuu_make_deal_02,152),fade_length)
+charlotte_op_t06=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(charlotte_13_shunsuke_see_airplane,79),fade_length)+TRIM_FIRST_CLIP(charlotte_07_yumi_ask_yuu_to_go_outside_02,75)+TRIM_LAST_CLIP(charlotte_12_misa_eat_soba_and_cry,78)+TRIM_LAST_CLIP(charlotte_05_yuu_on_field_01,38)+TRIM_LAST_CLIP(charlotte_05_yuu_on_field_02,40) \
 	+TRIM_MIDDLE_CLIP(charlotte_05_nao_and_yuu_talking_in_forest,152)+TRIM_MIDDLE_CLIP(charlotte_12_shunsuke_not_reconciled,77)+TRIM_FIRST_CLIP(charlotte_08_sara_sing_for_kazuki_02_trimmed,79)
 charlotte_op_t07=charlotte_clean_op_02
-charlotte_op_t08=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(charlotte_09_nao_with_casual_wear,77),fade_length)+TRIM_LAST_CLIP(charlotte_02_joujirou_dash_to_sandwitch,84)+TRIM_MIDDLE_CLIP(charlotte_11_yuu_use_collapse_02,65)+TRIM_MIDDLE_CLIP(charlotte_01_joujirou_ready_to_dash,71) \
+charlotte_op_t08=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(charlotte_09_nao_with_casual_wear,77),fade_length)+TRIM_LAST_CLIP(charlotte_02_joujirou_dash_to_sandwitch,84)+TRIM_MIDDLE_CLIP(charlotte_11_yuu_use_collapse_02,65)+TRIM_MIDDLE_CLIP(charlotte_01_joujirou_ready_to_dash,71) \
 	+TRIM_MIDDLE_CLIP(charlotte_02_kumagami_walk_02,58)+TRIM_MIDDLE_CLIP(charlotte_06_konishi_hate,20)+blank_out+TRIM_MIDDLE_CLIP(charlotte_04_misa_run_toward_home_plate,23)+TRIM_MIDDLE_CLIP(charlotte_06_nao_kick_joujirou_to_outside_02,23)+TRIM_LAST_CLIP(charlotte_04_nao_cheer_up,37) \
 	+TRIM_FIRST_CLIP(charlotte_06_ayumi_turn_on_tv,76)+TRIM_LAST_CLIP(charlotte_12_yusa_show_risotto,80)
-charlotte_op_t09=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(charlotte_13_courageous_girl_stand_ahead_of_yuu_02,154),fade_length)
+charlotte_op_t09=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(charlotte_13_courageous_girl_stand_ahead_of_yuu_02,154),fade_length)
 
-charlotte_op_t10=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(charlotte_03_misa_angry,77),fade_length)+TRIM_MIDDLE_CLIP(charlotte_11_medoki_ask_yuu,76)+TRIM_MIDDLE_CLIP(charlotte_06_ayumi_get_across_window,77)+TRIM_FIRST_CLIP(charlotte_01_yuu_push_yumi_away,77) \
+charlotte_op_t10=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(charlotte_03_misa_angry,77),fade_length)+TRIM_MIDDLE_CLIP(charlotte_11_medoki_ask_yuu,76)+TRIM_MIDDLE_CLIP(charlotte_06_ayumi_get_across_window,77)+TRIM_FIRST_CLIP(charlotte_01_yuu_push_yumi_away,77) \
 	+TRIM_LAST_CLIP(charlotte_04_yusa_appear,76)+TRIM_MIDDLE_CLIP(charlotte_05_joujirou_gachimuchi,77)+TRIM_LAST_CLIP(charlotte_10_yusa_is_found,77)+TRIM_MIDDLE_CLIP(charlotte_07_yuu_grab_needle,77) \
-	+Trim(charlotte_01_ayumi_exciting,130,-77)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(charlotte_03_yusa_stand_ahead_of_car_and_people,76),fade_length)
-charlotte_op_t11=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(charlotte_11_ayumi_call_shunsuke_brother,154),fade_length)+TRIM_MIDDLE_CLIP(charlotte_01_nao_kick_yuu,153)+TRIM_LAST_CLIP(charlotte_08_sara_eat_raamen_and_kiss_bowl,154)+TRIM_FIRST_CLIP(charlotte_02_nao_s_mother_smile_trimmed,149)
+	+Trim(charlotte_01_ayumi_exciting,130,-77)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(charlotte_03_yusa_stand_ahead_of_car_and_people,76),fade_length)
+charlotte_op_t11=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(charlotte_11_ayumi_call_shunsuke_brother,154),fade_length)+TRIM_MIDDLE_CLIP(charlotte_01_nao_kick_yuu,153)+TRIM_LAST_CLIP(charlotte_08_sara_eat_raamen_and_kiss_bowl,154)+TRIM_FIRST_CLIP(charlotte_02_nao_s_mother_smile_trimmed,149)
 
 charlotte_op_t12=AUDIO_DUB_TONE(spell_02,samplerate=48000,channels=2,type="Silence")
-charlotte_op_t13=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(charlotte_04_misa_prepare_to_hit_baseball,77),fade_length)+TRIM_LAST_CLIP(charlotte_10_shunsuke_leave_from_yuu_ayumi,84)+TRIM_FIRST_CLIP(charlotte_09_yuu_pass_through_wall,65)+TRIM_FIRST_CLIP(charlotte_03_shou_cry_ahead_of_misa,71) \
+charlotte_op_t13=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(charlotte_04_misa_prepare_to_hit_baseball,77),fade_length)+TRIM_LAST_CLIP(charlotte_10_shunsuke_leave_from_yuu_ayumi,84)+TRIM_FIRST_CLIP(charlotte_09_yuu_pass_through_wall,65)+TRIM_FIRST_CLIP(charlotte_03_shou_cry_ahead_of_misa,71) \
 	+TRIM_FIRST_CLIP(charlotte_07_yamanote_train,58)+TRIM_MIDDLE_CLIP(charlotte_03_yusa_eat_marshmallow,20)+blank_out+TRIM_MIDDLE_CLIP(charlotte_06_nao_climb_chain_link_fence,23)+TRIM_LAST_CLIP(charlotte_13_yuu_control_rock_toward_people,23)+TRIM_MIDDLE_CLIP(charlotte_13_yuu_under_moon,37) \
-	+TRIM_LAST_CLIP(charlotte_09_nao_get_smart_phone_case_03,76)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_LAST_CLIP(charlotte_09_shunsuke_hear_yuu_coming,78),fade_length)
-charlotte_op_t14=charlotte_clean_op_03+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(charlotte_01_otosaka_family,80),fade_length)
+	+TRIM_LAST_CLIP(charlotte_09_nao_get_smart_phone_case_03,76)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(charlotte_09_shunsuke_hear_yuu_coming,78),fade_length)
+charlotte_op_t14=charlotte_clean_op_03+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(charlotte_01_otosaka_family,80),fade_length)
 charlotte_op_t15=Dissolve(TRIM_FIRST_CLIP(charlotte_02_student_association,227+fade_length),charlotte_clean_op_04,fade_length)+BlankClip(charlotte_clean_op,length=24*5,color=color_black)
 
 
@@ -258,6 +261,8 @@ charlotte_op_mute=charlotte_op_t01+charlotte_op_t02+charlotte_op_t03+charlotte_o
 charlotte_op_mute
 
 ######## Subtitle ########
+
+#ConvertToRGB32()
 
 #SUBTITLE_FX("Bravely You//Lia|- by fielia@AVISynth",-subtitle_x,subtitle_x,7695,7780,true)
 SUBTITLE_RIPPLE(7695,7780,false)

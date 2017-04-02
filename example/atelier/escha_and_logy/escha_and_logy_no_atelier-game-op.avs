@@ -112,6 +112,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick")
 }
 
+ConvertToRGB32()
+
 SUBTITLE_FX("ミルク色の峠//チリヌルヲワカ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,5756,6075,true)
 
 SUBTITLE_FX("ミルク色に染まる冬の峠は",subtitle_x,subtitle_y,687,877)

@@ -102,6 +102,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color)
 }
 
+ConvertToRGB32()
+
 SUBTITLE_FX("Answers//Susan Calloway|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,12575,12775,true)
 
 SUBTITLE_FX("I close my eyes. Tell us why must we suffer.",subtitle_x,subtitle_y,9,405)

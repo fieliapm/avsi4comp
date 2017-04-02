@@ -65,6 +65,7 @@ prologue=maoyuu_tv_01_explain_the_other_side_of_the_hill
 
 ######## Pre Combine ########
 
+prologue=ConvertToRGB32(prologue)
 prologue=SUBTITLE_N(prologue,"‹‹”IŠÅˆêŒÂ“Œ¼",subtitle_x,subtitle_y,25,90,false)
 prologue=SUBTITLE_N(prologue,"šIˆ¢...ˆ¢!",subtitle_x,subtitle_y,195,260,false)
 prologue=SUBTITLE_N(prologue,"”‡¥...?",subtitle_x,subtitle_y,355,375,false)
@@ -177,33 +178,42 @@ lovetra_sweet_pv_short=SSRC(ConvertFPS(lovetra_sweet_pv_short,map_audio),48000)
 
 ######## Pre Combine - Subtitle ########
 
+cm_kaimon_toshi_map=ConvertToRGB32(cm_kaimon_toshi_map)
 cm_kaimon_toshi_map=SUBTITLE_N(cm_kaimon_toshi_map,"1.‹ÖŽ~ˆùH",is_title=true)
 cm_kaimon_toshi_map=ConvertToYV12(cm_kaimon_toshi_map)
 
+cm_winter_country_map=ConvertToRGB32(cm_winter_country_map)
 cm_winter_country_map=SUBTITLE_N(cm_winter_country_map,"2.¿–Ü»‘¢‚—º“x",is_title=true)
 cm_winter_country_map=ConvertToYV12(cm_winter_country_map)
 
+cm_church_map=ConvertToRGB32(cm_church_map)
 cm_church_map=SUBTITLE_N(cm_church_map,"3.ç¬Žèè–å,AŽZ3P–çˆêžé",is_title=true)
 cm_church_map=ConvertToYV12(cm_church_map)
 
+cm_mazoku_attack_map=ConvertToRGB32(cm_mazoku_attack_map)
 cm_mazoku_attack_map=SUBTITLE_N(cm_mazoku_attack_map,"4.•sžPèêmŽ•—",is_title=true)
 cm_mazoku_attack_map=ConvertToYV12(cm_mazoku_attack_map)
 
+cm_doumei_map=ConvertToRGB32(cm_doumei_map)
 cm_doumei_map=SUBTITLE_N(cm_doumei_map,"5.–Ü‘åãßŒ–‰Üäoˆú‹©",is_title=true)
 cm_doumei_map=ConvertToYV12(cm_doumei_map)
 
+cm_mazoku_and_human_boundry_map=ConvertToRGB32(cm_mazoku_and_human_boundry_map)
 cm_mazoku_and_human_boundry_map=SUBTITLE_N(cm_mazoku_and_human_boundry_map,"àŠ®‹K‘¥“I–‚‰¤˜ð...",is_title=true)
 cm_mazoku_and_human_boundry_map=ConvertToYV12(cm_mazoku_and_human_boundry_map)
 
+cm_lake_map=ConvertToRGB32(cm_lake_map)
 cm_lake_map=SUBTITLE_N(cm_lake_map,"•vÈˆöŽ¸˜aŽ§‰Æ–\,‰—¥...",is_title=true)
 cm_lake_map=ConvertToYV12(cm_lake_map)
 
+cm_mazoku_vs_human=ConvertToRGB32(cm_mazoku_vs_human)
 cm_mazoku_vs_human=SUBTITLE_N(cm_mazoku_vs_human,"l–‚‘åD‰ÌæÕ‘¦›’ŠJŽn",is_title=true)
 cm_mazoku_vs_human=SUBTITLE_N(cm_mazoku_vs_human,"--------              ",is_title=true)
 cm_mazoku_vs_human=ConvertToYV12(cm_mazoku_vs_human)
 
 
 
+do_not_eat_food_01=ConvertToRGB32(do_not_eat_food_01)
 do_not_eat_food_01=SUBTITLE_WARNING(do_not_eat_food_01,"[staff”Vˆê,ˆÈ•°à–ˆ×žÙ“I‰Î—´Œö—]",second_subtitle_x,second_subtitle_y,430,590)
 do_not_eat_food_01=SUBTITLE_N(do_not_eat_food_01,"‘¾”ü–¡f~~~",subtitle_x,subtitle_y,1,60,false)
 do_not_eat_food_01=SUBTITLE_N(do_not_eat_food_01,"”‡‰ò–ìŒ{“÷™ù‹N˜Òœk˜ð•¬`–ë",subtitle_x,subtitle_y,65,155,false)
@@ -215,14 +225,17 @@ do_not_eat_food_01=SUBTITLE_N(do_not_eat_food_01,"“V”±˜Ò—¹",subtitle_x,subtitle_
 do_not_eat_food_01=SUBTITLE_N(do_not_eat_food_01,""""“V”±˜Ò—¹"¥Y›õˆÓŽvˆ¢!""",subtitle_x,subtitle_y,545,580,false)
 do_not_eat_food_01=ConvertToYV12(do_not_eat_food_01)
 
+do_not_eat_food_02=ConvertToRGB32(do_not_eat_food_02)
 do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"—v¥Š¸›æˆù—¿i˜ðêŠ…“I˜b,˜ð”ístaffà–Ž€šG!",subtitle_x,subtitle_y,30,90,false)
 do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"œƒ›õ”‡›õ–ìåÅ!",subtitle_x,subtitle_y,105,135,false)
 do_not_eat_food_02=SUBTITLE_N(do_not_eat_food_02,"•sŠ£—¹ˆù—¿Äiê“I˜b|‰Ââi•sã¥…Žç‹K‘¥šG(ŽEŸ†)",subtitle_x,subtitle_y-subtitle_size,145,260,false)
 do_not_eat_food_02=ConvertToYV12(do_not_eat_food_02)
 
+light_off_01=ConvertToRGB32(light_off_01)
 light_off_01=SUBTITLE_N(light_off_01,"ˆöˆ×„„ç²¥‰Ìç²ŠßP&D|ŠˆÈ”íHìlˆõ—p–‚–@è‹Ù•Â—¹",subtitle_x,subtitle_y-subtitle_size,5,120,false)
 light_off_01=ConvertToYV12(light_off_01)
 
+light_off_02=ConvertToRGB32(light_off_02)
 light_off_02=SUBTITLE_WARNING(light_off_02,"[•ú‘MŒõsˆ×Ž‹“¯»‘¢‚—º“x]",second_subtitle_x,second_subtitle_y,5,515)
 light_off_02=SUBTITLE_N(light_off_02,"æî‰ä‘z“Iˆêžéé é “î“î“I",subtitle_x,subtitle_y,10,70,false)
 light_off_02=SUBTITLE_N(light_off_02,"”‡™Ô‘Ú–çœk_“î",subtitle_x,subtitle_y,85,130,false)
@@ -234,10 +247,12 @@ light_off_02=SUBTITLE_N(light_off_02,"—EŽÒ...",subtitle_x,subtitle_y,415,435,fal
 light_off_02=SUBTITLE_N(light_off_02,"–‚‰¤...",subtitle_x,subtitle_y,470,490,false)
 light_off_02=ConvertToYV12(light_off_02)
 
+close_door=ConvertToRGB32(close_door)
 close_door=SUBTITLE_WARNING(close_door,"[3PŽž¿ç¬Žèè–å]",second_subtitle_x,second_subtitle_y,5,185)
 close_door=SUBTITLE_N(close_door,"3ŒÂlˆê‹Nè‹N–å˜Ò‹¤“xtª”b~~~",subtitle_x,subtitle_y,5,75,false)
 close_door=ConvertToYV12(close_door)
 
+pass_mic=ConvertToRGB32(pass_mic)
 pass_mic=SUBTITLE_WARNING(pass_mic,"[—p“÷é“žPèêmŽ•—“Iãµ’pplay]",second_subtitle_x,second_subtitle_y,95,255)
 pass_mic=SUBTITLE_N(pass_mic,"(êmŽ•—)-->",60,280,5,90,false)
 pass_mic=SUBTITLE_N(pass_mic,"<--(êmŽ•—)",-90,240,95,255,false)
@@ -247,11 +262,13 @@ pass_mic=SUBTITLE_N(pass_mic,"¿–Y—¹”b,á¶‰Â”\‰õŽ§v‘¬’n",subtitle_x,subtitle_y,1
 pass_mic=SUBTITLE_N(pass_mic,"‰¶,‰äá¶—ÍŽ§ˆ×",subtitle_x,subtitle_y,205,255,false)
 pass_mic=ConvertToYV12(pass_mic)
 
+keep_quiet_01=ConvertToRGB32(keep_quiet_01)
 keep_quiet_01=SUBTITLE_WARNING(keep_quiet_01,"[èÏ”w‘¾‘åãß,”íHìlˆõ‹h{—¹]",second_subtitle_x,second_subtitle_y,125,330)
 keep_quiet_01=SUBTITLE_N(keep_quiet_01,"Œö“¹™JA¥8äÝ1!!!",subtitle_x,subtitle_y,3,40,false)
 keep_quiet_01=SUBTITLE_N(keep_quiet_01,"”I¥Ý‘åãßY›õf!!!!!",subtitle_x,subtitle_y,55,80,false)
 keep_quiet_01=ConvertToYV12(keep_quiet_01)
 
+keep_quiet_02=ConvertToRGB32(keep_quiet_02)
 keep_quiet_02=SUBTITLE_WARNING(keep_quiet_02,"[–Ü‘åãßˆú‹©,á¢¶«ézï¿—âèÎ’Ê’m’†T‘ä]",second_subtitle_x,second_subtitle_y,5,305)
 keep_quiet_02=SUBTITLE_N(keep_quiet_02,"ˆ¢,‰¶ˆ¢ˆ¢!”I”‡¥Ý˜ôY›õ!?",subtitle_x,subtitle_y,10,75,false)
 keep_quiet_02=SUBTITLE_N(keep_quiet_02,"”‡™_ŒÂŒŽ”I“sŸ“ŠßKinect“Iƒ‰ƒu™ƒgƒŒ|àÕŽ©•Âè˜ô‰Ì",subtitle_x,subtitle_y-subtitle_size,80,175,false)
@@ -259,6 +276,7 @@ keep_quiet_02=SUBTITLE_N(keep_quiet_02,"‘Ê“÷“x‰Ê‘R•sÐú‰Á",subtitle_x,subtitle_
 keep_quiet_02=SUBTITLE_N(keep_quiet_02,"—v‹Ž—¹~~~!!!",subtitle_x,subtitle_y,245,265,false)
 keep_quiet_02=ConvertToYV12(keep_quiet_02)
 
+refuse=ConvertToRGB32(refuse)
 refuse=SUBTITLE_N(refuse,"Œü—EŽÒàŠ®”‡±‹K‘¥Œã",subtitle_x,subtitle_y,40,90,false)
 refuse=SUBTITLE_N(refuse,"‰äÄˆêŽŸ½S¿‹",subtitle_x,subtitle_y,110,155,false)
 refuse=SUBTITLE_N(refuse,"”I‘zàY›õ,‰ä“I‰Ì—Fˆ¢!",subtitle_x,subtitle_y,180,235,false)
@@ -277,6 +295,7 @@ refuse=SUBTITLE_N(refuse,"’É...šI—vˆ¢...",subtitle_x,subtitle_y,1090,1120,false)
 refuse=SUBTITLE_N(refuse,"‰ä‰Â¥–ˆ“ú“s—L˜ô°‘O‰^“®Œ¸”ì“I",subtitle_x,subtitle_y,1135,1235,false)
 refuse=ConvertToYV12(refuse)
 
+do_not_fight=ConvertToRGB32(do_not_fight)
 do_not_fight=SUBTITLE_WARNING(do_not_fight,"[‹ÖŽ~‰Æ–\“™Šié¦sˆ×,—pˆ¤l•ø–ŠCK–’“¯]",second_subtitle_x,second_subtitle_y,12,410)
 do_not_fight=SUBTITLE_N(do_not_fight,"Š²Y›õ",subtitle_x,subtitle_y,85,105,false)
 do_not_fight=SUBTITLE_N(do_not_fight,"Äà”ì“s“s,Äàl‰Æ”ì“s“s‘Ê“÷–‚‰¤ˆ¢!",subtitle_x,subtitle_y,120,235,false)
@@ -284,6 +303,7 @@ do_not_fight=SUBTITLE_N(do_not_fight,"‰ÌæÕ‘ü—v‘z¥A‰ÂˆÈ—¹ˆ¢|ŠÇ”I¥•s¥âœ’`‘å‰
 do_not_fight=SUBTITLE_N(do_not_fight,"•s‰Â”\“ß›õŠÈšd”b",subtitle_x,subtitle_y,375,410,false)
 do_not_fight=ConvertToYV12(do_not_fight)
 
+to_be_continued=ConvertToRGB32(to_be_continued)
 to_be_continued=SUBTITLE_WARNING(to_be_continued,"[‰Æ–\–hŽ¡›“ü:113]",second_subtitle_x,second_subtitle_y,5,350)
 to_be_continued=SUBTITLE_N(to_be_continued,"ŠˆÈ—EŽÒŠÒ¥•sæî‰ä‹Ž¥‰Ìšjšj~~~",subtitle_x,subtitle_y,10,88,false)
 to_be_continued=SUBTITLE_N(to_be_continued,"D,D,¡“VŠÒ¥‰õêy‹Ž‹x‘§”b",subtitle_x,subtitle_y,90,165,false)
@@ -294,6 +314,7 @@ to_be_continued=ConvertToYV12(to_be_continued)
 
 
 
+puzzle_and_dragons_gameplay_short=ConvertToRGB32(puzzle_and_dragons_gameplay_short)
 puzzle_and_dragons_gameplay_short=SUBTITLE_WARNING(puzzle_and_dragons_gameplay_short,"[‰Î—´Œö—³ÝŠßPuzzle & Dragons...]",second_subtitle_x,second_subtitle_y,5,340)
 puzzle_and_dragons_gameplay_short=ConvertToYV12(puzzle_and_dragons_gameplay_short)
 

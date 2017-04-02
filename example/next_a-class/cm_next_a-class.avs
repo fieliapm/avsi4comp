@@ -105,9 +105,13 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 
 
+prologue_01=ConvertToRGB32(prologue_01)
+
 prologue_subtitle_01_first_frame=50
 prologue_subtitle_01_last_frame=299
 prologue_01=SUBTITLE_N(prologue_01,"20XX”N||V’ù’è“I’˜ìÜ–@ŠôŒÁÁ–Å—¹“ñŸ‘nì||‘S¢ŠE“I“ñ‘nŠˆ“®ˆöŸ‘–Œü‹@“®‰»ãSšz–Í®||ˆÈ‹K”ğŒx@“I’Êãh||’A‘½É˜¹“ï“¦–@–Ô",second_subtitle_x,second_subtitle_y,prologue_subtitle_01_first_frame,prologue_subtitle_01_last_frame,false)
+
+prologue_02=ConvertToRGB32(prologue_02)
 
 prologue_subtitle_02_first_frame=0
 prologue_subtitle_02_last_frame=249
@@ -125,6 +129,7 @@ prologue_blank_clip=BlankClip(prologue_01,length=24,color=color_black)
 prologue=ConvertToYV12(prologue_01+prologue_blank_clip+prologue_02+prologue_blank_clip)
 
 
+di_gi_charat_party_night_thumbnail=ConvertToRGB32(di_gi_charat_party_night_thumbnail)
 
 di_gi_charat_party_night_thumbnail=SUBTITLE_N(di_gi_charat_party_night_thumbnail,"(3l) Hold me baby ƒmƒŠƒmƒŠparty",subtitle_x,subtitle_y,50,149,false)
 di_gi_charat_party_night_thumbnail=SUBTITLE_N(di_gi_charat_party_night_thumbnail,"(^“cƒAƒTƒ~) “µ‚Ü‚Å‹P‚¢‚Ä",subtitle_x,subtitle_y,151,236,false)
@@ -138,6 +143,8 @@ di_gi_charat_party_night_thumbnail=RESIZE_TO_REF_CLIP(ConvertFPS(di_gi_charat_pa
 di_gi_charat_party_night_thumbnail=ConvertToYV12(di_gi_charat_party_night_thumbnail)
 
 
+
+next_a_class_full_jp_03_follow_raamen_truck=ConvertToRGB32(next_a_class_full_jp_03_follow_raamen_truck)
 
 original_subtitle=false
 
@@ -272,8 +279,10 @@ function REPLACE_COLORKEY_TO_PLASMA(clip clip,int color,int tolerance){
 	return Layer(clip_plasma,clip_with_colorkey,op="Add")
 }
 
+next_a_class_full_jp_05_modified_title_01=ConvertToRGB32(next_a_class_full_jp_05_modified_title_01)
 next_a_class_full_jp_05_modified_title_01=SUBTITLE_N(next_a_class_full_jp_05_modified_title_01,title_01,title_01_subtitle_x,title_subtitle_y-(title_subtitle_size/2),is_title=true)
 next_a_class_full_jp_05_modified_title_01=AudioDub(next_a_class_full_jp_05_modified_title_01,next_a_class_full_jp_05_title_01)
+next_a_class_full_jp_05_modified_title_02=ConvertToRGB32(next_a_class_full_jp_05_modified_title_02)
 next_a_class_full_jp_05_modified_title_02=SUBTITLE_N(next_a_class_full_jp_05_modified_title_02,title_02,title_02_subtitle_x,title_subtitle_y-(title_subtitle_size/2),is_title=true)
 next_a_class_full_jp_05_modified_title_02=AudioDub(next_a_class_full_jp_05_modified_title_02,next_a_class_full_jp_05_title_02)
 next_a_class_full_jp_05_modified_title=next_a_class_full_jp_05_modified_title_01+next_a_class_full_jp_05_modified_title_02
@@ -285,6 +294,7 @@ next_a_class_full_jp_05_modified_title=ConvertToYV12(next_a_class_full_jp_05_mod
 
 
 
+initial_d_thumbnail=ConvertToRGB32(initial_d_thumbnail)
 initial_d_thumbnail=SUBTITLE_N(initial_d_thumbnail,"[–²Œ¶“¤•…“X(©‰Æ—p)]",subtitle_x,subtitle_y,is_title=false)
 initial_d_thumbnail=ConvertToYV12(initial_d_thumbnail)
 

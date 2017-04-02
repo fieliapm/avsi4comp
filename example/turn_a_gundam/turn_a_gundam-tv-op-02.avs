@@ -94,8 +94,10 @@ turn_a_gundam_movie_02_turn_a_vs_turn_x=TRIM_FIRST_CLIP(turn_a_gundam_movie_02_t
 fade_length=48
 blank_clip_length=Framecount(turn_a_gundam_movie_02_black_history_01)-fade_length
 overlay_clip_base=BlankClip(turn_a_gundam_movie_02_gym_and_merrybell,length=blank_clip_length,color=color_black)+turn_a_gundam_movie_02_black_history_03
-overlay_clip=TRANSFORM(overlay_clip_base,turn_a_gundam_movie_02_black_history_01,factor="(n>blank_clip_length)?1.0-0.5*Float(n-blank_clip_length)/Float(fade_length):1.0",angle="(n>blank_clip_length)?n-blank_clip_length:0.0",opacity="CLAMP(1.0-Float(n-blank_clip_length)/Float(fade_length),0.0,1.0)")
-turn_a_gundam_movie_02_black_history=ConvertToYV12(overlay_clip)+turn_a_gundam_movie_02_black_history_02
+overlay_clip_base_rgb32=ConvertToRGB32(overlay_clip_base)
+turn_a_gundam_movie_02_black_history_01_rgb32=ConvertToRGB32(turn_a_gundam_movie_02_black_history_01)
+overlay_clip_rgb32=TRANSFORM(overlay_clip_base_rgb32,turn_a_gundam_movie_02_black_history_01_rgb32,factor="(n>blank_clip_length)?1.0-0.5*Float(n-blank_clip_length)/Float(fade_length):1.0",angle="(n>blank_clip_length)?n-blank_clip_length:0.0",opacity="CLAMP(1.0-Float(n-blank_clip_length)/Float(fade_length),0.0,1.0)")
+turn_a_gundam_movie_02_black_history=ConvertToYV12(overlay_clip_rgb32)+turn_a_gundam_movie_02_black_history_02
 
 ######## Combine ########
 
@@ -113,10 +115,10 @@ turn_a_gundam_tv_op_02_t06=Dissolve(turn_a_gundam_movie_02_turn_a_evade,turn_a_g
 
 double_fade_length=12
 turn_a_gundam_tv_op_02_temp=turn_a_gundam_tv_op_02_t01+turn_a_gundam_tv_op_02_t02
-turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t03,double_fade_length,double_fade_length)
-turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t04,double_fade_length,double_fade_length)
-turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t05,double_fade_length,double_fade_length)
-turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t06,double_fade_length,double_fade_length)
+turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t03,double_fade_length,double_fade_length)
+turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t04,double_fade_length,double_fade_length)
+turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t05,double_fade_length,double_fade_length)
+turn_a_gundam_tv_op_02_temp=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(turn_a_gundam_tv_op_02_temp,turn_a_gundam_tv_op_02_t06,double_fade_length,double_fade_length)
 
 turn_a_gundam_tv_op_02_mute=turn_a_gundam_tv_op_02_temp
 
@@ -126,6 +128,8 @@ bgm_48khz=SSRC(WAVSource("src\turn_a_gundam-tv-op-02-01.wav"),48000)
 AudioDub(turn_a_gundam_tv_op_02_mute,bgm_48khz)
 
 ######## Subtitle ########
+
+ConvertToRGB32()
 
 SUBTITLE_FX("Century Color//RAY-GUNS|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,2402,2637,is_title=true)
 

@@ -115,7 +115,7 @@ kobato_tv_01_falling_01_02=Trim(kobato_tv_01_falling,81,0)
 
 kobato_tv_op_01_extend=Dissolve(kobato_tv_01_falling_01_02,kobato_tv_op_01,92)
 
-kobato_tv_01_sakura_snow_01_start_dissolved=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_01_sakura_snow_01,fade_length)
+kobato_tv_01_sakura_snow_01_start_dissolved=FADE_IN_WITH_BRIGHTNESS_OFFSET(kobato_tv_01_sakura_snow_01,fade_length)
 kobato_tv_01_sakura_snow=Dissolve(kobato_tv_01_sakura_snow_01_start_dissolved,kobato_tv_01_sakura_snow_02,12)
 
 kobato_tv_01_park_dissolve_interval=8
@@ -128,7 +128,7 @@ kiyokazu=Dissolve(Trim(kobato_tv_14_little_kiyokazu,0,kiyokazu_interval),Trim(ko
 
 kobato_tv_12_world_trimmed=Trim(kobato_tv_12_world,24,0)
 
-kobato_tv_19_snow_end_faded=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_19_snow,fade_length)
+kobato_tv_19_snow_end_faded=FADE_OUT_WITH_BRIGHTNESS_OFFSET(kobato_tv_19_snow,fade_length)
 
 kobato_tv_24_the_end_extend=Dissolve(kobato_tv_24_the_end,BlankClip(kobato_tv_24_the_end,length=312,color=color_white),24)
 
@@ -170,9 +170,9 @@ kobato_tv_op_people_03_interval=-34
 kobato_tv_op_people_03=Trim(kobato_tv_16_chitose_chiho_chise,0,kobato_tv_op_people_03_interval*2)+Trim(kobato_tv_09_chitose_sayaka_festival,0,kobato_tv_op_people_03_interval*2)+Trim(kobato_tv_08_chiho_chise_afraid,0,kobato_tv_op_people_03_interval*4) \
 	+Trim(kobato_tv_12_ioryogi_ribbon,66,kobato_tv_op_people_03_interval)+Trim(kobato_tv_20_tsubasa_main_character,0,kobato_tv_op_people_03_interval)+Trim(kobato_tv_20_shaoran_kobato_01,0,kobato_tv_op_people_03_interval)+Trim(kobato_tv_11_kobato_maid,0,kobato_tv_op_people_03_interval*3)
 
-kobato_tv_op_t04=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_op_t01,kobato_tv_op_t02,fade_length,fade_length)
-kobato_tv_op_t04=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_op_t04,kobato_tv_op_t03,fade_length,fade_length)
-kobato_tv_op_t04=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_op_t04,kobato_tv_op_people_03,fade_length,fade_length)
+kobato_tv_op_t04=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(kobato_tv_op_t01,kobato_tv_op_t02,fade_length,fade_length)
+kobato_tv_op_t04=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(kobato_tv_op_t04,kobato_tv_op_t03,fade_length,fade_length)
+kobato_tv_op_t04=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(kobato_tv_op_t04,kobato_tv_op_people_03,fade_length,fade_length)
 
 kobato_tv_22_ioryogi_memory_trimmed=Trim(kobato_tv_22_ioryogi_memory,500,-Framecount(kobato_tv_12_world_trimmed))
 kobato_tv_22_ioryogi_memory_rescaled=RESCALE(kobato_tv_22_ioryogi_memory_trimmed,0.75,0.75)
@@ -189,8 +189,8 @@ kobato_tv_op_t05=Dissolve(kobato_tv_op_t05,kobato_tv_19_snow_end_faded,75)
 
 kobato_tv_op_t06=Dissolve(kobato_tv_op_02,kobato_tv_24_the_end_extend,51)
 
-kobato_tv_op_t99=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_op_t00,kobato_tv_op_t04,fade_length,fade_length)
-kobato_tv_op_mute=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(kobato_tv_op_t99,kobato_tv_op_t05,fade_length,fade_length)+kobato_tv_op_t06
+kobato_tv_op_t99=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(kobato_tv_op_t00,kobato_tv_op_t04,fade_length,fade_length)
+kobato_tv_op_mute=DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(kobato_tv_op_t99,kobato_tv_op_t05,fade_length,fade_length)+kobato_tv_op_t06
 
 ######## Music ########
 
@@ -216,6 +216,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("マジックナンバー//坂本真綾|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,4928,5066,true)
 

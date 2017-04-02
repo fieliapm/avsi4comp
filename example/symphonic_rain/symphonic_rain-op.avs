@@ -97,13 +97,14 @@ function RIPPLE_EFFECT(clip clip,int x,int y,int start_frame){
 	ripple_effect_length=25
 	end_frame=start_frame+ripple_effect_length-1
 
-	clip_rgba=ConvertToRGB32(clip)
-	clip_with_static_ripple=_SUBTITLE_FX_PRE(clip_rgba,"Åõ",320,240-165,start_frame,end_frame,subtitle_font,"c",256,second_subtitle_text_color,OVERWRITE_SUBTITLE_COLOR_ALPHA(second_subtitle_text_color,$0))
+	Assert(IsRGB32(clip),"RIPPLE_EFFECT(): clip only support RGB32 format")
+
+	clip_with_static_ripple=_SUBTITLE_FX_PRE(clip,"Åõ",320,240-165,start_frame,end_frame,subtitle_font,"c",256,second_subtitle_text_color,OVERWRITE_SUBTITLE_COLOR_ALPHA(second_subtitle_text_color,$0))
 
 	clip_with_faded_ripple=ScriptClip(clip_with_static_ripple,"RGBAdjust(a=Spline(current_frame,-1,1.0,"+String(start_frame)+",1.0,"+String(end_frame)+",0.0,Framecount(),0.0,cubic=false))")
 	clip_with_ripple_effect=ScriptClip(clip_with_faded_ripple,"FAST_ZOOM(dstx="+String(x)+",dsty="+String(y)+",factor=Spline(current_frame,-1,0.01,"+String(start_frame)+",0.01,"+String(end_frame)+",5.0,Framecount(),5.0,cubic=false))")
 
-	return _SUBTITLE_FX_POST(clip_rgba,clip_with_ripple_effect,start_frame,end_frame)
+	return _SUBTITLE_FX_POST(clip,clip_with_ripple_effect,start_frame,end_frame)
 }
 
 ######## Win32 CG (640*480) ########
@@ -304,19 +305,19 @@ symphonic_rain_in_op=ConvertToYV12(symphonic_rain_in_op)
 
 
 symphonic_rain_op_part_03=ConvertToRGB32(symphonic_rain_op_src_03)
-symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,event_cg_liselsia_is_punished,828)
-symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,event_cg_arietta_read_mail,879)
-symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,event_cg_chris_hug_tortinita,931)
-symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,event_cg_phorni_writing,1034)
-symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,event_cg_falsita_after_h,1085)
-symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,event_cg_liselsia_in_hospital_happy,1137)
+symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,ConvertToRGB32(event_cg_liselsia_is_punished),828)
+symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,ConvertToRGB32(event_cg_arietta_read_mail),879)
+symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,ConvertToRGB32(event_cg_chris_hug_tortinita),931)
+symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,ConvertToRGB32(event_cg_phorni_writing),1034)
+symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,ConvertToRGB32(event_cg_falsita_after_h),1085)
+symphonic_rain_op_part_03=APPEAR_OVERLAY(symphonic_rain_op_part_03,ConvertToRGB32(event_cg_liselsia_in_hospital_happy),1137)
 symphonic_rain_op_part_03=ConvertToYV12(symphonic_rain_op_part_03)
 last_overlay=ConvertToYV12(Zoom(ConvertToRGB32(EXTEND_ANIMATION_CG(event_cg_arietta_and_chris_walking,141+(fade_length/2))),factor="Spline(n,0,1.2,141+(fade_length/2),1.0,cubic=false)"))
 symphonic_rain_op_part_03=Dissolve(TRIM_FIRST_CLIP(symphonic_rain_op_part_03,1239+(fade_length/2)),last_overlay,fade_length)
 
 
 
-ripple_clip=BlankClip(symphonic_rain_op_src,length=234+(fade_length/2),color=color_black)
+ripple_clip=BlankClip(symphonic_rain_op_src,length=234+(fade_length/2),pixel_type="RGB32",color=color_black)
 ripple_clip=RIPPLE_EFFECT(ripple_clip,320,240,0)
 ripple_clip=RIPPLE_EFFECT(ripple_clip,320-200,240,7)
 ripple_clip=RIPPLE_EFFECT(ripple_clip,320+200,240,15)
@@ -348,9 +349,9 @@ symphonic_rain_op_t07=Dissolve(ripple_clip,TRIM_FIRST_CLIP(title_cg,165+(fade_le
 
 
 
-symphonic_rain_op_mute=symphonic_rain_op_t00+symphonic_rain_op_t01+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(FadeIn0(symphonic_rain_op_t02,fade_length),fade_length) \
-	+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(symphonic_rain_op_t03,fade_length*5) \
-	+FadeOut0(FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(symphonic_rain_op_t04,fade_length),fade_length)+symphonic_rain_op_t05+FadeOut0(symphonic_rain_op_t06,fade_length) \
+symphonic_rain_op_mute=symphonic_rain_op_t00+symphonic_rain_op_t01+FADE_OUT_WITH_BRIGHTNESS_OFFSET(FadeIn0(symphonic_rain_op_t02,fade_length),fade_length) \
+	+FADE_OUT_WITH_BRIGHTNESS_OFFSET(symphonic_rain_op_t03,fade_length*5) \
+	+FadeOut0(FADE_IN_WITH_BRIGHTNESS_OFFSET(symphonic_rain_op_t04,fade_length),fade_length)+symphonic_rain_op_t05+FadeOut0(symphonic_rain_op_t06,fade_length) \
 	+symphonic_rain_op_t07
 
 ######## Music ########
@@ -371,6 +372,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("ãÛÇÃå¸Ç±Ç§Ç…//â™çËó•éq|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,8490,8685,true)
 

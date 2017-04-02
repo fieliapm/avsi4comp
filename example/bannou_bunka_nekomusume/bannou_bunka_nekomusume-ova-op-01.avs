@@ -108,6 +108,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,subtitle_halo_color)
 }
 
+ConvertToRGB32()
+
 
 
 SUBTITLE_FX("私にハッピーバースデイ//林原めぐみ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,862,1120,is_title=true)

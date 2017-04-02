@@ -190,6 +190,8 @@ function SUBTITLE_N(clip clip,string text,float x,float y,int start_frame,int en
 	return SUBTITLE_NORMAL(clip,text,x,y,start_frame,end_frame,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color,"standard")
 }
 
+ConvertToRGB32()
+
 SUBTITLE_N("THE REAL FOLK BLUES//éRç™ñÉàﬂ",subtitle_x,subtitle_y-subtitle_size,8022,8597,true)
 SUBTITLE_N("- by fielia@AVISynth",subtitle_x,subtitle_y,8022,8597,true)
 

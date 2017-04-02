@@ -42,7 +42,7 @@ function DECORATE_CLIP(clip pre_clip,clip base_clip){
 
 function TRIM_QUARTER_PATTERN_AND_FADEOUT(clip clip,int pattern_length){
 	quarter_pattern_length=pattern_length/4-3
-	return FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_LAST_CLIP(clip,quarter_pattern_length),15)
+	return FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(clip,quarter_pattern_length),15)
 }
 
 ######## PV Online (720P) ########
@@ -194,6 +194,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,subtitle_text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("òBã‡è≠èóÉÅÉãÉãÇÃÇ§ÇΩ//ê^óùäG|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,4927,5118,true)
 

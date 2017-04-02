@@ -136,6 +136,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,halo_color,"ex_thick")
 }
 
+ConvertToRGB32()
+
 SUBTITLE_FX("‰Ô•W//–ìŒ©R–r–¢|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,382,702,true)
 
 SUBTITLE_FX("Œq‚²‚¤‚Æ‚µ‚½w‚Í‹óU‚è",subtitle_x,subtitle_y,1035,1266,true)

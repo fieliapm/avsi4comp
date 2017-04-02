@@ -146,12 +146,12 @@ overlay_clip=LINEAR_MOVE(overlay_clip,"overlay_clip_trim12",overlay_clip_blend_m
 
 meruru_op_t01=BlankClip(meruru_op,length=20,color=color_black)+meruru_op_01
 meruru_op_t02=Dissolve(meruru_dengeki_promotion_movie_05,meruru_dengeki_promotion_movie_08,meruru_dengeki_promotion_movie_07_01,28)
-meruru_op_t03=Dissolve(meruru_dengeki_promotion_movie_07_03,FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(overlay_clip,15),23)
+meruru_op_t03=Dissolve(meruru_dengeki_promotion_movie_07_03,FADE_OUT_WITH_BRIGHTNESS_OFFSET(overlay_clip,15),23)
 meruru_op_t04=meruru_dengeki_promotion_movie_04_b+meruru_dengeki_promotion_movie_04_a
 meruru_op_t05=meruru_tvcm_02+Dissolve(meruru_tvcm_03,meruru_dengeki_promotion_movie_03_01,meruru_dengeki_promotion_movie_03_02,38)
 meruru_op_t06=meruru_op_02
 
-meruru_op_mute=meruru_op_t01+AssumeFPS(Dissolve(meruru_op_t02,meruru_op_t03,5)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(meruru_op_t04,meruru_op_t05,15,15),meruru_op)+meruru_op_t06
+meruru_op_mute=meruru_op_t01+AssumeFPS(Dissolve(meruru_op_t02,meruru_op_t03,5)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(meruru_op_t04,meruru_op_t05,15,15),meruru_op)+meruru_op_t06
 
 ######## Music ########
 
@@ -180,6 +180,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,size,text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 
 

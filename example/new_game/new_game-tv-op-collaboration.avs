@@ -65,9 +65,11 @@ function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int 
 
 
 aoba_yun_hajime_watch_fairies_story_3_01=TRIM_FIRST_CLIP(new_game_tv_11_aoba_yun_hajime_watch_fairies_story_3_and_excited,75)
+aoba_yun_hajime_watch_fairies_story_3_01=ConvertToRGB32(aoba_yun_hajime_watch_fairies_story_3_01)
 aoba_yun_hajime_watch_fairies_story_3_01=SUBTITLE_N(aoba_yun_hajime_watch_fairies_story_3_01,"ˆ¢~~~",y=Round(subtitle_y),first_frame=10,last_frame=40)
 
 aoba_yun_hajime_watch_fairies_story_3_04=new_game_tv_11_aoba_yun_hajime_watch_fairies_story_3
+aoba_yun_hajime_watch_fairies_story_3_04=ConvertToRGB32(aoba_yun_hajime_watch_fairies_story_3_04)
 aoba_yun_hajime_watch_fairies_story_3_04=SUBTITLE_N(aoba_yun_hajime_watch_fairies_story_3_04,"”‡éˆ¢",y=Round(subtitle_y),first_frame=15,last_frame=40)
 aoba_yun_hajime_watch_fairies_story_3_04=SUBTITLE_N(aoba_yun_hajime_watch_fairies_story_3_04,"ŠÅ’˜©ŒÈ™Òäo“I—VE–Ê¢",y=Round(subtitle_y),first_frame=50,last_frame=130)
 aoba_yun_hajime_watch_fairies_story_3_04=SUBTITLE_N(aoba_yun_hajime_watch_fairies_story_3_04,"Œ´˜Ò¥”‡íŠ´æS",y=Round(subtitle_y),first_frame=140,last_frame=215)
@@ -80,7 +82,9 @@ aoba_yun_hajime_watch_fairies_story_3=ConvertToYV12(aoba_yun_hajime_watch_fairie
 umiko_and_tired_programmer_01=new_game_tv_10_umiko_and_tired_programmer
 umiko_and_tired_programmer_02=new_game_tv_10_umiko_say_there_is_more_bug_than_expected
 
+umiko_and_tired_programmer_01=ConvertToRGB32(umiko_and_tired_programmer_01)
 umiko_and_tired_programmer_01=SUBTITLE_N(umiko_and_tired_programmer_01,"“ßŒÂ...",y=Round(subtitle_y),first_frame=55,last_frame=80)
+umiko_and_tired_programmer_02=ConvertToRGB32(umiko_and_tired_programmer_02)
 umiko_and_tired_programmer_02=SUBTITLE_N(umiko_and_tired_programmer_02,"ˆöˆ× POH8 ‰ğ‘è’ö®áù“I bug ‘¾‘½|‘å‰Æ“s—İšÓ—¹",y=Round(subtitle_y-subtitle_size),first_frame=10,last_frame=105)
 
 
@@ -97,6 +101,6 @@ new_game_tv_op_sp
 
 ConvertToYV12()
 #ConvertToYUY2()
-#ConvertToRGB24
+#ConvertToRGB24()
 
 TCPServer()

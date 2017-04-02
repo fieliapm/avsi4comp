@@ -129,11 +129,11 @@ firis_no_atelier_niconico_live_field_09_resized=RESIZE_TO_REF_CLIP(firis_no_atel
 
 
 firis_no_atelier_op_t01=BlankClip(firis_no_atelier_op,length=51,color=color_black)+firis_no_atelier_op_01
-firis_no_atelier_op_t02=firis_no_atelier_op_02+Dissolve(firis_no_atelier_op_03,FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_LAST_CLIP(firis_no_atelier_promotion_video_01_02,fade_length+(342-7)),fade_length),fade_length)
+firis_no_atelier_op_t02=firis_no_atelier_op_02+Dissolve(firis_no_atelier_op_03,FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(firis_no_atelier_promotion_video_01_02,fade_length+(342-7)),fade_length),fade_length)
 firis_no_atelier_op_t03=TRIM_MIDDLE_CLIP(firis_no_atelier_niconico_live_field_11_resized,7+885)+TRIM_FIRST_CLIP(firis_no_atelier_niconico_live_field_09_resized,387)+TRIM_FIRST_CLIP(firis_no_atelier_promotion_video_02_03+firis_no_atelier_promotion_video_02_04,56+774)
 firis_no_atelier_op_t04=TRIM_FIRST_CLIP(firis_no_atelier_promotion_video_02_02,83+388)
 firis_no_atelier_op_t05=TRIM_LAST_CLIP(firis_no_atelier_promotion_video_01_01,fade_length+442)
-firis_no_atelier_op_t06=FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(firis_no_atelier_promotion_video_01_04+firis_no_atelier_promotion_video_01_05,443+332+249-(Framecount(firis_no_atelier_promotion_video_02_05)-322)),fade_length)
+firis_no_atelier_op_t06=FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(firis_no_atelier_promotion_video_01_04+firis_no_atelier_promotion_video_01_05,443+332+249-(Framecount(firis_no_atelier_promotion_video_02_05)-322)),fade_length)
 firis_no_atelier_op_t07=firis_no_atelier_promotion_video_02_05+firis_no_atelier_op_04+firis_no_atelier_op_05
 
 firis_no_atelier_op_mute=firis_no_atelier_op_t01+firis_no_atelier_op_t02+firis_no_atelier_op_t03+Dissolve(firis_no_atelier_op_t04,firis_no_atelier_op_t05,fade_length)+firis_no_atelier_op_t06+firis_no_atelier_op_t07
@@ -169,6 +169,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("flora//“ìšæ‚ ‚³Žq|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,7053,7275,true)
 

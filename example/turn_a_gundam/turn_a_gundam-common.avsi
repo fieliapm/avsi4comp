@@ -70,7 +70,7 @@ function SUBTITLE_CENTER(clip clip,string text){
 }
 
 function SEKAI_MEISAKU_GEKIJOU_CLIP(clip ref_clip,int length){
-	sekai_meisaku_gekijou_bg=BlankClip(ref_clip,length=length,color=color_black)
+	sekai_meisaku_gekijou_bg=BlankClip(ref_clip,length=length,pixel_type="RGB32",color=color_black)
 	sekai_meisaku_gekijou=SUBTITLE_CENTER(sekai_meisaku_gekijou_bg,"¢ŠE–¼ìŒ€ê")
 	return ConvertToYV12(sekai_meisaku_gekijou)
 }

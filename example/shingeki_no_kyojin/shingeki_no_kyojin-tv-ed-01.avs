@@ -71,8 +71,8 @@ shingeki_no_kyojin_tv_ed_01_t10=PSEUDO_COLOR_PAPER(TRIM_MIDDLE_CLIP(MULTIPASS_PE
 
 
 
-shingeki_no_kyojin_tv_ed_01_mute=shingeki_no_kyojin_tv_ed_01_t01+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(PSEUDO_COLOR_PAPER(shingeki_no_kyojin_tv_ed_01_t02+shingeki_no_kyojin_tv_ed_01_t03),PSEUDO_COLOR_GRAY(shingeki_no_kyojin_tv_ed_01_t04),fade_length,fade_length)+shingeki_no_kyojin_tv_ed_01_t05 \
-	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(PSEUDO_COLOR_PAPER(shingeki_no_kyojin_tv_ed_01_t06),shingeki_no_kyojin_tv_ed_01_t07,fade_length,fade_length),DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(shingeki_no_kyojin_tv_ed_01_t08,shingeki_no_kyojin_tv_ed_01_t09,fade_length,fade_length),fade_length,fade_length)+shingeki_no_kyojin_tv_ed_01_t10
+shingeki_no_kyojin_tv_ed_01_mute=shingeki_no_kyojin_tv_ed_01_t01+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(PSEUDO_COLOR_PAPER(shingeki_no_kyojin_tv_ed_01_t02+shingeki_no_kyojin_tv_ed_01_t03),PSEUDO_COLOR_GRAY(shingeki_no_kyojin_tv_ed_01_t04),fade_length,fade_length)+shingeki_no_kyojin_tv_ed_01_t05 \
+	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(PSEUDO_COLOR_PAPER(shingeki_no_kyojin_tv_ed_01_t06),shingeki_no_kyojin_tv_ed_01_t07,fade_length,fade_length),DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(shingeki_no_kyojin_tv_ed_01_t08,shingeki_no_kyojin_tv_ed_01_t09,fade_length,fade_length),fade_length,fade_length)+shingeki_no_kyojin_tv_ed_01_t10
 
 shingeki_no_kyojin_tv_ed_01_mute
 
@@ -113,6 +113,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("î¸ÇµÇ´écçìÇ»ê¢äE//ì˙ä}ózéq|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,6776,6976,true)
 

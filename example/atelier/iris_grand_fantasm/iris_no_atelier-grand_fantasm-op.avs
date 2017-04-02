@@ -175,6 +175,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,Round(size),text_color,subtitle_halo_color)
 }
 
+ConvertToRGB32()
+
 function APPLY_SUBTITLE(clip clip){
 	clip
 
@@ -264,7 +266,7 @@ FILTER_INTERLACED_VIDEO("APPLY_SUBTITLE()")
 
 
 
-Dissolve(iris_no_atelier_grand_fantasm_op_00,ConvertToYUY2(last),op_single_music_start_overlap)
+Dissolve(ConvertToRGB32(iris_no_atelier_grand_fantasm_op_00),last,op_single_music_start_overlap)
 
 function APPLY_SUBTITLE_PRE(clip clip){
 	clip

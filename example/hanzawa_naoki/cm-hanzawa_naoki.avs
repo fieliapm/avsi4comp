@@ -35,7 +35,7 @@ hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=Trim(hanzawa_naoki_tv_10,56150,58
 ######## Pre Combine ########
 
 madoka_cida=ImageSource("src\P1200930.JPG",start=0,end=360-275,fps=Framerate(hanzawa_naoki_tv_09_oowata_angry))
-hanzawa_naoki_tv_09_oowata_angry_overlay=ConvertToYV12(TRANSFORM(hanzawa_naoki_tv_09_oowata_angry,madoka_cida,dstx="1024",dsty="240",factor="0.12"))
+hanzawa_naoki_tv_09_oowata_angry_overlay=ConvertToYV12(TRANSFORM(ConvertToRGB32(hanzawa_naoki_tv_09_oowata_angry),ConvertToRGB32(madoka_cida),dstx="1024",dsty="240",factor="0.12"))
 
 hanzawa_naoki_tv_09_oowata_angry=OVERWRITE_RANGE(hanzawa_naoki_tv_09_oowata_angry,hanzawa_naoki_tv_09_oowata_angry_overlay,254,353)
 
@@ -60,6 +60,7 @@ function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int 
 
 
 
+hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=ConvertToRGB32(hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it)
 hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=SUBTITLE_N(hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it,"///",530,80,726,783,false)
 hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=SUBTITLE_N(hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it,"õîóπ",subtitle_x,subtitle_y,85,105,false)
 hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=SUBTITLE_N(hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it,"â‰ä“ëzóvç›âÃÊèç’ùëò™,èäà»...",subtitle_x,subtitle_y,140,260,false)
@@ -76,6 +77,7 @@ hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=SUBTITLE_N(hanzawa_naoki_tv_10_oo
 hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=SUBTITLE_N(hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it,"ópàÍïSî{ïÚä“!!!!!",subtitle_x,subtitle_y,1970,2010,false)
 hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it=SUBTITLE_N(hanzawa_naoki_tv_10_oowata_tell_hanzawa_try_it,"êøãLèZîáÍy",subtitle_x,subtitle_y,2090,2135,false)
 
+hanzawa_naoki_tv_09_oowata_angry=ConvertToRGB32(hanzawa_naoki_tv_09_oowata_angry)
 hanzawa_naoki_tv_09_oowata_angry=SUBTITLE_N(hanzawa_naoki_tv_09_oowata_angry,"(ïsãvîVå„)",subtitle_x,subtitle_y,0,120,true)
 hanzawa_naoki_tv_09_oowata_angry=SUBTITLE_N(hanzawa_naoki_tv_09_oowata_angry,"ç≈ãﬂóLàÍë•óØåæ",subtitle_x,subtitle_y,20,70,false)
 hanzawa_naoki_tv_09_oowata_angry=SUBTITLE_N(hanzawa_naoki_tv_09_oowata_angry,"â‰ê•ìcã{",subtitle_x,subtitle_y,110,130,false)

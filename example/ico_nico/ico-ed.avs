@@ -115,7 +115,7 @@ ico_ed_t05=ico_hd_pv_02+ico_hd_pv_03+ico_hd_pv_04+TRIM_MIDDLE_CLIP(ico_hd_gamepl
 ico_ed_t06=TRIM_MIDDLE_CLIP(ico_hd_gameplay_ending_elevator,288)+TRIM_MIDDLE_CLIP(ico_hd_gameplay_ending_yorda_let_ico_go_02,288)
 ico_ed_t07=TRIM_LAST_CLIP(ico_hd_gameplay_beach_01_beach,288)+TRIM_MIDDLE_CLIP(ico_hd_gameplay_beach_08_yorda_wake_up,379)+ico_hd_pv_05+BlankClip(ico_hd_pv,length=420,color=color_black)
 
-ico_ed_mute=ico_ed_t01+ico_ed_t02+ico_ed_t03+Letterbox(FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(ico_ed_t04,36),72,72)+ico_ed_t05+ico_ed_t06+ico_ed_t07
+ico_ed_mute=ico_ed_t01+ico_ed_t02+ico_ed_t03+Letterbox(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ico_ed_t04,36),72,72)+ico_ed_t05+ico_ed_t06+ico_ed_t07
 
 ######## Music ########
 
@@ -145,6 +145,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_OFFSET_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("ICO -You were there-//Steven Geraghty|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,617,820,true)
 

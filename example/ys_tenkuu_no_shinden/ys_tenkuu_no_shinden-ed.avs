@@ -87,6 +87,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_SLIDE_IN_WATER_OUT(clip,text,x,y,start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }
 
+ConvertToRGB32()
+
 function APPLY_SUBTITLE(clip clip){
 	clip
 

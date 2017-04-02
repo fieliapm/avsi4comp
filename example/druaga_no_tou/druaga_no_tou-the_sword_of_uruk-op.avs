@@ -176,7 +176,7 @@ druaga_no_tou_the_sword_of_uruk_tv_07_ahmey_with_girl_clothes_faster=CLIP_SPEED(
 # druaga_no_tou_the_sword_of_uruk_tv_op_03 = 934 / 979 1012 1051 / 1140 1176 1216 1259 / 1301 1310 1319 1329 1345
 #                                            45 / 33 39 89 / 36 40 43 42 / 9 9 10 16
 
-druaga_no_tou_the_sword_of_uruk_tv_op_t01=BlankClip(druaga_no_tou_the_sword_of_uruk_tv_op,length=17,color=color_black)+FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_LAST_CLIP(druaga_no_tou_the_sword_of_uruk_tv_01_meskia_city,304),fade_length)+druaga_no_tou_the_sword_of_uruk_tv_op_01
+druaga_no_tou_the_sword_of_uruk_tv_op_t01=BlankClip(druaga_no_tou_the_sword_of_uruk_tv_op,length=17,color=color_black)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(druaga_no_tou_the_sword_of_uruk_tv_01_meskia_city,304),fade_length)+druaga_no_tou_the_sword_of_uruk_tv_op_01
 druaga_no_tou_the_sword_of_uruk_tv_op_t02=druaga_no_tou_the_sword_of_uruk_tv_op_02
 druaga_no_tou_the_sword_of_uruk_tv_op_t03=druaga_no_tou_the_sword_of_uruk_tv_op_03
 
@@ -203,8 +203,8 @@ druaga_no_tou_the_sword_of_uruk_tv_op_t11=druaga_no_tou_the_sword_of_uruk_tv_op_
 	+TRIM_LAST_CLIP(druaga_no_tou_the_sword_of_uruk_tv_11_tower_gun,53)+druaga_no_tou_the_sword_of_uruk_tv_op_05+BlankClip(druaga_no_tou_the_sword_of_uruk_tv_op,length=90,color=color_black)
 
 druaga_no_tou_the_sword_of_uruk_tv_op_mute=druaga_no_tou_the_sword_of_uruk_tv_op_t01+druaga_no_tou_the_sword_of_uruk_tv_op_t02+druaga_no_tou_the_sword_of_uruk_tv_op_t03+druaga_no_tou_the_sword_of_uruk_tv_op_t04 \
-	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(druaga_no_tou_the_sword_of_uruk_tv_op_t05,druaga_no_tou_the_sword_of_uruk_tv_op_t06,fade_length,fade_length)+druaga_no_tou_the_sword_of_uruk_tv_op_t07+druaga_no_tou_the_sword_of_uruk_tv_op_t08 \
-	+druaga_no_tou_the_sword_of_uruk_tv_op_t09+FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(druaga_no_tou_the_sword_of_uruk_tv_op_t10,fade_length)+druaga_no_tou_the_sword_of_uruk_tv_op_t11
+	+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(druaga_no_tou_the_sword_of_uruk_tv_op_t05,druaga_no_tou_the_sword_of_uruk_tv_op_t06,fade_length,fade_length)+druaga_no_tou_the_sword_of_uruk_tv_op_t07+druaga_no_tou_the_sword_of_uruk_tv_op_t08 \
+	+druaga_no_tou_the_sword_of_uruk_tv_op_t09+FADE_IN_WITH_BRIGHTNESS_OFFSET(druaga_no_tou_the_sword_of_uruk_tv_op_t10,fade_length)+druaga_no_tou_the_sword_of_uruk_tv_op_t11
 
 ######## Music ########
 
@@ -230,6 +230,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_SMEAR_IN_SMEAR_OUT(clip,text,x,y,start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,subtitle_size,text_color,subtitle_halo_color)
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("Questions?//’†‘º—D|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,341,583,true)
 

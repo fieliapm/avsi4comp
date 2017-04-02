@@ -28,7 +28,7 @@
 ######## General ########
 
 function UNDEFINED_(val "dummyArg"){
-    Assert(!Defined(dummyArg),"UNDEFINED_(): cannot be called with any arguments.")
+    Assert(!Defined(dummyArg),"UNDEFINED_(): cannot be called with any argument")
     return dummyArg
 }
 
@@ -236,6 +236,22 @@ function COLOR_LERP(float t,int color1,int color2){
 
 ######## String ########
 
+function _GENERATE_CHAR_SET(int ord_value){
+	return (ord_value>1?_GENERATE_CHAR_SET(ord_value-1):"")+Chr(ord_value)
+}
+
+global __ASCII_CHAR_SET=_GENERATE_CHAR_SET(255)
+
+function ORD_(string char){
+	Assert(StrLen(char)==1,"ORD_(): string length is not equal to 1")
+	return FindStr(__ASCII_CHAR_SET,char)
+}
+
+function IS_CONTROL_CHAR(string char){
+	ord_value=ORD_(char)
+	return ord_value<$20||ord_value==$7F
+}
+
 function DOUBLE_QUOTE(){
 	return Chr(34)
 }
@@ -256,14 +272,21 @@ function OPTIONAL_STRING_ARG(string "str"){
 	return Defined(str)?DOUBLE_QUOTE_STRING(str):"UNDEFINED_()"
 }
 
-function RANDOM_STRING(string ref_string,string random_char_func){
-	length=StrLen(ref_string)
-	ref_char=LeftStr(ref_string,1)
-	return length>0?(ref_char=="|"?ref_char:Apply(random_char_func))+RANDOM_STRING(RightStr(ref_string,length-1),random_char_func):""
+function OPTIONAL_STRING_ARG_CONTAIN_DOUBLE_QUOTE_CHAR(string "str"){
+	return Defined(str)?THREE_DOUBLE_QUOTE_STRING(str):"UNDEFINED_()"
 }
 
-function RANDOM_STRING_OUT_OF_FRAME_RANGE(string text,int current_frame,int start_frame,int end_frame,string random_char_func){
-	return current_frame<start_frame||current_frame>end_frame?RANDOM_STRING(text,random_char_func):text
+function RANDOM_STRING(string ref_string,string random_char_func,string "exclude_char_set"){
+	exclude_char_set=Default(exclude_char_set,"|")
+
+	length=StrLen(ref_string)
+	ref_char=LeftStr(ref_string,1)
+	is_exclude_char=FindStr(exclude_char_set,ref_char)>0
+	return (IS_CONTROL_CHAR(ref_char)||is_exclude_char?ref_char:Apply(random_char_func))+(length>1?RANDOM_STRING(RightStr(ref_string,length-1),random_char_func,exclude_char_set):"")
+}
+
+function RANDOM_STRING_OUT_OF_FRAME_RANGE(string text,int current_frame,int start_frame,int end_frame,string random_char_func,string "exclude_char_set"){
+	return current_frame<start_frame||current_frame>end_frame?RANDOM_STRING(text,random_char_func,exclude_char_set):text
 }
 
 ######## Audio ########
@@ -271,6 +294,40 @@ function RANDOM_STRING_OUT_OF_FRAME_RANGE(string text,int current_frame,int star
 function AUDIO_DUB_TONE(clip clip,int "frequency",int "samplerate",int "channels",string "type",float "level"){
 	tone=Tone(length=Float(Framecount(clip))/Float(Framerate(clip)),frequency=frequency,samplerate=samplerate,channels=channels,type=type,level=level)
 	return AudioDub(clip,tone)
+}
+
+######## Pixel Type ########
+
+function _DEFINE_TRY_IS_PIXEL_TYPE(string pixel_type){
+	Eval("function TRY_IS_"+pixel_type+"(clip clip){
+	Try{
+		result=Is"+pixel_type+"(clip)
+	}Catch(err_msg){
+		result=false
+	}
+	return result
+}")
+}
+
+_DEFINE_TRY_IS_PIXEL_TYPE("YV24")
+_DEFINE_TRY_IS_PIXEL_TYPE("YV16")
+_DEFINE_TRY_IS_PIXEL_TYPE("YV411")
+_DEFINE_TRY_IS_PIXEL_TYPE("Y8")
+
+function GET_PIXEL_TYPE(clip clip){
+	return IsRGB32(clip)?"RGB32" \
+		:IsRGB24(clip)?"RGB24" \
+		:IsYUY2(clip)?"YUY2" \
+		:IsYV12(clip)?"YV12" \
+		:TRY_IS_YV24(clip)?"YV24" \
+		:TRY_IS_YV16(clip)?"YV16" \
+		:TRY_IS_YV411(clip)?"YV411" \
+		:TRY_IS_Y8(clip)?"Y8" \
+		:Assert(false,"GET_PIXEL_TYPE(): cannot identify clip pixel type")
+}
+
+function CONVERT_TO_PIXEL_TYPE(clip clip,string pixel_type){
+	return Eval("ConvertTo"+pixel_type+"(clip)")
 }
 
 ######## Color Channel ########
@@ -298,7 +355,7 @@ function TRIM_ONE_FRAME(clip clip,int frame_index){
 }
 
 function LOOP_ONE_FRAME(clip clip,int loop_count){
-	Assert(Framecount(clip)==1,"must be one frame")
+	Assert(Framecount(clip)==1,"LOOP_ONE_FRAME(): clip frame count is not equal to 1")
 	return Loop(clip,loop_count,0,0)
 }
 
@@ -463,14 +520,15 @@ global _transform_overlay_clip_count=0
 function TRANSFORM(clip base_clip,clip overlay_clip,string "srcx",string "srcy",string "dstx",string "dsty",string "factorX",string "factorY",string "factor",string "angle",bool "show",string "opacity"){
 	opacity=Default(opacity,"1.0")
 
-	base_clip_rgb32=ConvertToRGB32(base_clip)
-	base_clip_rgb32_width=Width(base_clip_rgb32)
-	base_clip_rgb32_height=Height(base_clip_rgb32)
-	overlay_clip_rgb32=ConvertToRGB32(overlay_clip)
+	Assert(IsRGB32(base_clip),"TRANSFORM(): base_clip only support RGB32 format")
+	Assert(IsRGB32(overlay_clip),"TRANSFORM(): overlay_clip only support RGB32 format")
+
+	base_clip_width=Width(base_clip)
+	base_clip_height=Height(base_clip)
 	global_clip_name="_transform_overlay_clip_zoomed_"+String(_transform_overlay_clip_count)
 	global _transform_overlay_clip_count=_transform_overlay_clip_count+1
-	Eval("global "+global_clip_name+"=Zoom(overlay_clip_rgb32,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,base_clip_rgb32_width,base_clip_rgb32_height,show)")
-	result_clip_containing_parameter=ScriptClip(base_clip_rgb32,"Layer("+global_clip_name+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
+	Eval("global "+global_clip_name+"=Zoom(overlay_clip,srcx,srcy,dstx,dsty,factorX,factorY,factor,angle,base_clip_width,base_clip_height,show)")
+	result_clip_containing_parameter=ScriptClip(base_clip,"Layer("+global_clip_name+","+DOUBLE_QUOTE_STRING("Add")+",level=Round(256.0*("+opacity+")))")
 	return FrameEvaluate(result_clip_containing_parameter,"global n=current_frame")
 }
 
@@ -513,36 +571,38 @@ function BRIGHTNESS_OFFSET(clip clip,float offset){
 	return Levels(clip,0,1.0,255,offset_level,offset_level+255,coring=false)
 }
 
-function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_out){
-	zero_val_frame=is_fade_out?start_frame:end_frame
-	one_val_frame=is_fade_out?end_frame:start_frame
+function _FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_in){
+	zero_val_frame=is_fade_in?end_frame:start_frame
+	one_val_frame=is_fade_in?start_frame:end_frame
+
 	clip_faded_containing_parameter=ScriptClip(clip,"BRIGHTNESS_OFFSET(_parameter)")
-	clip_faded=EVALUATE_LERP_PARAMETER(clip_faded_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
-	return OVERWRITE_RANGE(clip,clip_faded,start_frame,end_frame)
+	return EVALUATE_LERP_PARAMETER(clip_faded_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
 }
 
-function FADE_IN_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames){
-	return FADE_WITH_BRIGHTNESS_OFFSET(clip,0,num_frames-1,false)
+function FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_in,bool "internal_rgb"){
+	internal_rgb=Default(internal_rgb,true)
+
+	clip_pixel_type=GET_PIXEL_TYPE(clip)
+	is_clip_rgb=IsRGB(clip)
+	clip_rgb=(!internal_rgb)||is_clip_rgb?clip:ConvertToRGB24(clip)
+
+	clip_rgb_faded=_FADE_WITH_BRIGHTNESS_OFFSET(clip_rgb,start_frame,end_frame,is_fade_in)
+
+	clip_faded=is_clip_rgb?clip_rgb_faded:CONVERT_TO_PIXEL_TYPE(clip_rgb_faded,clip_pixel_type)
+	return OVERWRITE_RANGE(clip,clip_faded,start_frame+(is_fade_in?0:1),end_frame-(is_fade_in?1:0))
 }
 
-function FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames){
-	return FADE_WITH_BRIGHTNESS_OFFSET(clip,Framecount(clip)-num_frames,Framecount(clip)-1,true)
+function FADE_IN_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames,bool "internal_rgb"){
+	return FADE_WITH_BRIGHTNESS_OFFSET(clip,0,num_frames,true,internal_rgb)
 }
 
-function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(clip clip1,clip clip2,int num_frames_before,int num_frames_after){
-	return FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip1,num_frames_before)+FADE_IN_WITH_BRIGHTNESS_OFFSET(clip2,num_frames_after)
+function FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip clip,int num_frames,bool "internal_rgb"){
+	last_frame=Framecount(clip)-1
+	return FADE_WITH_BRIGHTNESS_OFFSET(clip,last_frame-num_frames,last_frame,false,internal_rgb)
 }
 
-function FADE_IN_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip,int num_frames){
-	return ConvertToYV12(FADE_IN_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip),num_frames))
-}
-
-function FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip,int num_frames){
-	return ConvertToYV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip),num_frames))
-}
-
-function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET_RGB24(clip clip1,clip clip2,int num_frames_before,int num_frames_after){
-	return ConvertToYV12(DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(clip1),ConvertToRGB24(clip2),num_frames_before,num_frames_after))
+function DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(clip clip1,clip clip2,int num_frames_before,int num_frames_after,bool "internal_rgb"){
+	return FADE_OUT_WITH_BRIGHTNESS_OFFSET(clip1,num_frames_before,internal_rgb)+FADE_IN_WITH_BRIGHTNESS_OFFSET(clip2,num_frames_after,internal_rgb)
 }
 
 function DOUBLE_FADE(clip clip1,clip clip2,int num_frames_before,int num_frames_after,int color){
@@ -572,24 +632,25 @@ function PIXEL_SMEAR(clip clip,float "smear_ratio_x",float "smear_ratio_y"){
 	return FAST_ZOOM(clip_zoomed,0.0,0.0,smear_x,smear_y,extend=true)
 }
 
-function PIXEL_SMEAR_FX(clip clip,string mode,int smear_direction,int start_frame,int end_frame,bool is_out){
-	Assert(mode=="x" || mode=="y","invalid mode")
+function PIXEL_SMEAR_FX(clip clip,string mode,int smear_direction,int start_frame,int end_frame,bool is_in){
+	Assert(mode=="x"||mode=="y","PIXEL_SMEAR_FX(): invalid mode")
 
 	smear_ratio=Float(Sign(smear_direction))
-	zero_val_frame=is_out?start_frame:end_frame
-	one_val_frame=is_out?end_frame:start_frame
+	zero_val_frame=is_in?end_frame:start_frame
+	one_val_frame=is_in?start_frame:end_frame
 
 	clip_pixel_smeared_containing_parameter=ScriptClip(clip,"PIXEL_SMEAR(smear_ratio_"+mode+"=_parameter*("+String(smear_ratio)+"))")
 	clip_pixel_smeared=EVALUATE_LERP_PARAMETER(clip_pixel_smeared_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
-	return OVERWRITE_RANGE(clip,clip_pixel_smeared,start_frame,end_frame)
+	return OVERWRITE_RANGE(clip,clip_pixel_smeared,start_frame+(is_in?0:1),end_frame-(is_in?1:0))
 }
 
 function PIXEL_SMEAR_IN(clip clip,string mode,int smear_direction,int num_frames){
-	return PIXEL_SMEAR_FX(clip,mode,smear_direction,0,num_frames-1,false)
+	return PIXEL_SMEAR_FX(clip,mode,smear_direction,0,num_frames,true)
 }
 
 function PIXEL_SMEAR_OUT(clip clip,string mode,int smear_direction,int num_frames){
-	return PIXEL_SMEAR_FX(clip,mode,smear_direction,Framecount(clip)-num_frames,Framecount(clip)-1,true)
+	last_frame=Framecount(clip)-1
+	return PIXEL_SMEAR_FX(clip,mode,smear_direction,last_frame-num_frames,last_frame,false)
 }
 
 function SCALE_WIPE(clip clip,float "wipe_ratio_x",float "wipe_ratio_y",float "scale_factor_x",float "scale_factor_y"){
@@ -605,32 +666,39 @@ function SCALE_WIPE(clip clip,float "wipe_ratio_x",float "wipe_ratio_y",float "s
 	offset_x=wipe_ratio_x<0.0?clip_width:0.0
 	offset_y=wipe_ratio_y<0.0?clip_height:0.0
 
-	clip_rgb32=ConvertToRGB32(clip)
-	clip_mask=FAST_ZOOM(BlankClip(clip_rgb32,color=color_white),0.0,0.0,wipe_x,wipe_y)
-	clip_origin=Mask(clip_rgb32,clip_mask)
-	clip_scaled=FAST_ZOOM(clip_rgb32,0.0,0.0,(offset_x+wipe_x)*(1.0-scale_factor_x),(offset_y+wipe_y)*(1.0-scale_factor_y),scale_factor_x,scale_factor_y)
+	Assert(IsRGB32(clip),"SCALE_WIPE(): clip only support RGB32 format")
+
+	clip_mask=FAST_ZOOM(BlankClip(clip,color=color_white),0.0,0.0,wipe_x,wipe_y)
+	clip_origin=Mask(clip,clip_mask)
+	clip_scaled=FAST_ZOOM(clip,0.0,0.0,(offset_x+wipe_x)*(1.0-scale_factor_x),(offset_y+wipe_y)*(1.0-scale_factor_y),scale_factor_x,scale_factor_y)
 	return Layer(clip_scaled,clip_origin,"Add")
 }
 
-function SCALE_WIPE_FX(clip clip,string mode,int wipe_direction,float scale_factor,int start_frame,int end_frame,bool is_out){
-	Assert(mode=="x" || mode=="y","invalid mode")
+function SCALE_WIPE_FX(clip clip,string mode,int wipe_direction,float scale_factor,int start_frame,int end_frame,bool is_in){
+	Assert(mode=="x"||mode=="y","SCALE_WIPE_FX(): invalid mode")
 
 	wipe_ratio=Float(Sign(wipe_direction))
-	zero_val_frame=is_out?start_frame:end_frame
-	one_val_frame=is_out?end_frame:start_frame
+	zero_val_frame=is_in?end_frame:start_frame
+	one_val_frame=is_in?start_frame:end_frame
 
-	clip_rgb32=ConvertToRGB32(clip)
-	clip_scale_wiped_containing_parameter=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_parameter*("+String(wipe_ratio)+"),scale_factor_"+mode+"=LERP(_parameter,1.0,"+String(scale_factor)+"))")
-	clip_scale_wiped=EVALUATE_LERP_PARAMETER(clip_scale_wiped_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
-	return OVERWRITE_RANGE(clip_rgb32,clip_scale_wiped,start_frame,end_frame)
+	clip_pixel_type=GET_PIXEL_TYPE(clip)
+	is_clip_rgb32=IsRGB32(clip)
+	clip_rgb32=is_clip_rgb32?clip:ConvertToRGB32(clip)
+
+	clip_rgb32_scale_wiped_containing_parameter=ScriptClip(clip_rgb32,"SCALE_WIPE(wipe_ratio_"+mode+"=_parameter*("+String(wipe_ratio)+"),scale_factor_"+mode+"=LERP(_parameter,1.0,"+String(scale_factor)+"))")
+	clip_rgb32_scale_wiped=EVALUATE_LERP_PARAMETER(clip_rgb32_scale_wiped_containing_parameter,"_parameter",zero_val_frame,one_val_frame)
+
+	clip_scale_wiped=is_clip_rgb32?clip_rgb32_scale_wiped:CONVERT_TO_PIXEL_TYPE(clip_rgb32_scale_wiped,clip_pixel_type)
+	return OVERWRITE_RANGE(clip,clip_scale_wiped,start_frame+(is_in?0:1),end_frame-(is_in?1:0))
 }
 
 function SCALE_WIPE_IN(clip clip,string mode,int wipe_direction,float scale_factor,int num_frames){
-	return SCALE_WIPE_FX(clip,mode,wipe_direction,scale_factor,0,num_frames-1,false)
+	return SCALE_WIPE_FX(clip,mode,wipe_direction,scale_factor,0,num_frames,true)
 }
 
 function SCALE_WIPE_OUT(clip clip,string mode,int wipe_direction,float scale_factor,int num_frames){
-	return SCALE_WIPE_FX(clip,mode,wipe_direction,scale_factor,Framecount(clip)-num_frames,Framecount(clip)-1,true)
+	last_frame=Framecount(clip)-1
+	return SCALE_WIPE_FX(clip,mode,wipe_direction,scale_factor,last_frame-num_frames,last_frame,false)
 }
 
 ######## Stereoscopy ########
@@ -676,14 +744,6 @@ function FFMS2_VIDEO_SOURCE(string filename,int "vtrack",int "atrack",int "fpsnu
 	return FFmpegSource2(filename,vtrack=vtrack,atrack=atrack,fpsnum=fpsnum,fpsden=fpsden,threads=threads)
 }
 
-function FFMS2_VIDEO_SOURCE_RGB24(string filename,int "vtrack",int "atrack",int "fpsnum",int "fpsden",bool "enable_multi_thread"){
-	return ConvertToRGB24(FFMS2_VIDEO_SOURCE(filename,vtrack,atrack,fpsnum,fpsden,enable_multi_thread))
-}
-
 function VOB_MPEG2_VIDEO_SOURCE(string filename,int "upConv",int "info"){
 	return DGDecode_MPEG2Source(filename,upConv=upConv,info=info)
-}
-
-function VOB_MPEG2_VIDEO_SOURCE_CROPPED(string filename,int "upConv",int "info"){
-	return Crop(VOB_MPEG2_VIDEO_SOURCE(filename,upConv=upConv,info=info),0,60,720,360)
 }

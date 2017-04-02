@@ -130,26 +130,28 @@ triggerheart_exelica_enhanced_ps2_op_05_06=is_deinterlace?CONVERT_24P_TO_60P_PAT
 
 triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,15,0)
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_pv_01_offset,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01=triggerheart_exelica_xbla_game_review_03
-triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02=triggerheart_exelica_xbla_game_review_05
 
-overlay_bg_width=Width(triggerheart_exelica_enhanced_ps2_pv_overlay_bg)
-overlay_bg_height=Height(triggerheart_exelica_enhanced_ps2_pv_overlay_bg)
-overlay_fg_01_last_frame=Framecount(triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01)-1
-overlay_fg_02_last_frame=Framecount(triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02)-1
+triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32=ConvertToRGB32(triggerheart_exelica_enhanced_ps2_pv_overlay_bg)
+triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32=ConvertToRGB32(triggerheart_exelica_xbla_game_review_03)
+triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32=ConvertToRGB32(triggerheart_exelica_xbla_game_review_05)
 
-triggerheart_exelica_enhanced_ps2_pv_overlay=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01,dstx="(1.0/4.0)*overlay_bg_width", \
+overlay_bg_width=Width(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32)
+overlay_bg_height=Height(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32)
+overlay_fg_01_last_frame=Framecount(triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32)-1
+overlay_fg_02_last_frame=Framecount(triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32)-1
+
+triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32,dstx="(1.0/4.0)*overlay_bg_width", \
 	dsty="Spline(n,0,(1.0/8.0)*overlay_bg_height,190,(1.0/8.0)*overlay_bg_height,240,(2.0/8.0)*overlay_bg_height,340,(4.0/8.0)*overlay_bg_height,390,(5.0/8.0)*overlay_bg_height,overlay_fg_01_last_frame,(5.0/8.0)*overlay_bg_height,cubic=false)", \
 	factor="Spline(n,0,0.3,190,0.3,240,0.5,340,0.5,390,0.7,overlay_fg_01_last_frame,0.7,cubic=false)", \
 	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,overlay_fg_01_last_frame,45,cubic=false)", \
 	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,overlay_fg_01_last_frame,0.0,cubic=false)")
-triggerheart_exelica_enhanced_ps2_pv_overlay=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02,dstx="(3.0/4.0)*overlay_bg_width", \
+triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32,dstx="(3.0/4.0)*overlay_bg_width", \
 	dsty="Spline(n,0,(7.0/8.0)*overlay_bg_height,190,(7.0/8.0)*overlay_bg_height,240,(6.0/8.0)*overlay_bg_height,340,(4.0/8.0)*overlay_bg_height,390,(3.0/8.0)*overlay_bg_height,overlay_fg_02_last_frame,(3.0/8.0)*overlay_bg_height,cubic=false)", \
 	factor="Spline(n,0,0.3,190,0.3,240,0.5,340,0.5,390,0.7,overlay_fg_02_last_frame,0.7,cubic=false)", \
 	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,overlay_fg_02_last_frame,45,cubic=false)", \
 	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,overlay_fg_02_last_frame,0.0,cubic=false)")
 
-triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay),190,390)
+triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32),190,390)
 
 
 
@@ -184,7 +186,7 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-triggerheart_exelica_enhanced_ps2_op_pre03_frame_count)
 triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_pre03+triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,762),fade_length)
+triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,762),fade_length)
 triggerheart_exelica_enhanced_op_t05=ConvertToYV12(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01_fade_out,triggerheart_exelica_xbla_game_review))
 triggerheart_exelica_enhanced_op_t06=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t07=BlankClip(triggerheart_exelica_xbla_game_review,length=30*4,color=color_black)
@@ -233,6 +235,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_heavy",subtitle_random_char_func) # deinterlace
 }
+
+ConvertToRGB32()
 
 SUBTITLE_FX("GRAVITY ERROR//ç âπ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)
 

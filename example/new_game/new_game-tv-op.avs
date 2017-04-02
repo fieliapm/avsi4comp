@@ -69,7 +69,7 @@ new_game_tv_op_t09=TRIM_FIRST_CLIP(new_game_tv_03_aoba_s_leg,139)+TRIM_MIDDLE_CL
 new_game_tv_op_t10=TRIM_LAST_CLIP(new_game_tv_09_hajime_research_character_action,66)+TRIM_MIDDLE_CLIP(new_game_tv_10_demon_aoba,74)+TRIM_MIDDLE_CLIP(new_game_tv_06_aoba_strip_clothes_02,65)+TRIM_MIDDLE_CLIP(new_game_tv_12_seiyuu_demo_magical_girl,70)+TRIM_MIDDLE_CLIP(new_game_tv_04_rin_wear_pantie_only,70)
 
 new_game_tv_op_t11=TRIM_MIDDLE_CLIP(new_game_tv_11_tgs_makuhari_messe_outside,35)+TRIM_MIDDLE_CLIP(new_game_tv_11_tgs_makuhari_messe_inside_01,35)+TRIM_MIDDLE_CLIP(new_game_tv_12_kou_see_upside,70)+TRIM_MIDDLE_CLIP(new_game_tv_10_aoba_watch_nene_fly,73)+TRIM_LAST_CLIP(new_game_tv_03_yun_catch_aoba_s_hand,70)+TRIM_LAST_CLIP(new_game_tv_06_magical_girl_transform,66)
-new_game_tv_op_t12=Dissolve(new_game_tv_clean_op_05,FADE_OUT_WITH_BRIGHTNESS_OFFSET_RGB24(TRIM_MIDDLE_CLIP(new_game_tv_12_kou_and_aoba_watch_fairies_story_3_poster,fade_length+76),fade_length),fade_length)
+new_game_tv_op_t12=Dissolve(new_game_tv_clean_op_05,FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(new_game_tv_12_kou_and_aoba_watch_fairies_story_3_poster,fade_length+76),fade_length),fade_length)
 new_game_tv_op_t13=TRIM_FIRST_CLIP(new_game_tv_05_tweak_animation,66)+TRIM_FIRST_CLIP(fairies_story_3_pip,74) \
 	+Dissolve(TRIM_LAST_CLIP(new_game_tv_01_sakura_night,63+fade_length),new_game_tv_clean_op_06,fade_length)+BlankClip(new_game_tv_clean_op,length=24*5,color=color_black)
 
@@ -131,6 +131,8 @@ function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int 
 }
 
 ### inherit end ###
+
+ConvertToRGB32()
 
 SUBTITLE_FX("ÇﬂÇÆÇËÇﬂÇÆÇ¡ÇƒEveryone",subtitle_x,subtitle_y-subtitle_size,312,383)
 SUBTITLE_FX("âΩÇ©Ç™ë“Ç¡ÇƒÇ¢ÇÈÇÃÇ©Ç»?",subtitle_x,subtitle_y,382,451)
@@ -212,6 +214,7 @@ Import("new_game-tv-common-cross_process.avsi")
 kyou_mo_ichinichi_ganbaruzoi_audio=FadeIn0(FadeOut0(Normalize(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full),3),3)
 kyou_mo_ichinichi_ganbaruzoi=AudioDub(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full,kyou_mo_ichinichi_ganbaruzoi_audio)
 
+kyou_mo_ichinichi_ganbaruzoi=ConvertToRGB32(kyou_mo_ichinichi_ganbaruzoi)
 kyou_mo_ichinichi_ganbaruzoi=SUBTITLE_N(kyou_mo_ichinichi_ganbaruzoi,"ç°ì˙Ç‡àÍì˙Ç™ÇÒÇŒÇÈÇºÇ¢",y=Round(subtitle_y),first_frame=107,last_frame=158)
 
 ######## Thumbnail ########

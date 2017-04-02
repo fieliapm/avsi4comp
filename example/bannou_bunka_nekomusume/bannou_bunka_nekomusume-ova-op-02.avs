@@ -55,10 +55,11 @@ mask_base=BlankClip(bannou_bunka_nekomusume_ova_origin_op_02_01,color=color_blac
 mask=Overlay(mask_base,BlankClip(bannou_bunka_nekomusume_ova_origin_op_02_01,width=mosaic_area_size,height=mosaic_area_size,color=color_white),x=Round(mosaic_01_x*1.5),y=Round(mosaic_01_y*1.5),opacity=1.0)
 mask=Overlay(mask,BlankClip(bannou_bunka_nekomusume_ova_origin_op_02_01,width=mosaic_area_size,height=mosaic_area_size,color=color_white),x=Round(mosaic_02_x*1.5),y=Round(mosaic_02_y*1.5),opacity=1.0)
 bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic=MOSAIC_MASK(bannou_bunka_nekomusume_ova_origin_op_02_01,mask,24.0)
-bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic=SUBTITLE_NORMAL(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic,"‹Ö",mosaic_01_x+(limited_size/2),mosaic_01_y+(limited_size/2),font=limited_font,effects=limited_effects,size=limited_size,text_color=limited_text_color,halo_color=limited_halo_color)
-bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic=SUBTITLE_NORMAL(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic,"‹Ö",mosaic_02_x+(limited_size/2),mosaic_02_y+(limited_size/2),font=limited_font,effects=limited_effects,size=limited_size,text_color=limited_text_color,halo_color=limited_halo_color)
+bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic_rgb32=ConvertToRGB32(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic)
+bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic_rgb32=SUBTITLE_NORMAL(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic_rgb32,"‹Ö",mosaic_01_x+(limited_size/2),mosaic_01_y+(limited_size/2),font=limited_font,effects=limited_effects,size=limited_size,text_color=limited_text_color,halo_color=limited_halo_color)
+bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic_rgb32=SUBTITLE_NORMAL(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic_rgb32,"‹Ö",mosaic_02_x+(limited_size/2),mosaic_02_y+(limited_size/2),font=limited_font,effects=limited_effects,size=limited_size,text_color=limited_text_color,halo_color=limited_halo_color)
 
-bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic=OVERWRITE_RANGE(bannou_bunka_nekomusume_ova_origin_op_02_01,ConvertToYV12(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic),1105,1178)
+bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic=OVERWRITE_RANGE(bannou_bunka_nekomusume_ova_origin_op_02_01,ConvertToYV12(bannou_bunka_nekomusume_ova_origin_op_02_01_mosaic_rgb32),1105,1178)
 
 ######## Combine ########
 
@@ -123,6 +124,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,subtitle_halo_color)
 }
+
+ConvertToRGB32()
 
 
 
