@@ -63,15 +63,27 @@ function ROUND_BS(val x,val n){
 ######## Random ########
 
 function PSEUDO_RANDOM_SEED(int seed){
+	Assert(seed>=$0&&seed<=$7FFFFFFF,"PSEUDO_RANDOM_SEED(): seed is not in range 0 <= seed <= 2147483647")
+
 	global _next_pseudo_random_number=seed
 }
 
-function PSEUDO_RANDOM(int "max"){
+function PSEUDO_RAND(){
 	#global _next_pseudo_random_number=(_next_pseudo_random_number*1664525)+1013904223
 	next=(_next_pseudo_random_number*1103515245)+12345
-	global _next_pseudo_random_number=next<0?next+$80000000:next # next mod pow(2,31), when next is signed int
+	global _next_pseudo_random_number=next<$0?next+$80000000:next # next mod Pow(2,31), this implementation is valid if type of next is signed int32
+	return _next_pseudo_random_number/$10000
+}
 
-	return Defined(max)?_next_pseudo_random_number%max:_next_pseudo_random_number
+function PSEUDO_RANDOM(int "max",bool "scale"){
+	rand_max=$8000
+	max=Default(max,rand_max)
+	scale=Default(scale,max>rand_max)
+
+	Assert(max>0,"PSEUDO_RANDOM(): max is not greater than 0")
+
+	random_output=PSEUDO_RAND()
+	return scale?Floor(Float(random_output)/Float(rand_max)*Float(max)):random_output%max
 }
 
 PSEUDO_RANDOM_SEED(Int(Value(Time("%S"))))
