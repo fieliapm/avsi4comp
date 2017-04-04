@@ -293,4 +293,10 @@ ConvertToYV12()
 #ConvertToYUY2()
 #ConvertToRGB24()
 
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
+
 TCPServer()
