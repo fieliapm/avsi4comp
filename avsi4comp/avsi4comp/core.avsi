@@ -75,8 +75,12 @@ function PSEUDO_RAND(){
 	return _next_pseudo_random_number/$10000
 }
 
+function PSEUDO_RAND_MAX(){
+	return $8000
+}
+
 function PSEUDO_RANDOM(int "max",bool "scale"){
-	rand_max=$8000
+	rand_max=PSEUDO_RAND_MAX()
 	max=Default(max,rand_max)
 	scale=Default(scale,max>rand_max)
 
