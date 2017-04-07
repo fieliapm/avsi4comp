@@ -247,7 +247,7 @@ global subtitle_y=400*2.25
 global subtitle_front_fade_count=18
 global subtitle_rear_fade_count=18
 global subtitle_font="MS Gothic"
-global subtitle_effects="bi"
+global subtitle_effects="biw"
 global subtitle_size=24*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_lime,$C0)
@@ -262,7 +262,7 @@ function SUBTITLE_FX_1(clip clip,string text,float x,float y,int start_frame,int
 	halo_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_halo_color,$FF):subtitle_halo_color
 	random_char_func=is_title?title_subtitle_random_char_func:subtitle_random_char_func
 
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color,"ex_thick",random_char_func)
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),subtitle_text_color,halo_color,"ex_thick",random_char_func,"")
 }
 
 global second_subtitle_front_fade_count=24
@@ -321,8 +321,10 @@ SUBTITLE_FX_1("„I „€„„„r„u„„„‰„y„{ „y „ƒ„…„t„„‘",subtitle_x,subtitle_y,723,794)
 SUBTITLE_FX_2("I otvyetchik i sud'ya",subtitle_x,subtitle_y-subtitle_size*2,723,794)
 SUBTITLE_FX_1("„` „ƒ„„„€„ „~„p „t„r„…„‡ „{„€„~„ˆ„p„‡ „€„s„~„‘",subtitle_x,subtitle_y,802,926)
 SUBTITLE_FX_2("Ya stoyu na dvukh kontsakh ognya",subtitle_x,subtitle_y-subtitle_size,802,926)
-SUBTITLE_FX_1("„O„s„y„q„p„‘ „r„y„‚„p„w„y,|„€„q„s„€„~„‘„‘ „ƒ„}„u„‚„„„ „y „w„y„x„~„",subtitle_x,subtitle_y-subtitle_size,960,1110)
-SUBTITLE_FX_2("Ogibaya virazhi,|obgonyaya smyert' i zhizn'",subtitle_x,subtitle_y-subtitle_size*3,960,1110)
+SUBTITLE_FX_1("„O„s„y„q„p„‘ „r„y„‚„p„w„y,",subtitle_x,subtitle_y-subtitle_size,960,1110)
+SUBTITLE_FX_1("„€„q„s„€„~„‘„‘ „ƒ„}„u„‚„„„ „y „w„y„x„~„",subtitle_x,subtitle_y,960,1110)
+SUBTITLE_FX_2("Ogibaya virazhi,",subtitle_x,subtitle_y-subtitle_size*3,960,1110)
+SUBTITLE_FX_2("obgonyaya smyert' i zhizn'",subtitle_x,subtitle_y-subtitle_size*2,960,1110)
 SUBTITLE_FX_1("„` „q„u„s„… „ƒ„‚„p„x„y„„„„ƒ„‘ „ƒ „„„u„~„„ „|„w„y",subtitle_x,subtitle_y,1118,1242)
 SUBTITLE_FX_2("Ya byegu srazit'sya s tyen'yu lzhi",subtitle_x,subtitle_y-subtitle_size,1118,1242)
 SUBTITLE_FX_1("„R„{„€„|„„{„€ „q „~„y„„„u„z „~„u „„|„v„| „€„q„}„p„~",subtitle_x,subtitle_y,1253,1400)

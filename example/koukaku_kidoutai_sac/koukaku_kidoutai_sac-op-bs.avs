@@ -340,7 +340,7 @@ global subtitle_y=400*2.25
 global subtitle_front_fade_count=20
 global subtitle_rear_fade_count=20
 global subtitle_font="MS Gothic"
-global subtitle_effects="bi"
+global subtitle_effects="biw"
 global subtitle_size=24*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=OVERWRITE_SUBTITLE_COLOR_ALPHA(color_dodgerblue,$C0)
@@ -376,7 +376,7 @@ function SUBTITLE_FX_1(clip clip,string text,float x,float y,int start_frame,int
 
 	#return clip
 	#return SUBTITLE_TEST(clip,text,start_frame-front_fade_count,end_frame+rear_fade_count)
-	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_thick",subtitle_random_char_func)
+	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_thick",subtitle_random_char_func,"")
 }
 
 function SUBTITLE_FX_2(clip clip,string text,float x,float y,int start_frame,int end_frame,int session_start_120p,bool is_24p_session){
@@ -401,7 +401,8 @@ koukaku_kidoutai_sac_op_bs_part01_23p=ConvertToRGB32(koukaku_kidoutai_sac_op_bs_
 part01_start=0
 koukaku_kidoutai_sac_op_bs_part01_23p=EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part01_23p)
 
-koukaku_kidoutai_sac_op_bs_part01_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part01_23p,"inner universe//origa|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,184,444,part01_start,true,true)
+koukaku_kidoutai_sac_op_bs_part01_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part01_23p,"inner universe//origa",subtitle_x,subtitle_y-subtitle_size,184,444,part01_start,true,true)
+koukaku_kidoutai_sac_op_bs_part01_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part01_23p,"- by fielia@AVISynth",subtitle_x,subtitle_y,184,444,part01_start,true,true)
 
 koukaku_kidoutai_sac_op_bs_part01_23p=UNDO_EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part01_23p)
 
@@ -476,8 +477,10 @@ koukaku_kidoutai_sac_op_bs_part04_29p=EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_b
 
 koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part04_29p,"...„A„u„ƒ„{„€„~„u„‰„~„„z „q„u„s...",subtitle_x,subtitle_y,4320,4519,part04_start,false)
 koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part04_29p,"...Beskonechnyj beg...",subtitle_x,subtitle_y-subtitle_size,4320,4519,part04_start,false)
-koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part04_29p,"„P„€„{„p „w„y„r„p|„‘ „}„€„s„… „ƒ„„„p„‚„p„„„„ƒ„‘ „~„p „|„u„„„… „~„u „…„„p„ƒ„„„,",subtitle_x,subtitle_y-subtitle_size,4526,4897,part04_start,false)
-koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part04_29p,"Poka zhiva|ya mogu starat'sya na letu ne upast',",subtitle_x,subtitle_y-subtitle_size*3,4526,4897,part04_start,false)
+koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part04_29p,"„P„€„{„p „w„y„r„p",subtitle_x,subtitle_y-subtitle_size,4526,4897,part04_start,false)
+koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part04_29p,"„‘ „}„€„s„… „ƒ„„„p„‚„p„„„„ƒ„‘ „~„p „|„u„„„… „~„u „…„„p„ƒ„„„,",subtitle_x,subtitle_y,4526,4897,part04_start,false)
+koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part04_29p,"Poka zhiva",subtitle_x,subtitle_y-subtitle_size*3,4526,4897,part04_start,false)
+koukaku_kidoutai_sac_op_bs_part04_29p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part04_29p,"ya mogu starat'sya na letu ne upast',",subtitle_x,subtitle_y-subtitle_size*2,4526,4897,part04_start,false)
 
 koukaku_kidoutai_sac_op_bs_part04_29p=UNDO_EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part04_29p)
 
@@ -490,8 +493,10 @@ koukaku_kidoutai_sac_op_bs_part05_23p=ConvertToRGB32(koukaku_kidoutai_sac_op_bs_
 part05_start=18656
 koukaku_kidoutai_sac_op_bs_part05_23p=EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part05_23p)
 
-koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part05_23p,"„P„€„{„p „w„y„r„p|„‘ „}„€„s„… „ƒ„„„p„‚„p„„„„ƒ„‘ „~„p „|„u„„„… „~„u „…„„p„ƒ„„„,",subtitle_x,subtitle_y-subtitle_size,4526,4897,part05_start,true)
-koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part05_23p,"Poka zhiva|ya mogu starat'sya na letu ne upast',",subtitle_x,subtitle_y-subtitle_size*3,4526,4897,part05_start,true)
+koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part05_23p,"„P„€„{„p „w„y„r„p",subtitle_x,subtitle_y-subtitle_size,4526,4897,part05_start,true)
+koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part05_23p,"„‘ „}„€„s„… „ƒ„„„p„‚„p„„„„ƒ„‘ „~„p „|„u„„„… „~„u „…„„p„ƒ„„„,",subtitle_x,subtitle_y,4526,4897,part05_start,true)
+koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part05_23p,"Poka zhiva",subtitle_x,subtitle_y-subtitle_size*3,4526,4897,part05_start,true)
+koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part05_23p,"ya mogu starat'sya na letu ne upast',",subtitle_x,subtitle_y-subtitle_size*2,4526,4897,part05_start,true)
 koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part05_23p,"„N„u „‚„p„x„…„‰„y„„„„ƒ„‘ „}„u„‰„„„p„„„... „|„„q„y„„„...",subtitle_x,subtitle_y,4911,5264,part05_start,true)
 koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part05_23p,"Ne razuchit'sya mechtat'... lyubit'...",subtitle_x,subtitle_y-subtitle_size,4911,5264,part05_start,true)
 koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part05_23p,"...„A„u„ƒ„{„€„~„u„‰„~„„z „q„u„s...",subtitle_x,subtitle_y,5268,5465,part05_start,true)
@@ -500,6 +505,12 @@ koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_p
 koukaku_kidoutai_sac_op_bs_part05_23p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part05_23p,"Calling Calling now, For the place of knowing",subtitle_x,subtitle_y-subtitle_size*2,5354-3,5704,part05_start,true)
 
 koukaku_kidoutai_sac_op_bs_part05_23p=UNDO_EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part05_23p)
+
+### export clip: koukaku_kidoutai_sac_op_bs_part01_23p,koukaku_kidoutai_sac_op_bs_part02_29p,koukaku_kidoutai_sac_op_bs_part03_23p,koukaku_kidoutai_sac_op_bs_part04_29p,koukaku_kidoutai_sac_op_bs_part05_23p,koukaku_kidoutai_sac_op_bs_part06_29p,koukaku_kidoutai_sac_op_bs_part07_23p
+
+### prefetch: 5,2
+
+### ###
 
 
 
@@ -517,12 +528,6 @@ koukaku_kidoutai_sac_op_bs_part06_29p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_p
 koukaku_kidoutai_sac_op_bs_part06_29p=SUBTITLE_FX_1(koukaku_kidoutai_sac_op_bs_part06_29p,"There's more than what can be linked",subtitle_x,subtitle_y,5720,5863,part06_start,false)
 
 koukaku_kidoutai_sac_op_bs_part06_29p=UNDO_EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part06_29p)
-
-### export clip: koukaku_kidoutai_sac_op_bs_part01_23p,koukaku_kidoutai_sac_op_bs_part02_29p,koukaku_kidoutai_sac_op_bs_part03_23p,koukaku_kidoutai_sac_op_bs_part04_29p,koukaku_kidoutai_sac_op_bs_part05_23p,koukaku_kidoutai_sac_op_bs_part06_29p,koukaku_kidoutai_sac_op_bs_part07_23p
-
-### prefetch: 5,2
-
-### ###
 
 
 
@@ -553,6 +558,12 @@ koukaku_kidoutai_sac_op_bs_part07_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_p
 koukaku_kidoutai_sac_op_bs_part07_23p=SUBTITLE_FX_2(koukaku_kidoutai_sac_op_bs_part07_23p,"Aeria gloris, aeria gloris",subtitle_x,subtitle_x,8458,8637,part07_start,true)
 
 koukaku_kidoutai_sac_op_bs_part07_23p=UNDO_EXTEND_ONE_FRAME(koukaku_kidoutai_sac_op_bs_part07_23p)
+
+### export clip: koukaku_kidoutai_sac_op_bs_part01_23p,koukaku_kidoutai_sac_op_bs_part02_29p,koukaku_kidoutai_sac_op_bs_part03_23p,koukaku_kidoutai_sac_op_bs_part04_29p,koukaku_kidoutai_sac_op_bs_part05_23p,koukaku_kidoutai_sac_op_bs_part06_29p,koukaku_kidoutai_sac_op_bs_part07_23p
+
+### prefetch: 5,2
+
+### ###
 
 ######## Thumbnail ########
 
