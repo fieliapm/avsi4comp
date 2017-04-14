@@ -20,9 +20,17 @@
 
 
 
+MP_Pipeline("""
+
+### inherit start ###
+
 Import("..\..\avsi4comp\avsi4comp.avsi")
 
+### inherit end ###
+
 ######## BD (1080P) ########
+
+### inherit start ###
 
 yuruyuri_season_02_tv_01=FFMS2_VIDEO_SOURCE("src\anime\‚ä‚é‚ä‚èôô ‘æ01˜b u‹A‚Á‚Ä‚«‚½ålŒöv (TX 1280x720 x264 AAC 10bit).mp4")
 yuruyuri_season_02_tv_02=FFMS2_VIDEO_SOURCE("src\anime\‚ä‚é‚ä‚èôô ‘æ02˜b u‚ä‚é‚ä‚è‚È‚é“úX‚È‚é‚È‚èv (TX 1280x720 x264 AAC 10bit).mp4")
@@ -36,6 +44,8 @@ yuruyuri_season_02_tv_09=FFMS2_VIDEO_SOURCE("src\anime\‚ä‚é‚ä‚èôô ‘æ09˜b u‰½‚
 yuruyuri_season_02_tv_10=FFMS2_VIDEO_SOURCE("src\anime\‚ä‚é‚ä‚èôô ‘æ10˜b uCŠw—·sRv (TX 1280x720 x264 AAC 10bit).mp4")
 yuruyuri_season_02_tv_11=FFMS2_VIDEO_SOURCE("src\anime\‚ä‚é‚ä‚èôô ‘æ11˜b u‚ğ‚©‚¯‚é‚ ‚©‚èv (TX 1280x720 x264 AAC 10bit).mp4")
 yuruyuri_season_02_tv_12=FFMS2_VIDEO_SOURCE("src\anime\‚ä‚é‚ä‚èôô ‘æ12˜b u‚³‚æ‚¤‚È‚çålŒöA‚Ü‚½‰ï‚¤“ú‚Ü‚Åv (TX 1280x720 x264 AAC 10bit).mp4")
+
+### inherit end ###
 
 
 
@@ -127,7 +137,13 @@ yuruyuri_season_02_tv_07_sakurako_cosplay_fat=Trim(yuruyuri_season_02_tv_07,1788
 yuruyuri_season_02_tv_07_akari_super_saiyazin=Trim(yuruyuri_season_02_tv_07,18979,19212) #
 yuruyuri_season_02_tv_07_himawari_sit_ball=Trim(yuruyuri_season_02_tv_07,19948,20000)
 yuruyuri_season_02_tv_07_broken_sakurako=Trim(yuruyuri_season_02_tv_07,25702,25845)
+
+### inherit start ###
+
 yuruyuri_season_02_tv_07_akane_title_call=Trim(yuruyuri_season_02_tv_07,26020,26229)
+
+### inherit end ###
+
 yuruyuri_season_02_tv_07_tomoko_climax=Trim(yuruyuri_season_02_tv_07,27220,27931) #
 yuruyuri_season_02_tv_07_akane_beautiful_back=Trim(yuruyuri_season_02_tv_07,28899,29063)
 yuruyuri_season_02_tv_07_sister_complex_akane_01=Trim(yuruyuri_season_02_tv_07,31190,31309) #
@@ -206,9 +222,15 @@ yuruyuri_season_02_tv_12_bomb=Trim(yuruyuri_season_02_tv_12,32055,32126) #
 
 ######## Pre Combine (1080P) ########
 
+### inherit start ###
+
+fade_length=12
+
 #### Title Call ####
 
 yuruyuri_season_02_tv_01_title_call_mtv_version=Normalize(yuruyuri_season_02_tv_07_akane_title_call)
+
+### inherit end ###
 
 ######## Combine ########
 
@@ -217,8 +239,6 @@ yuruyuri_season_02_tv_01_title_call_mtv_version=Normalize(yuruyuri_season_02_tv_
 # yuruyuri_season_02_tv_clean_op_part03 4669
 # yuruyuri_season_02_tv_clean_op_part04 5376
 # yuruyuri_season_02_tv_clean_op_part04 5599
-
-fade_length=12
 
 yuruyuri_season_02_tv_op_t01=BlankClip(yuruyuri_season_02_tv_clean_op,length=11,color=color_black)+yuruyuri_season_02_tv_clean_op_part01
 
@@ -250,20 +270,17 @@ yuruyuri_season_02_tv_op_mute=yuruyuri_season_02_tv_op_t01+yuruyuri_season_02_tv
 	+FADE_OUT_WITH_BRIGHTNESS_OFFSET(yuruyuri_season_02_tv_op_t04,fade_length)+DOUBLE_FADE_WITH_BRIGHTNESS_OFFSET(yuruyuri_season_02_tv_op_t05,yuruyuri_season_02_tv_op_t06,fade_length,fade_length) \
 	+yuruyuri_season_02_tv_op_t07+yuruyuri_season_02_tv_op_t08+yuruyuri_season_02_tv_op_t09+yuruyuri_season_02_tv_op_t10
 
-######## Music ########
+yuruyuri_season_02_tv_op_mute
 
-bgm_48khz=SSRC(WAVSource("src\yuruyuri-season_02-op-cd-01.wav"),48000)
-AudioDub(yuruyuri_season_02_tv_op_mute,bgm_48khz)
+### export clip: yui_tenkousei_mute,yuruyuri_season_02_tv_clean_op
 
-######## Post Combine ########
+### prefetch: 5,2
 
-yui_tenkousei=AudioDub(yui_tenkousei_mute,Trim(1386,0))
-yui_tenkousei=FadeOut(yui_tenkousei,fade_length*2,color_white)
-yui_tenkousei_width=(Round(747*16.0/9.0)-940)/2
-yui_tenkousei=AddBorders(yui_tenkousei,yui_tenkousei_width,0,yui_tenkousei_width,0)
-yui_tenkousei=RESIZE_TO_REF_CLIP(yui_tenkousei,yuruyuri_season_02_tv_clean_op)
+### ###
 
 ######## Subtitle ########
+
+### inherit start ###
 
 subtitle_x=50
 subtitle_y=395
@@ -291,6 +308,8 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return result_clip
 }
+
+### inherit end ###
 
 ConvertToRGB32()
 
@@ -356,6 +375,12 @@ SUBTITLE_FX("ƒXƒ„ƒXƒ„–²‚Ì’†",subtitle_x,subtitle_y,2890,2946)
 SUBTITLE_FX("ƒNƒ‰ƒQ‚ªƒtƒƒtƒ",subtitle_x,subtitle_y,2947,3005)
 SUBTITLE_FX("(ƒnƒC!EƒnƒC!E‚¢‚¥‚¢!)",second_subtitle_x,second_subtitle_y,2959,3015,true)
 
+### export clip: yui_tenkousei_mute,yuruyuri_season_02_tv_clean_op
+
+### prefetch: 5,2
+
+### ###
+
 SUBTITLE_FX("‚ `‚Æ‚Ü‚ç‚È‚¢",subtitle_x,subtitle_y,3010,3051)
 SUBTITLE_FX("–Ï‘z •@ŒŒ ƒgƒLƒƒL™",subtitle_x,subtitle_y,3052,3123)
 SUBTITLE_FX("‚ ‚Ì‚Ë ‚¦‚Æ‚Ë",subtitle_x,subtitle_y,3124,3186)
@@ -408,6 +433,21 @@ SUBTITLE_FX("‚ä‚ä‚äE‚ä‚é‚ä‚è ‚¢‚¥‚·!",subtitle_x,subtitle_y,5479,5525)
 
 
 
+######## Music ########
+
+bgm_48khz=SSRC(WAVSource("src\yuruyuri-season_02-op-cd-01.wav"),48000)
+AudioDub(bgm_48khz)
+
+######## Post Combine ########
+
+yui_tenkousei=AudioDub(yui_tenkousei_mute,Trim(1386,0))
+yui_tenkousei=FadeOut(yui_tenkousei,fade_length*2,color_white)
+yui_tenkousei_width=(Round(747*16.0/9.0)-940)/2
+yui_tenkousei=AddBorders(yui_tenkousei,yui_tenkousei_width,0,yui_tenkousei_width,0)
+yui_tenkousei=RESIZE_TO_REF_CLIP(yui_tenkousei,yuruyuri_season_02_tv_clean_op)
+
+
+
 global center_subtitle_size=56
 center_subtitle_x=428
 
@@ -439,6 +479,8 @@ yui_tenkousei=SUBTITLE_N(yui_tenkousei,"’†‰›“®‰æ•”",center_subtitle_x,cm_subtitl
 
 
 yuruyuri_season_02_tv_01_title_call_mtv_version++last++yui_tenkousei++BlankClip(last,length=24,color=color_black)
+
+""")
 
 ######## Post Processing ########
 
