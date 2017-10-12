@@ -26,16 +26,18 @@ Import("..\..\..\avsi4comp\avsi4comp.avsi")
 
 iris_no_atelier_grand_fantasm_op_360p=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.360p.mp4",fpsnum=30000,fpsden=1001)),48000)
 
-iris_no_atelier_grand_fantasm_op_video=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1))
+iris_no_atelier_grand_fantasm_op_video=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm_OPENING.DASH-480p.mp4",fpsnum=30000,fpsden=1001,threads=1,seekmode=-1))
 iris_no_atelier_grand_fantasm_op=AudioDub(iris_no_atelier_grand_fantasm_op_video,iris_no_atelier_grand_fantasm_op_360p)
 
 iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=SSRC(ConvertToYUY2(FFMS2_VIDEO_SOURCE("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.360p.mp4")),48000)
 iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p=DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(DeleteFrame(iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p,6000),5001),4003),3001),2002),1001)
 
-iris_no_atelier_grand_fantasm_web_pv_01_youtube_video=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1),interlaced=true)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_path="src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4"
+
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_video=ConvertToYUY2(FFVideoSource(iris_no_atelier_grand_fantasm_web_pv_01_youtube_path,fpsnum=30000,fpsden=1001,threads=1,seekmode=-1),interlaced=true)
 iris_no_atelier_grand_fantasm_web_pv_01_youtube=AudioDub(iris_no_atelier_grand_fantasm_web_pv_01_youtube_video,iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p)
 
-iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02=ConvertToYUY2(FFVideoSource("src\iris_no_atelier-grand_fantasm-movie\youtube\Atelier Iris Grand Fantasm(PV) イリスのアトリエ グランファンタズム.DASH-480p.mp4",fpsnum=30000,fpsden=1001,seekmode=-1),interlaced=true)
+iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02=ConvertToYUY2(FFVideoSource(iris_no_atelier_grand_fantasm_web_pv_01_youtube_path,fpsnum=30000,fpsden=1001,threads=1,seekmode=-1),interlaced=true)
 iris_no_atelier_grand_fantasm_web_pv_01_youtube_cache02=AudioDub(iris_no_atelier_grand_fantasm_web_pv_01_youtube_video_cache02,iris_no_atelier_grand_fantasm_web_pv_01_youtube_360p)
 
 ######## Official Web (320*240) ########
