@@ -1,0 +1,58 @@
+################################################################################
+#
+# avsi4comp - A set of AviSynth functions to help video compositing and editing
+# Copyright (C) 2010-present Himawari Tachibana <fieliapm@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
+
+
+Import("..\..\avsi4comp\avsi4comp.avsi")
+
+Import("dennou_coil-tv-common.avsi")
+
+LoadPlugin("..\plugins\medianblur.dll")
+
+LoadPlugin("..\plugins\MaskTools.dll")
+
+function DENSUKE_MATTE(clip clip){
+	radius=2
+	
+	left=830
+	top=740
+	right=1440-1090
+	bottom=1080-950
+
+	clip_median_blured=MedianBlur(clip,radiusy=radius,radiusu=radius,radiusv=radius)
+	mask=ConvertToYV12(ShowAlpha(ColorKeyMask(ConvertToRGB32(clip_median_blured),$918f8d,17)))
+	mask=AddBorders(Crop(mask,left,top,-right,-bottom),left,top,right,bottom)
+
+	mask_convexed=Inpand(Inpand(Inpand(Inpand(Inpand(Inpand(Inpand(Expand(Expand(Expand(Expand(Expand(Expand(Expand(mask))))))))))))))
+
+	return Mask(ConvertToRGB32(clip),ConvertToRGB32(mask_convexed))
+}
+
+######## Pre Combine ########
+
+dennou_coil_tv_clean_ed_densuke_walk_interval=Trim(dennou_coil_tv_clean_ed,0,23)
+
+######## Combine ########
+
+DENSUKE_MATTE(dennou_coil_tv_clean_ed_densuke_walk_interval)
+
+######## Post Processing ########
+
+ImageWriter(file="I:\mtv\avsi4comp\example\dennou_coil\src\densuke\densuke_walk_interval_",type="png")
