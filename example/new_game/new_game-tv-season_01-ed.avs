@@ -28,14 +28,14 @@ Import("..\..\avsi4comp\avsi4comp.avsi")
 
 ### inherit end ###
 
-Import("new_game-tv-common.avsi")
+Import("new_game-tv-season_01-common.avsi")
 
 ######## Function ########
 
 function ROTATE_CG(clip cg,float center_x,float center_y,float angle_start,float angle_end,float scale){
 	cg_frame_count=Framecount(cg)
 
-	return ConvertToYV12(Zoom(ConvertToRGB32(cg),srcx=String(center_x),srcy=String(center_y),factor=String(scale),angle="Spline(n,0,"+String(angle_start)+","+String(cg_frame_count)+","+String(angle_end)+")"))
+	return ConvertToYV12(Zoom(ConvertToRGB32(cg,matrix="Rec709"),srcx=String(center_x),srcy=String(center_y),factor=String(scale),angle="Spline(n,0,"+String(angle_start)+","+String(cg_frame_count)+","+String(angle_end)+")"),matrix="Rec709")
 }
 
 function SCALE_CG(clip cg,float center_x,float center_y,float scale_start,float scale_end){
@@ -63,59 +63,59 @@ function FORWARD_REVERSE_LOOP_VIDEO(clip clip){
 fade_length=12
 
 pip_length=167+fade_length
-fairies_story_3_pip_01=TRIM_FIRST_CLIP(new_game_tv_08_game_event_sofia_meet_thieves_02,pip_length)
-fairies_story_3_pip_02=STILL_LAST_FRAME(new_game_tv_06_village_in_game,pip_length)
+fairies_story_3_pip_01=TRIM_FIRST_CLIP(new_game_tv_season_01_08_game_event_sofia_meet_thieves_02,pip_length)
+fairies_story_3_pip_02=STILL_LAST_FRAME(new_game_tv_season_01_06_village_in_game,pip_length)
 fairies_story_3_pip_01=ScriptClip(fairies_story_3_pip_01,"FAST_ZOOM(srcx=0.0,srcy=0.0,dstx=0.0,dsty=0.0+Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
 fairies_story_3_pip_02=ScriptClip(fairies_story_3_pip_02,"FAST_ZOOM(srcx=Width(fairies_story_3_pip_02),srcy=Height(fairies_story_3_pip_02),dstx=Width(fairies_story_3_pip_02),dsty=Height(fairies_story_3_pip_02)-Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
 fairies_story_3_pip=Overlay(fairies_story_3_pip_01,fairies_story_3_pip_02,mode="Add")
 fairies_story_3_pip=FrameEvaluate(fairies_story_3_pip,"OL_opacity_offset=Spline(current_frame,0,-1.0,39-fade_length,-1.0,39,0.0,Framecount()-1,0.0,cubic=false)")
 
-new_game_tv_04_rin_and_kou_lie_in_sauna_pre=new_game_tv_04_kou_ero+new_game_tv_04_rin_ero
-new_game_tv_04_rin_and_kou_lie_in_sauna_extend=new_game_tv_04_rin_and_kou_lie_in_sauna_pre+MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_04_rin_and_kou_lie_in_sauna,244-Framecount(new_game_tv_04_rin_and_kou_lie_in_sauna_pre)),0,-1,72.0,1.1)
+new_game_tv_season_01_04_rin_and_kou_lie_in_sauna_pre=new_game_tv_season_01_04_kou_ero+new_game_tv_season_01_04_rin_ero
+new_game_tv_season_01_04_rin_and_kou_lie_in_sauna_extend=new_game_tv_season_01_04_rin_and_kou_lie_in_sauna_pre+MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_season_01_04_rin_and_kou_lie_in_sauna,244-Framecount(new_game_tv_season_01_04_rin_and_kou_lie_in_sauna_pre)),0,-1,72.0,1.1)
 
 loop_join_length=6
-new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base=Trim(new_game_tv_12_aoba_catch_kou_s_hand_01,17,-(40+loop_join_length))
-new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base_cache02=Trim(new_game_tv_12_aoba_catch_kou_s_hand_01_cache02,17,-(40+loop_join_length))
-new_game_tv_12_aoba_catch_kou_s_hand_01_loop=Dissolve(new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base,new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base_cache02,new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base,new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base_cache02,new_game_tv_12_aoba_catch_kou_s_hand_01_loop_base,loop_join_length)
+new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base=Trim(new_game_tv_season_01_12_aoba_catch_kou_s_hand_01,17,-(40+loop_join_length))
+new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base_cache02=Trim(new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_cache02,17,-(40+loop_join_length))
+new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop=Dissolve(new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base,new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base_cache02,new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base,new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base_cache02,new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop_base,loop_join_length)
 
 ######## Combine ########
 
-# new_game_tv_clean_ed_01 17
-# new_game_tv_clean_ed_03 4853
-# new_game_tv_clean_ed_04 5504
+# new_game_tv_season_01_clean_ed_01 17
+# new_game_tv_season_01_clean_ed_03 4853
+# new_game_tv_season_01_clean_ed_04 5504
 
 
 
-new_game_tv_ed_t01=BlankClip(new_game_tv_clean_ed,length=17,color=color_black)+new_game_tv_clean_ed_01
+new_game_tv_season_01_ed_t01=BlankClip(new_game_tv_season_01_clean_ed,length=17,color=color_black)+new_game_tv_season_01_clean_ed_01
 
-new_game_tv_ed_t02=new_game_tv_clean_ed_02
-new_game_tv_ed_t03=TRIM_FIRST_CLIP(new_game_tv_04_rin_and_kou_lie_in_sauna_extend,244)+MOVE_CG(STILL_FIRST_FRAME(new_game_tv_09_yun_hajime_hifumi_aoba_after_bath,239),-1,0,128.0,1.1)
+new_game_tv_season_01_ed_t02=new_game_tv_season_01_clean_ed_02
+new_game_tv_season_01_ed_t03=TRIM_FIRST_CLIP(new_game_tv_season_01_04_rin_and_kou_lie_in_sauna_extend,244)+MOVE_CG(STILL_FIRST_FRAME(new_game_tv_season_01_09_yun_hajime_hifumi_aoba_after_bath,239),-1,0,128.0,1.1)
 
-new_game_tv_ed_t04=SCALE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_11_nene_kirakira,53,0)),239),960.0,360.0,1.3,1.0)
+new_game_tv_season_01_ed_t04=SCALE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_season_01_11_nene_kirakira,53,0)),239),960.0,360.0,1.3,1.0)
 
-new_game_tv_ed_t05=SCALE_CG(STILL_LAST_FRAME(new_game_tv_02_aoba_see_cocktail,238),320.0,360.0,1.0,1.3)+ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_11_kou_another_style_01,56,57)),239),640.0,360.0,-10.0,10.0,1.3)
-new_game_tv_ed_t06=MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_02_hifumi_sit_down,238),1,0,128.0,1.1)+MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_12_aoba_catch_kou_s_hand_01_loop,179),0,1,72.0,1.1)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_12_aoba_catch_kou_s_hand_02,0,92)),112),640.0,360.0,10.0,-10.0,1.3),fade_length)
-new_game_tv_ed_t07=MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_01_hifumi_hajime_yun_aoba_eat_dessert,245),1,0,128.0,1.1)+MOVE_CG(STILL_FRAME(new_game_tv_07_umiko_shoot_kou,47,239),-1,0,128.0,1.1)
+new_game_tv_season_01_ed_t05=SCALE_CG(STILL_LAST_FRAME(new_game_tv_season_01_02_aoba_see_cocktail,238),320.0,360.0,1.0,1.3)+ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_season_01_11_kou_another_style_01,56,57)),239),640.0,360.0,-10.0,10.0,1.3)
+new_game_tv_season_01_ed_t06=MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_season_01_02_hifumi_sit_down,238),1,0,128.0,1.1)+MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_season_01_12_aoba_catch_kou_s_hand_01_loop,179),0,1,72.0,1.1)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(ROTATE_CG(EXTEND_ANIMATION_CG(FORWARD_REVERSE_LOOP_VIDEO(Trim(new_game_tv_season_01_12_aoba_catch_kou_s_hand_02,0,92)),112),640.0,360.0,10.0,-10.0,1.3),fade_length)
+new_game_tv_season_01_ed_t07=MOVE_CG(TRIM_FIRST_CLIP(new_game_tv_season_01_01_hifumi_hajime_yun_aoba_eat_dessert,245),1,0,128.0,1.1)+MOVE_CG(STILL_FRAME(new_game_tv_season_01_07_umiko_shoot_kou,47,239),-1,0,128.0,1.1)
 
-new_game_tv_ed_t08=SCALE_CG(STILL_FIRST_FRAME(new_game_tv_01_aoba_twin_tail,239),320.0,360.0,1.3,1.0)
-new_game_tv_ed_t09=ROTATE_CG(TRIM_FIRST_CLIP(new_game_tv_06_aoba_watched_by_kou,119),640.0,360.0,-10.0,10.0,1.3)+TRIM_MIDDLE_CLIP(new_game_tv_05_rin_and_kou_in_photo_02,120)+MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_10_little_aoba_keep_nene_s_safe,178),0,-1,72.0,1.1)+SCALE_CG(STILL_LAST_FRAME(new_game_tv_08_rin_see_purin_and_smile,172),640.0,360.0,1.0,1.3)
+new_game_tv_season_01_ed_t08=SCALE_CG(STILL_FIRST_FRAME(new_game_tv_season_01_01_aoba_twin_tail,239),320.0,360.0,1.3,1.0)
+new_game_tv_season_01_ed_t09=ROTATE_CG(TRIM_FIRST_CLIP(new_game_tv_season_01_06_aoba_watched_by_kou,119),640.0,360.0,-10.0,10.0,1.3)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_05_rin_and_kou_in_photo_02,120)+MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_season_01_10_little_aoba_keep_nene_s_safe,178),0,-1,72.0,1.1)+SCALE_CG(STILL_LAST_FRAME(new_game_tv_season_01_08_rin_see_purin_and_smile,172),640.0,360.0,1.0,1.3)
 
-new_game_tv_ed_t10=MOVE_CG(STILL_FIRST_FRAME(new_game_tv_06_yun_play_game,246),0,1,72.0,1.1)+MOVE_CG(STILL_FRAME(new_game_tv_03_nene_lie_on_bed,91,112),1,0,128.0,1.1)+TRIM_FIRST_CLIP(new_game_tv_02_hifumi_excited,53)+TRIM_LAST_CLIP(new_game_tv_10_shizuku_loop_sweet_and_salty,22)+TRIM_MIDDLE_CLIP(new_game_tv_08_umiko_make_nene_nervous,22)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(new_game_tv_05_hajime_cry_and_run_away,23),fade_length)
-new_game_tv_ed_t11=Dissolve(new_game_tv_clean_ed_03,FADE_OUT_WITH_BRIGHTNESS_OFFSET(MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_03_aoba_sleeping,fade_length+131),-1,0,128.0,1.1),fade_length),fade_length)
-new_game_tv_ed_t12=Dissolve(TRIM_FIRST_CLIP(fairies_story_3_pip,167+fade_length),new_game_tv_clean_ed_04,fade_length)+BlankClip(new_game_tv_clean_ed,length=24*4,color=color_black)
+new_game_tv_season_01_ed_t10=MOVE_CG(STILL_FIRST_FRAME(new_game_tv_season_01_06_yun_play_game,246),0,1,72.0,1.1)+MOVE_CG(STILL_FRAME(new_game_tv_season_01_03_nene_lie_on_bed,91,112),1,0,128.0,1.1)+TRIM_FIRST_CLIP(new_game_tv_season_01_02_hifumi_excited,53)+TRIM_LAST_CLIP(new_game_tv_season_01_10_shizuku_loop_sweet_and_salty,22)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_08_umiko_make_nene_nervous,22)+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(new_game_tv_season_01_05_hajime_cry_and_run_away,23),fade_length)
+new_game_tv_season_01_ed_t11=Dissolve(new_game_tv_season_01_clean_ed_03,FADE_OUT_WITH_BRIGHTNESS_OFFSET(MOVE_CG(STILL_MIDDLE_FRAME(new_game_tv_season_01_03_aoba_sleeping,fade_length+131),-1,0,128.0,1.1),fade_length),fade_length)
+new_game_tv_season_01_ed_t12=Dissolve(TRIM_FIRST_CLIP(fairies_story_3_pip,167+fade_length),new_game_tv_season_01_clean_ed_04,fade_length)+BlankClip(new_game_tv_season_01_clean_ed,length=24*4,color=color_black)
 
 
 
-new_game_tv_ed_mute=new_game_tv_ed_t01 \
-	+new_game_tv_ed_t02+new_game_tv_ed_t03 \
-	+new_game_tv_ed_t04 \
-	+new_game_tv_ed_t05+new_game_tv_ed_t06+new_game_tv_ed_t07 \
-	+new_game_tv_ed_t08+new_game_tv_ed_t09 \
-	+new_game_tv_ed_t10+new_game_tv_ed_t11+new_game_tv_ed_t12
+new_game_tv_season_01_ed_mute=new_game_tv_season_01_ed_t01 \
+	+new_game_tv_season_01_ed_t02+new_game_tv_season_01_ed_t03 \
+	+new_game_tv_season_01_ed_t04 \
+	+new_game_tv_season_01_ed_t05+new_game_tv_season_01_ed_t06+new_game_tv_season_01_ed_t07 \
+	+new_game_tv_season_01_ed_t08+new_game_tv_season_01_ed_t09 \
+	+new_game_tv_season_01_ed_t10+new_game_tv_season_01_ed_t11+new_game_tv_season_01_ed_t12
 
-new_game_tv_ed_mute
+new_game_tv_season_01_ed_mute
 
-### export clip: new_game_tv_ed_mute
+### export clip: new_game_tv_season_01_ed_mute
 
 ### prefetch: 5,2
 
@@ -163,7 +163,7 @@ function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int 
 
 ### inherit end ###
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("日曜日が少し物足りないワケ",subtitle_x,subtitle_y-subtitle_size,328,448)
 SUBTITLE_FX("一番星、キラキラ光って気付いた",subtitle_x,subtitle_y,448,567)
@@ -190,7 +190,7 @@ SUBTITLE_FX("Now Loading… ",subtitle_x,subtitle_y,1737,1765)
 SUBTITLE_FX("              Now Loading…",subtitle_x,subtitle_y,1760,1786)
 SUBTITLE_FX("                            Now Loading…",subtitle_x,subtitle_y,1781,1831)
 
-### pass clip: new_game_tv_ed_mute
+### pass clip: new_game_tv_season_01_ed_mute
 
 ### prefetch: 5,2
 
@@ -220,7 +220,7 @@ SUBTITLE_FX("Now Loading…",subtitle_x,subtitle_y,3467,3494)
 SUBTITLE_FX("              Now Loading…",subtitle_x,subtitle_y,3489,3516)
 SUBTITLE_FX("                            Now Loading…",subtitle_x,subtitle_y,3511,3554)
 
-### pass clip: new_game_tv_ed_mute
+### pass clip: new_game_tv_season_01_ed_mute
 
 ### prefetch: 5,2
 
@@ -244,7 +244,7 @@ SUBTITLE_FX("Now Loading…",subtitle_x,subtitle_y,4778,4806)
 SUBTITLE_FX("              Now Loading…",subtitle_x,subtitle_y,4801,4828)
 SUBTITLE_FX("                            Now Complete!",subtitle_x,subtitle_y,4823,4853)
 
-### pass clip: new_game_tv_ed_mute
+### pass clip: new_game_tv_season_01_ed_mute
 
 ### prefetch: 5,2
 
@@ -269,19 +269,19 @@ SUBTITLE_FX("|||     寫程式編輯影音的遊戲程式設計師",subtitle_x,subtitle_x,5695,
 
 ######## Preface ########
 
-Import("new_game-tv-common-cross_process.avsi")
+Import("new_game-tv-season_01-common-cross_process.avsi")
 
-kyou_mo_ichinichi_ganbaruzoi_audio=FadeIn0(FadeOut0(Normalize(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full),3),3)
-kyou_mo_ichinichi_ganbaruzoi=AudioDub(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full,kyou_mo_ichinichi_ganbaruzoi_audio)
+kyou_mo_ichinichi_ganbaruzoi_audio=FadeIn0(FadeOut0(Normalize(new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full),3),3)
+kyou_mo_ichinichi_ganbaruzoi=AudioDub(new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full,kyou_mo_ichinichi_ganbaruzoi_audio)
 
-kyou_mo_ichinichi_ganbaruzoi=ConvertToRGB32(kyou_mo_ichinichi_ganbaruzoi)
+kyou_mo_ichinichi_ganbaruzoi=ConvertToRGB32(kyou_mo_ichinichi_ganbaruzoi,matrix="Rec709")
 kyou_mo_ichinichi_ganbaruzoi=SUBTITLE_N(kyou_mo_ichinichi_ganbaruzoi,"今日も一日がんばるぞい",y=Round(subtitle_y),first_frame=107,last_frame=158)
 
 ######## Thumbnail ########
 
 is_thumbnail=false
 
-is_thumbnail?ConvertToRGB32(new_game_tv_ed_mute):last
+is_thumbnail?ConvertToRGB32(new_game_tv_season_01_ed_mute,matrix="Rec709"):last
 
 ######## Music ########
 
@@ -304,8 +304,8 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
 
 TCPServer()
