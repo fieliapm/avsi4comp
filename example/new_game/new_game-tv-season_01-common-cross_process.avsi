@@ -22,14 +22,10 @@
 
 ######## TV (1920*1080) ########
 
-new_game_tv_04=FFMS2_VIDEO_SOURCE("src\anime\(2016Q3) NEW GAME! 第04話 「はじめての給料・・・！」 (AT-X 1280x720 x264 AAC).mp4")
-new_game_tv_11=FFMS2_VIDEO_SOURCE("src\anime\(2016Q3) NEW GAME! 第11話 「リーク画像が昨日、ネットに出てましたよ！」 (AT-X 1280x720 x264 AAC).mp4")
-
-new_game_tv_11_fairies_story_3_op_trademark=Trim(new_game_tv_11,3393,3499)
-new_game_tv_11_fairies_story_3_op=Trim(new_game_tv_11,3500,5658)
+new_game_tv_season_01_04=FFMS2_VIDEO_SOURCE("src\anime\season_01\(2016Q3) NEW GAME! 第04話 「はじめての給料・・・！」 (AT-X 1280x720 x264 AAC).mp4")
 
 ######## Trim ########
 
-new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_extra=Trim(new_game_tv_04,13941,14210) #270
-new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full=Trim(new_game_tv_04,13941,14107) #167 op
-new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_thumb=Trim(new_game_tv_04,14048,14107) #60
+new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_extra=Trim(new_game_tv_season_01_04,13941,14210) #270
+new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full=Trim(new_game_tv_season_01_04,13941,14107) #167 op
+new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_thumb=Trim(new_game_tv_season_01_04,14048,14107) #60

@@ -26,7 +26,7 @@ MP_Pipeline("""
 
 Import("..\..\avsi4comp\avsi4comp.avsi")
 
-Import("new_game-tv-common-cross_process.avsi")
+Import("new_game-tv-season_01-common-cross_process-11-op.avsi")
 
 ### inherit end ###
 
@@ -34,19 +34,19 @@ Import("new_game-tv-common-cross_process.avsi")
 
 ######## Combine ########
 
-# new_game_tv_11_fairies_story_3_op 0
+# new_game_tv_season_01_11_fairies_story_3_op 0
 
 
 
-new_game_tv_11_op_t01=new_game_tv_11_fairies_story_3_op
+new_game_tv_season_01_11_op_t01=new_game_tv_season_01_11_fairies_story_3_op
 
 
 
-new_game_tv_11_op_mute=new_game_tv_11_op_t01
+new_game_tv_season_01_11_op_mute=new_game_tv_season_01_11_op_t01
 
-new_game_tv_11_op_mute
+new_game_tv_season_01_11_op_mute
 
-### export clip: new_game_tv_11_op_mute
+### export clip: new_game_tv_season_01_11_op_mute
 
 ### prefetch: 5,2
 
@@ -80,7 +80,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 ### inherit end ###
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("·ßåâÇ™èµÇ≠ÇŸÇÁ",subtitle_x,subtitle_y-subtitle_size,382,470)
 SUBTITLE_FX("èIÇÌÇËÇÃâÄ",subtitle_x,subtitle_y,475,551)
@@ -110,11 +110,11 @@ SUBTITLE_FX("ãFÇËÇÃâH//en|- by fielia@AVISynth",subtitle_x,subtitle_x,1950,2100,
 
 is_thumbnail=false
 
-is_thumbnail?new_game_tv_11_op_mute:last
+is_thumbnail?new_game_tv_season_01_11_op_mute:last
 
 ######## Music ########
 
-bgm_48khz=Normalize(new_game_tv_11_fairies_story_3_op)
+bgm_48khz=Normalize(new_game_tv_season_01_11_fairies_story_3_op)
 AudioDub(bgm_48khz)
 
 
@@ -123,7 +123,7 @@ thumbnail=Trim(1285,-24*5)
 
 
 
-new_game_tv_11_fairies_story_3_op_trademark++ConvertToYV12()
+ConvertToRGB32(new_game_tv_season_01_11_fairies_story_3_op_trademark,matrix="Rec709")++last
 
 
 
@@ -133,8 +133,8 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
 
 TCPServer(22051)

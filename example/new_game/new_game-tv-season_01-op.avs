@@ -28,15 +28,15 @@ Import("..\..\avsi4comp\avsi4comp.avsi")
 
 ### inherit end ###
 
-Import("new_game-tv-common.avsi")
+Import("new_game-tv-season_01-common.avsi")
 
 ######## Pre Combine ########
 
 fade_length=12
 
 pip_length=74
-fairies_story_3_pip_01=TRIM_FIRST_CLIP(new_game_tv_07_modeling_sofia,pip_length)
-fairies_story_3_pip_02=TRIM_LAST_CLIP(new_game_tv_08_game_event_sofia_meet_thieves_01,pip_length)
+fairies_story_3_pip_01=TRIM_FIRST_CLIP(new_game_tv_season_01_07_modeling_sofia,pip_length)
+fairies_story_3_pip_02=TRIM_LAST_CLIP(new_game_tv_season_01_08_game_event_sofia_meet_thieves_01,pip_length)
 fairies_story_3_pip_01=ScriptClip(fairies_story_3_pip_01,"FAST_ZOOM(srcx=0.0,srcy=0.0,dstx=0.0,dsty=0.0+Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
 fairies_story_3_pip_02=ScriptClip(fairies_story_3_pip_02,"FAST_ZOOM(srcx=Width(fairies_story_3_pip_02),srcy=Height(fairies_story_3_pip_02),dstx=Width(fairies_story_3_pip_02),dsty=Height(fairies_story_3_pip_02)-Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
 fairies_story_3_pip=Overlay(fairies_story_3_pip_01,fairies_story_3_pip_02,mode="Add")
@@ -44,47 +44,47 @@ fairies_story_3_pip=FrameEvaluate(fairies_story_3_pip,"OL_opacity_offset=Spline(
 
 ######## Combine ########
 
-# new_game_tv_clean_op_01 17
-# new_game_tv_clean_op_04 2626
-# new_game_tv_clean_op_05 4504
-# new_game_tv_clean_op_06 5269
+# new_game_tv_season_01_clean_op_01 17
+# new_game_tv_season_01_clean_op_04 2626
+# new_game_tv_season_01_clean_op_05 4504
+# new_game_tv_season_01_clean_op_06 5269
 
 
 
-new_game_tv_op_t01=BlankClip(new_game_tv_clean_op,length=17,color=color_black)+new_game_tv_clean_op_01+new_game_tv_clean_op_02
+new_game_tv_season_01_op_t01=BlankClip(new_game_tv_season_01_clean_op,length=17,color=color_black)+new_game_tv_season_01_clean_op_01+new_game_tv_season_01_clean_op_02
 
-new_game_tv_op_t02=new_game_tv_clean_op_03
-new_game_tv_op_t03=TRIM_MIDDLE_CLIP(new_game_tv_11_hifumi_cosplay,69)+TRIM_MIDDLE_CLIP(new_game_tv_03_yun_stretch_out_hand,70)+TRIM_LAST_CLIP(new_game_tv_09_nene_imitate_dandy,69)+TRIM_LAST_CLIP(new_game_tv_07_yun_happy,70)+TRIM_MIDDLE_CLIP(new_game_tv_05_hajime_nyan,65) \
-new_game_tv_op_t04=TRIM_FIRST_CLIP(new_game_tv_02_hifumi_aoba_yun_hajime_eat_afternoon_tea,70)+TRIM_FIRST_CLIP(new_game_tv_11_kou_another_style_talk,70)+TRIM_MIDDLE_CLIP(new_game_tv_10_aoba_run_in_train,70)+TRIM_LAST_CLIP(new_game_tv_02_shizuku_catch_cat_s_hand_and_wave,69) \
-	+TRIM_LAST_CLIP(new_game_tv_05_rin_angry,70)+TRIM_LAST_CLIP(new_game_tv_01_hajime_research_character_action,70)+TRIM_MIDDLE_CLIP(new_game_tv_02_hifumi_take_money_01,70)+TRIM_LAST_CLIP(new_game_tv_07_nene_lie_on_bed,74)
+new_game_tv_season_01_op_t02=new_game_tv_season_01_clean_op_03
+new_game_tv_season_01_op_t03=TRIM_MIDDLE_CLIP(new_game_tv_season_01_11_hifumi_cosplay,69)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_03_yun_stretch_out_hand,70)+TRIM_LAST_CLIP(new_game_tv_season_01_09_nene_imitate_dandy,69)+TRIM_LAST_CLIP(new_game_tv_season_01_07_yun_happy,70)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_05_hajime_nyan,65) \
+new_game_tv_season_01_op_t04=TRIM_FIRST_CLIP(new_game_tv_season_01_02_hifumi_aoba_yun_hajime_eat_afternoon_tea,70)+TRIM_FIRST_CLIP(new_game_tv_season_01_11_kou_another_style_talk,70)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_10_aoba_run_in_train,70)+TRIM_LAST_CLIP(new_game_tv_season_01_02_shizuku_catch_cat_s_hand_and_wave,69) \
+	+TRIM_LAST_CLIP(new_game_tv_season_01_05_rin_angry,70)+TRIM_LAST_CLIP(new_game_tv_season_01_01_hajime_research_character_action,70)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_02_hifumi_take_money_01,70)+TRIM_LAST_CLIP(new_game_tv_season_01_07_nene_lie_on_bed,74)
 
-new_game_tv_op_t05=TRIM_MIDDLE_CLIP(new_game_tv_02_rin_is_drunk,139)+TRIM_LAST_CLIP(new_game_tv_01_aoba_meet_kou,140)
+new_game_tv_season_01_op_t05=TRIM_MIDDLE_CLIP(new_game_tv_season_01_02_rin_is_drunk,139)+TRIM_LAST_CLIP(new_game_tv_season_01_01_aoba_meet_kou,140)
 
-new_game_tv_op_t06=TRIM_MIDDLE_CLIP(new_game_tv_08_nene_jump,69)+TRIM_MIDDLE_CLIP(new_game_tv_04_rin_and_kou_wear_pantie_only_and_lie,70)+TRIM_LAST_CLIP(new_game_tv_06_yun_take_care_of_sister_and_brother,70)+TRIM_FIRST_CLIP(new_game_tv_07_umiko_change_gun,71)
-new_game_tv_op_t07=new_game_tv_clean_op_04
-new_game_tv_op_t08=TRIM_FIRST_CLIP(new_game_tv_01_umiko_shoot_shizuku,69)+TRIM_MIDDLE_CLIP(new_game_tv_08_nene_watch_figure_and_kirakira,70)+TRIM_MIDDLE_CLIP(new_game_tv_04_hajime_show_lightsaber,70)+TRIM_FIRST_CLIP(new_game_tv_12_karen_cosplay_03,69) \
-	+TRIM_LAST_CLIP(new_game_tv_06_kou_stand_after_wall,70)+TRIM_LAST_CLIP(new_game_tv_09_yun_love_love,70)+TRIM_LAST_CLIP(new_game_tv_10_umiko_and_tired_programmer,69)+TRIM_MIDDLE_CLIP(new_game_tv_08_shizuku_take_photo_with_nene_and_aoba_02,74)
+new_game_tv_season_01_op_t06=TRIM_MIDDLE_CLIP(new_game_tv_season_01_08_nene_jump,69)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_04_rin_and_kou_wear_pantie_only_and_lie,70)+TRIM_LAST_CLIP(new_game_tv_season_01_06_yun_take_care_of_sister_and_brother,70)+TRIM_FIRST_CLIP(new_game_tv_season_01_07_umiko_change_gun,71)
+new_game_tv_season_01_op_t07=new_game_tv_season_01_clean_op_04
+new_game_tv_season_01_op_t08=TRIM_FIRST_CLIP(new_game_tv_season_01_01_umiko_shoot_shizuku,69)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_08_nene_watch_figure_and_kirakira,70)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_04_hajime_show_lightsaber,70)+TRIM_FIRST_CLIP(new_game_tv_season_01_12_karen_cosplay_03,69) \
+	+TRIM_LAST_CLIP(new_game_tv_season_01_06_kou_stand_after_wall,70)+TRIM_LAST_CLIP(new_game_tv_season_01_09_yun_love_love,70)+TRIM_LAST_CLIP(new_game_tv_season_01_10_umiko_and_tired_programmer,69)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_08_shizuku_take_photo_with_nene_and_aoba_02,74)
 
-new_game_tv_op_t09=TRIM_FIRST_CLIP(new_game_tv_03_aoba_s_leg,139)+TRIM_MIDDLE_CLIP(new_game_tv_09_hifumi_take_shower_01,140)
-new_game_tv_op_t10=TRIM_LAST_CLIP(new_game_tv_09_hajime_research_character_action,66)+TRIM_MIDDLE_CLIP(new_game_tv_10_demon_aoba,74)+TRIM_MIDDLE_CLIP(new_game_tv_06_aoba_strip_clothes_02,65)+TRIM_MIDDLE_CLIP(new_game_tv_12_seiyuu_demo_magical_girl,70)+TRIM_MIDDLE_CLIP(new_game_tv_04_rin_wear_pantie_only,70)
+new_game_tv_season_01_op_t09=TRIM_FIRST_CLIP(new_game_tv_season_01_03_aoba_s_leg,139)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_09_hifumi_take_shower_01,140)
+new_game_tv_season_01_op_t10=TRIM_LAST_CLIP(new_game_tv_season_01_09_hajime_research_character_action,66)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_10_demon_aoba,74)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_06_aoba_strip_clothes_02,65)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_12_seiyuu_demo_magical_girl,70)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_04_rin_wear_pantie_only,70)
 
-new_game_tv_op_t11=TRIM_MIDDLE_CLIP(new_game_tv_11_tgs_makuhari_messe_outside,35)+TRIM_MIDDLE_CLIP(new_game_tv_11_tgs_makuhari_messe_inside_01,35)+TRIM_MIDDLE_CLIP(new_game_tv_12_kou_see_upside,70)+TRIM_MIDDLE_CLIP(new_game_tv_10_aoba_watch_nene_fly,73)+TRIM_LAST_CLIP(new_game_tv_03_yun_catch_aoba_s_hand,70)+TRIM_LAST_CLIP(new_game_tv_06_magical_girl_transform,66)
-new_game_tv_op_t12=Dissolve(new_game_tv_clean_op_05,FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(new_game_tv_12_kou_and_aoba_watch_fairies_story_3_poster,fade_length+76),fade_length),fade_length)
-new_game_tv_op_t13=TRIM_FIRST_CLIP(new_game_tv_05_tweak_animation,66)+TRIM_FIRST_CLIP(fairies_story_3_pip,74) \
-	+Dissolve(TRIM_LAST_CLIP(new_game_tv_01_sakura_night,63+fade_length),new_game_tv_clean_op_06,fade_length)+BlankClip(new_game_tv_clean_op,length=24*5,color=color_black)
+new_game_tv_season_01_op_t11=TRIM_MIDDLE_CLIP(new_game_tv_season_01_11_tgs_makuhari_messe_outside,35)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_11_tgs_makuhari_messe_inside_01,35)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_12_kou_see_upside,70)+TRIM_MIDDLE_CLIP(new_game_tv_season_01_10_aoba_watch_nene_fly,73)+TRIM_LAST_CLIP(new_game_tv_season_01_03_yun_catch_aoba_s_hand,70)+TRIM_LAST_CLIP(new_game_tv_season_01_06_magical_girl_transform,66)
+new_game_tv_season_01_op_t12=Dissolve(new_game_tv_season_01_clean_op_05,FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(new_game_tv_season_01_12_kou_and_aoba_watch_fairies_story_3_poster,fade_length+76),fade_length),fade_length)
+new_game_tv_season_01_op_t13=TRIM_FIRST_CLIP(new_game_tv_season_01_05_tweak_animation,66)+TRIM_FIRST_CLIP(fairies_story_3_pip,74) \
+	+Dissolve(TRIM_LAST_CLIP(new_game_tv_season_01_01_sakura_night,63+fade_length),new_game_tv_season_01_clean_op_06,fade_length)+BlankClip(new_game_tv_season_01_clean_op,length=24*5,color=color_black)
 
 
 
-new_game_tv_op_mute=new_game_tv_op_t01 \
-	+new_game_tv_op_t02+new_game_tv_op_t03+new_game_tv_op_t04 \
-	+new_game_tv_op_t05 \
-	+new_game_tv_op_t06+new_game_tv_op_t07+new_game_tv_op_t08 \
-	+new_game_tv_op_t09+new_game_tv_op_t10 \
-	+new_game_tv_op_t11+new_game_tv_op_t12+new_game_tv_op_t13
+new_game_tv_season_01_op_mute=new_game_tv_season_01_op_t01 \
+	+new_game_tv_season_01_op_t02+new_game_tv_season_01_op_t03+new_game_tv_season_01_op_t04 \
+	+new_game_tv_season_01_op_t05 \
+	+new_game_tv_season_01_op_t06+new_game_tv_season_01_op_t07+new_game_tv_season_01_op_t08 \
+	+new_game_tv_season_01_op_t09+new_game_tv_season_01_op_t10 \
+	+new_game_tv_season_01_op_t11+new_game_tv_season_01_op_t12+new_game_tv_season_01_op_t13
 
-new_game_tv_op_mute
+new_game_tv_season_01_op_mute
 
-### export clip: new_game_tv_op_mute
+### export clip: new_game_tv_season_01_op_mute
 
 ### prefetch: 5,2
 
@@ -132,7 +132,7 @@ function SUBTITLE_N(clip clip,string text,int "x",int "y",int "first_frame",int 
 
 ### inherit end ###
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("ÇﬂÇÆÇËÇﬂÇÆÇ¡ÇƒEveryone",subtitle_x,subtitle_y-subtitle_size,312,383)
 SUBTITLE_FX("âΩÇ©Ç™ë“Ç¡ÇƒÇ¢ÇÈÇÃÇ©Ç»?",subtitle_x,subtitle_y,382,451)
@@ -158,7 +158,7 @@ SUBTITLE_FX("óEãCÇÇ‡Ç¡Ç∆íÕÇÒÇæÇÁ",subtitle_x,subtitle_y,1847,1915)
 SUBTITLE_FX("èŒäÁÇÇ¨Ç„Ç¡Ç∆ãlÇﬂçûÇÒÇ≈",subtitle_x,subtitle_y-subtitle_size,1917,1986)
 SUBTITLE_FX("îMÇ¢ÉLÉÇÉ`Ç≈ÇÃÇ¡ÇƒÇ¢Ç±Ç§!",subtitle_x,subtitle_y,1987,2058)
 
-### pass clip: new_game_tv_op_mute
+### pass clip: new_game_tv_season_01_op_mute
 
 ### prefetch: 5,2
 
@@ -183,7 +183,7 @@ SUBTITLE_FX("ê¬Ç¢ãGêﬂÇÕãPÇ¢Çƒ",subtitle_x,subtitle_y,3312,3380)
 SUBTITLE_FX("ÇÌÇ≠ÇÌÇ≠Ç™àÏÇÍÇƒÇ≠ÇÊ",subtitle_x,subtitle_y-subtitle_size,3381,3451)
 SUBTITLE_FX("å¿äEìhÇËë÷Ç¶ÇƒÇ¢Ç±Ç§!",subtitle_x,subtitle_y,3451,3522)
 
-### pass clip: new_game_tv_op_mute
+### pass clip: new_game_tv_season_01_op_mute
 
 ### prefetch: 5,2
 
@@ -209,19 +209,19 @@ SUBTITLE_FX("|||     õçíˆéÆï“èSâeâπìIóVùEíˆéÆê›åvét",subtitle_x,subtitle_x,5270,
 
 ######## Preface ########
 
-Import("new_game-tv-common-cross_process.avsi")
+Import("new_game-tv-season_01-common-cross_process.avsi")
 
-kyou_mo_ichinichi_ganbaruzoi_audio=FadeIn0(FadeOut0(Normalize(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full),3),3)
-kyou_mo_ichinichi_ganbaruzoi=AudioDub(new_game_tv_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full,kyou_mo_ichinichi_ganbaruzoi_audio)
+kyou_mo_ichinichi_ganbaruzoi_audio=FadeIn0(FadeOut0(Normalize(new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full),3),3)
+kyou_mo_ichinichi_ganbaruzoi=AudioDub(new_game_tv_season_01_04_aoba_kyou_mo_ichinichi_ganbaruzoi_full,kyou_mo_ichinichi_ganbaruzoi_audio)
 
-kyou_mo_ichinichi_ganbaruzoi=ConvertToRGB32(kyou_mo_ichinichi_ganbaruzoi)
+kyou_mo_ichinichi_ganbaruzoi=ConvertToRGB32(kyou_mo_ichinichi_ganbaruzoi,matrix="Rec709")
 kyou_mo_ichinichi_ganbaruzoi=SUBTITLE_N(kyou_mo_ichinichi_ganbaruzoi,"ç°ì˙Ç‡àÍì˙Ç™ÇÒÇŒÇÈÇºÇ¢",y=Round(subtitle_y),first_frame=107,last_frame=158)
 
 ######## Thumbnail ########
 
 is_thumbnail=false
 
-is_thumbnail?ConvertToRGB32(new_game_tv_op_mute):last
+is_thumbnail?ConvertToRGB32(new_game_tv_season_01_op_mute,matrix="Rec709"):last
 
 ######## Music ########
 
@@ -245,8 +245,8 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
 
 TCPServer(22052)
