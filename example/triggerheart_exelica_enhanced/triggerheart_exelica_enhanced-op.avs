@@ -131,9 +131,9 @@ triggerheart_exelica_enhanced_ps2_op_05_06=is_deinterlace?CONVERT_24P_TO_60P_PAT
 triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,15,0)
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_pv_01_offset,triggerheart_exelica_xbla_game_review)
 
-triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32=ConvertToRGB32(triggerheart_exelica_enhanced_ps2_pv_overlay_bg)
-triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32=ConvertToRGB32(triggerheart_exelica_xbla_game_review_03)
-triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32=ConvertToRGB32(triggerheart_exelica_xbla_game_review_05)
+triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32=ConvertToRGB32(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,matrix="Rec601")
+triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32=ConvertToRGB32(triggerheart_exelica_xbla_game_review_03,matrix="Rec601")
+triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32=ConvertToRGB32(triggerheart_exelica_xbla_game_review_05,matrix="Rec601")
 
 overlay_bg_width=Width(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32)
 overlay_bg_height=Height(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32)
@@ -151,7 +151,7 @@ triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelic
 	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,overlay_fg_02_last_frame,45,cubic=false)", \
 	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,overlay_fg_02_last_frame,0.0,cubic=false)")
 
-triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32),190,390)
+triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,matrix="Rec601"),190,390)
 
 
 
@@ -236,7 +236,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_heavy",subtitle_random_char_func) # deinterlace
 }
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec601")
 
 SUBTITLE_FX("GRAVITY ERROR//ç âπ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)
 
@@ -289,8 +289,8 @@ SUBTITLE_FX("íÕÇﬂ! ï˙Çƒ! êSÇÃÉgÉäÉKÅ[Çà¯ÇØ!",subtitle_x,subtitle_y,8139,8317)
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
 
 #ConvertAudioTo8bit()
