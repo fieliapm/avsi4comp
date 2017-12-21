@@ -285,7 +285,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color,subtitle_mode)
 }
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("あーーーー",subtitle_x,subtitle_y-subtitle_size*2,24,86,is_denormal_kasi=true)
 SUBTITLE_FX("こい",subtitle_x,subtitle_y,100,252,true,is_denormal_kasi=true)
@@ -344,8 +344,14 @@ SUBTITLE_FX("迷わぬよう歩いていけるたったひとつの道標",subtitle_x,subtitle_y,707
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
 
 TCPServer()
