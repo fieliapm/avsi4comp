@@ -38,7 +38,7 @@ pip_length=74
 fairies_story_3_pip_01=TRIM_FIRST_CLIP(new_game_tv_season_01_07_modeling_sofia,pip_length)
 fairies_story_3_pip_02=TRIM_LAST_CLIP(new_game_tv_season_01_08_game_event_sofia_meet_thieves_01,pip_length)
 fairies_story_3_pip_01=ScriptClip(fairies_story_3_pip_01,"FAST_ZOOM(srcx=0.0,srcy=0.0,dstx=0.0,dsty=0.0+Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
-fairies_story_3_pip_02=ScriptClip(fairies_story_3_pip_02,"FAST_ZOOM(srcx=Width(fairies_story_3_pip_02),srcy=Height(fairies_story_3_pip_02),dstx=Width(fairies_story_3_pip_02),dsty=Height(fairies_story_3_pip_02)-Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
+fairies_story_3_pip_02=ScriptClip(fairies_story_3_pip_02,"FAST_ZOOM(srcx=Width(),srcy=Height(),dstx=Width(),dsty=Height()-Spline(current_frame,0,Height()/8.0,Framecount()-1,0.0,cubic=false),factor=0.6)")
 fairies_story_3_pip=Overlay(fairies_story_3_pip_01,fairies_story_3_pip_02,mode="Add")
 fairies_story_3_pip=FrameEvaluate(fairies_story_3_pip,"OL_opacity_offset=Spline(current_frame,0,-1.0,39-fade_length,-1.0,39,0.0,Framecount()-1,0.0,cubic=false)")
 
