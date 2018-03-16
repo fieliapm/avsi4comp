@@ -30,6 +30,35 @@ Import("..\..\..\avsi4comp\avsi4comp.avsi")
 
 ######## Function ########
 
+### inherit start ###
+
+splat_mask_source=ConvertToRGB32(FFMS2_VIDEO_SOURCE("src\mask\White Splat Transition 5.270p.mp4",fpsnum=30000,fpsden=1001),matrix="Rec601")
+splat_mask_stack=StackHorizontal(splat_mask_source,splat_mask_source,splat_mask_source,splat_mask_source)
+global splat_mask_template=StackVertical(splat_mask_stack,splat_mask_stack,splat_mask_stack,splat_mask_stack)
+
+function SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
+	before_start_frame=start_frame-front_fade_count
+	after_end_frame=end_frame+rear_fade_count
+
+	Assert(IsRGB32(clip),"SUBTITLE_FX_FADE_IN_FADE_OUT(): clip only support RGB32 format")
+
+	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+
+	splat_mask=RESIZE_TO_REF_CLIP(CLIP_SPEED(splat_mask_template,Float(Framecount(splat_mask_template))/Float(front_fade_count),true),subtitle_rgba)
+	splat_mask_extend=BlankClip(splat_mask,length=start_frame-Framecount(splat_mask),color=color_black)+splat_mask+BlankClip(splat_mask,length=Framecount(subtitle_rgba)-start_frame,color=color_white)
+	subtitle_alpha=ShowAlpha(subtitle_rgba)
+	subtitle_alpha_splat=Layer(subtitle_alpha,splat_mask_extend,"Mul")
+	subtitle_alpha_splat=OVERWRITE_RANGE(subtitle_alpha,subtitle_alpha_splat,before_start_frame,start_frame-1)
+	subtitle_rgba=Mask(subtitle_rgba,subtitle_alpha_splat)
+
+	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
+	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame-1)+",0.0,"+String(before_start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
+
+	return _SUBTITLE_FX_POST(clip,subtitle_rgba_faded,before_start_frame,after_end_frame)
+}
+
+### inherit end ###
+
 function SCALE_CG(clip cg,float center_x,float center_y,float scale_start,float scale_end){
 	cg_frame_count=Framecount(cg)
 
@@ -255,7 +284,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	y_offset=is_second?0:-subtitle_size*2
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y+y_offset),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
+	return SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip,text,Round(x),Round(y+y_offset),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
 
 ### inherit end ###
