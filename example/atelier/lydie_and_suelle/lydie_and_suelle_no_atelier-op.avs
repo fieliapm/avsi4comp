@@ -35,8 +35,8 @@ Import("..\..\..\avsi4comp\avsi4comp.avsi")
 LoadPlugin("..\..\plugins\MaskTools.dll")
 
 splat_mask_source=ConvertToRGB32(FFMS2_VIDEO_SOURCE("src\mask\White Splat Transition 5.270p.mp4",fpsnum=30000,fpsden=1001),matrix="Rec601")
-splat_mask_stack=StackHorizontal(splat_mask_source,splat_mask_source,splat_mask_source,splat_mask_source)
-global splat_mask_template=StackVertical(splat_mask_stack,splat_mask_stack,splat_mask_stack,splat_mask_stack)
+splat_mask_stack=StackHorizontal(splat_mask_source,FlipHorizontal(splat_mask_source),splat_mask_source,FlipHorizontal(splat_mask_source))
+global splat_mask_template=StackVertical(splat_mask_stack,FlipVertical(splat_mask_stack),splat_mask_stack,FlipVertical(splat_mask_stack))
 
 function SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",int "outside_halo_color",string "subtitle_mode"){
 	before_start_frame=start_frame-front_fade_count
