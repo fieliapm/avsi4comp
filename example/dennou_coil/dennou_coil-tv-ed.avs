@@ -108,9 +108,9 @@ dennou_coil_tv_ed_densuke_walk_bg=Dissolve(dennou_coil_tv_ed_t02,dennou_coil_tv_
 	dennou_coil_tv_ed_t05,dennou_coil_tv_ed_t06,dennou_coil_tv_ed_t07,dennou_coil_tv_ed_t08, \
 	dennou_coil_tv_ed_t09,dissolve_length_2)
 
-dennou_coil_tv_ed_densuke_walk_bg=ConvertToRGB32(dennou_coil_tv_ed_densuke_walk_bg)
-dennou_coil_tv_ed_t01_rgb=ConvertToRGB32(dennou_coil_tv_ed_t01)
-dennou_coil_tv_ed_t10_rgb=ConvertToRGB32(dennou_coil_tv_ed_t10)
+dennou_coil_tv_ed_densuke_walk_bg=ConvertToRGB32(dennou_coil_tv_ed_densuke_walk_bg,matrix="Rec709")
+dennou_coil_tv_ed_t01_rgb=ConvertToRGB32(dennou_coil_tv_ed_t01,matrix="Rec709")
+dennou_coil_tv_ed_t10_rgb=ConvertToRGB32(dennou_coil_tv_ed_t10,matrix="Rec709")
 
 
 
@@ -253,8 +253,14 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
 
 TCPServer()

@@ -37,12 +37,12 @@ function DENSUKE_MATTE(clip clip){
 	bottom=1080-950
 
 	clip_median_blured=MedianBlur(clip,radiusy=radius,radiusu=radius,radiusv=radius)
-	mask=ConvertToYV12(ShowAlpha(ColorKeyMask(ConvertToRGB32(clip_median_blured),$918f8d,17)))
+	mask=ConvertToYV12(ShowAlpha(ColorKeyMask(ConvertToRGB32(clip_median_blured,matrix="Rec709"),$918f8d,17)),matrix="Rec709")
 	mask=AddBorders(Crop(mask,left,top,-right,-bottom),left,top,right,bottom)
 
 	mask_convexed=Inpand(Inpand(Inpand(Inpand(Inpand(Inpand(Inpand(Expand(Expand(Expand(Expand(Expand(Expand(Expand(mask))))))))))))))
 
-	return Mask(ConvertToRGB32(clip),ConvertToRGB32(mask_convexed))
+	return Mask(ConvertToRGB32(clip,matrix="Rec709"),ConvertToRGB32(Greyscale(mask_convexed),matrix="Rec709"))
 }
 
 ######## Pre Combine ########
