@@ -32,23 +32,31 @@ Import("..\..\..\avsi4comp\avsi4comp.avsi")
 
 ### inherit start ###
 
+LoadPlugin("..\..\plugins\MaskTools.dll")
+
 splat_mask_source=ConvertToRGB32(FFMS2_VIDEO_SOURCE("src\mask\White Splat Transition 5.270p.mp4",fpsnum=30000,fpsden=1001),matrix="Rec601")
 splat_mask_stack=StackHorizontal(splat_mask_source,splat_mask_source,splat_mask_source,splat_mask_source)
 global splat_mask_template=StackVertical(splat_mask_stack,splat_mask_stack,splat_mask_stack,splat_mask_stack)
 
-function SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",string "subtitle_mode"){
+function SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",int "outside_halo_color",string "subtitle_mode"){
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
 	Assert(IsRGB32(clip),"SUBTITLE_FX_FADE_IN_FADE_OUT(): clip only support RGB32 format")
 
-	subtitle_rgba=_SUBTITLE_FX_PRE(clip,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	subtitle_rgb=_SUBTITLE_FX_PRE_OPAQUE(clip,outside_halo_color,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
+	subtitle_rgba=ColorKeyMask(ResetMask(subtitle_rgb),outside_halo_color,0)
+
+	subtitle_alpha=ConvertToYV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
+	subtitle_alpha=Expand(Expand(subtitle_alpha))
+	subtitle_alpha=ConvertToRGB32(Greyscale(subtitle_alpha),matrix="Rec709")
 
 	splat_mask=RESIZE_TO_REF_CLIP(CLIP_SPEED(splat_mask_template,Float(Framecount(splat_mask_template))/Float(front_fade_count),true),subtitle_rgba)
 	splat_mask_extend=BlankClip(splat_mask,length=start_frame-Framecount(splat_mask),color=color_black)+splat_mask+BlankClip(splat_mask,length=Framecount(subtitle_rgba)-start_frame,color=color_white)
-	subtitle_alpha=ShowAlpha(subtitle_rgba)
+
 	subtitle_alpha_splat=Layer(subtitle_alpha,splat_mask_extend,"Mul")
 	subtitle_alpha_splat=OVERWRITE_RANGE(subtitle_alpha,subtitle_alpha_splat,before_start_frame,start_frame-1)
+
 	subtitle_rgba=Mask(subtitle_rgba,subtitle_alpha_splat)
 
 	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
@@ -275,16 +283,17 @@ global subtitle_effects="b"
 global subtitle_size=32*2.25
 global subtitle_text_color=color_magenta
 global subtitle_halo_color=color_goldenrod
+global subtitle_outside_halo_color=color_black
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool is_second,bool "is_title"){
 	is_title=Default(is_title,false)
 
 	text_color=is_second?color_yellow:color_cyan
-	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$C0):text_color
+	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$FF):text_color
 
 	y_offset=is_second?0:-subtitle_size*2
 
-	return SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip,text,Round(x),Round(y+y_offset),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
+	return SUBTITLE_FX_SPLAT_IN_FADE_OUT(clip,text,Round(x),Round(y+y_offset),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,subtitle_outside_halo_color,"ex_thick_reduce_memory")
 }
 
 ### inherit end ###
