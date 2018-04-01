@@ -128,7 +128,7 @@ triggerheart_exelica_enhanced_ps2_op_05_06=is_deinterlace?CONVERT_24P_TO_60P_PAT
 
 
 
-triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,15,0)
+triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,10,0)
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_pv_01_offset,triggerheart_exelica_xbla_game_review)
 
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32=ConvertToRGB32(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,matrix="Rec601")
@@ -155,13 +155,13 @@ triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelic
 
 
 
-pre03_last_still_frame=51
+pre03_last_still_frame=47
 triggerheart_exelica_enhanced_ps2_op_03_still_frame_01=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,pre03_last_still_frame)
 triggerheart_exelica_enhanced_ps2_op_03_still_frame_02=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,pre03_last_still_frame/2)
 triggerheart_exelica_enhanced_ps2_op_03_still_frame_03=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,0)
 
 center_x=30
-center_y=-290
+center_y=-218
 function PRE03_SCALE_FACTOR(float x){
 	return Spline(x,0.0,1.0,3.0,0.758,cubic=false)
 }
@@ -180,8 +180,10 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 # triggerheart_exelica_enhanced_op_01_02       0       0
 # triggerheart_exelica_enhanced_op_03_04    3367    4209
 # triggerheart_exelica_enhanced_op_05_06    6044    7555
-#
-# triggerheart_exelica_enhanced_ps2_pv_01    -15
+
+#                                          at 30000/1001 fps
+#                                          absolute offset
+# triggerheart_exelica_enhanced_ps2_pv_01    1429    -10
 
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-triggerheart_exelica_enhanced_ps2_op_pre03_frame_count)
@@ -209,6 +211,8 @@ AudioDub(triggerheart_exelica_enhanced_op_mute,bgm_48khz_delayed)
 
 
 
+ConvertToRGB32(matrix="Rec601")
+
 thumbnail=Trim(4439*frame_index_scale,-30*5*frame_index_scale)
 
 ######## Subtitle ########
@@ -235,8 +239,6 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_RANDOM_STRING(clip,text,Round(x),Round(y),start_frame*frame_index_scale,end_frame*frame_index_scale,subtitle_front_fade_count*frame_index_scale,subtitle_rear_fade_count*frame_index_scale,subtitle_font,subtitle_effects,Round(subtitle_size),subtitle_text_color,halo_color,"ex_heavy",subtitle_random_char_func) # deinterlace
 }
-
-ConvertToRGB32(matrix="Rec601")
 
 SUBTITLE_FX("GRAVITY ERROR//ç âπ|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)
 
