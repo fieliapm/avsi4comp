@@ -78,7 +78,9 @@ triggerheart_exelica_enhanced_ps2_op=SSRC(ASSUME_23_976P(triggerheart_exelica_en
 ps2_wmv_fpsnum=30000
 ps2_wmv_fpsden=1001
 
-triggerheart_exelica_enhanced_ps2_pv=FFMS2_VIDEO_SOURCE("src\triggerheart_exelica-movie\ps2\mms\EXELICA_08COM.wmv",fpsnum=ps2_wmv_fpsnum,fpsden=ps2_wmv_fpsden)
+triggerheart_exelica_enhanced_ps2_pv_path="src\triggerheart_exelica-movie\ps2\mms\EXELICA_08COM.wmv"
+#triggerheart_exelica_enhanced_ps2_pv=ASSUME_29_97P(DirectShowSource(triggerheart_exelica_enhanced_ps2_pv_path,seekzero=true))
+triggerheart_exelica_enhanced_ps2_pv=FFMS2_VIDEO_SOURCE(triggerheart_exelica_enhanced_ps2_pv_path,fpsnum=ps2_wmv_fpsnum,fpsden=ps2_wmv_fpsden)
 
 ######## Trim ########
 
@@ -128,7 +130,7 @@ triggerheart_exelica_enhanced_ps2_op_05_06=is_deinterlace?CONVERT_24P_TO_60P_PAT
 
 
 
-triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,10,0)
+triggerheart_exelica_enhanced_ps2_pv_01_offset=Trim(triggerheart_exelica_enhanced_ps2_pv_01,12,0)
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_pv_01_offset,triggerheart_exelica_xbla_game_review)
 
 triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32=ConvertToRGB32(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,matrix="Rec601")
@@ -155,13 +157,13 @@ triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelic
 
 
 
-pre03_last_still_frame=47
+pre03_last_still_frame=49
 triggerheart_exelica_enhanced_ps2_op_03_still_frame_01=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,pre03_last_still_frame)
 triggerheart_exelica_enhanced_ps2_op_03_still_frame_02=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,pre03_last_still_frame/2)
 triggerheart_exelica_enhanced_ps2_op_03_still_frame_03=TRIM_ONE_FRAME(triggerheart_exelica_enhanced_ps2_op_03,0)
 
 center_x=30
-center_y=-218
+center_y=-247
 function PRE03_SCALE_FACTOR(float x){
 	return Spline(x,0.0,1.0,3.0,0.758,cubic=false)
 }
@@ -183,7 +185,7 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 
 #                                          at 30000/1001 fps
 #                                          absolute offset
-# triggerheart_exelica_enhanced_ps2_pv_01    1429    -10
+# triggerheart_exelica_enhanced_ps2_pv_01    1427    -12
 
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-triggerheart_exelica_enhanced_ps2_op_pre03_frame_count)
