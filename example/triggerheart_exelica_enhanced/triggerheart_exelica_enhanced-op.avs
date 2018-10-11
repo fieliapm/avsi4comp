@@ -224,7 +224,7 @@ global subtitle_clip_width=1280
 global subtitle_clip_height=720
 
 subtitle_x=50*1.5
-subtitle_y=395*1.5
+subtitle_y=393*1.5
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
