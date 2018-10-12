@@ -249,7 +249,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,subtitle_halo_color,subtitle_mode)
 }
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("リフレクト//さよならポニーテール|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,10248,10437,is_title=true)
 
@@ -296,8 +296,14 @@ SUBTITLE_FX("振り返る一瞬の刹那を抱いて　今日も走るのさ",subtitle_x,subtitle_y,9
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
 
 TCPServer()
