@@ -233,7 +233,7 @@ global subtitle_rear_fade_count=15
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
 global subtitle_size=32*2.25
-global subtitle_text_color=$1E90C0
+global subtitle_text_color=$20AFFF
 global subtitle_halo_color=color_white
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_furigana",bool "is_title"){
