@@ -142,18 +142,24 @@ overlay_bg_height=Height(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32)
 overlay_fg_01_last_frame=Framecount(triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32)-1
 overlay_fg_02_last_frame=Framecount(triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32)-1
 
-triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32,dstx="(1.0/4.0)*overlay_bg_width", \
-	dsty="Spline(n,0,(1.0/8.0)*overlay_bg_height,190,(1.0/8.0)*overlay_bg_height,240,(2.0/8.0)*overlay_bg_height,340,(4.0/8.0)*overlay_bg_height,390,(5.0/8.0)*overlay_bg_height,overlay_fg_01_last_frame,(5.0/8.0)*overlay_bg_height,cubic=false)", \
-	factor="Spline(n,0,0.3,190,0.3,240,0.5,340,0.5,390,0.7,overlay_fg_01_last_frame,0.7,cubic=false)", \
-	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,overlay_fg_01_last_frame,45,cubic=false)", \
-	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,overlay_fg_01_last_frame,0.0,cubic=false)")
-triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32,dstx="(3.0/4.0)*overlay_bg_width", \
-	dsty="Spline(n,0,(7.0/8.0)*overlay_bg_height,190,(7.0/8.0)*overlay_bg_height,240,(6.0/8.0)*overlay_bg_height,340,(4.0/8.0)*overlay_bg_height,390,(3.0/8.0)*overlay_bg_height,overlay_fg_02_last_frame,(3.0/8.0)*overlay_bg_height,cubic=false)", \
-	factor="Spline(n,0,0.3,190,0.3,240,0.5,340,0.5,390,0.7,overlay_fg_02_last_frame,0.7,cubic=false)", \
-	angle="Spline(n,0,0,190,0,240,0,340,0,390,45,overlay_fg_02_last_frame,45,cubic=false)", \
-	opacity="Spline(n,0,0.0,190,0.0,240,1.0,340,1.0,390,0.0,overlay_fg_02_last_frame,0.0,cubic=false)")
+# key frame: 1633 1682 1779 1828
+anim_fr1=194
+anim_fr2=243
+anim_fr3=340
+anim_fr4=389
 
-triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,matrix="Rec601"),190,390)
+triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_bg_rgb32,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_01_rgb32,dstx="(1.0/4.0)*overlay_bg_width", \
+	dsty="Spline(n,0,(1.0/8.0)*overlay_bg_height,anim_fr1,(1.0/8.0)*overlay_bg_height,anim_fr2,(2.0/8.0)*overlay_bg_height,anim_fr3,(4.0/8.0)*overlay_bg_height,anim_fr4,(5.0/8.0)*overlay_bg_height,overlay_fg_01_last_frame,(5.0/8.0)*overlay_bg_height,cubic=false)", \
+	factor="Spline(n,0,0.3,anim_fr1,0.3,anim_fr2,0.5,anim_fr3,0.5,anim_fr4,0.7,overlay_fg_01_last_frame,0.7,cubic=false)", \
+	angle="Spline(n,0,0.0,anim_fr1,0.0,anim_fr2,0.0,anim_fr3,0.0,anim_fr4,45.0,overlay_fg_01_last_frame,45.0,cubic=false)", \
+	opacity="Spline(n,0,0.0,anim_fr1,0.0,anim_fr2,1.0,anim_fr3,1.0,anim_fr4,0.0,overlay_fg_01_last_frame,0.0,cubic=false)")
+triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,triggerheart_exelica_enhanced_ps2_pv_overlay_fg_02_rgb32,dstx="(3.0/4.0)*overlay_bg_width", \
+	dsty="Spline(n,0,(7.0/8.0)*overlay_bg_height,anim_fr1,(7.0/8.0)*overlay_bg_height,anim_fr2,(6.0/8.0)*overlay_bg_height,anim_fr3,(4.0/8.0)*overlay_bg_height,anim_fr4,(3.0/8.0)*overlay_bg_height,overlay_fg_02_last_frame,(3.0/8.0)*overlay_bg_height,cubic=false)", \
+	factor="Spline(n,0,0.3,anim_fr1,0.3,anim_fr2,0.5,anim_fr3,0.5,anim_fr4,0.7,overlay_fg_02_last_frame,0.7,cubic=false)", \
+	angle="Spline(n,0,0.0,anim_fr1,0.0,anim_fr2,0.0,anim_fr3,0.0,anim_fr4,45.0,overlay_fg_02_last_frame,45.0,cubic=false)", \
+	opacity="Spline(n,0,0.0,anim_fr1,0.0,anim_fr2,1.0,anim_fr3,1.0,anim_fr4,0.0,overlay_fg_02_last_frame,0.0,cubic=false)")
+
+triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,matrix="Rec601"),anim_fr1,anim_fr4)
 
 
 
@@ -185,7 +191,7 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 
 #                                          at 30000/1001 fps
 #                                          absolute offset
-# triggerheart_exelica_enhanced_ps2_pv_01    1427    -12
+# triggerheart_exelica_enhanced_ps2_pv_01    1427     -12
 
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-triggerheart_exelica_enhanced_ps2_op_pre03_frame_count)
@@ -244,48 +250,48 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 SUBTITLE_FX("GRAVITY ERROR//彩音|- by fielia@AVISynth",subtitle_x,subtitle_y-subtitle_size,806,1001,true)
 
-SUBTITLE_FX("幾千光年の離れた星でも",subtitle_x,subtitle_y,206,407)
-SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,412,593)
+SUBTITLE_FX("幾千光年の離れた星でも",subtitle_x,subtitle_y,204,407)
+SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,410,593)
 
-SUBTITLE_FX("運命線飛び越えても どんな未来がまってる?",subtitle_x,subtitle_y,1036,1230)
-SUBTITLE_FX("そこが笑顔に溢れる 世界と言えるかな?",subtitle_x,subtitle_y,1231,1424)
+SUBTITLE_FX("運命線飛び越えても どんな未来がまってる?",subtitle_x,subtitle_y,1035,1227)
+SUBTITLE_FX("そこが笑顔に溢れる 世界と言えるかな?",subtitle_x,subtitle_y,1228,1424)
 
-SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1433,1622)
-SUBTITLE_FX("戦う事に 忘れかけた天使よ",subtitle_x,subtitle_y,1628,1812)
-SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1823,2013)
-SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2017,2185)
+SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1432,1622)
+SUBTITLE_FX("戦う事に 忘れかけた天使よ",subtitle_x,subtitle_y,1627,1814)
+SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1819,2013)
+SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2014,2185)
 
-SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,2193,2209)
-SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,2210,2399)
-SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,2405,2588)
-SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,2594,2981)
-SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,2982,3177)
-SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,3181,3360)
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,2190,2205)
+SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,2206,2399)
+SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,2404,2588)
+SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,2590,2980)
+SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,2981,3177)
+SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,3179,3360)
 
-SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3806,4000)
-SUBTITLE_FX("従うだけのハートが 誰かをキズつける",subtitle_x,subtitle_y,4002,4195)
+SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3803,3998)
+SUBTITLE_FX("従うだけのハートが 誰かをキズつける",subtitle_x,subtitle_y,3999,4194)
 
-SUBTITLE_FX("呑み込まれる 安らぎと呼べる日常に",subtitle_x,subtitle_y,4203,4392)
-SUBTITLE_FX("目を逸らしても それは運命のように",subtitle_x,subtitle_y,4398,4583)
-SUBTITLE_FX("だけどそれは 愛するものに背くこと",subtitle_x,subtitle_y,4592,4782)
-SUBTITLE_FX("覚醒せよ 光溢れる『未来へと』",subtitle_x,subtitle_y,4787,4956)
+SUBTITLE_FX("呑み込まれる 安らぎと呼べる日常に",subtitle_x,subtitle_y,4199,4392)
+SUBTITLE_FX("目を逸らしても それは運命のように",subtitle_x,subtitle_y,4393,4583)
+SUBTITLE_FX("だけどそれは 愛するものに背くこと",subtitle_x,subtitle_y,4591,4781)
+SUBTITLE_FX("覚醒せよ 光溢れる『未来へと』",subtitle_x,subtitle_y,4786,4956)
 
-SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,4963,4980)
-SUBTITLE_FX("風をきるこの感覚 歪みかけたプライド",subtitle_x,subtitle_y,4981,5169)
-SUBTITLE_FX("守るべきその何かを キミはもう知っている",subtitle_x,subtitle_y,5176,5357)
-SUBTITLE_FX("幾千光年の離れた星でも|そこに何かの希望が輝くなら",subtitle_x,subtitle_y-subtitle_size,5363,5751)
-SUBTITLE_FX("引き寄せろエナジーウェイブ 両手に感じて",subtitle_x,subtitle_y,5752,5948)
-SUBTITLE_FX("回せ!砕け!心のトリガーを引け!",subtitle_x,subtitle_y,5952,6132)
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,4960,4979)
+SUBTITLE_FX("風をきるこの感覚 歪みかけたプライド",subtitle_x,subtitle_y,4980,5169)
+SUBTITLE_FX("守るべきその何かを キミはもう知っている",subtitle_x,subtitle_y,5171,5356)
+SUBTITLE_FX("幾千光年の離れた星でも|そこに何かの希望が輝くなら",subtitle_x,subtitle_y-subtitle_size,5359,5749)
+SUBTITLE_FX("引き寄せろエナジーウェイブ 両手に感じて",subtitle_x,subtitle_y,5750,5947)
+SUBTITLE_FX("回せ!砕け!心のトリガーを引け!",subtitle_x,subtitle_y,5948,6131)
 
-SUBTITLE_FX("交わされたその約束 途切れそうな旋律も",subtitle_x,subtitle_y,6779,6968)
-SUBTITLE_FX("いつしか栄光となり 奏で始める",subtitle_x,subtitle_y,6974,7140)
+SUBTITLE_FX("交わされたその約束 途切れそうな旋律も",subtitle_x,subtitle_y,6778,6967)
+SUBTITLE_FX("いつしか栄光となり 奏で始める",subtitle_x,subtitle_y,6972,7140)
 
-SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,7149,7166)
-SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,7167,7356)
-SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,7362,7546)
-SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,7550,7938)
-SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,7939,8134)
-SUBTITLE_FX("掴め! 放て! 心のトリガーを引け!",subtitle_x,subtitle_y,8139,8317)
+SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,7147,7163)
+SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,7164,7356)
+SUBTITLE_FX("戸惑いのその答えを キミはもう知っている",subtitle_x,subtitle_y,7361,7545)
+SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitle_y-subtitle_size,7547,7937)
+SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,7938,8134)
+SUBTITLE_FX("掴め! 放て! 心のトリガーを引け!",subtitle_x,subtitle_y,8136,8317)
 
 
 
