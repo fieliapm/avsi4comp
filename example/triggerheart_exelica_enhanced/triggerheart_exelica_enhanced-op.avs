@@ -256,10 +256,10 @@ SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,410,593)
 SUBTITLE_FX("運命線飛び越えても どんな未来がまってる?",subtitle_x,subtitle_y,1035,1227)
 SUBTITLE_FX("そこが笑顔に溢れる 世界と言えるかな?",subtitle_x,subtitle_y,1228,1424)
 
-SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1432,1622)
+SUBTITLE_FX("悪しき影が 穏やかな空を塞ぐ頃",subtitle_x,subtitle_y,1430,1622)
 SUBTITLE_FX("戦う事に 忘れかけた天使よ",subtitle_x,subtitle_y,1627,1814)
-SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1819,2013)
-SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2014,2185)
+SUBTITLE_FX("埋もれかけた 誇りとも呼べる翼",subtitle_x,subtitle_y,1819,2012)
+SUBTITLE_FX("今羽ばたけ その先にある『あの空へ』",subtitle_x,subtitle_y,2013,2185)
 
 SUBTITLE_FX("Are you ready?",subtitle_x,subtitle_y-subtitle_size,2190,2205)
 SUBTITLE_FX("真実を勇気に変え その力をシュートせよ",subtitle_x,subtitle_y,2206,2399)
@@ -268,7 +268,7 @@ SUBTITLE_FX("百万光年の離れた星でも|そこに誰かの命が輝くなら",subtitle_x,subtitl
 SUBTITLE_FX("飛び立ったプロミネンス 熱く舞いあがれ",subtitle_x,subtitle_y,2981,3177)
 SUBTITLE_FX("掴め!放て!心のトリガーを引け!",subtitle_x,subtitle_y,3179,3360)
 
-SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3803,3998)
+SUBTITLE_FX("それはまるで違う星の 戦火を映すニュースと",subtitle_x,subtitle_y,3802,3998)
 SUBTITLE_FX("従うだけのハートが 誰かをキズつける",subtitle_x,subtitle_y,3999,4194)
 
 SUBTITLE_FX("呑み込まれる 安らぎと呼べる日常に",subtitle_x,subtitle_y,4199,4392)
