@@ -60,18 +60,19 @@ function SUBTITLE_FX_RANDOM_SCALE(clip clip,string text,int "x",int "y",int "fir
 	subtitle_clip_random_zoomed=ScriptClip(subtitle_clip,"FAST_ZOOM(dstx=PSEUDO_RANDOM(Round(Width()-((50*1.5)*2)))+(50*1.5),dsty=PSEUDO_RANDOM(Round(Height()-((50*1.5)*2)))+(50*1.5),factor=(Float(PSEUDO_RANDOM(65536))/65536.0*1.0)+0.5)")
 
 	subtitle_clip_random_zoomed_resized=RESIZE_TO_REF_CLIP(subtitle_clip_random_zoomed,clip)
-	clip_with_subtitle=Overlay(clip,subtitle_clip_random_zoomed_resized,opacity=0.75,mode="Exclusion",pc_range=true)
+	clip_with_subtitle=Overlay(clip,ColorYUV(subtitle_clip_random_zoomed_resized,levels="TV->PC"),opacity=0.75,mode="Exclusion",pc_range=true)
 	clip_with_subtitle=MergeChroma(clip_with_subtitle,clip)
-	return clip_with_subtitle
-	#return OVERWRITE_RANGE(clip,clip_with_subtitle,first_frame,last_frame)
+
+	return OVERWRITE_RANGE(clip,clip_with_subtitle,first_frame,last_frame)
 }
 
 # chromatic aberration
 function DISPERSION(clip clip,float offset){
-	clip_rgb=ConvertToRGB24(clip)
+	clip_rgb=ConvertToRGB24(clip,matrix="Rec709")
 	clip_r=FAST_ZOOM(ShowRed(clip_rgb),factor=1.0+offset,extend=true)
 	clip_g=ShowGreen(clip_rgb)
 	clip_b=FAST_ZOOM(ShowBlue(clip_rgb),factor=1.0-offset,extend=true)
+	#return MergeRGB(clip_r,clip_g,clip_b,pixel_type="RGB32")
 	return MergeRGB(clip_r,clip_g,clip_b,pixel_type="RGB24")
 }
 
@@ -128,11 +129,13 @@ function SUBTITLE_FX_SPELL(clip clip,string text,int start_num_frames,int end_nu
 	y=(subtitle_clip_height/2)-(size/2)
 
 	frame_count=Framecount(clip)
-	clip_yv12=ConvertToYV12(clip)
+	clip_yv12=ConvertToYV12(clip,matrix="Rec709")
 	one_pass_clip=SUBTITLE_FX_RANDOM_SCALE(clip_yv12,text,Round(x),Round(y),0,start_num_frames-1,font,effects,Round(size),text_color,halo_color)
 	one_pass_clip=EXTEND_ONE_FRAME(one_pass_clip)
 	two_pass_clip=SUBTITLE_FX_RANDOM_SCALE(one_pass_clip,text,Round(x),Round(y),frame_count-end_num_frames,frame_count-1,font,effects,Round(size),text_color,halo_color)
-	return UNDO_EXTEND_ONE_FRAME(two_pass_clip)
+	two_pass_clip=UNDO_EXTEND_ONE_FRAME(two_pass_clip)
+	#return ConvertToYV12(two_pass_clip,matrix="Rec709")
+	return two_pass_clip
 }
 
 ### inherit end ###
@@ -158,7 +161,7 @@ function SPELL(string trim_func_01,clip clip_01,string trim_func_02,clip clip_02
 		+SUBTITLE_FX_SPELL(CHARLOTTE_SCALE_WIPE_OUT(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_07_01,clip_07_01,29)),"x",1,6),"x",-1,14),"シャーロット",6,14) \
 		+SUBTITLE_FX_SPELL(FADE_OUT_WITH_BRIGHTNESS_OFFSET(CHARLOTTE_SCALE_WIPE_IN(CHARLOTTE_DISPERSION(Apply(trim_func_07_02,clip_07_02,13)),"x",1,5),3),"約束",5,3) \
 		+SUBTITLE_FX_SPELL(FADE_IN_WITH_BRIGHTNESS_OFFSET(CHARLOTTE_DISPERSION(Apply(trim_func_08_01,clip_08_01,19)),3),"これからの記録",3,8)
-	return Dissolve(ConvertToYV12(spell_clip),Apply(trim_func_08_02,clip_08_02,29),8)
+	return Dissolve(spell_clip,Apply(trim_func_08_02,clip_08_02,29),8)
 }
 
 ### inherit end ###
@@ -262,7 +265,7 @@ charlotte_op_mute
 
 ######## Subtitle ########
 
-#ConvertToRGB32()
+#ConvertToRGB32(matrix="Rec709")
 
 #SUBTITLE_FX("Bravely You//Lia|- by fielia@AVISynth",-subtitle_x,subtitle_x,7695,7780,true)
 SUBTITLE_RIPPLE(7695,7780,false)
@@ -342,6 +345,7 @@ TextSub("charlotte-op.ass")
 
 is_thumbnail=false
 
+#is_thumbnail?ConvertToRGB32(charlotte_op_mute,matrix="Rec709"):last
 is_thumbnail?charlotte_op_mute:last
 
 ######## Music ########
@@ -358,8 +362,14 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+#ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
 
 TCPServer()

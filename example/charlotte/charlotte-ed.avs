@@ -139,7 +139,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 ### inherit end ###
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("Œ©“n‚¹‚éêŠ‚É¡’©‚Í’H‚è’…‚­",subtitle_x,subtitle_y,749,920)
 SUBTITLE_FX("‰“‚­ü˜H‚ªL‚Ñ‚é",subtitle_x,subtitle_y,927,1051)
@@ -195,7 +195,7 @@ SUBTITLE_FX("Ü‚¯—‚¿‚È‚¢—ƒ//‘½“cˆ¨|- by fielia@AVISynth",-subtitle_x,subtitle_y
 
 is_thumbnail=false
 
-is_thumbnail?charlotte_ed_mute:last
+is_thumbnail?ConvertToRGB32(charlotte_ed_mute,matrix="Rec709"):last
 
 ######## Music ########
 
@@ -211,8 +211,14 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
+ConvertToYV12(matrix="Rec709")
+#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
 
 TCPServer()
