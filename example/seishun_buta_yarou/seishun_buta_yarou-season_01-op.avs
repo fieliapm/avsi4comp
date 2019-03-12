@@ -303,7 +303,7 @@ global subtitle_rear_fade_count=8
 global subtitle_font="MS Mincho"
 global subtitle_effects="b"
 global subtitle_size=33*2.25
-global subtitle_text_color=color_deepskyblue
+global subtitle_text_color=color_royalblue
 global subtitle_halo_color=color_white
 global subtitle_outside_halo_color=color_gray90
 
@@ -311,7 +311,7 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 	is_title=Default(is_title,false)
 	is_furigana=Default(is_furigana,false)
 
-	text_color=is_title?color_royalblue:subtitle_text_color
+	text_color=is_title?color_deepskyblue:subtitle_text_color
 
 	#subtitle_mode=is_furigana?"ex":"ex_thick_reduce_memory"
 	subtitle_mode="ex"
