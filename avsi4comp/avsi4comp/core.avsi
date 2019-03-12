@@ -308,7 +308,7 @@ function RANDOM_STRING_OUT_OF_FRAME_RANGE(string text,int current_frame,int star
 ######## Audio ########
 
 function AUDIO_DUB_TONE(clip clip,int "frequency",int "samplerate",int "channels",string "type",float "level"){
-	tone=Tone(length=Float(Framecount(clip))/Float(Framerate(clip)),frequency=frequency,samplerate=samplerate,channels=channels,type=type,level=level)
+	tone=Tone(length=Float(Framecount(clip))/Framerate(clip),frequency=frequency,samplerate=samplerate,channels=channels,type=type,level=level)
 	return AudioDub(clip,tone)
 }
 
@@ -513,8 +513,8 @@ function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty"
 	target_height=Default(height,clip_height)
 	dstx=Default(dstx,Float(target_width)*0.5)
 	dsty=Default(dsty,Float(target_height)*0.5)
-	factorX=Default(factor,Default(factorX,1.0))
-	factorY=Default(factor,Default(factorY,1.0))
+	factorX=Float(Default(factor,Default(factorX,1.0)))
+	factorY=Float(Default(factor,Default(factorY,1.0)))
 	resize_func=Default(resize_func,"Lanczos4Resize")
 	extend=Default(extend,false)
 
