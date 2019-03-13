@@ -525,8 +525,8 @@ function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty"
 	border_size_y=extend?0:CEIL_BS(Float(border_size)/factorY,border_size)
 
 	clip_with_border=AddBorders(clip,border_size_x,border_size_y,border_size_x,border_size_y)
-	src_left=(srcx+border_size_x)-(dstx/factorX) # source_px=((target_px-dstx)/factorX)+(srcx+border_size_x)
-	src_top=(srcy+border_size_y)-(dsty/factorY) # source_py=((target_py-dsty)/factorY)+(srcy+border_size_y)
+	src_left=(srcx+Float(border_size_x))-(dstx/factorX) # source_px=((target_px-dstx)/factorX)+(srcx+border_size_x)
+	src_top=(srcy+Float(border_size_y))-(dsty/factorY) # source_py=((target_py-dsty)/factorY)+(srcy+border_size_y)
 	src_width=Float(target_width)/factorX
 	src_height=Float(target_height)/factorY
 	return Eval(resize_func+"(clip_with_border,target_width,target_height,src_left=src_left,src_top=src_top,src_width=src_width,src_height=src_height)")
