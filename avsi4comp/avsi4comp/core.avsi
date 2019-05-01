@@ -453,6 +453,18 @@ function ASSUME_SCALED_FPS_SYNC_AUDIO(clip clip,int "multiplier",int "divisor"){
 	return ResampleAudio(AssumeScaledFPS(clip,multiplier,divisor,sync_audio=true),clip_audiorate)
 }
 
+function ASSUME_60P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,60,1)
+}
+
+function ASSUME_59_94P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,60000,1001)
+}
+
+function ASSUME_50P(clip clip){
+	return ASSUME_FPS_SYNC_AUDIO(clip,50,1)
+}
+
 function ASSUME_30P(clip clip){
 	return ASSUME_FPS_SYNC_AUDIO(clip,30,1)
 }

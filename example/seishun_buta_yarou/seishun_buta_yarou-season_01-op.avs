@@ -141,8 +141,8 @@ pic_part_base_1_2=Loop(TRIM_FIRST_CLIP(seishun_buta_yarou_season_01_04_tomoe_tur
 #pic_part_base_2_test=Trim(seishun_buta_yarou_season_01_clean_op_03,195+47,-(dissolve_length_18+126+dissolve_length_pic_part+68)) #216
 pic_part_base_2=TRIM_LAST_CLIP(seishun_buta_yarou_season_01_09_syouko_and_kaede_hold_cats,dissolve_length_18+126+dissolve_length_pic_part+68) #216
 
-pic_part_base=Dissolve(TRIM_FIRST_CLIP(pic_part_base_1_1,124+dissolve_length_pic_part),TRIM_MIDDLE_CLIP(CLIP_SPEED(seishun_buta_yarou_season_01_06_yokohama,0.5,true),dissolve_length_pic_part+67),dissolve_length_pic_part) \
-	+Dissolve(TRIM_MIDDLE_CLIP(seishun_buta_yarou_season_01_01_shichirigahama_railroad_crossing,47+dissolve_length_18),Dissolve(TRIM_FIRST_CLIP(pic_part_base_2,dissolve_length_18+126+dissolve_length_pic_part),TRIM_MIDDLE_CLIP(CLIP_SPEED(seishun_buta_yarou_season_01_06_enoshima,0.5,true),dissolve_length_pic_part+68),dissolve_length_pic_part),dissolve_length_18)
+pic_part_base=Dissolve(TRIM_FIRST_CLIP(pic_part_base_1_1,124+dissolve_length_pic_part),SCALE_CG(TRIM_MIDDLE_CLIP(CLIP_SPEED(seishun_buta_yarou_season_01_06_yokohama,0.5,true),dissolve_length_pic_part+67),0.7*Width(seishun_buta_yarou_season_01_clean_op),0.7*Height(seishun_buta_yarou_season_01_clean_op),1.0,1.1),dissolve_length_pic_part) \
+	+Dissolve(MOVE_CG(TRIM_MIDDLE_CLIP(seishun_buta_yarou_season_01_01_shichirigahama_railroad_crossing,47+dissolve_length_18),-1,0,Width(seishun_buta_yarou_season_01_clean_op)/10.0,1.1),Dissolve(TRIM_FIRST_CLIP(pic_part_base_2,dissolve_length_18+126+dissolve_length_pic_part),SCALE_CG(TRIM_MIDDLE_CLIP(CLIP_SPEED(seishun_buta_yarou_season_01_06_enoshima,0.5,true),dissolve_length_pic_part+68),0.3*Width(seishun_buta_yarou_season_01_clean_op),0.3*Height(seishun_buta_yarou_season_01_clean_op),1.0,1.1),dissolve_length_pic_part),dissolve_length_18)
 
 # pic part 1
 
@@ -303,15 +303,15 @@ global subtitle_rear_fade_count=8
 global subtitle_font="MS Mincho"
 global subtitle_effects="b"
 global subtitle_size=33*2.25
-global subtitle_text_color=color_royalblue
-global subtitle_halo_color=color_white
-global subtitle_outside_halo_color=color_gray90
+global subtitle_text_color=color_white
+global subtitle_halo_color=color_deepskyblue
+global subtitle_outside_halo_color=color_royalblue
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_furigana",bool "is_title"){
 	is_title=Default(is_title,false)
 	is_furigana=Default(is_furigana,false)
 
-	text_color=is_title?color_deepskyblue:subtitle_text_color
+	text_color=is_title?color_gold:subtitle_text_color
 
 	#subtitle_mode=is_furigana?"ex":"ex_thick_reduce_memory"
 	subtitle_mode="ex"

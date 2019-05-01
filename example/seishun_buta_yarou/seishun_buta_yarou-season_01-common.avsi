@@ -24,6 +24,7 @@
 
 seishun_buta_yarou_season_01_01=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 01 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_02=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 02 (ABC 1280x720 x264 AAC).mp4")
+seishun_buta_yarou_season_01_02_cache02=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 02 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_03=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 03 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_04=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 04 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_04_cache02=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 04 (ABC 1280x720 x264 AAC).mp4")
@@ -37,10 +38,25 @@ seishun_buta_yarou_season_01_10=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishu
 seishun_buta_yarou_season_01_10_cache02=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 10 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_11=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 11 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_12=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 12 (ABC 1280x720 x264 AAC).mp4")
+seishun_buta_yarou_season_01_12_cache02=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 12 (ABC 1280x720 x264 AAC).mp4")
 seishun_buta_yarou_season_01_13=FFMS2_VIDEO_SOURCE("src\anime\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai (ABC 1280x720 x264 AAC)\[Ohys-Raws] Seishun Buta Yarou wa Bunny Girl Senpai no Yume o Minai - 13 END (ABC 1280x720 x264 AAC).mp4")
 
 seishun_buta_yarou_season_01_clean_op=Trim(seishun_buta_yarou_season_01_04,884,3041)
-#seishun_buta_yarou_season_01_clean_ed_01=Trim(seishun_buta_yarou_season_01_01,0,0)
+
+seishun_buta_yarou_season_01_clean_ed_mai_v1=Trim(seishun_buta_yarou_season_01_02,34402,35838)    #  0  0  0  0  0 1437
+seishun_buta_yarou_season_01_clean_ed_mai_v2=Trim(seishun_buta_yarou_season_01_03,33969,35407)    #  0 +1 +1 +1 +1 1439
+seishun_buta_yarou_season_01_clean_ed_tomoe_v1=Trim(seishun_buta_yarou_season_01_04,34401,35837)  # +1 +1 +1 +1 +1 1437
+seishun_buta_yarou_season_01_clean_ed_tomoe_v2=Trim(seishun_buta_yarou_season_01_05,34403,35838)  #  0  0  0  0  0 1436
+seishun_buta_yarou_season_01_clean_ed_rio_v1=Trim(seishun_buta_yarou_season_01_07,34401,35838)    #  0 +1 +1 -3 +1 1438
+seishun_buta_yarou_season_01_clean_ed_rio_v2=Trim(seishun_buta_yarou_season_01_08,33994,35432)    #  0 +1 +1 -3 +1 1439
+seishun_buta_yarou_season_01_clean_ed_nodoka_v1=Trim(seishun_buta_yarou_season_01_09,34402,35837) # -1  0  0  0  0 1436
+seishun_buta_yarou_season_01_clean_ed_nodoka_digest=Trim(seishun_buta_yarou_season_01_10,33105,34041) #937
+seishun_buta_yarou_season_01_clean_ed_kaede_v1=Trim(seishun_buta_yarou_season_01_11,34402,35838)  # +1 +1 +1 +1 -3 1437
+seishun_buta_yarou_season_01_clean_ed_kaede_v2=Trim(seishun_buta_yarou_season_01_12,34403,35838)  #  0  0  0  0 -4 1436
+
+######## Website (?*?) ########
+
+character_syouko_side=AUDIO_DUB_TONE(ImageSource("src\website\img_chara_main-_side.png",0,47,24000.0/1001.0,pixel_type="rgb32"),samplerate=48000,channels=2,type="Silence") # 980*940
 
 ######## Trim ########
 
@@ -55,7 +71,48 @@ seishun_buta_yarou_season_01_clean_op_08=Trim(seishun_buta_yarou_season_01_clean
 
 
 
-#seishun_buta_yarou_season_01_clean_ed_01=Trim(seishun_buta_yarou_season_01_clean_ed,0,0)
+seishun_buta_yarou_season_01_clean_ed_mai_01_v1=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v1,0,503)
+seishun_buta_yarou_season_01_clean_ed_mai_01=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v2,0,503)
+seishun_buta_yarou_season_01_clean_ed_mai_02=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v1,504,938)
+seishun_buta_yarou_season_01_clean_ed_mai_03=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v1,939,984)
+seishun_buta_yarou_season_01_clean_ed_mai_04=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v1,985,1250)
+seishun_buta_yarou_season_01_clean_ed_mai_05=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v1,1251,1353)
+seishun_buta_yarou_season_01_clean_ed_mai_06=Trim(seishun_buta_yarou_season_01_clean_ed_mai_v1,1354,0)
+
+seishun_buta_yarou_season_01_clean_ed_tomoe_01=Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v2,0,503)
+seishun_buta_yarou_season_01_clean_ed_tomoe_02=Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v2,504,938)
+seishun_buta_yarou_season_01_clean_ed_tomoe_03=Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v2,939,984)
+seishun_buta_yarou_season_01_clean_ed_tomoe_04=Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v2,985,1250)
+seishun_buta_yarou_season_01_clean_ed_tomoe_05=Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v2,1251,1353)
+seishun_buta_yarou_season_01_clean_ed_tomoe_06=Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v2,1354,0)
+
+seishun_buta_yarou_season_01_clean_ed_rio_01=Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,0,503)
+seishun_buta_yarou_season_01_clean_ed_rio_02=Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,504,939)
+seishun_buta_yarou_season_01_clean_ed_rio_03=Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,940,985)
+seishun_buta_yarou_season_01_clean_ed_rio_04=Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,986,1247)
+seishun_buta_yarou_season_01_clean_ed_rio_05=Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,1248,1354)
+seishun_buta_yarou_season_01_clean_ed_rio_06=Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,1355,0)
+
+seishun_buta_yarou_season_01_clean_ed_nodoka_01=Trim(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,0,502)
+seishun_buta_yarou_season_01_clean_ed_nodoka_02=Trim(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,503,938)
+seishun_buta_yarou_season_01_clean_ed_nodoka_03=Trim(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,939,984)
+seishun_buta_yarou_season_01_clean_ed_nodoka_04=Trim(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,985,1250)
+seishun_buta_yarou_season_01_clean_ed_nodoka_05=Trim(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,1251,1353)
+seishun_buta_yarou_season_01_clean_ed_nodoka_06=Trim(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,1354,0)
+
+seishun_buta_yarou_season_01_clean_ed_kaede_01=Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v2,0,503)
+seishun_buta_yarou_season_01_clean_ed_kaede_02=Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v2,504,938)
+seishun_buta_yarou_season_01_clean_ed_kaede_03=Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v2,939,984)
+seishun_buta_yarou_season_01_clean_ed_kaede_04=Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v2,985,1250)
+seishun_buta_yarou_season_01_clean_ed_kaede_05=Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v2,1251,1349)
+seishun_buta_yarou_season_01_clean_ed_kaede_06=Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v2,1350,0)
+
+ed_debug_stack=StackVertical( \
+	StackHorizontal(seishun_buta_yarou_season_01_clean_ed_mai_v1,Trim(seishun_buta_yarou_season_01_clean_ed_mai_v2,1,0)), \
+	StackHorizontal(Trim(seishun_buta_yarou_season_01_clean_ed_tomoe_v1,1,0),seishun_buta_yarou_season_01_clean_ed_tomoe_v2), \
+	StackHorizontal(Trim(seishun_buta_yarou_season_01_clean_ed_rio_v1,1,0),Trim(seishun_buta_yarou_season_01_clean_ed_rio_v2,1,0)), \
+	StackHorizontal(seishun_buta_yarou_season_01_clean_ed_nodoka_v1,BlankClip(seishun_buta_yarou_season_01_clean_ed_nodoka_digest,length=503,color=color_black)+seishun_buta_yarou_season_01_clean_ed_nodoka_digest), \
+	StackHorizontal(Trim(seishun_buta_yarou_season_01_clean_ed_kaede_v1,1,0),seishun_buta_yarou_season_01_clean_ed_kaede_v2))
 
 
 
@@ -72,7 +129,7 @@ seishun_buta_yarou_season_01_01_sakuta_under_shichirigahama_sunset=Trim(seishun_
 seishun_buta_yarou_season_01_01_sakuta_block_camera=Trim(seishun_buta_yarou_season_01_01,12424,12509) #86
 seishun_buta_yarou_season_01_01_mai_see_enoshima=Trim(seishun_buta_yarou_season_01_01,18590,18748) #159
 
-seishun_buta_yarou_season_01_01_anime_interval=Trim(seishun_buta_yarou_season_01_01,21047,21095) #49
+seishun_buta_yarou_season_01_01_anime_interval=Trim(seishun_buta_yarou_season_01_01,21047,21095) #49 ed
 
 seishun_buta_yarou_season_01_01_kaede_hurt_picture=Trim(seishun_buta_yarou_season_01_01,23910,24042) #133
 seishun_buta_yarou_season_01_01_kaede_hurt_self=Trim(seishun_buta_yarou_season_01_01,24586,24651) #66
@@ -96,8 +153,13 @@ seishun_buta_yarou_season_01_02_enoshima_dentetsu_train_inside=Trim(seishun_buta
 seishun_buta_yarou_season_01_02_enoshima_dentetsu=Trim(seishun_buta_yarou_season_01_02,17314,17469) #156
 seishun_buta_yarou_season_01_02_enoshima_dentetsu_gate=Trim(seishun_buta_yarou_season_01_02,18021,18097) #77
 
-seishun_buta_yarou_season_01_02_anime_interval=Trim(seishun_buta_yarou_season_01_02,18098,18145) #48
+seishun_buta_yarou_season_01_02_anime_interval=Trim(seishun_buta_yarou_season_01_02_cache02,18098,18145) #48 ed
 
+seishun_buta_yarou_season_01_02_beach=Trim(seishun_buta_yarou_season_01_02,18146,18225) #80
+seishun_buta_yarou_season_01_02_syouko_walk_close_to_sakuta=Trim(seishun_buta_yarou_season_01_02,18226,18344) #119
+seishun_buta_yarou_season_01_02_syouko_see_and_discuss_horizon=Trim(seishun_buta_yarou_season_01_02,18345,18428) #84 ed
+seishun_buta_yarou_season_01_02_syouko_introduce_herself=Trim(seishun_buta_yarou_season_01_02,18508,18603) #96
+seishun_buta_yarou_season_01_02_syouko_introduce_herself_on_the_beach=Trim(seishun_buta_yarou_season_01_02,18604,18885) #282 ed
 seishun_buta_yarou_season_01_02_mai_meet_her_mother=Trim(seishun_buta_yarou_season_01_02,20672,20760) #89
 seishun_buta_yarou_season_01_02_mai_s_mother_discard_mai=Trim(seishun_buta_yarou_season_01_02,20800,20843) #44 op
 seishun_buta_yarou_season_01_02_mai_ask_to_get_out=Trim(seishun_buta_yarou_season_01_02,27242,27315) #74
@@ -152,7 +214,7 @@ seishun_buta_yarou_season_01_06_enoshima=Trim(seishun_buta_yarou_season_01_06,10
 seishun_buta_yarou_season_01_06_tomoe_and_sakuta_hide_rain_in_beach=Trim(seishun_buta_yarou_season_01_06,11741,11800) #60 op
 seishun_buta_yarou_season_01_06_tomoe_and_sakuta_happily_splash_water=Trim(seishun_buta_yarou_season_01_06,11828,11873) #46
 seishun_buta_yarou_season_01_06_tomoe_happily_splash_water=Trim(seishun_buta_yarou_season_01_06,11874,11924) #51 op
-seishun_buta_yarou_season_01_06_enoshima_sea_candle_under_sunset=Trim(seishun_buta_yarou_season_01_06,12380,12439) #60
+seishun_buta_yarou_season_01_06_enoshima_sea_candle_under_sunset=Trim(seishun_buta_yarou_season_01_06,12380,12439) #60 ed
 seishun_buta_yarou_season_01_06_tomoe_and_sakuta_see_sea_under_sunset=Trim(seishun_buta_yarou_season_01_06,12440,12619) #180
 seishun_buta_yarou_season_01_06_tomoe_and_sakuta_talk_in_beach_under_sunset=Trim(seishun_buta_yarou_season_01_06,12910,13144) #235
 seishun_buta_yarou_season_01_06_enoshima_street=Trim(seishun_buta_yarou_season_01_06,20444,20515) #72 op
@@ -169,6 +231,11 @@ seishun_buta_yarou_season_01_06_tomoe_cry=Trim(seishun_buta_yarou_season_01_06,2
 seishun_buta_yarou_season_01_06_mai_kiss_sakuta_dynamic_scene=Trim(seishun_buta_yarou_season_01_06,30540,30583) #44
 seishun_buta_yarou_season_01_06_mai_kiss_sakuta_static_scene=Trim(seishun_buta_yarou_season_01_06,30584,30655) #72
 
+seishun_buta_yarou_season_01_07_syouko_see_and_discuss_horizon=Trim(seishun_buta_yarou_season_01_07,201,284) #84
+seishun_buta_yarou_season_01_07_syouko_talk_with_sakuta_on_the_beach=Trim(seishun_buta_yarou_season_01_07,362,599) #238
+seishun_buta_yarou_season_01_07_syouko_angry_to_sakuta_on_the_beach=Trim(seishun_buta_yarou_season_01_07,600,809) #210
+seishun_buta_yarou_season_01_07_syouko_introduce_herself=Trim(seishun_buta_yarou_season_01_07,1024,1107) #84
+seishun_buta_yarou_season_01_07_syouko_introduce_herself_on_the_beach=Trim(seishun_buta_yarou_season_01_07,1108,1395) #288
 seishun_buta_yarou_season_01_07_yukata_girl=Trim(seishun_buta_yarou_season_01_07,8041,8150) #50
 seishun_buta_yarou_season_01_07_tomoe_wear_yukata_and_open_door=Trim(seishun_buta_yarou_season_01_07,9463,9514) #52 op-pic
 seishun_buta_yarou_season_01_07_tomoe_wear_yukata=Trim(seishun_buta_yarou_season_01_07,9704,9813) #110
@@ -246,7 +313,7 @@ seishun_buta_yarou_season_01_11_kaede_see_sand_castle=Trim(seishun_buta_yarou_se
 
 seishun_buta_yarou_season_01_12_sakuta_s_mother_get_mad_01=Trim(seishun_buta_yarou_season_01_12,5331,5432) #102 op
 seishun_buta_yarou_season_01_12_sakuta_s_mother_get_mad_02=Trim(seishun_buta_yarou_season_01_12,5508,5666) #159
-seishun_buta_yarou_season_01_12_syouko_press_her_hair=Trim(seishun_buta_yarou_season_01_12,7699,7875) #177 op
+seishun_buta_yarou_season_01_12_syouko_press_her_hair=Trim(seishun_buta_yarou_season_01_12_cache02,7699,7875) #177 op ed
 seishun_buta_yarou_season_01_12_syouko_and_sakuta_see_sea_01=Trim(seishun_buta_yarou_season_01_12,7876,8154) #279 op
 seishun_buta_yarou_season_01_12_syouko_s_skirt=Trim(seishun_buta_yarou_season_01_12,8155,8264) #110 op
 seishun_buta_yarou_season_01_12_syouko_and_sakuta_talking=Trim(seishun_buta_yarou_season_01_12,8265,8482) #218
