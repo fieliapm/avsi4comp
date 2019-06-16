@@ -114,7 +114,7 @@ global frame_index_scale=is_deinterlace?2:1
 fade_length=15
 
 triggerheart_exelica_dc_pv_01=AddBorders(triggerheart_exelica_dc_pv_01,68,0,68,0)
-triggerheart_exelica_dc_pv_01_fade_out_interlace=FADE_OUT_WITH_BRIGHTNESS_OFFSET(triggerheart_exelica_dc_pv_01,fade_length)
+triggerheart_exelica_dc_pv_01_fade_out_interlace=FADE_OUT_WITH_BRIGHTNESS_OFFSET(triggerheart_exelica_dc_pv_01,fade_length,false)
 triggerheart_exelica_dc_pv_01_fade_out_deinterlace=BOB_PRESERVE_ORIGINAL_FIELD(triggerheart_exelica_dc_pv_01_fade_out_interlace)
 triggerheart_exelica_dc_pv_01_fade_out=is_deinterlace?triggerheart_exelica_dc_pv_01_fade_out_deinterlace:triggerheart_exelica_dc_pv_01_fade_out_interlace
 
@@ -159,7 +159,7 @@ triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32=TRANSFORM(triggerheart_exelic
 	angle="Spline(n,0,0.0,anim_fr1,0.0,anim_fr2,0.0,anim_fr3,0.0,anim_fr4,45.0,overlay_fg_02_last_frame,45.0,cubic=false)", \
 	opacity="Spline(n,0,0.0,anim_fr1,0.0,anim_fr2,1.0,anim_fr3,1.0,anim_fr4,0.0,overlay_fg_02_last_frame,0.0,cubic=false)")
 
-triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,ConvertToYV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,matrix="Rec601"),anim_fr1,anim_fr4)
+triggerheart_exelica_enhanced_ps2_pv_overlay=OVERWRITE_RANGE(triggerheart_exelica_enhanced_ps2_pv_overlay_bg,CONVERT_BACK_TO_YV12(triggerheart_exelica_enhanced_ps2_pv_overlay_rgb32,matrix="Rec601"),anim_fr1,anim_fr4)
 
 
 
@@ -196,7 +196,7 @@ triggerheart_exelica_enhanced_ps2_op_pre03=ChangeFPS(triggerheart_exelica_enhanc
 triggerheart_exelica_enhanced_op_t01=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_01_02,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t02=TRIM_FIRST_CLIP(triggerheart_exelica_enhanced_ps2_pv_overlay,2770-triggerheart_exelica_enhanced_ps2_op_pre03_frame_count)
 triggerheart_exelica_enhanced_op_t03=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_pre03+triggerheart_exelica_enhanced_ps2_op_03_04,triggerheart_exelica_xbla_game_review)
-triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,762),fade_length)
+triggerheart_exelica_enhanced_op_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(triggerheart_exelica_xbla_game_review_02,762),fade_length,false)
 triggerheart_exelica_enhanced_op_t05=ConvertToYV12(RESIZE_TO_REF_CLIP(triggerheart_exelica_dc_pv_01_fade_out,triggerheart_exelica_xbla_game_review))
 triggerheart_exelica_enhanced_op_t06=RESIZE_TO_REF_CLIP(triggerheart_exelica_enhanced_ps2_op_05_06,triggerheart_exelica_xbla_game_review)
 triggerheart_exelica_enhanced_op_t07=BlankClip(triggerheart_exelica_xbla_game_review,length=30*4,color=color_black)
@@ -215,7 +215,7 @@ bgm_48khz=SSRC(WAVSource("src\triggerheart_exelica_enhanced-op-01.wav"),48000)
 #### for SFD ####
 bgm_48khz_delayed=DelayAudio(bgm_48khz,0.454)
 
-AudioDub(triggerheart_exelica_enhanced_op_mute,bgm_48khz_delayed)
+Normalize(AudioDub(triggerheart_exelica_enhanced_op_mute,bgm_48khz_delayed))
 
 
 
@@ -299,9 +299,9 @@ SUBTITLE_FX("íÕÇﬂ! ï˙Çƒ! êSÇÃÉgÉäÉKÅ[Çà¯ÇØ!",subtitle_x,subtitle_y,8136,8317)
 
 ######## Post Processing ########
 
-ConvertToYV12(matrix="Rec709")
-#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+#ConvertBackToYUY2(matrix="Rec709")
+CONVERT_BACK_TO_YV12(matrix="Rec709")
 
 #ConvertAudioTo8bit()
 #ConvertAudioTo16bit()

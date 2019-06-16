@@ -58,7 +58,7 @@ function SUBTITLE_FX_SCAN_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,in
 	subtitle_rgb=_SUBTITLE_FX_PRE_OPAQUE(clip,outside_halo_color,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 	subtitle_rgba=ColorKeyMask(ResetMask(subtitle_rgb),outside_halo_color,0)
 
-	subtitle_alpha=ConvertToYV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
+	subtitle_alpha=CONVERT_BACK_TO_YV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
 	subtitle_alpha=Expand(Expand(subtitle_alpha))
 	subtitle_alpha=ConvertToRGB32(Greyscale(subtitle_alpha),matrix="Rec709")
 
@@ -85,14 +85,14 @@ fade_length=15
 
 
 crystar_teaser_movie_03=FRAME_RATE_2X(RESIZE_TO_REF_CLIP(crystar_teaser_movie_03,crystar_op),is_60p)
-crystar_teaser_movie_03_faded=ConvertToYV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(TRIM_FIRST_CLIP(crystar_teaser_movie_03,622*frame_index_scale),matrix="Rec709"),fade_length*frame_index_scale),matrix="Rec709")
+crystar_teaser_movie_03_faded=CONVERT_BACK_TO_YV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(TRIM_FIRST_CLIP(crystar_teaser_movie_03,622*frame_index_scale),matrix="Rec709"),fade_length*frame_index_scale,false),matrix="Rec709")
 
 
 
 crystar_wallpaper_resized=FRAME_RATE_2X(RESIZE_TO_REF_CLIP(crystar_wallpaper,crystar_op),is_60p)
 crystar_wallpaper_show=ScriptClip(crystar_wallpaper_resized,"FAST_ZOOM(srcx=0.8*Width(),srcy=0.4*Height(),dstx=0.8*Width(),dsty=0.4*Height(),factor=Pow(2.0,Spline(current_frame,0*frame_index_scale,4.0,11*frame_index_scale,0.0,Framecount()-1,0.0,cubic=false)),extend=true)")
 #crystar_wallpaper_show=ScriptClip(crystar_wallpaper_resized,"FAST_ZOOM(srcx=0.8*Width(),srcy=0.4*Height(),dstx=0.8*Width(),dsty=0.4*Height(),factor=1.0/Spline(current_frame,0*frame_index_scale,1.0/16.0,11*frame_index_scale,1.0,Framecount()-1,1.0,cubic=false),extend=true)")
-crystar_wallpaper_show=ConvertToYV12(crystar_wallpaper_show,matrix="Rec709")
+crystar_wallpaper_show=CONVERT_BACK_TO_YV12(crystar_wallpaper_show,matrix="Rec709")
 
 
 
@@ -111,7 +111,7 @@ crystar_wallpaper_cover_extend=Loop(crystar_wallpaper_cover,Ceil(Float(Framecoun
 
 crystar_op_03_show_cover=ConvertToRGB32(crystar_op_03,matrix="Rec709")
 crystar_op_03_show_cover=Layer(crystar_op_03_show_cover,crystar_wallpaper_cover_extend,"Add")
-crystar_op_03_show_cover=ConvertToYV12(crystar_op_03_show_cover,matrix="Rec709")
+crystar_op_03_show_cover=CONVERT_BACK_TO_YV12(crystar_op_03_show_cover,matrix="Rec709")
 
 ######## Combine ########
 
@@ -154,11 +154,11 @@ crystar_op_mute=crystar_op_t01+crystar_op_t02+crystar_op_t03+crystar_op_t04+crys
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\iroduku_sekai_no_ashita_kara-ed-02.wav"),48000)
-AudioDub(crystar_op_mute,bgm_48khz)
+Normalize(AudioDub(crystar_op_mute,bgm_48khz))
 
 
 
-last++crystar_promotion_movie_27_furyu+BlankClip(crystar_op,length=30*2*frame_index_scale,color=color_black)
+last++Normalize(crystar_promotion_movie_27_furyu)+BlankClip(crystar_op,length=30*2*frame_index_scale,color=color_black)
 
 
 
@@ -184,7 +184,7 @@ global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 global subtitle_outside_halo_color=color_gray10
 
-global scan_mask=GENERATE_SCAN_MASK(crystar_op,subtitle_front_fade_count)
+global scan_mask=GENERATE_SCAN_MASK(crystar_op,subtitle_front_fade_count*frame_index_scale)
 
 function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int end_frame,bool "is_furigana",bool "is_title"){
 	is_title=Default(is_title,false)
@@ -268,9 +268,9 @@ SUBTITLE_FX(" åıÇ™ñjÇè∆ÇÁÇ∑",subtitle_x,subtitle_y,6651,6888)
 
 ######## Post Processing ########
 
-ConvertToYV12(matrix="Rec709")
-#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+#ConvertBackToYUY2(matrix="Rec709")
+CONVERT_BACK_TO_YV12(matrix="Rec709")
 
 #ConvertAudioTo8bit()
 #ConvertAudioTo16bit()

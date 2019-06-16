@@ -45,7 +45,7 @@ function SUBTITLE_FX_FADE_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,in
 	subtitle_rgb=_SUBTITLE_FX_PRE_OPAQUE(clip,outside_halo_color,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 	subtitle_rgba=ColorKeyMask(ResetMask(subtitle_rgb),outside_halo_color,0)
 
-	subtitle_alpha=ConvertToYV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
+	subtitle_alpha=CONVERT_BACK_TO_YV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
 	subtitle_alpha=Expand(Expand(Expand(subtitle_alpha)))
 	subtitle_alpha=ConvertToRGB32(Greyscale(subtitle_alpha),matrix="Rec709")
 
@@ -120,7 +120,7 @@ syouko_side_fg=character_syouko_side
 syouko_side_fg_center_x=Width(syouko_side_fg)/2
 syouko_side_fg_center_y=Height(syouko_side_fg)/2
 syouko_side_fg_alpha=ShowAlpha(syouko_side_fg)
-syouko_side_fg=ConvertToYV12(syouko_side_fg,matrix="Rec709")
+syouko_side_fg=CONVERT_BACK_TO_YV12(syouko_side_fg,matrix="Rec709")
 #syouko_side_fg=Tweak(syouko_side_fg,hue=16.0,sat=0.4,bright=-48.0)
 syouko_side_fg=ColorYUV(syouko_side_fg,gain_y=-64.0,off_u=-2.0,off_v=2.0,cont_u=-160.0,cont_v=-160.0)
 syouko_side_fg=ConvertToRGB32(syouko_side_fg,matrix="Rec709")
@@ -142,7 +142,7 @@ syouko_walking_fg=Blur(syouko_walking_fg,1.58)
 syouko_walking_bg=ConvertToRGB32(seishun_buta_yarou_season_01_clean_ed_tomoe_02,matrix="Rec709")
 syouko_walking_fg_loop=Loop(syouko_walking_fg,Ceil(Framecount(syouko_walking_bg)/Framecount(syouko_walking_fg)))
 syouko_walking=Layer(syouko_walking_bg,syouko_walking_fg_loop,"Add")
-syouko_walking=ConvertToYV12(syouko_walking,matrix="Rec709")
+syouko_walking=CONVERT_BACK_TO_YV12(syouko_walking,matrix="Rec709")
 
 
 
@@ -367,7 +367,7 @@ is_thumbnail?ConvertToRGB32(seishun_buta_yarou_season_01_ed_mute,matrix="Rec709"
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\seishun_buta_yarou-season_01-ed-01.wav"),48000)
-AudioDub(bgm_48khz)
+Normalize(AudioDub(bgm_48khz))
 
 
 
@@ -390,9 +390,9 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12(matrix="Rec709")
-#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+#ConvertBackToYUY2(matrix="Rec709")
+CONVERT_BACK_TO_YV12(matrix="Rec709")
 
 #ConvertAudioTo8bit()
 #ConvertAudioTo16bit()

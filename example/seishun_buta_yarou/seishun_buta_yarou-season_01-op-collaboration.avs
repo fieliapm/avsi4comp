@@ -65,8 +65,7 @@ TRIM_FIRST_CLIP(seishun_buta_yarou_season_01_op,6288)++last
 
 ######## Post Processing ########
 
-#ConvertToYV12()
-#ConvertToYUY2()
 #ConvertToRGB24(matrix="Rec709")
+#ConvertToYUY2()
 
 TCPServer(22051)

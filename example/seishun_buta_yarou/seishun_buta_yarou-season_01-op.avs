@@ -45,7 +45,7 @@ function SUBTITLE_FX_FADE_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,in
 	subtitle_rgb=_SUBTITLE_FX_PRE_OPAQUE(clip,outside_halo_color,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 	subtitle_rgba=ColorKeyMask(ResetMask(subtitle_rgb),outside_halo_color,0)
 
-	subtitle_alpha=ConvertToYV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
+	subtitle_alpha=CONVERT_BACK_TO_YV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
 	subtitle_alpha=Expand(Expand(Expand(subtitle_alpha)))
 	subtitle_alpha=ConvertToRGB32(Greyscale(subtitle_alpha),matrix="Rec709")
 
@@ -58,17 +58,6 @@ function SUBTITLE_FX_FADE_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,in
 }
 
 ### inherit end ###
-
-function CUBIC_BEZIER_CURVE(float t,float p0,float p1,float p2,float p3){
-	t=Float(t)
-	p0=Float(p0)
-	p1=Float(p1)
-	p2=Float(p2)
-	p3=Float(p3)
-
-	tc=1.0-t
-	return (tc*tc*tc)*p0+(tc*tc*t)*p1*3.0+(tc*t*t)*p2*3.0+(t*t*t)*p3
-}
 
 function MOTION_CURVE_INTERPOLATION(float x,float x0,float y0,float x1,float y1,float x2,float y2){
 	x=Float(x)
@@ -179,7 +168,7 @@ pic_part_1=Layer(pic_part_1,motion_pic13)
 pic_part_1=Layer(pic_part_1,motion_pic12)
 pic_part_1=Layer(pic_part_1,motion_pic14)
 pic_part_1=Layer(pic_part_1,motion_pic11)
-pic_part_1=ConvertToYV12(pic_part_1,matrix="Rec709")
+pic_part_1=CONVERT_BACK_TO_YV12(pic_part_1,matrix="Rec709")
 pic_part_1=OVERWRITE_RANGE(pic_part_base,pic_part_1,pic10_start,pic1_end)
 
 # pic part 2
@@ -218,7 +207,7 @@ pic_part_2=Layer(pic_part_2,motion_pic21)
 pic_part_2=Layer(pic_part_2,motion_pic22)
 pic_part_2=Layer(pic_part_2,motion_pic23)
 pic_part_2=Layer(pic_part_2,motion_pic24)
-pic_part_2=ConvertToYV12(pic_part_2,matrix="Rec709")
+pic_part_2=CONVERT_BACK_TO_YV12(pic_part_2,matrix="Rec709")
 pic_part=OVERWRITE_RANGE(pic_part_1,pic_part_2,pic20_start,pic2_end)
 
 
@@ -427,7 +416,7 @@ is_thumbnail?ConvertToRGB32(seishun_buta_yarou_season_01_op_mute,matrix="Rec709"
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\seishun_buta_yarou-season_01-op-01.wav"),48000)
-AudioDub(bgm_48khz)
+Normalize(AudioDub(bgm_48khz))
 
 
 
@@ -441,9 +430,9 @@ is_thumbnail?thumbnail:last
 
 ######## Post Processing ########
 
-ConvertToYV12(matrix="Rec709")
-#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+#ConvertBackToYUY2(matrix="Rec709")
+CONVERT_BACK_TO_YV12(matrix="Rec709")
 
 #ConvertAudioTo8bit()
 #ConvertAudioTo16bit()

@@ -149,6 +149,17 @@ function EVALUATE_LERP_PARAMETER(clip clip,string parameter_name,int zero_val_fr
 	return FrameEvaluate(clip,parameter_name+"=INVERSE_LERP_CLAMPED(current_frame,"+String(zero_val_frame)+","+String(one_val_frame)+")",after_frame=after_frame)
 }
 
+function CUBIC_BEZIER_CURVE(float t,float p0,float p1,float p2,float p3){
+	t=Float(t)
+	p0=Float(p0)
+	p1=Float(p1)
+	p2=Float(p2)
+	p3=Float(p3)
+
+	tc=1.0-t
+	return ((tc*tc*tc)*p0)+(3.0*(tc*tc*t)*p1)+(3.0*(tc*t*t)*p2)+((t*t*t)*p3)
+}
+
 ######## Apply Range ########
 
 function OVERWRITE_RANGE(clip clip,clip new_clip,int start_frame,int end_frame){
@@ -346,6 +357,11 @@ function CONVERT_TO_PIXEL_TYPE(clip clip,string pixel_type){
 	return Eval("ConvertTo"+pixel_type+"(clip)")
 }
 
+function CONVERT_BACK_TO_YV12(clip clip,bool "interlaced",string "matrix"){
+	clip_yuy2=ConvertBackToYUY2(clip,matrix=matrix)
+	return ConvertToYV12(clip_yuy2,interlaced=interlaced)
+}
+
 ######## Color Channel ########
 
 function SHOW_CHROMA(clip clip){
@@ -508,10 +524,12 @@ function SLOW_MOTION_BY_DIVISOR(clip clip,int fps_divisor,bool smooth,bool "line
 
 ######## Transform & Resize ########
 
-function RESIZE_TO_REF_CLIP(clip clip,clip ref_clip){
+function RESIZE_TO_REF_CLIP(clip clip,clip ref_clip,string "resize_func"){
+	resize_func=Default(resize_func,"Lanczos4Resize")
+
 	w=Width(ref_clip)
 	h=Height(ref_clip)
-	return Lanczos4Resize(clip,w,h)
+	return Eval(resize_func+"(clip,w,h)")
 }
 
 function FAST_ZOOM(clip clip,float "srcx",float "srcy",float "dstx",float "dsty",float "factorX",float "factorY",float "factor",int "width",int "height",string "resize_func",bool "extend"){
@@ -596,7 +614,7 @@ function TRANSITION(clip clip_left,clip clip_right,int length,string expression)
 
 function BRIGHTNESS_OFFSET(clip clip,float offset){
 	offset_level=Round(offset*255.0)
-	return Levels(clip,0,1.0,255,offset_level,offset_level+255,coring=false)
+	return Levels(clip,0,1.0,255,offset_level,offset_level+255)
 }
 
 function _FADE_WITH_BRIGHTNESS_OFFSET(clip clip,int start_frame,int end_frame,bool is_fade_in){
