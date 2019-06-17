@@ -84,15 +84,16 @@ fade_length=15
 
 
 
-crystar_teaser_movie_03=FRAME_RATE_2X(RESIZE_TO_REF_CLIP(crystar_teaser_movie_03,crystar_op),is_60p)
-crystar_teaser_movie_03_faded=CONVERT_BACK_TO_YV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(TRIM_FIRST_CLIP(crystar_teaser_movie_03,622*frame_index_scale),matrix="Rec709"),fade_length*frame_index_scale,false),matrix="Rec709")
+crystar_teaser_movie_03_trimmed=TRIM_FIRST_CLIP(crystar_teaser_movie_03,622)
+crystar_teaser_movie_03_faded=CONVERT_BACK_TO_YV12(FADE_OUT_WITH_BRIGHTNESS_OFFSET(ConvertToRGB24(crystar_teaser_movie_03_trimmed,matrix="Rec709"),fade_length*frame_index_scale,false),matrix="Rec709")
+crystar_teaser_movie_03_faded_resized=FRAME_RATE_2X(RESIZE_TO_REF_CLIP(crystar_teaser_movie_03_faded,crystar_op),is_60p)
 
 
 
-crystar_wallpaper_resized=FRAME_RATE_2X(RESIZE_TO_REF_CLIP(crystar_wallpaper,crystar_op),is_60p)
-crystar_wallpaper_show=ScriptClip(crystar_wallpaper_resized,"FAST_ZOOM(srcx=0.8*Width(),srcy=0.4*Height(),dstx=0.8*Width(),dsty=0.4*Height(),factor=Pow(2.0,Spline(current_frame,0*frame_index_scale,4.0,11*frame_index_scale,0.0,Framecount()-1,0.0,cubic=false)),extend=true)")
-#crystar_wallpaper_show=ScriptClip(crystar_wallpaper_resized,"FAST_ZOOM(srcx=0.8*Width(),srcy=0.4*Height(),dstx=0.8*Width(),dsty=0.4*Height(),factor=1.0/Spline(current_frame,0*frame_index_scale,1.0/16.0,11*frame_index_scale,1.0,Framecount()-1,1.0,cubic=false),extend=true)")
+crystar_wallpaper_show=ScriptClip(crystar_wallpaper,"FAST_ZOOM(srcx=0.8*Width(),srcy=0.4*Height(),dstx=0.8*Width(),dsty=0.4*Height(),factor=Pow(2.0,Spline(current_frame,0*frame_index_scale,4.0,11*frame_index_scale,0.0,Framecount()-1,0.0,cubic=false)),extend=true)")
+#crystar_wallpaper_show=ScriptClip(crystar_wallpaper,"FAST_ZOOM(srcx=0.8*Width(),srcy=0.4*Height(),dstx=0.8*Width(),dsty=0.4*Height(),factor=1.0/Spline(current_frame,0*frame_index_scale,1.0/16.0,11*frame_index_scale,1.0,Framecount()-1,1.0,cubic=false),extend=true)")
 crystar_wallpaper_show=CONVERT_BACK_TO_YV12(crystar_wallpaper_show,matrix="Rec709")
+crystar_wallpaper_show_resized=FRAME_RATE_2X(RESIZE_TO_REF_CLIP(crystar_wallpaper_show,crystar_op),is_60p)
 
 
 
@@ -136,7 +137,7 @@ crystar_op_03_show_cover=CONVERT_BACK_TO_YV12(crystar_op_03_show_cover,matrix="R
 
 
 crystar_op_t01=BlankClip(crystar_op,length=15*frame_index_scale,color=color_black)+Dissolve(crystar_promotion_movie_02,crystar_op_01,Framecount(crystar_promotion_movie_02)-(285*frame_index_scale)) \
-	+TRIM_FIRST_CLIP(crystar_op_02_title,239*frame_index_scale)+TRIM_FIRST_CLIP(crystar_teaser_movie_03_faded,622*frame_index_scale)
+	+TRIM_FIRST_CLIP(crystar_op_02_title,239*frame_index_scale)+TRIM_FIRST_CLIP(crystar_teaser_movie_03_faded_resized,622*frame_index_scale)
 
 crystar_op_t02=crystar_op_03_show_cover+crystar_op_04+TRIM_FIRST_CLIP(crystar_promotion_movie_23_slogan,(36+4)*frame_index_scale)
 crystar_op_t03=TRIM_FIRST_CLIP(crystar_promotion_movie_04_character+crystar_promotion_movie_10_rei_cry,(308-4+329+112+123+314)*frame_index_scale)
@@ -147,7 +148,7 @@ crystar_op_t05=TRIM_FIRST_CLIP(crystar_promotion_movie_15_character+TRIM_MIDDLE_
 crystar_op_t06=TRIM_MIDDLE_CLIP(crystar_promotion_movie_16_rei_hear_music,33*frame_index_scale)+crystar_op_05+TRIM_MIDDLE_CLIP(crystar_promotion_movie_06_animation+crystar_promotion_movie_17_animation,318*frame_index_scale)
 crystar_op_t07=TRIM_MIDDLE_CLIP(crystar_promotion_movie_08_animation+crystar_promotion_movie_13_dialog,308*frame_index_scale)+crystar_op_06+TRIM_FIRST_CLIP(crystar_op_07,123*frame_index_scale)
 
-crystar_op_t08=TRIM_FIRST_CLIP(crystar_promotion_movie_18_game+crystar_promotion_movie_19_game+crystar_promotion_movie_14_rei_cry,611*frame_index_scale)+TRIM_FIRST_CLIP(crystar_wallpaper_show,119*frame_index_scale)
+crystar_op_t08=TRIM_FIRST_CLIP(crystar_promotion_movie_18_game+crystar_promotion_movie_19_game+crystar_promotion_movie_14_rei_cry,611*frame_index_scale)+TRIM_FIRST_CLIP(crystar_wallpaper_show_resized,119*frame_index_scale)
 
 crystar_op_mute=crystar_op_t01+crystar_op_t02+crystar_op_t03+crystar_op_t04+crystar_op_t05+crystar_op_t06+crystar_op_t07+crystar_op_t08
 
