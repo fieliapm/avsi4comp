@@ -26,56 +26,6 @@ is_60p=false
 
 Import("crystar-common.avsi")
 
-######## Function ########
-
-function GENERATE_SCAN_MASK(clip ref_clip,int length){
-	scan_width_division=16
-	angle=30.0
-	factor=1.76
-
-	mask_head=BlankClip(ref_clip,length=length,width=subtitle_clip_width,height=subtitle_clip_height,pixel_type="RGB32",color=color_black)
-	mask_body=StackHorizontal(BlankClip(ref_clip,length=length,width=subtitle_clip_width/scan_width_division,height=subtitle_clip_height,pixel_type="RGB32",color=color_white), \
-		BlankClip(ref_clip,length=length,width=subtitle_clip_width/scan_width_division,height=subtitle_clip_height,pixel_type="RGB32",color=color_black))
-	mask_tail=BlankClip(ref_clip,length=length,width=subtitle_clip_width,height=subtitle_clip_height,pixel_type="RGB32",color=color_white)
-	mask_base=StackHorizontal(mask_head,mask_body,mask_body,mask_body,mask_tail)
-	x_ratio=Cos(angle*Pi()/180.0)
-	y_ratio=Sin(angle*Pi()/180.0)
-	point_x_start=subtitle_clip_width/2+subtitle_clip_width*(scan_width_division/2+3)/scan_width_division*factor*x_ratio
-	point_x_end=subtitle_clip_width/2-subtitle_clip_width*(scan_width_division/2+3)/scan_width_division*factor*x_ratio
-	point_y_start=subtitle_clip_height/2+subtitle_clip_width*(scan_width_division/2+3)/scan_width_division*factor*y_ratio
-	point_y_end=subtitle_clip_height/2-subtitle_clip_width*(scan_width_division/2+3)/scan_width_division*factor*y_ratio
-	return Zoom(mask_base,dstx="Spline(n,0,"+String(point_x_start)+","+String(length)+","+String(point_x_end)+",cubic=false)",dsty="Spline(n,0,"+String(point_y_start)+","+String(length)+","+String(point_y_end)+",cubic=false)",factor=String(factor),angle=String(angle),width=subtitle_clip_width,height=subtitle_clip_height)
-}
-
-LoadPlugin("..\plugins\MaskTools.dll")
-
-function SUBTITLE_FX_SCAN_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,int y,int start_frame,int end_frame,int front_fade_count,int rear_fade_count,string "font",string "effects",int "size",int "text_color",int "halo_color",int "outside_halo_color",string "subtitle_mode"){
-	before_start_frame=start_frame-front_fade_count
-	after_end_frame=end_frame+rear_fade_count
-
-	Assert(IsRGB32(clip),"SUBTITLE_FX_SCAN_IN_FADE_OUT_DOUBLE_HALO(): clip only support RGB32 format")
-
-	subtitle_rgb=_SUBTITLE_FX_PRE_OPAQUE(clip,outside_halo_color,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
-	subtitle_rgba=ColorKeyMask(ResetMask(subtitle_rgb),outside_halo_color,0)
-
-	subtitle_alpha=CONVERT_BACK_TO_YV12(ShowAlpha(subtitle_rgba),matrix="Rec709")
-	subtitle_alpha=Expand(Expand(subtitle_alpha))
-	subtitle_alpha=ConvertToRGB32(Greyscale(subtitle_alpha),matrix="Rec709")
-
-	#scan_mask_extend=BlankClip(scan_mask,length=start_frame-Framecount(scan_mask),color=color_black)+scan_mask+BlankClip(scan_mask,length=Framecount(subtitle_rgba)-start_frame,color=color_white)
-	scan_mask_extend=Loop(scan_mask,start_frame-Framecount(scan_mask)+1,0,0)
-
-	subtitle_alpha_scan=Layer(subtitle_alpha,ResetMask(scan_mask_extend),"Mul")
-	subtitle_alpha_scan=OVERWRITE_RANGE(subtitle_alpha,subtitle_alpha_scan,before_start_frame,start_frame-1)
-
-	subtitle_rgba=Mask(subtitle_rgba,subtitle_alpha_scan)
-
-	subtitle_rgba_faded_containing_parameter=ScriptClip(subtitle_rgba,"RGBAdjust(a=alpha_factor)")
-	subtitle_rgba_faded=FrameEvaluate(subtitle_rgba_faded_containing_parameter,"alpha_factor=Spline(current_frame,"+String(before_start_frame-1)+",0.0,"+String(before_start_frame)+",1.0,"+String(end_frame)+",1.0,"+String(after_end_frame)+",0.0,cubic=false)")
-
-	return _SUBTITLE_FX_POST(clip,subtitle_rgba_faded,before_start_frame,after_end_frame)
-}
-
 ######## Pre Combine ########
 
 global frame_index_scale=is_60p?2:1
@@ -236,7 +186,7 @@ SUBTITLE_FX("その涙に艶や温度が無くても",subtitle_x,subtitle_y,2816,3044)
 SUBTITLE_FX("can cry",subtitle_x,subtitle_y-subtitle_size*2,3053,3128)
 SUBTITLE_FX("            だれ       こころ    つ      た         はな            ",subtitle_x,subtitle_y,3130,3355,true)
 SUBTITLE_FX("ずっと誰かの心に突き立って離れない",subtitle_x,subtitle_y,3130,3355)
-SUBTITLE_FX("いた        ほお     な         ",subtitle_x,subtitle_y-subtitle_size*2,3365,3625,true)
+SUBTITLE_FX("いた        ほほ     な         ",subtitle_x,subtitle_y-subtitle_size*2,3365,3625,true)
 SUBTITLE_FX("痛みが頬を撫でる",subtitle_x,subtitle_y-subtitle_size*2,3365,3625)
 
 SUBTITLE_FX(" き おく    ふち    ",subtitle_x,subtitle_y-subtitle_size*2,4715,4848,true)
@@ -260,7 +210,7 @@ SUBTITLE_FX("なんて美しい世界の理なんだろう",subtitle_x,subtitle_y,6098,6328)
 SUBTITLE_FX("can cry",subtitle_x,subtitle_y-subtitle_size*2,6339,6414)
 SUBTITLE_FX("       なみだ                                     よう        ",subtitle_x,subtitle_y-subtitle_size*2,6494,6641,true)
 SUBTITLE_FX("その涙 まるでクリスタルの様だね",subtitle_x,subtitle_y-subtitle_size*2,6494,6641)
-SUBTITLE_FX(" ひかり   ほお     て         ",subtitle_x,subtitle_y,6651,6888,true)
+SUBTITLE_FX(" ひかり   ほほ     て         ",subtitle_x,subtitle_y,6651,6888,true)
 SUBTITLE_FX(" 光が頬を照らす",subtitle_x,subtitle_y,6651,6888)
 
 
