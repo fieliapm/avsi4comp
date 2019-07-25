@@ -22,6 +22,8 @@
 
 Import("..\..\avsi4comp\avsi4comp.avsi")
 
+is_pray_for_kyoani=false
+
 ######## PV (1280*720) ########
 
 koe_no_katachi_theme_song_pv=SSRC(FFMS2_VIDEO_SOURCE("src\official\映画『聲の形』主題歌PV.720p.mp4"),48000)
@@ -120,7 +122,8 @@ koe_no_katachi_trailer_shouya_fall=Trim(koe_no_katachi_trailer,469,538) #70
 koe_no_katachi_trailer_shouya_awake=Trim(koe_no_katachi_trailer,903,939) #37
 koe_no_katachi_trailer_shouko_smile=Trim(koe_no_katachi_trailer,985,1047) #63
 koe_no_katachi_trailer_shouko_take_notebook=Trim(koe_no_katachi_trailer,1128,1161) #34 ed
-koe_no_katachi_trailer_shouya_see_shouko_suicide_01=Trim(koe_no_katachi_trailer,1241,1262) #22
+koe_no_katachi_trailer_shouya_see_shouko_suicide_01=Trim(koe_no_katachi_trailer,1241,1252) #12
+koe_no_katachi_trailer_shouko_blink_eyes=Trim(koe_no_katachi_trailer,1253,1262) #10
 #koe_no_katachi_trailer_shouya_see_shouko_suicide_02=Trim(koe_no_katachi_trailer,1263,1331) #69
 
 koe_no_katachi_news_slogan_she_is_as_needle_which_hurt_self=Trim(koe_no_katachi_news,184,244) #61 ed
@@ -184,6 +187,7 @@ other_combine=koe_no_katachi_tvcm_01_shouya_catch_shouko \
 	+koe_no_katachi_trailer_shouya_awake \
 	+koe_no_katachi_trailer_shouya_fall \
 	+koe_no_katachi_trailer_shouya_see_shouko_suicide_01 \
+	+koe_no_katachi_trailer_shouko_blink_eyes \
 	+koe_no_katachi_tvcm_02_shouko_nervous \
 	+koe_no_katachi_trailer_naoka_watch_shouya \
 	+koe_no_katachi_trailer_shouko_smile \
@@ -209,12 +213,12 @@ other_combine=koe_no_katachi_tvcm_01_shouya_catch_shouko \
 
 
 
-koe_no_katachi_ed_t01=koe_no_katachi_theme_song_pv_01+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(koe_no_katachi_news_jump_into_water,70),fade_length)
+koe_no_katachi_ed_t01=koe_no_katachi_theme_song_pv_01+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(koe_no_katachi_news_jump_into_water,70),fade_length,false)
 
 #koe_no_katachi_ed_t02=BlankClip(koe_no_katachi_theme_song_pv,length=1058,color=color_white)+BlankClip(koe_no_katachi_theme_song_pv,length=66,color=color_blue)
 #koe_no_katachi_ed_t03=BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_black)+BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_white)
 #koe_no_katachi_ed_t04=BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_black)+BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_white)
-koe_no_katachi_ed_t02_t03_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(long_pv_combine_01+long_pv_combine_02,1058+66+281+281+281+281),fade_length)
+koe_no_katachi_ed_t02_t03_t04=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(long_pv_combine_01+long_pv_combine_02,1058+66+281+281+281+281),fade_length,false)
 
 koe_no_katachi_ed_t05=FadeOut(TRIM_FIRST_CLIP(koe_no_katachi_long_pv_shouko_happily_jump_to_bed_extend,138-1),fade_length)
 
@@ -222,12 +226,12 @@ koe_no_katachi_ed_t06=koe_no_katachi_theme_song_pv_02
 koe_no_katachi_ed_t07=koe_no_katachi_theme_song_pv_03_01+koe_no_katachi_theme_song_pv_03_02+koe_no_katachi_theme_song_pv_04_flower+koe_no_katachi_theme_song_pv_05+koe_no_katachi_theme_song_pv_06_fish
 koe_no_katachi_ed_t08=koe_no_katachi_theme_song_pv_07+koe_no_katachi_theme_song_pv_08_train+koe_no_katachi_theme_song_pv_09
 
-koe_no_katachi_ed_t09=koe_no_katachi_theme_song_pv_10+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(koe_no_katachi_long_pv_cast_extend,37+72+94+120),fade_length)
+koe_no_katachi_ed_t09=koe_no_katachi_theme_song_pv_10+FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(koe_no_katachi_long_pv_cast_extend,37+72+94+120),fade_length,false)
 #koe_no_katachi_ed_t10=BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_black)+BlankClip(koe_no_katachi_theme_song_pv,length=280,color=color_white)
 
 #koe_no_katachi_ed_t11=BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_black)+BlankClip(koe_no_katachi_theme_song_pv,length=280,color=color_white)
 #koe_no_katachi_ed_t12=BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_black)+BlankClip(koe_no_katachi_theme_song_pv,length=281,color=color_white)
-koe_no_katachi_ed_t10_t11_t12=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(koe_no_katachi_special_memory_program_find_notebook_combine,281+280+281+280+281+281),fade_length)
+koe_no_katachi_ed_t10_t11_t12=FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_FIRST_CLIP(koe_no_katachi_special_memory_program_find_notebook_combine,281+280+281+280+281+281),fade_length,false)
 
 koe_no_katachi_ed_t13=TRIM_FIRST_CLIP(other_combine,421)
 koe_no_katachi_ed_t14=TRIM_FIRST_CLIP(koe_no_katachi_news_slogan_she_is_as_needle_which_hurt_self,50)+koe_no_katachi_theme_song_pv_11_02+TRIM_FIRST_CLIP(koe_no_katachi_news_slogan_want_to_see_you_again,30)+koe_no_katachi_theme_song_pv_12_promise+koe_no_katachi_theme_song_pv_11_01+koe_no_katachi_theme_song_pv_13_title+BlankClip(koe_no_katachi_theme_song_pv,length=24*11,color=color_black)
@@ -242,12 +246,17 @@ koe_no_katachi_ed_mute=koe_no_katachi_ed_t01 \
 	+koe_no_katachi_ed_t10_t11_t12 \
 	+koe_no_katachi_ed_t13+koe_no_katachi_ed_t14
 
+koe_no_katachi_ed_mute_pray_for_kyoani=ScriptClip(koe_no_katachi_ed_mute,"Tweak(sat=Spline(current_frame,0,1.0,8267,1.0,8309,0.0,Framecount()-1,0.0,cubic=false))")
+koe_no_katachi_ed_mute=is_pray_for_kyoani?OVERWRITE_RANGE(koe_no_katachi_ed_mute,koe_no_katachi_ed_mute_pray_for_kyoani,8267,8430):koe_no_katachi_ed_mute
+
 ######## Music ########
 
 bgm_48khz=SSRC(WAVSource("src\aiko-2016_09_21-koi_wo_shita_no_wa-01.wav"),48000)
-AudioDub(koe_no_katachi_ed_mute,bgm_48khz)
+Normalize(AudioDub(koe_no_katachi_ed_mute,bgm_48khz))
 
 
+
+ConvertToRGB32(matrix="Rec709")
 
 thumbnail=Trim(4586,-24*5)
 
@@ -284,8 +293,6 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,front_fade_count,rear_fade_count,subtitle_font,subtitle_effects,Round(size),text_color,halo_color,subtitle_mode)
 }
-
-ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("あーーーー",subtitle_x,subtitle_y-subtitle_size*2,24,86,is_denormal_kasi=true)
 SUBTITLE_FX("こい",subtitle_x,subtitle_y,100,252,true,is_denormal_kasi=true)
@@ -338,15 +345,17 @@ SUBTITLE_FX("Darling",subtitle_x,subtitle_y-subtitle_size*2,7041,7080)
 SUBTITLE_FX("まよ                ある                                               みちしるべ",subtitle_x,subtitle_y,7075,7655,true)
 SUBTITLE_FX("迷わぬよう歩いていけるたったひとつの道標",subtitle_x,subtitle_y,7075,7655)
 
+is_pray_for_kyoani?SUBTITLE_FX("京アニに祈りを|#PrayForKyoani",-subtitle_x,subtitle_y-subtitle_size,8064,8347):last
+
 
 
 #thumbnail
 
 ######## Post Processing ########
 
-ConvertToYV12(matrix="Rec709")
-#ConvertToYUY2(matrix="Rec709")
 #ConvertToRGB24()
+#ConvertBackToYUY2(matrix="Rec709")
+CONVERT_BACK_TO_YV12(matrix="Rec709")
 
 #ConvertAudioTo8bit()
 #ConvertAudioTo16bit()
