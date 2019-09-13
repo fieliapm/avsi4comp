@@ -166,7 +166,7 @@ SUBTITLE_FX(" ‚æ‚ë‚±       ‚È‚ª        ",subtitle_x,subtitle_y-subtitle_size*2,2
 SUBTITLE_FX(" Šì‚Ñ‚É—¬‚µ‚Ä",subtitle_x,subtitle_y-subtitle_size*2,2132,2216)
 SUBTITLE_FX(" ‚Æ ‚Ü‚Ç        ‚Þ‚¹        ",subtitle_x,subtitle_y,2212,2293,true)
 SUBTITLE_FX("ŒË˜f‚¢‚Éˆô‚Á‚Ä",subtitle_x,subtitle_y,2212,2293)
-SUBTITLE_FX("‚©‚È            ‚Â‚Ô        ",subtitle_x,subtitle_y-subtitle_size*2,2290,2372,true)
+SUBTITLE_FX("‚©‚È            ‚Â‚Þ        ",subtitle_x,subtitle_y-subtitle_size*2,2290,2372,true)
 SUBTITLE_FX("ˆ£‚µ‚Ý‚ÉáÒ‚Á‚Ä",subtitle_x,subtitle_y-subtitle_size*2,2290,2372)
 SUBTITLE_FX("‚½‚Ì            ‚ä‚¾        ",subtitle_x,subtitle_y,2368,2450,true)
 SUBTITLE_FX("–ù‚µ‚³‚ÉˆÏ‚Ë‚Ä",subtitle_x,subtitle_y,2368,2450)
