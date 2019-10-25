@@ -38,7 +38,7 @@ function SUBTITLE_FX_FADE_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,in
 	before_start_frame=start_frame-front_fade_count
 	after_end_frame=end_frame+rear_fade_count
 
-	Assert(IsRGB32(clip),"SUBTITLE_FX_FADE_IN_FADE_OUT(): clip only support RGB32 format")
+	Assert(IsRGB32(clip),"SUBTITLE_FX_FADE_IN_FADE_OUT_DOUBLE_HALO(): clip only support RGB32 format")
 
 	subtitle_rgb=_SUBTITLE_FX_PRE_OPAQUE(clip,outside_halo_color,text,x,y,before_start_frame,after_end_frame,font,effects,size,text_color,halo_color,subtitle_mode)
 	subtitle_rgba=ColorKeyMask(ResetMask(subtitle_rgb),outside_halo_color,0)
