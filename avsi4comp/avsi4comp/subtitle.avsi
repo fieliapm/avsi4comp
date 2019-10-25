@@ -305,6 +305,10 @@ function RANDOM_JIS_CHAR(){
 	return Chr(PSEUDO_RANDOM($E0-$A1)+$A1)
 }
 
+function RANDOM_JIS_KANA_CHAR(){
+	return Chr(PSEUDO_RANDOM($DE-$A6)+$A6)
+}
+
 function RANDOM_ASCII_CHAR(){
 	ascii_code=PSEUDO_RANDOM($7E-$21)+$21
 	ascii_code=ascii_code+(ascii_code>=$7C?1:0)
