@@ -84,12 +84,12 @@ global subtitle_clip_width=1920
 global subtitle_clip_height=1080
 
 subtitle_x=50*2.25
-subtitle_y=405*2.25
+subtitle_y=400*2.25
 global subtitle_front_fade_count=30
 global subtitle_rear_fade_count=30
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=21*2.25
+global subtitle_size=24*2.25
 global subtitle_text_color=color_white
 global subtitle_halo_color=color_black
 global subtitle_outside_halo_color=color_magenta
@@ -114,7 +114,7 @@ ConvertToRGB32(matrix="Rec709")
 #SUBTITLE_FX("Savior//青山ウィリアム & Beverly|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,78,369,3,is_title=true)
 SUBTITLE_FX("Savior//青山ウィリアム & Beverly|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,5918,6130,3,is_title=true)
 
-SUBTITLE_FX("The sky turns red swallowing up each and every being in this town",subtitle_x,subtitle_y-subtitle_size,659,813,1)
+SUBTITLE_FX("The sky turns red swallowing up|each and every being in this town",subtitle_x,subtitle_y-subtitle_size*2,659,813,1)
 SUBTITLE_FX("Hopes, hearts, everything is falling down",subtitle_x,subtitle_y,817,926,1)
 SUBTITLE_FX("Far away in the skyline",subtitle_x,subtitle_y-subtitle_size,943,1014,2)
 SUBTITLE_FX("A crowd of apparitions crawling around",subtitle_x,subtitle_y,1006,1086,2)
@@ -137,7 +137,7 @@ SUBTITLE_FX("I'll be your savior",subtitle_x,subtitle_y,1905,2003,3)
 
 ### ###
 
-SUBTITLE_FX("The eyes of the living dead, the lies, the cries without a single sound",subtitle_x,subtitle_y-subtitle_size,2531,2688,2)
+SUBTITLE_FX("The eyes of the living dead,|the lies, the cries without a single sound",subtitle_x,subtitle_y-subtitle_size*2,2531,2688,2)
 SUBTITLE_FX("Cold hearts, everything is falling down",subtitle_x,subtitle_y,2690,2800,2)
 SUBTITLE_FX("[The] War is on, our faiths are gone",subtitle_x,subtitle_y-subtitle_size,2811,2887,1)
 SUBTITLE_FX("Another reminiscence haunting us all",subtitle_x,subtitle_y,2879,2958,1)
