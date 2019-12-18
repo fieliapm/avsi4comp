@@ -102,10 +102,10 @@ trailer_movie=CLIP_SPEED(Dissolve(shallie_no_atelier_trailer_movie_02,PSEUDO_COL
 
 
 shallie_no_atelier_op_t01=shallie_no_atelier_trailer_movie_01_extend
-shallie_no_atelier_op_t02=Dissolve(shallie_no_atelier_op_01,PSEUDO_COLOR_1(FADE_OUT_WITH_BRIGHTNESS_OFFSET(shallie_no_atelier_teaser_movie_05,fade_length*2)),Framecount(shallie_no_atelier_teaser_movie_05)-234)
-shallie_no_atelier_op_t03=PSEUDO_COLOR_1(FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(shallie_no_atelier_teaser_movie_01,457),fade_length*2)+TRIM_MIDDLE_CLIP(shallie_no_atelier_promotion_movie_05+shallie_no_atelier_promotion_movie_06,457+229))
-shallie_no_atelier_op_t04=PSEUDO_COLOR_1(FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(shallie_no_atelier_promotion_movie_01,(fade_length*4)+457),fade_length*2))
-shallie_no_atelier_op_t05=PSEUDO_COLOR_1(FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(shallie_no_atelier_promotion_movie_03+shallie_no_atelier_promotion_movie_04,457+457+452),fade_length*2))
+shallie_no_atelier_op_t02=Dissolve(shallie_no_atelier_op_01,PSEUDO_COLOR_1(FADE_OUT_WITH_BRIGHTNESS_OFFSET(shallie_no_atelier_teaser_movie_05,fade_length*2,false)),Framecount(shallie_no_atelier_teaser_movie_05)-234)
+shallie_no_atelier_op_t03=PSEUDO_COLOR_1(FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_MIDDLE_CLIP(shallie_no_atelier_teaser_movie_01,457),fade_length*2,false)+TRIM_MIDDLE_CLIP(shallie_no_atelier_promotion_movie_05+shallie_no_atelier_promotion_movie_06,457+229))
+shallie_no_atelier_op_t04=PSEUDO_COLOR_1(FADE_OUT_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(shallie_no_atelier_promotion_movie_01,(fade_length*4)+457),fade_length*2,false))
+shallie_no_atelier_op_t05=PSEUDO_COLOR_1(FADE_IN_WITH_BRIGHTNESS_OFFSET(TRIM_LAST_CLIP(shallie_no_atelier_promotion_movie_03+shallie_no_atelier_promotion_movie_04,457+457+452),fade_length*2,false))
 shallie_no_atelier_op_t06=shallie_no_atelier_op_02
 shallie_no_atelier_op_t07=FadeOut(trailer_movie,fade_length)+BlankClip(shallie_no_atelier_op,length=30*7,color=color_black) # 5:06
 
@@ -115,6 +115,7 @@ shallie_no_atelier_op_mute=shallie_no_atelier_op_t01+shallie_no_atelier_op_t02+D
 
 bgm_48khz=SSRC(WAVSource("src\shallie_no_atelier-vocal_album-02.wav"),48000)
 AudioDub(shallie_no_atelier_op_mute,bgm_48khz)
+#Normalize()
 
 
 
@@ -122,16 +123,16 @@ thumbnail=Trim(6633,-30*5)
 
 ######## Subtitle ########
 
-#global subtitle_clip_width=1280
-#global subtitle_clip_height=720
+global subtitle_clip_width=1920
+global subtitle_clip_height=1080
 
-subtitle_x=50
-subtitle_y=400
+subtitle_x=50*2.25
+subtitle_y=400*2.25
 global subtitle_front_fade_count=15
 global subtitle_rear_fade_count=15
 global subtitle_font="MS Gothic"
 global subtitle_effects="b"
-global subtitle_size=24
+global subtitle_size=24*2.25
 global subtitle_text_color=color_brown
 global subtitle_halo_color=color_white
 
@@ -140,10 +141,10 @@ function SUBTITLE_FX(clip clip,string text,float x,float y,int start_frame,int e
 
 	text_color=is_title?OVERWRITE_SUBTITLE_COLOR_ALPHA(subtitle_text_color,$C0):subtitle_text_color
 
-	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color)
+	return SUBTITLE_FX_FADE_IN_FADE_OUT(clip,text,Round(x),Round(y),start_frame,end_frame,subtitle_front_fade_count,subtitle_rear_fade_count,subtitle_font,subtitle_effects,Round(subtitle_size),text_color,subtitle_halo_color,"ex_thick_reduce_memory")
 }
 
-ConvertToRGB32()
+ConvertToRGB32(matrix="Rec709")
 
 SUBTITLE_FX("Rusty Sky//matryoshka|- by fielia@AVISynth",-subtitle_x,subtitle_y-subtitle_size,696,1101,true)
 
@@ -191,8 +192,14 @@ SUBTITLE_FX("I walk to you",subtitle_x,subtitle_y,7419,7508)
 
 ######## Post Processing ########
 
-ConvertToYV12()
-#ConvertToYUY2()
 #ConvertToRGB24()
+#ConvertBackToYUY2(matrix="Rec709")
+CONVERT_BACK_TO_YV12(matrix="Rec709")
+
+#ConvertAudioTo8bit()
+#ConvertAudioTo16bit()
+ConvertAudioTo24bit()
+#ConvertAudioTo32bit()
+#ConvertAudioToFloat()
 
 TCPServer()
