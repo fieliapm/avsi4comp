@@ -107,6 +107,12 @@ function SUBTITLE_FX_FADE_IN_FADE_OUT_DOUBLE_HALO(clip clip,string text,int x,in
 
 
 
+function SCALE_CG(clip cg,float center_x,float center_y,float scale_start,float scale_end){
+	cg_frame_count=Framecount(cg)
+
+	return ScriptClip(cg,"FAST_ZOOM(srcx="+String(center_x)+",srcy="+String(center_y)+",dstx="+String(center_x)+",dsty="+String(center_y)+",factor=Spline(current_frame,0,"+String(scale_start)+","+String(cg_frame_count)+","+String(scale_end)+"))")
+}
+
 function MOVE_CG(clip cg,int dir_x,int dir_y,float move_offset,float scale){
 	cg_frame_count=Framecount(cg)
 	cg_width_half=Width(cg)/2
