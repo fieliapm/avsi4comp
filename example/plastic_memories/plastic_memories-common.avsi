@@ -22,6 +22,12 @@
 
 ######## BD (1920*1080) ########
 
+# Fix adjustments for positive audio delay in FFMS2 2.21
+# However, possible off by 1 frame until first seek issue is introduced in FFMS2 2.21
+# Thus I suggest editing video and syncing audio using FFMS2 2.21, then publishing video using FFMS2 2.20
+
+# using FFMS2 2.21, adjustdelay=-1
+
 plastic_memories_01=FFMS2_VIDEO_SOURCE("src\anime\[ANK-Raws] プラスティック・メモリーズ 01 (BDrip 1920x1080 HEVC-YUV420P10 FLAC).mkv")
 plastic_memories_02=FFMS2_VIDEO_SOURCE("src\anime\[ANK-Raws] プラスティック・メモリーズ 02 (BDrip 1920x1080 HEVC-YUV420P10 FLAC).mkv")
 plastic_memories_03=FFMS2_VIDEO_SOURCE("src\anime\[ANK-Raws] プラスティック・メモリーズ 03 (BDrip 1920x1080 HEVC-YUV420P10 FLAC).mkv")
